@@ -1,0 +1,10 @@
+<div class="text-center">
+  <h1><%= @user.name %></h1>
+
+  <p class="buffer-top">
+  <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-default' %>
+  </p>
+</div>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', root_path %>

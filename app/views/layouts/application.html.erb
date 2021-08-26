@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Тренировки</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <%= favicon_link_tag %>
+
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Персональный сайт фотографа Дмитрия Dack9 Архипова. Сотрудничество: фотосессии и фотосъемка (макро, предметная)">
+    <meta name="keywords" content="dack9, фотограф, макрофотография, фотосессия, macro, macrophoto">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="author" content="Дмитрий Архипов aka Dack9">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+    
+  </head>
+
+  <body>
+
+    <div id="collapseMenu" class="collapse d-lg-block">
+      <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+        <div class="container-fluid">
+          <div class="navbar navbar-responsive logo_my_class">
+              <ul class="navbar-nav">
+                <%= link_to 'Тренировки', root_path, class: 'btn bg-light', title: t('app.navbar.logo_name_caption') %>
+              </ul>
+          </div>
+          <div class="navbar navbar-responsive d-md-block">
+            <ul class="navbar-nav">
+              <li class="dropdown">
+                <!-- <button type="button" class="btn dropdown-toggle my_font_size remove_padding" data-toggle="dropdown"><%= t('app.navbar.menu.drop_down.photos') %></button> -->
+                <div class="dropdown-menu my_control my_font_size" aria-labelledby="dropdownMenuButton">
+
+                  <%# if current_user %>
+                    <%#=link_to t('app.navbar.menu.drop_down.all'), all_page_path, class: "dropdown-item my_dropdown_item" %>
+                  <%# end %>
+
+                </div>
+              </li>
+              <li> <%#= link_to t('app.navbar.menu.blog'), articles_path, class: "btn my_font_size remove_padding" %> </li>
+              
+
+              <%# if current_user %>
+                <li> <%#= link_to t('app.navbar.menu.load_photo'), new_photo_path, class: "btn my_font_size remove_padding" %> </li>
+                <li> <%#= link_to t('app.navbar.menu.profile'), current_user, class: "btn my_font_size remove_padding" %> </li>
+                <li> <%#= link_to t('app.navbar.menu.exit'), destroy_user_session_path, :method => :delete, class: "btn my_font_size remove_padding" %> </li>
+              <%# else %>
+
+                <li> <%#= link_to t('app.navbar.menu.admin'), new_user_session_path, class: "btn my_font_size remove_padding" %> </li>
+              <%# end %>
+
+              <% if params[:locale] == 'ru' || params[:locale] == nil %>
+                <% locale_class_eng = '' %>
+                <% locale_class_ru = 'locale_class_na' %>
+              <% else %>
+                <% locale_class_eng = 'locale_class_na' %>
+                <% locale_class_ru = '' %>
+              <% end %>
+
+              <li><%#= link_to image_pack_tag("rus.jpg", alt: 'rus',  class: "btn flag_position #{locale_class_ru}"), controller: controller_name, action: action_name, locale: "ru", title: 'Переключиться на русский' %></li>
+
+              <li><%#= link_to image_pack_tag("eng.jpg", alt: 'eng',  class: "btn flag_position #{locale_class_eng}"), controller: controller_name, action: action_name, locale: "en", title: 'Switch to english' %></li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>" role="alert">
+        <%= value %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+    <footer>
+      <div class="dackbottomicons dackbottomicons-range">
+        <div class="text-center buffer-bottom">
+          <p>&copy; Dack9  <%= Time.now.year %></p>
+          <%#= link_to image_pack_tag("vk.png", alt: 'vk'), "https://vk.com/dack9", target: "blanc", rel: "noreferrer", title: "VK" %>
+          <%#= link_to image_pack_tag("telegram.png", alt: 'telegram'), "https://t.me/Dack99", target: "blanc", rel: "noreferrer", title: "Telegram" %>
+          <%#= link_to image_pack_tag("instagram.png", alt: 'instagram'), "https://www.instagram.com/dack9/", target: "blanc", rel: "noreferrer", title: "Instagram" %>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
