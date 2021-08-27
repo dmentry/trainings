@@ -266,114 +266,21 @@ ru:
       long: "%H:%M, %d %B %Y"
       short: "%H:%M, %d.%m.%Y"
     pm: вечера
-  app:
-    tab: Фотограф Дмитрий Dack9 Архипов
-    navbar:
-      logo_name: Дмитрий Архипов
-      logo_name_caption: На главную
-      menu:
-        drop_down:
-          photos: Фотографии
-          all: Все
-          recent: Недавние
-          macro: Макро
-          landscape: Пейзажи
-          portrait: Портреты
-          drone: С квадрокоптера
-          collage: Коллажи
-          other: Остальное
-        blog: Блог
-        about: Обо мне
-        feedback: Обратная связь
-        load_photo: Загрузить фотку
-        profile: Профиль
-        exit: Выйти
-        admin: Для админа
-  controllers:
-    photos:
-      index:
-        header: Недавние
-      create:
-        success: Фотка успешно создана!
-        fail: Фотку создать не удалось!
-      update:
-        success: Фотка успешно изменена!
-        fail: Фотку изменить не удалось!
-      destroy:
-        success: Фотка успешно удалена!
-      all_page:
-        header: Все
-      type:
-        macro: Макро
-        landscape: Пейзажи
-        portrait: Портреты
-        drone: С квадрокоптера
-        collage: Коллажи
-        other: Остальное
-      feedback_page_send:
-        success: Сообщение успешно отправлено!
-        fail: Сообщение не отправлено!
-  views:
-    articles:
-      index:
-        blog: Блог
-        article:
-          read: Читать полностью
-          edit: Редактировать
-          destroy: Удалить
-          sure: Вы уверены?
-          new: Новый пост
-      form:
-        save: Сохранить
-      new:
-        new_article: Новый пост
-        back: Обратно
-      show:
-        back: Обратно
-        blog: Блог
-    photos:
-      form:
-        save: Сохранить
-      blog:
-        blog: Блог
-    feedback:
-      title: Форма обратной связи
-      send: Отправить
-    abouts:
-      index:
-        edit: Редактировать
-        destroy: Удалить
-        sure: Вы уверены?
-        new: Новый текст
-        about: Текст обо мне
-      show:
-        title: Обо мне
-      edit:
-        title: Редактировать
-        back: Обратно
-      form:
-        main_text: Текст
-        save: Сохранить
-    comments:
-      email: Ваш email
-      comment: Ваш комментарий
-      submit: Отправить
-    devise:
-      session:
-        title: Оставь надежду, всяк сюда входящий...
-        remember: Я тебя запомню
-        enter: Войти
-      passwords:
-        title: Даже не пробуй
-        push: Не нажимай
-  models:
-    article:
-      article_title: Заголовок поста
-      article_body: Пост
-    feedback:
-      feedback_email: Ваш мейл
-      feedback_body: Сообщение
-    photo:
-      photo: Фотка
-      description: Описание
-      type_id: Тип
+  simple_calendar:
+    previous: "<<"
+    next: ">>"
+    week: Неделя
+    month_names:
+      - 
+      - Январь
+      - Февраль
+      - Март
+      - Апрель
+      - Май
+      - Июнь
+      - Июль
+      - Август
+      - Сентябрь
+      - Октябрь
+      - Ноябрь
+      - Декабрь
