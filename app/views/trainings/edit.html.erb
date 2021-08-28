@@ -1,6 +1,16 @@
-<h1>Editing Training</h1>
+<h1 class="center text_size">Редактировать тренировку: <%= @training.label %></h1>
+<div class="container bg-light">
+  <div class="row my-3">
+    <div class="col-sm-12 col-md-10">
+      
+      <div>
+        <%= render 'form', training: @training %>
+      </div>
 
-<%= render 'form', training: @training %>
-
-<%= link_to 'Show', @training %> |
-<%= link_to 'Back', trainings_path %>
+      <div class="my-3">
+        <%= link_to 'Show', @training %> |
+        <%= link_to 'Back', trainings_path %>
+      </div>
+    </div>
+  </div>
+</div>

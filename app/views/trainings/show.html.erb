@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+<h1 class="center text_size"><%= @training.label %></h1>
+<div class="container bg-light">
+  <div class="row my-3">
+    <div class="col-sm-12 col-md-10">
+      <div>
+        Дата: <%= @training.start_time %>
+      </div>
 
-<%= link_to 'Edit', edit_training_path(@training) %> |
-<%= link_to 'Back', trainings_path %>
+      <div class="my-3">
+        <%= link_to 'Edit', edit_training_path(@training) %> |
+        <%= link_to 'Back', trainings_path %>
+      </div>
+    </div>
+  </div>
+</div>

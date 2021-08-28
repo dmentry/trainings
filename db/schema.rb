@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_122633) do
+ActiveRecord::Schema.define(version: 2021_08_28_092800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exercise_name_vocs", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "quantity"
+    t.text "note"
+    t.bigint "training_id", null: false
+    t.bigint "exercise_name_voc_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_name_voc_id"], name: "index_exercises_on_exercise_name_voc_id"
+    t.index ["training_id"], name: "index_exercises_on_training_id"
+  end
 
   create_table "trainings", force: :cascade do |t|
     t.string "label"
@@ -31,5 +48,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_122633) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "exercises", "exercise_name_vocs"
+  add_foreign_key "exercises", "trainings"
   add_foreign_key "trainings", "users"
 end
