@@ -1,10 +1,20 @@
 <div>
-  <p><%= exercise.label %></p>
+  <p><%= exercise.exercise_name_voc.label %></p>
   <p>
-    <span>
+    <div>
+      Подходы:
       <%= exercise.quantity %>
+    </div>
+    <div>
+      Заметки:
       <%= exercise.note %>
-    </span>
-      <%= link_to('Удалить упражнение', training_exercise_path(exercise.training, exercise), method: :delete, data: {confirm: t('.destroy_confirm')} ) %>
+    </div>
+      
+
+
+
+      <%= link_to('Удалить', training_exercise_path(exercise.training, exercise), method: :delete, data: {confirm: t('.destroy_confirm')} ) %>
+
+
   </p>
 </div>

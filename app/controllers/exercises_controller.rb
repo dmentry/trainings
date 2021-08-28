@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_training, only: [:create, :destroy]
+  before_action :set_training, only: [:create, :destroy, :update]
   before_action :set_exercise, only: [:destroy]
 
   # POST /exercises
@@ -16,34 +16,41 @@ class ExercisesController < ApplicationController
 
   end
 
-  # DELETE /exercises/1
-  def destroy
-    
-    respond_to do |format|
-      format.html { redirect_to exercises_url, notice: "Exercise was successfully destroyed." }
-      format.json { head :no_content }
+  def update
 
-      
-      if @exercise.destroy!
-        message = {notice: 'Упражнение удалено успешно'}
+
+      if @exercise.update(exercise_params)
+        message = {notice: 'Упражнение изменено успешно'}
       else
-        message = {alert: I18n.t('controllers.comments.error')}
+        message = {alert: 'Упражнение не было изменено'}
       end
 
       redirect_to @training, message
-    end
+
+  end
+
+  # DELETE /exercises/1
+  def destroy
+      if @exercise.destroy!
+        message = {notice: 'Упражнение удалено успешно'}
+      else
+        message = {alert: 'Упражнение не было удалено'}
+      end
+
+      redirect_to @training, message
+
   end
 
   private
     def set_training
       @training = Training.find(params[:training_id])
     end
-    
+
     def set_exercise
       @exercise = @training.exercises.find(params[:id])
     end
 
     def exercise_params
-      params.require(:exercise).permit(:quantity, :note)
+      params.require(:exercise).permit(:quantity, :note, :exercise_name_voc_id, :label)
     end
 end

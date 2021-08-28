@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   # переключение локалей
-    before_action :switch_locale
+    # before_action :switch_locale
   # передача параметра текущей локали через запросы
-  def default_url_options
-    {locale: I18n.locale}
-  end
+  # def default_url_options
+  #   {locale: I18n.locale}
+  # end
 
   # Позволяем использовать возможности пандита во всех контроллерах
   # include Pundit
@@ -21,12 +21,12 @@ class ApplicationController < ActionController::Base
   # Обработать ошибку авторизации
   # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  private
+  # private
 
-  def switch_locale(&action)
-    locale = params[:locale] || I18n.default_locale
-    I18n.locale = locale
-  end
+  # def switch_locale(&action)
+  #   locale = params[:locale] || I18n.default_locale
+  #   I18n.locale = locale
+  # end
 
   # def user_not_authorized
   #   # Перенаправляем юзера откуда пришел (или в корень сайта) с сообщением об ошибке
