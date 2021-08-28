@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :trainings
+  has_many :trainings, dependent: :destroy
 
   validates :name, presence: true, length: {maximum: 35}
   validates :email, presence: true, length: {maximum: 255}

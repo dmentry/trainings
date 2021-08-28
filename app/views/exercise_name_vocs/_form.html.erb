@@ -1,0 +1,22 @@
+<%= form_with(model: exercise_name_voc, local: true) do |form| %>
+  <% if exercise_name_voc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exercise_name_voc.errors.count, "error") %> prohibited this exercise_name_voc from being saved:</h2>
+
+      <ul>
+        <% exercise_name_voc.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mt-3">
+    <%= form.label 'Название' %>
+    <%= form.text_field :label, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Сохранить', class: 'btn btn-secondary mt-2' %>
+  </div>
+<% end %>

@@ -1,0 +1,34 @@
+<%= form_for [@training, exercise] do |form| %>
+  <% if exercise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+
+      <ul>
+        <% exercise.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mt-3">
+    <%= form.label 'Количество подходов и/или повторов' %>
+    <%= form.text_field :quantity, class: 'form-control' %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= form.label 'Примечания' %>
+    <%= form.text_field :note, class: 'form-control' %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= form.label 'Упражнение' %>
+    <%#= form.collection_select :exercise_name_voc_id, ExerciseNameVoc.order(:label), :id, :label, include_blank: false, prompt: '[выберите упражнение]', class: 'form-control' %>
+
+    <%= form.collection_select :exercise_name_voc_id, ExerciseNameVoc.all, :id, :label %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Сохранить', class: 'btn btn-secondary mt-2' %>
+  </div>
+<% end %>

@@ -3,8 +3,24 @@
   <div class="row my-3">
     <div class="col-sm-12 col-md-10">
       <div>
-        Дата: <%= @training.start_time %>
+        Дата: <%= l @training.start_time, format: :my_format %>
       </div>
+
+
+
+
+      <div class="row">
+        <%= render partial: 'exercises/form', locals: {exercise: @new_exercise || @training.exercises.build} %>
+
+        <div class="buffer-both">
+          <%= render partial: 'exercises/exercise', collection: @training.exercises.except(@new_exercise) %>
+          <% if @training.exercises.empty? %>
+          Вы еще не внесли ни одного упражнения в эту тренировку
+        <% end %>
+        </div>
+      </div>
+    </div>
+
 
       <div class="my-3">
         <%= link_to 'Edit', edit_training_path(@training) %> |

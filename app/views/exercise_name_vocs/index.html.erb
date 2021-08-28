@@ -1,0 +1,26 @@
+<h1 class="center text_size">Список тренировок</h1>
+<div class="container bg-light">
+  <div class="row my-3">
+    <div class="col-lg-8 order-lg-1">
+      <div class="border p-2 m-2">
+      <div>Названия</div>
+      <div class="my-3">
+        <% @exercise_name_vocs.each do |exercise_name_voc| %>
+          <div><%= link_to exercise_name_voc.label, edit_exercise_name_voc_path(exercise_name_voc) %></div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 order-lg-1">
+      <div class="border p-2 m-2">
+      <div>Создать новую</div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12">
+          <%= render partial: 'exercise_name_vocs/form', locals: {exercise_name_voc: @exercise_name_voc = ExerciseNameVoc.new }  %>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

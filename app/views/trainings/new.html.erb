@@ -4,7 +4,7 @@
     <div class="col-sm-12 col-md-10">
       
       <div>
-        <%= render 'form', training: @training %>
+        <%= render 'form', training: @training || @training = Training.new %>
       </div>
 
       <div class="my-3">
