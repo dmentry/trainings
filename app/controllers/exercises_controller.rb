@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
-  before_action :set_training, only: [:create, :destroy, :update]
-  before_action :set_exercise, only: [:destroy]
+  before_action :set_training, only: [:create, :destroy, :update, :edit]
+  before_action :set_exercise, only: [:destroy, :edit, :update]
 
   # POST /exercises
   def create
@@ -14,6 +14,9 @@ class ExercisesController < ApplicationController
         render 'trainings/show', alert: 'Упражнение добавить не удалось!'
       end
 
+  end
+
+  def edit
   end
 
   def update

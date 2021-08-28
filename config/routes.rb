@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :exercise_name_vocs
   resources :trainings do
     # Вложенный ресурс упражнений
-    resources :exercises, only: [:create, :destroy, :update]  
+    resources :exercises, only: [:create, :destroy, :update, :edit]  
   end
 
   resources :users, only: [:show, :edit, :update, :destroy]

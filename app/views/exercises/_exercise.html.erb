@@ -1,20 +1,27 @@
-<div>
-  <p><%= exercise.exercise_name_voc.label %></p>
-  <p>
-    <div>
-      Подходы:
-      <%= exercise.quantity %>
-    </div>
-    <div>
-      Заметки:
-      <%= exercise.note %>
-    </div>
-      
-
-
-
-      <%= link_to('Удалить', training_exercise_path(exercise.training, exercise), method: :delete, data: {confirm: t('.destroy_confirm')} ) %>
-
-
-  </p>
-</div>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th class="table-info"><%= exercise.exercise_name_voc.label %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>            
+        Подходы:
+        <%= exercise.quantity %>
+      </td>
+    </tr>
+    <tr>
+      <td>            
+        Заметки:
+        <%= exercise.note %>
+      </td>
+    </tr>
+    <tr>
+      <td>            
+        <%= link_to('Удалить | ', training_exercise_path(exercise.training, exercise), method: :delete, data: {confirm: t('.destroy_confirm')} ) %>
+        <%= link_to 'Отредактировать', edit_training_exercise_path(exercise.training, exercise) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
