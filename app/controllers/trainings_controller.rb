@@ -7,6 +7,14 @@ class TrainingsController < ApplicationController
     @trainings_by_date = @trainings.group_by(&:start_time)
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
+
+    @trainings_by_month = []
+
+    Training.all.each do |date|
+      if date.start_time.month == @date.month && date.start_time.year == @date.year
+        @trainings_by_month << date
+      end
+    end
   end
 
   def show

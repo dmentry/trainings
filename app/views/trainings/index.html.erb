@@ -1,17 +1,16 @@
 <h1 class="center text_size">Календарь тренировок</h1>
 <div class="container bg-light">
   <div class="row my-3 pr-3">
+
     <div class="border col-lg-4 order-lg-2 mb-3 mt-4">
       <%= link_to 'Создать тренировку', new_training_path %>
       <br><br>
       <div>
         <div>Тренировки в этом месяце:</div>
-        <% @trainings.each do |training| %>
+        <% @trainings_by_month.each do |training| %>
           <div> <%= link_to training.label, training %></div>
-              <%#= link_to 'Show', training %>
-              <%#= link_to 'Edit', edit_training_path(training) %>
-              <%#= link_to 'Destroy', training, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
+
       </div>
     </div>
 
@@ -23,12 +22,18 @@
       </h2>
       <%= calendar @date do |date| %>
         <%= date.day %>
-        <% if @trainings_by_date[date] %>
-          <% @trainings_by_date[date].each do |training| %>
-            <%= link_to training.label, training %>
-          <% end %> 
-        <% end %>
+        <div>
+          <% if @trainings_by_date[date] %>
+            <% @trainings_by_date[date].each do |training| %>
+              <div>
+                <%= link_to training.label, training %>
+                <br>
+              </div>
+            <% end %> 
+          <% end %>
+        </div>
       <% end %>
     </div>
+    
   </div>
 </div>
