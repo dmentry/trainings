@@ -41,6 +41,7 @@ ru:
       default: "%d.%m.%Y"
       long: "%-d %B %Y"
       short: "%-d %b"
+      my_format: "%d.%m.%Y"
     month_names:
     - 
     - января
@@ -265,7 +266,6 @@ ru:
       default: "%H:%M:%S %z, %a, %d %b %Y"
       long: "%H:%M, %d %B %Y"
       short: "%H:%M, %d.%m.%Y"
-      my_format: "%d.%m.%Y"
     pm: вечера
   simple_calendar:
     previous: "<<"

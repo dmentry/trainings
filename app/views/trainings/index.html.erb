@@ -16,13 +16,18 @@
     </div>
 
     <div class="col-lg-8 order-lg-1">
-      <%= month_calendar(events: @trainings) do |date, trainings| %>
+      <h2 id="month">
+        <%= link_to "<", date: @date.prev_month %>
+        <%= @date.strftime("%B %Y") %>
+        <%= link_to ">", date: @date.next_month %>
+      </h2>
+      <%= calendar @date do |date| %>
         <%= date.day %>
-        <% trainings.each do |training| %>
-          <div>
-            <%= training.label %>
-          </div>
-        <% end %>  
+        <% if @trainings_by_date[date] %>
+          <% @trainings_by_date[date].each do |training| %>
+            <%= link_to training.label, training %>
+          <% end %> 
+        <% end %>
       <% end %>
     </div>
   </div>

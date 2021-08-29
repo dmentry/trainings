@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_092800) do
 
   create_table "trainings", force: :cascade do |t|
     t.string "label"
-    t.datetime "start_time"
+    t.date "start_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false

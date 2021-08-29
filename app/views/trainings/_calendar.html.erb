@@ -1,0 +1,9 @@
+<%= month_calendar events: @trainings, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link do |date, trainings| %>
+  <%= date.day %>
+
+  <% trainings.each do |training| %>
+    <div>
+      <%= training.label %>
+    </div>
+  <% end %>
+<% end %>

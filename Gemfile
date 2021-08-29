@@ -13,7 +13,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'recaptcha'
 # gem 'devise-i18n'
 # gem 'traco'
-gem 'simple_calendar', '~> 2.4'
 gem 'rails-i18n'
 
 group :development, :test do

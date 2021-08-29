@@ -2,9 +2,11 @@ class TrainingsController < ApplicationController
   before_action :set_training, only: %i[ show edit update destroy ]
 
   def index
-    start_date = Date.today
+    @trainings = Training.all
 
-    @trainings = Training.where(start_time: start_date.beginning_of_month..start_date.end_of_month)
+    @trainings_by_date = @trainings.group_by(&:start_time)
+
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
   def show
@@ -47,11 +49,12 @@ class TrainingsController < ApplicationController
   end
 
   private
-    def set_training
-      @training = Training.find(params[:id])
-    end
+  
+  def set_training
+    @training = Training.find(params[:id])
+  end
 
-    def training_params
-      params.require(:training).permit(:label, :start_time)
-    end
+  def training_params
+    params.require(:training).permit(:label, :start_time)
+  end
 end
