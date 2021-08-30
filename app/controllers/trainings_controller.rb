@@ -26,7 +26,7 @@ class TrainingsController < ApplicationController
 
     respond_to do |format|
       if @training.save
-        format.html { redirect_to trainings_url, notice: "Training was successfully created." }
+        format.html { redirect_to @training, notice: "Training was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,7 +36,7 @@ class TrainingsController < ApplicationController
   def update
     respond_to do |format|
       if @training.update(training_params)
-        format.html { redirect_to trainings_url, notice: "Training was successfully updated." }
+        format.html { redirect_to @training, notice: "Training was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end

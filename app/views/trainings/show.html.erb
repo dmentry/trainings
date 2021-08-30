@@ -10,7 +10,7 @@
             Дата: <%= l @training.start_time, format: :my_format %>
           </div>
           <div class="my-3">
-            <%= render partial: 'exercises/exercise', collection: @training.exercises.except(@new_exercise) %>
+            <%= render partial: 'exercises/exercise', collection: @training.exercises.except(@exercise) %>
             <% if @training.exercises.empty? %>
               Вы еще не внесли ни одного упражнения в эту тренировку
             <% end %>
@@ -23,7 +23,7 @@
         <div>Добавить упражнение:</div>
         <div class="row mt-3">
           <div class="col-sm-12 col-md-12">
-            <%= render partial: 'exercises/form', locals: {exercise: @new_exercise || @training.exercises.build} %>
+            <%= render partial: 'exercises/form', locals: {exercise: @exercise || @training.exercises.build} %>
           </div>
         </div>
       </div>

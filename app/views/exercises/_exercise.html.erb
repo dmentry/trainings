@@ -13,6 +13,16 @@
     </tr>
     <tr>
       <td>            
+        Сумма:
+        <% if exercise.exercise_name_voc.label && exercise.exercise_name_voc.label.match?(/бег|лыжи|Бег|Лыжи/) %>
+          <%= exercise.summ %>
+        <% else %>
+          <%= exercise.summ.to_i %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>            
         Заметки:
         <%= exercise.note %>
       </td>

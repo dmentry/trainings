@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_092800) do
   create_table "exercises", force: :cascade do |t|
     t.string "quantity"
     t.text "note"
+    t.float "summ"
     t.bigint "training_id", null: false
     t.bigint "exercise_name_voc_id", null: false
     t.datetime "created_at", precision: 6, null: false
