@@ -1,50 +1,99 @@
 module ExercisesHelper
-  def self.summ(options={})
-    name = options[:label] || ''
+  class Summ
+    attr_accessor :label, :exercise
 
-    exercise = options[:exercise]
+    def initialize(params)
+      @label = params[:label] || ''
 
-    exercise = exercise.gsub(" ", "")
+      @exercise = params[:exercise] || 0
 
+      @exercise = @exercise.gsub(" ", "")
+    end
+
+    def overall
+      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи/)
+        overall_summ = 0
+
+        @exercise.split(',') do |match|
+          temp_summ = self.dash(@label, match)
+
+          overall_summ += temp_summ if temp_summ
+
+          temp_summ = self.multiply(@label, match)
+
+          overall_summ += temp_summ if temp_summ
+
+          temp_summ = self.one_rep(@label, match)
+
+          overall_summ += temp_summ if temp_summ
+        end
+
+        return overall_summ
+      else
+        temp_summ_1 = self.dash(@label, @exercise) || 0
+
+        temp_summ_2 = self.multiply(@label, @exercise) || 0
+
+        temp_summ_3 = self.ladder(@label, @exercise) || 0
+
+        temp_summ_4 = self.running(@label, @exercise) || 0
+
+        temp_summ_5 = self.one_rep(@label, @exercise) || 0
+
+        return temp_summ_1 + temp_summ_2 + temp_summ_3 + temp_summ_4 + temp_summ_5
+      end
+    end
+
+  private
     # тире
-    if !name.match?(/лесен/) && exercise.match?(/-/)
-      summ = 0
+    def dash(label, exercise)
+      if !label.match?(/лесен|Лесен/) && exercise.match?(/-/)
+        summ = 0
 
-      exercise.split('-'){ |sub| summ += sub.to_i }
+        exercise.split('-'){ |sub| summ += sub.to_i }
 
-      return summ
+        summ
+      end
     end
 
     # x
-    if exercise.match?(/[xXхХ]/)
-      mult = 1
+    def multiply(label, exercise)
+      if exercise.match?(/[xXхХ]/)
+        mult = 1
 
-      exercise.split(/[xXхХ]/){ |sub| mult *= sub.to_i }
+        exercise.split(/[xXхХ]/){ |sub| mult *= sub.to_i }
 
-      return mult
+        mult = 0 if mult == 1
+
+        mult
+      end
     end
 
     # лесенка
-    if name && name.match?(/лесен/)
-      max = exercise.match(/(\A\d+\z)|(\d+\z)/).to_s.to_i
+    def ladder(label, exercise)
+      if label.match?(/лесен|Лесен/)
+        max = exercise.match(/(\A\d+\z)|(\d+\z)/).to_s.to_i
 
-      result = 0
+        result = 0
 
-      (max).times { |i| result += i }
+        max.times { |i| result += i }
 
-      result = 2 * result + max
+        result = 2 * result + max
 
-      return result
+        result
+      end
     end
 
-    # бег
-    if name && name.match?(/бег|лыжи|Бег|Лыжи/)
-      return exercise.match(/\d+[.,]\d+/).to_s.gsub(",", ".").to_f
+    # бег\лыжи
+    def running(label, exercise)
+      exercise.match(/\d+[.,]\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
     end
 
     # один подход
-    if exercise.match?(/\A\d+\z/)
-      return exercise.match(/\A\d+\z/).to_s.to_i
+    def one_rep(label, exercise)
+      unless label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи/)
+        exercise.match(/\A\d+\z/).to_s.to_i if exercise.match?(/\A\d+\z/)
+      end
     end
   end
 end

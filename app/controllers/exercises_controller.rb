@@ -2,7 +2,6 @@ class ExercisesController < ApplicationController
   before_action :set_training, only: [:create, :destroy, :update, :edit]
   before_action :set_exercise, only: [:destroy, :edit, :update]
 
-
   # POST /exercises
   def create
     @exercise = @training.exercises.build(exercise_params)
@@ -48,7 +47,7 @@ class ExercisesController < ApplicationController
   def count_summ
     options={ exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
 
-    @exercise.summ = ExercisesHelper::summ(options)
+    @exercise.summ = ExercisesHelper::Summ.new(options).overall
 
     @exercise.save!
   end
