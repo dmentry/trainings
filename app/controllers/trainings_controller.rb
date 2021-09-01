@@ -50,6 +50,38 @@ class TrainingsController < ApplicationController
     end
   end
 
+
+
+
+  def stat
+    @training = Training.first
+    @exercise = @training.exercises.build
+
+    @data = []
+    id = 1
+# binding.pry
+     if params[:exercise_name_id].to_i <= 0
+id = 1
+else
+  id =params[:exercise_name_id].to_i
+end
+
+
+    Training.all.each do |training|
+      training.exercises.each do |exercise|
+
+        if exercise.exercise_name_voc_id == id
+        @name = exercise.exercise_name_voc.label
+
+        @data << [training.start_time, exercise.summ]
+      end
+      end
+    end
+@data
+  end
+
+
+
   private
   
   def set_training

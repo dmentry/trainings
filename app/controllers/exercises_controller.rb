@@ -42,6 +42,10 @@ class ExercisesController < ApplicationController
     redirect_to @training, message
   end
 
+  def stat
+    
+  end
+
   private
 
   def count_summ

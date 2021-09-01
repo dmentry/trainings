@@ -1,0 +1,36 @@
+<div class="center">
+  <h1 class="center text_size">Статистика тренировок</h1>
+</div>
+
+<div class="container bg-light">
+  <div class="row my-3">
+    <div class="col-lg-4 order-lg-2 mb-3 mt-4">
+      <div>
+
+        <% @list.each do |list| %>
+          <div><%= link_to list[1], stat_statistics_path(exercise_name_id: list[0]) %></div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container bg-light">
+  <div class="row my-3">
+    <div class="col-lg-4 order-lg-2 mb-3 mt-4">
+      <div>
+        <div><%#= @name %></div>
+
+        <% @data.each do |data| %>
+          <% if @name && @name.match?(/бег|лыжи|Бег|Лыжи/) %>
+            <% summ = data[1] %>
+          <% else %>
+            <% summ = data[1].to_i %>
+          <% end %>
+          <div> <%= data[0] %> - <%= summ %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
