@@ -1,6 +1,6 @@
 class Training < ApplicationRecord
   belongs_to :user
-  has_many :exercises
+  has_many :exercises, dependent: :destroy
 
   validates :label, presence: true, length: {maximum: 255}
   validates :start_time, presence: true

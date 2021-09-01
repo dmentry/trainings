@@ -29,7 +29,8 @@
         <div class="container-fluid">
           <div class="navbar navbar-responsive logo_my_class">
               <ul class="navbar-nav">
-                <%= link_to 'Тренировки', root_path, class: 'btn bg-light', title: t('app.navbar.logo_name_caption') %>
+                <li><%= link_to 'Тренировки', root_path, class: 'btn bg-light', title: 'На главную' %></li>
+                <li><%= link_to 'Статистика', statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
               </ul>
           </div>
           <div class="navbar navbar-responsive d-md-block">

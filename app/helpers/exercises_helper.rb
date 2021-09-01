@@ -3,9 +3,9 @@ module ExercisesHelper
     attr_accessor :label, :exercise
 
     def initialize(params)
-      @label = params[:label] || ''
+      @label = params[:label] ||= ''
 
-      @exercise = params[:exercise] || 0
+      @exercise = params[:exercise] ||= 0
 
       @exercise = @exercise.gsub(" ", "")
     end
