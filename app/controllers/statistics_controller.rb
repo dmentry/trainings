@@ -1,5 +1,15 @@
 class StatisticsController < ApplicationController
   def stat
+    @charts = [[1, 'Линейная'], [2, 'Stepline'], [3, 'Area'], [4, 'Column']]
+
+    if params[:chart_name_id].to_i <= 0
+      @chart_id = 1
+    else
+      @chart_id = params[:chart_name_id].to_i
+    end
+    
+    @chart_id
+
     @list=ExerciseNameVoc.all.pluck(:id, :label)
 
     @data = []
@@ -10,20 +20,16 @@ class StatisticsController < ApplicationController
       id = params[:exercise_name_id].to_i
     end
 
+    @name = Exercise.find_by(exercise_name_voc: id).exercise_name_voc.label
+
     Training.all.each do |training|
       training.exercises.each do |exercise|
         if exercise.exercise_name_voc_id == id
-          @name = exercise.exercise_name_voc.label
-
           @data << [training.start_time, exercise.summ]
         end
       end
     end
 
-    @data
-  end
-
-  def statistic_params
-    params.require(:statistic).permit(:exercise_name_id)
+    @data = @data.sort
   end
 end

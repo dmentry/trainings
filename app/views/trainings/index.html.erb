@@ -1,8 +1,8 @@
-<h1 class="center text_size">Календарь тренировок</h1>
+<h1 class="center text_size buffer-top">Календарь тренировок</h1>
 <div class="container bg-light">
-  <div class="row my-3 pr-3">
+  <div class="row my-3">
 
-    <div class="border col-lg-4 order-lg-2 mb-3 mt-4">
+    <div class="border col-lg-3 order-lg-2 mb-3 buffer-top buffer-both-sm shadow">
       <%= link_to 'Создать тренировку', new_training_path %>
       <br><br>
       <div>
@@ -10,30 +10,31 @@
         <% @trainings_by_month.each do |training| %>
           <div> <%= link_to training.label, training %></div>
         <% end %>
-
       </div>
     </div>
 
-    <div class="col-lg-8 order-lg-1">
-      <h2 id="month">
+    <div class="col-lg-8 order-lg-1 mb-3">
+    <h2 id="month">
+      <div class="text_size">
         <%= link_to "<", date: @date.prev_month %>
         <%= @date.strftime("%B %Y") %>
         <%= link_to ">", date: @date.next_month %>
-      </h2>
-      <%= calendar @date do |date| %>
-        <%= date.day %>
-        <div>
-          <% if @trainings_by_date[date] %>
-            <% @trainings_by_date[date].each do |training| %>
-              <div>
-                <%= link_to training.label, training %>
-                <br>
-              </div>
-            <% end %> 
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+      </div>
+    </h2>
+    <%= calendar @date do |date| %>
+      <%= date.day %>
+      <div>
+        <% if @trainings_by_date[date] %>
+          <% @trainings_by_date[date].each do |training| %>
+            <div>
+              <%= link_to training.label, training %>
+              <br>
+            </div>
+          <% end %> 
+        <% end %>
+      </div>
+    <% end %>
+  </div>
     
   </div>
 </div>

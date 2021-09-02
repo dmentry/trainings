@@ -7,6 +7,8 @@ window.$ = window.jQuery = jQuery;
 
 import '../../assets/stylesheets/application'
 import 'bootstrap/dist/js/bootstrap'
+import ApexCharts from 'apexcharts'
+window.ApexCharts = ApexCharts
 
 const images = require.context('../images', true)
 

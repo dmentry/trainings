@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'devise-i18n'
 # gem 'traco'
 gem 'rails-i18n'
+gem 'apexcharts'
 
 group :development, :test do
   gem 'pry', '~> 0.13.1'

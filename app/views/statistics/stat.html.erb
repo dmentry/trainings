@@ -1,35 +1,62 @@
 <div class="center">
-  <h1 class="center text_size">Статистика тренировок</h1>
+  <h1 class="center text_size">Статистика тренировок по упражнениям</h1>
 </div>
 
 <div class="container bg-light">
   <div class="row my-3">
-    <div class="col-lg-4 order-lg-2 mb-3 mt-4">
-      <div>
+    <div class="col-lg-12 order-lg-1 mb-3 mt-4">
 
+      <div class="center">
         <% @list.each do |list| %>
-          <div><%= link_to list[1], stat_statistics_path(exercise_name_id: list[0]) %></div>
+          <%= link_to list[1], stat_statistics_path(exercise_name_id: list[0]) %>
+          <% if list != @list.last %>
+            |
+          <% end %>
         <% end %>
-
       </div>
+
     </div>
   </div>
 </div>
 
+<div class="center">
+  <h3 class="center text_size"><%= @name %></h3>
+</div>
+
 <div class="container bg-light">
   <div class="row my-3">
-    <div class="col-lg-4 order-lg-2 mb-3 mt-4">
+    <div class="col-lg-12 order-lg-2 mb-3 mt-4">
       <div>
         <div><%#= @name %></div>
+        <%# @data.each do |data| %>
+          <%# if @name && @name.match?(/бег|лыжи|Бег|Лыжи/) %>
+            <%# summ = data[1] %>
+          <%# else %>
+            <%# summ = data[1].to_i %>
+          <%# end %>
+          <!-- <div> <%#= data[0] %> - <%#= summ %></div> -->
+        <%# end %>
 
-        <% @data.each do |data| %>
-          <% if @name && @name.match?(/бег|лыжи|Бег|Лыжи/) %>
-            <% summ = data[1] %>
-          <% else %>
-            <% summ = data[1].to_i %>
+        <div class="center">
+          <% @charts.each do |chart| %>
+            <%= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
+            <% if chart != @charts.last %>
+             |
+            <% end %>
           <% end %>
-          <div> <%= data[0] %> - <%= summ %></div>
+        </div>
+
+        <% case @chart_id %>
+          <% when 1 then%> 
+            <%= line_chart(@data) %>
+          <% when 2 then  %> 
+            <%= line_chart(@data, {theme: 'palette7', curve: 'stepline'}) %>
+          <% when 3 then  %> 
+            <%= area_chart(@data, {theme: 'palette5'}) %>
+          <% when 4 then  %> 
+            <%= column_chart(@data, {theme: 'palette4'}) %>
         <% end %>
+
       </div>
     </div>
   </div>

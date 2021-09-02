@@ -6,3 +6,31 @@
 .bold {
   font-weight: bold;
 }
+
+.buffer-top {
+  margin-top: 35px;
+}
+
+.cal-buffer-left {
+  margin-left: 30px;
+}
+
+.buffer-both-sm {
+  margin-left: 35px;
+  margin-right: 30px;
+}
+
+@media (max-width: 991px) {
+  .buffer-both-sm {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .buffer-top {
+    margin-top: 5px;
+  }
+
+  .text_size {
+    font-size: large;
+  }
+}
