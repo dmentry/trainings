@@ -3,15 +3,15 @@ module ExercisesHelper
     attr_accessor :label, :exercise
 
     def initialize(params)
-      @label = params[:label] ||= ''
+      @label = params[:label] || ''
 
-      @exercise = params[:exercise] ||= 0
+      @exercise = params[:exercise] || 0
 
       @exercise = @exercise.gsub(" ", "")
     end
 
     def overall
-      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи/)
+      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи|ЛФК|Лфк|лфк/)
         overall_summ = 0
 
         @exercise.split(',') do |match|
@@ -29,6 +29,9 @@ module ExercisesHelper
         end
 
         return overall_summ
+      elsif
+        @label.match?(/ЛФК|Лфк|лфк/)
+          return self.ofp(@label, @exercise)
       else
         temp_summ_1 = self.dash(@label, @exercise) || 0
 
@@ -87,6 +90,15 @@ module ExercisesHelper
     # бег\лыжи
     def running(label, exercise)
       exercise.match(/\d+[.,]\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
+    end
+
+    # офп
+    def ofp(label, exercise)
+      if label && label.match?(/ЛФК|Лфк|лфк/)
+        temp_value = exercise.match(/(\d+(x|X|х|Х)\d+)/).to_s
+
+        summ = self.multiply(label, temp_value)
+      end
     end
 
     # один подход

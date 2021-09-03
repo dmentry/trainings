@@ -19,7 +19,8 @@
     <h2 id="month">
       <div class="text_size">
         <%= link_to "<", date: @date.prev_month %>
-        <%= @date.strftime("%B %Y") %>
+        <%#= t @date.strftime("%B %Y") %>
+      <%= l(@date, format: "%B, %Y") %>
         <%= link_to ">", date: @date.next_month %>
       </div>
     </h2>
@@ -28,7 +29,7 @@
       <div>
         <% if @trainings_by_date[date] %>
           <% @trainings_by_date[date].each do |training| %>
-            <div>
+            <div class="cal-font">
               <%= link_to training.label, training %>
               <br>
             </div>
