@@ -24,26 +24,13 @@
     <div id="collapseMenu" class="collapse d-lg-block">
       <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
         <div class="container-fluid">
-          <div class="navbar navbar-responsive logo_my_class">
-              <ul class="navbar-nav">
-                <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
-                <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light" %></li>
-                <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
-              </ul>
-          </div>
+          <ul class="navbar-nav">
+            <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
+            <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
+            <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
+          </ul>
           <div class="navbar navbar-responsive d-md-block">
             <ul class="navbar-nav">
-              <li class="dropdown">
-                <!-- <button type="button" class="btn dropdown-toggle my_font_size remove_padding" data-toggle="dropdown"><%= t('app.navbar.menu.drop_down.photos') %></button> -->
-                <div class="dropdown-menu my_control my_font_size" aria-labelledby="dropdownMenuButton">
-
-                  <%# if current_user %>
-                    <%#=link_to t('app.navbar.menu.drop_down.all'), all_page_path, class: "dropdown-item my_dropdown_item" %>
-                  <%# end %>
-
-                </div>
-              </li>
-
               <%# if current_user %>
                 <li> <%#= link_to t('app.navbar.menu.load_photo'), new_photo_path, class: "btn my_font_size remove_padding" %> </li>
                 <li> <%#= link_to t('app.navbar.menu.profile'), current_user, class: "btn my_font_size remove_padding" %> </li>
@@ -70,6 +57,10 @@
         </div>
       </div>
     </div>
+
+    <a class="navbar-toggler d-lg-none" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu">
+      <%= image_pack_tag("menu-4x.png", alt: 'menu') %>
+    </a>
   
     <% flash.each do |key, value| %>
       <div class="<%= flash_class(key) %>" role="alert">
@@ -83,14 +74,12 @@
     <%= yield %>
 
     <footer>
-      <div class="dackbottomicons dackbottomicons-range">
+      <div>
         <div class="text-center buffer-bottom">
-          <p>&copy; Dack9  <%= Time.now.year %></p>
-          <%#= link_to image_pack_tag("vk.png", alt: 'vk'), "https://vk.com/dack9", target: "blanc", rel: "noreferrer", title: "VK" %>
-          <%#= link_to image_pack_tag("telegram.png", alt: 'telegram'), "https://t.me/Dack99", target: "blanc", rel: "noreferrer", title: "Telegram" %>
-          <%#= link_to image_pack_tag("instagram.png", alt: 'instagram'), "https://www.instagram.com/dack9/", target: "blanc", rel: "noreferrer", title: "Instagram" %>
+          <p><%= link_to "&copy; Dack9 #{Time.now.year}".html_safe, "https://vk.com/dack9", target: "blanc", rel: "noreferrer", title: "VK" %></p>
         </div>
       </div>
     </footer>
+
   </body>
 </html>

@@ -27,10 +27,18 @@
   }
 
   .buffer-top {
-    margin-top: 5px;
+    margin-top: -14px;
   }
 
   .text_size {
     font-size: large;
+  }
+
+  .bg-light {
+    background-color: white !important;
+  }
+
+  .buffer-bottom {
+    margin-top: -25px;
   }
 }
