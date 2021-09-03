@@ -6,7 +6,9 @@
       <%= link_to 'Создать тренировку', new_training_path %>
       <br><br>
       <div>
-        <div>Тренировки в этом месяце:</div>
+        <% unless @trainings_by_month.empty? %>
+          <div>Тренировки в этом месяце:</div>
+        <% end %>
         <% @trainings_by_month.each do |training| %>
           <div> <%= link_to training.label, training %></div>
         <% end %>

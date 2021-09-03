@@ -9,10 +9,10 @@ class ExercisesController < ApplicationController
     if @exercise.save
       count_summ
 
-      redirect_to @training, notice: "Exercise was successfully created."
+      redirect_to @training, notice: "Упражнение успешно создано."
     else
       # Если ошибки — рендерим здесь же шаблон тренировки (своих шаблонов у упражнения нет)
-      render 'trainings/show', alert: 'Упражнение добавить не удалось!'
+      render 'trainings/show', alert: "Упражнение добавить не удалось."
     end
   end
 
@@ -23,9 +23,9 @@ class ExercisesController < ApplicationController
     if @exercise.update(exercise_params)
       count_summ
 
-      message = {notice: 'Упражнение изменено успешно'}
+      message = { notice: 'Упражнение изменено успешно.' }
     else
-      message = {alert: 'Упражнение не было изменено'}
+      message = { alert: 'Упражнение не было изменено.' }
     end
 
     redirect_to @training, message
@@ -34,22 +34,18 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   def destroy
     if @exercise.destroy!
-      message = {notice: 'Упражнение удалено успешно'}
+      message = { notice: 'Упражнение удалено успешно.' }
     else
-      message = {alert: 'Упражнение не было удалено'}
+      message = { alert: 'Упражнение не было удалено.' }
     end
 
     redirect_to @training, message
   end
 
-  def stat
-    
-  end
-
   private
 
   def count_summ
-    options={ exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
+    options = { exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
 
     @exercise.summ = ExercisesHelper::Summ.new(options).overall
 

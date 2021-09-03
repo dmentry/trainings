@@ -9,9 +9,8 @@
     <%= favicon_link_tag %>
 
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Персональный сайт фотографа Дмитрия Dack9 Архипова. Сотрудничество: фотосессии и фотосъемка (макро, предметная)">
-    <meta name="keywords" content="dack9, фотограф, макрофотография, фотосессия, macro, macrophoto">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="description" content="Тренировки Дмитрия Dack9 Архипова">
+    <meta name="keywords" content="dack9, тренировка, workout">
     <meta name="author" content="Дмитрий Архипов aka Dack9">
 
     <%= csrf_meta_tags %>
@@ -19,17 +18,16 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
-    
   </head>
 
   <body>
-
     <div id="collapseMenu" class="collapse d-lg-block">
       <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
         <div class="container-fluid">
           <div class="navbar navbar-responsive logo_my_class">
               <ul class="navbar-nav">
-                <li><%= link_to 'Тренировки', root_path, class: 'btn bg-light', title: 'На главную' %></li>
+                <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
+                <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light" %></li>
                 <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
               </ul>
           </div>
@@ -45,8 +43,6 @@
 
                 </div>
               </li>
-              <li> <%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light" %> </li>
-              
 
               <%# if current_user %>
                 <li> <%#= link_to t('app.navbar.menu.load_photo'), new_photo_path, class: "btn my_font_size remove_padding" %> </li>

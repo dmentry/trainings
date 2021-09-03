@@ -23,64 +23,31 @@ class TrainingsController < ApplicationController
 
   def create
     @training = User.first.trainings.build(training_params)
-
-    respond_to do |format|
-      if @training.save
-        format.html { redirect_to @training, notice: "Training was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    
+    if @training.save
+      redirect_to @training, notice: "Тренировка успешно создана."
+    else
+      render :new, alert: "Тренировка не создалась."
     end
   end
 
   def update
-    respond_to do |format|
-      if @training.update(training_params)
-        format.html { redirect_to @training, notice: "Training was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @training.update(training_params)
+      redirect_to @training, notice: "Тренировка успешно отредактирована."
+    else
+      render :edit, alert: "Тренировка не отредактирована."
     end
   end
 
   def destroy
-    @training.destroy
-    respond_to do |format|
-      format.html { redirect_to trainings_url, notice: "Training was successfully destroyed." }
+    if @training.destroy!
+      message = { notice: 'Тренировка удалена успешно.' }
+    else
+      message = { alert: 'Тренировка не была удалена.' }
     end
+
+    redirect_to trainings_url, message
   end
-
-
-
-
-  def stat
-    @training = Training.first
-    @exercise = @training.exercises.build
-
-    @data = []
-    id = 1
-# binding.pry
-     if params[:exercise_name_id].to_i <= 0
-id = 1
-else
-  id =params[:exercise_name_id].to_i
-end
-
-
-    Training.all.each do |training|
-      training.exercises.each do |exercise|
-
-        if exercise.exercise_name_voc_id == id
-        @name = exercise.exercise_name_voc.label
-
-        @data << [training.start_time, exercise.summ]
-      end
-      end
-    end
-@data
-  end
-
-
 
   private
   
