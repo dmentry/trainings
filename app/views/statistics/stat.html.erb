@@ -38,14 +38,24 @@
         <%# end %>
 
         <div class="center">
-          <% @charts.each do |chart| %>
-            <%= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
-            <% if chart != @charts.last %>
+          <%# @charts.each do |chart| %>
+            <%#= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
+            <%# if chart != @charts.last %>
+             <!-- | -->
+            <%# end %>
+          <%# end %>
+        </div>
+
+        <div class="center">
+
+          <% @charts.each do |key, value| %>
+            <%= link_to key, stat_statistics_path(chart_name_id: value) %> 
+            <% if @charts.to_a.last[1] != value %>
              |
             <% end %>
           <% end %>
         </div>
-
+<%# binding.pry %>
         <% case @chart_id %>
           <% when 1 then%> 
             <%= area_chart(@data, {theme: 'palette5'}) %>
