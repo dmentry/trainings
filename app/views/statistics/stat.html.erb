@@ -7,9 +7,9 @@
     <div class="col-lg-12 order-lg-1 mb-3 mt-4">
 
       <div class="center">
-        <% @list.each do |list| %>
-          <%= link_to list[1], stat_statistics_path(exercise_name_id: list[0]) %>
-          <% if list != @list.last %>
+        <% @exercises_list.each do |list| %>
+          <%= link_to list[1], stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]) %>
+          <% if list != @exercises_list.last %>
             |
           <% end %>
         <% end %>
@@ -25,7 +25,7 @@
 
 <div class="container bg-light">
   <div class="row my-3">
-    <div class="col-lg-12 order-lg-2 mb-3 mt-4">
+    <div class="col-lg-12 order-lg-2 mb-3 mt-2">
       <div>
         <div><%#= @name %></div>
         <%# @data.each do |data| %>
@@ -38,9 +38,9 @@
         <%# end %>
 
         <div class="center">
-          <%# @charts.each do |chart| %>
+          <%# @chart_types.each do |chart| %>
             <%#= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
-            <%# if chart != @charts.last %>
+            <%# if chart != @chart_types.last %>
              <!-- | -->
             <%# end %>
           <%# end %>
@@ -48,14 +48,13 @@
 
         <div class="center">
 
-          <% @charts.each do |key, value| %>
-            <%= link_to key, stat_statistics_path(chart_name_id: value) %> 
-            <% if @charts.to_a.last[1] != value %>
+          <% @chart_types.each do |key, value| %>
+            <%= link_to key, stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]) %> 
+            <% if @chart_types.to_a.last[1] != value %>
              |
             <% end %>
           <% end %>
         </div>
-<%# binding.pry %>
         <% case @chart_id %>
           <% when 1 then%> 
             <%= area_chart(@data, {theme: 'palette5'}) %>
