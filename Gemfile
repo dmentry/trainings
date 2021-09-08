@@ -8,17 +8,17 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
-# gem 'devise'
+gem 'devise'
 # gem 'pundit'
 # gem 'recaptcha'
-# gem 'devise-i18n'
+gem 'devise-i18n'
 # gem 'traco'
 gem 'rails-i18n'
 gem 'apexcharts'
 
 group :development, :test do
   gem 'pry', '~> 0.13.1'
-  # gem "letter_opener"
+  gem "letter_opener"
 end
 
 group :development do

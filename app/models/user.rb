@@ -1,10 +1,15 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   has_many :trainings, dependent: :destroy
+  has_many :exercises, through: :trainings
 
   validates :name, presence: true, length: {maximum: 35}
-  validates :email, presence: true, length: {maximum: 255}
-  validates :email, uniqueness: true
-  validates :email, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
+  # validates :email, presence: true, length: {maximum: 255}
+  # validates :email, uniqueness: true
+  # validates :email, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
 
   enum chart_status: { area: 1, stepline: 2, linear: 3, column: 4 }
 end

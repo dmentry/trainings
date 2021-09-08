@@ -8,16 +8,7 @@ class ApplicationController < ActionController::Base
 
   # Позволяем использовать возможности пандита во всех контроллерах
   # include Pundit
-  # Настройка для работы Девайза, когда юзер правит профиль
-  # before_action :configure_permitted_parameters, if: :devise_controller?
-
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.permit(
-  #     :account_update,
-  #     keys: [:password, :password_confirmation, :current_password]
-  #   )
-  # end
-
+  
   # Обработать ошибку авторизации
   # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -34,4 +25,14 @@ class ApplicationController < ActionController::Base
 
   #   redirect_to(request.referrer || root_path)
   # end
+
+  # Настройка для работы Девайза, когда юзер правит профиль
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation, :remember_me])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:password, :password_confirmation, :current_password])
+  end
 end

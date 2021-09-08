@@ -1,4 +1,5 @@
 class ExerciseNameVocsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_exercise_name_voc, only: %i[ show edit update destroy ]
 
   # GET /exercise_name_vocs

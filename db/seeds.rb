@@ -30,3 +30,5 @@ exercises = [
 exercises.each do |exercise|
   ExerciseNameVoc.create!(label: exercise)
 end
+
+User.create!(name: 'Дима', email: '11@11.11', password: '123456', admin: true)

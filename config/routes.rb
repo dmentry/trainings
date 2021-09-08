@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # devise_for :users
+  devise_for :users
 
   root to: 'trainings#index'
 
@@ -18,6 +18,4 @@ Rails.application.routes.draw do
       post :stat
     end
   end
-
-  # post 'stat_data' => 'statistics#data', as: :stat_data
 end
