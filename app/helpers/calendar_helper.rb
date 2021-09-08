@@ -4,7 +4,7 @@ module CalendarHelper
   end
 
   class Calendar < Struct.new(:view, :date, :callback)
-    HEADER = %w[Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье]
+    HEADER = %w[ПН ВТ СР ЧТ ПТ СБ ВС]
     START_DAY = :monday
 
     delegate :content_tag, to: :view

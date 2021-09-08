@@ -22,6 +22,9 @@
   </div>
 
   <div class="actions">
+    <%= link_to('Удалить', training_path, method: :delete, data: {confirm: 'Уверены?'}, class: 'btn btn-danger mt-2' ) %>
     <%= form.submit 'Сохранить', class: 'btn btn-secondary mt-2' %>
   </div>
 <% end %>
+
+

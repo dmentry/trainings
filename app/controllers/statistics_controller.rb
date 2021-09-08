@@ -52,6 +52,8 @@ class StatisticsController < ApplicationController
         end
       end
     else
+      @name = 'Все упражнения'
+      
       (@exercises_list.count - 1).times do |i|
         data_temp = []
 

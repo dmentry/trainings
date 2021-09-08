@@ -45,4 +45,14 @@
   .buffer-bottom {
     margin-top: -20px;
   }
+
+  .cal-font {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+  }
+
+  .order-lg-1 {
+    padding: 2px;
+  }
 }
