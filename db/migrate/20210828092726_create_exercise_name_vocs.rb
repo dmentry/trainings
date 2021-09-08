@@ -5,5 +5,7 @@ class CreateExerciseNameVocs < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_reference :exercise_name_vocs, :user
   end
 end

@@ -1,7 +1,5 @@
 class TrainingsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_current_user_training, except: [:index, :new, :create]
-  # before_action :set_training, only: %i[ show edit update destroy ]
   before_action :set_current_user_training, only: %i[show edit update destroy]
 
   def index
@@ -53,10 +51,6 @@ class TrainingsController < ApplicationController
   end
 
   private
-  
-  def set_training
-    @training = Training.find(params[:id])
-  end
 
   def set_current_user_training
     @training = current_user.trainings.find(params[:id])

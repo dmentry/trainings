@@ -1,3 +1,5 @@
+User.create!(name: 'Дима', email: '11@11.11', password: '123456', admin: true)
+
 exercises = [
   "Подтягивания",
   "Высокие подтягивания",
@@ -28,7 +30,5 @@ exercises = [
 ]
 
 exercises.each do |exercise|
-  ExerciseNameVoc.create!(label: exercise)
+  ExerciseNameVoc.create!(label: exercise, user_id: 1)
 end
-
-User.create!(name: 'Дима', email: '11@11.11', password: '123456', admin: true)

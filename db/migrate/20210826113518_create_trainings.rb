@@ -6,5 +6,7 @@ class CreateTrainings < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_reference :trainings, :user, null: false, foreign_key: true
   end
 end

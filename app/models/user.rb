@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :trainings, dependent: :destroy
   has_many :exercises, through: :trainings
+  has_many :exercise_name_vocs, dependent: :destroy
 
   validates :name, presence: true, length: {maximum: 35}
   # validates :email, presence: true, length: {maximum: 255}

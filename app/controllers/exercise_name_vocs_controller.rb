@@ -1,10 +1,10 @@
 class ExerciseNameVocsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_exercise_name_voc, only: %i[ show edit update destroy ]
+  before_action :set_current_user_exercise_name_voc, only: %i[show edit update destroy]
 
   # GET /exercise_name_vocs
   def index
-    @exercise_name_vocs = ExerciseNameVoc.all
+    @exercise_name_vocs = current_user.exercise_name_vocs.all
   end
 
   # GET /exercise_name_vocs/1
@@ -13,6 +13,7 @@ class ExerciseNameVocsController < ApplicationController
 
   # GET /exercise_name_vocs/new
   def new
+    @exercise_name_vocs = current_user.exercise_name_vocs.build
   end
 
   # GET /exercise_name_vocs/1/edit
@@ -21,7 +22,7 @@ class ExerciseNameVocsController < ApplicationController
 
   # POST /exercise_name_vocs
   def create
-    @exercise_name_voc = ExerciseNameVoc.new(exercise_name_voc_params)
+    @exercise_name_voc = current_user.exercise_name_vocs.build(exercise_name_voc_params)
 
     if @exercise_name_voc.save
       redirect_to exercise_name_vocs_path, notice: "Упражнение было успешно создано."
@@ -52,8 +53,8 @@ class ExerciseNameVocsController < ApplicationController
 
   private
 
-  def set_exercise_name_voc
-    @exercise_name_voc = ExerciseNameVoc.find(params[:id])
+  def set_current_user_exercise_name_voc
+    @exercise_name_voc = current_user.exercise_name_vocs.find(params[:id])
   end
 
   def exercise_name_voc_params

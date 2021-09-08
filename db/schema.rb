@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2021_09_07_193131) do
     t.string "label"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_exercise_name_vocs_on_user_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -44,11 +46,11 @@ ActiveRecord::Schema.define(version: 2021_09_07_193131) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "email", default: "", null: false
     t.integer "chart_status", default: 1
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
