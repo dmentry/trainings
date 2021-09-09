@@ -69,8 +69,8 @@ Rails.application.configure do
     user_name: ENV['USERNAME'],
     password: ENV['PASSWORD'],
     domain: 'dack9.ru',
-    address: 'mail.dack9.ru',
-    port: 25,
+    address: 'in-v3.mailjet.com',
+    port: 587,
     authentication: :plain,
     enable_starttls_auto: true
   }
