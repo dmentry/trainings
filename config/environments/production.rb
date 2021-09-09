@@ -56,7 +56,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Настройки для отправки почты
-  config.action_mailer.default_url_options = { host: 'dack9.ru' }
+  config.action_mailer.default_url_options = { host: 'fitc.herokuapp.com' }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true
 
