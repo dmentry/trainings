@@ -1,7 +1,6 @@
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
 
-
   def stat
     @chart_types = User.chart_statuses
     

@@ -56,9 +56,25 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Настройки для отправки почты
-  config.action_mailer.default_url_options = { host: 'dack9.ru', subdomain: "photo"}
+  config.action_mailer.default_url_options = { host: 'fit_calendar.herokuapp.com' }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true
+
+  #Отправка мейлов через mailjet
+  # config.action_mailer.delivery_method = :smtp
+
+  # Или эта строка правильно? Проверить при необходимости!
+  config.action_mailer.delivery_method = :mailjet
+
+  ActionMailer::Base.smtp_settings = {
+    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :mailjet, :mailjet_username),
+    password: Rails.application.credentials.dig(Rails.env.to_sym, :mailjet, :mailjet_password),
+    domain: 'heroku.com',
+    address: 'in-v3.mailjet.com',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -84,5 +100,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #Отправка мейлов через postfix
-  config.action_mailer.delivery_method = :sendmail
+  # config.action_mailer.delivery_method = :sendmail
 end
