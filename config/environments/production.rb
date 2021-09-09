@@ -68,9 +68,9 @@ Rails.application.configure do
     # password: Rails.application.credentials.dig(Rails.env.to_sym, :mailjet, :mailjet_password),
     user_name: ENV['USERNAME'],
     password: ENV['PASSWORD'],
-    domain: 'heroku.com',
-    address: 'in-v3.mailjet.com',
-    port: 587,
+    domain: 'dack9.ru',
+    address: 'mail.dack9.ru',
+    port: 465,
     authentication: :plain,
     enable_starttls_auto: true
   }
