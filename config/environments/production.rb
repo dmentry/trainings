@@ -70,7 +70,7 @@ Rails.application.configure do
     password: ENV['PASSWORD'],
     domain: 'dack9.ru',
     address: 'mail.dack9.ru',
-    port: 465,
+    port: 25,
     authentication: :plain,
     enable_starttls_auto: true
   }
