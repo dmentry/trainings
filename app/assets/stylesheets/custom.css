@@ -24,6 +24,8 @@
   font-size: 12px;
 }
 
+
+
 @media (max-width: 991px) {
   .buffer-both-sm {
     margin-left: 10px;

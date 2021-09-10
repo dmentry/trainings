@@ -1,7 +1,7 @@
 <%= form_with(model: exercise_name_voc, local: true) do |form| %>
   <% if exercise_name_voc.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(exercise_name_voc.errors.count, "error") %> prohibited this exercise_name_voc from being saved:</h2>
+      <h2><%= pluralize(exercise_name_voc.errors.count, "ошибки") %> не дает сохранить упражнение:</h2>
 
       <ul>
         <% exercise_name_voc.errors.full_messages.each do |message| %>
@@ -13,10 +13,14 @@
 
   <div class="form-group mt-3">
     <%= form.label 'Название' %>
-    <%= form.text_field :label, class: 'form-control' %>
+    <%= form.text_field :label, class: 'form-control w-100' %>
   </div>
 
   <div class="actions">
     <%= form.submit 'Сохранить', class: 'btn btn-secondary mt-2' %>
   </div>
 <% end %>
+
+<div class="mt-3">
+  <%= link_to 'Обратно', :back %>       
+</div>

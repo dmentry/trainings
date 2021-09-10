@@ -25,16 +25,16 @@
       <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
         <div class="container-fluid">
           <ul class="navbar-nav">
-            <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
-            <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
-            <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
-
             <% if user_signed_in? %>
+              <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
+              <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
+              <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
               <li><%= link_to 'Профиль', current_user, class: 'btn bg-light' %></li>
               <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
             <% else %>
               <li><%= link_to 'Войти', new_user_session_path, class: 'btn bg-light' %></li>
               <li><%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'btn bg-light' %></li>
+              <li><%= link_to 'Восстановить пароль', new_password_path(resource_name), class: 'btn bg-light' %></li>
             <% end %>
           </ul>
 

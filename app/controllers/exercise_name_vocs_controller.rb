@@ -27,7 +27,7 @@ class ExerciseNameVocsController < ApplicationController
     if @exercise_name_voc.save
       redirect_to exercise_name_vocs_path, notice: "Упражнение было успешно создано."
     else
-      render :new, alert: "Упражнение не было создано."
+      render :edit, alert: "Упражнение не было создано."
     end
   end
 

@@ -1,21 +1,21 @@
-<h1 class="center text_size buffer-top">Профиль</h1>
+<h1 class="center text_size">Профиль</h1>
 <div class="container bg-light">
   <div class="row my-3">
-
     <div class="col-lg-8 order-lg-1 mb-3">
+
       <h1><%= @user.name %></h1>
-      <p class="buffer-top">
+      <div class="buffer-top">
         <div>
           <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-secondary mt-2' %>
         </div>
         <div>
           <%= link_to 'Сменить пароль', edit_user_registration_path, class: 'btn btn-secondary mt-2' %>
         </div>
-        <div>
-          <%= link_to 'Обратно', root_path, class: 'btn btn-secondary mt-2' %>
-        </div>
-      </p>
+      <div class="mt-3">
+        <%= link_to 'Обратно', root_path %>
+      </div>
+     </div> 
     </div>
-    
   </div>
 </div>
+

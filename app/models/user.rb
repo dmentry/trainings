@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :add_exercises
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,4 +14,24 @@ class User < ApplicationRecord
   # validates :email, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
 
   enum chart_status: { area: 1, stepline: 2, linear: 3, column: 4 }
+
+
+  private
+
+  def add_exercises
+    exercises = [
+      "Подтягивания",
+      "Отжимания",
+      "Алмазные отжимания",
+      "Выход силой",
+      "Скручивания",
+      "Бег"
+    ]
+
+    exercises.each do |exercise|
+      exc = ExerciseNameVoc.new(label: exercise, user_id: self.id)
+
+      exc.save(validate: false)
+    end
+  end
 end

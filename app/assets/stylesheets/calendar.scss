@@ -10,22 +10,38 @@
   }
 
   th {
-    background: #DDD;
-    color: #666;
+    background: #f8f8f8;
+    color: #000;
     text-align: center;
     width: 14.2857142857143%;
   }
 
+  th:nth-last-child(1) { color: red; }
+  th:nth-last-child(2) { color: red; }
+
   td {
     background: #FFF;
-    color: #777;
+    color: #000;
     height: 80px;
     vertical-align: top;
     font-size: 16px;
   }
 
-  .notmonth, .notmonth a { color: #CCC; }
-  .today { background-color: #D7F2FF; }
+  td:nth-last-child(1) { color: red; }
+  td:nth-last-child(2) { color: red; }
+
+  a { color: #0000ff; }
+
+  .notmonth { 
+    background-color: #f0f0f0; 
+    color: #a3a3a3;
+  }
+
+  .notmonth a { color: #a9c7ff; }
+  .today { background-color: #eafecc; }
+
+  .notmonth:nth-last-child(1) { color: #ff80ac; }
+  .notmonth:nth-last-child(2) { color: #ff80ac; }
 }
 
 #month {
