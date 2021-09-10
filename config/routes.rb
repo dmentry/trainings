@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :trainings do
     # Вложенный ресурс упражнений
     resources :exercises, only: [:create, :destroy, :update, :edit]
+    collection do
+      get :download_textfile
+    end
   end
 
   resources :users, only: [:show, :edit, :update, :destroy]

@@ -13,7 +13,7 @@
 
   <div class="form-group mt-3">
     <%= form.label 'Название' %>
-    <%= form.text_field :label, class: 'form-control w-100', value: "#{Date.today.strftime("%d.%m.%Y")}" %>
+    <%= form.text_field :label, class: 'form-control w-100', value: "#{ Date.today.strftime("%d.%m.%Y") }" %>
   </div>
 
   <div class="form-group mt-3">

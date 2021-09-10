@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Тренировки</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <%= favicon_link_tag %>
+    <%#= favicon_link_tag 'favicon.ico' %>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
 
     <meta name="robots" content="index, follow">
     <meta name="description" content="Тренировки Дмитрия Dack9 Архипова">
@@ -29,6 +29,7 @@
               <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
               <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
               <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
+              <li><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
               <li><%= link_to 'Профиль', current_user, class: 'btn bg-light' %></li>
               <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
             <% else %>

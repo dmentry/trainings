@@ -1,7 +1,7 @@
 class TrainingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user_training, only: %i[show edit update destroy]
-
+ 
   def index
     @trainings = current_user.trainings.all
 
@@ -48,6 +48,12 @@ class TrainingsController < ApplicationController
     end
 
     redirect_to trainings_url, message
+  end
+
+  def download_textfile
+    export_data = TrainingsHelper::TrainingExport.download_textfile(current_user)
+
+    send_data export_data,:type => 'text',:disposition => "attachment; filename=Тренировки_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
 
   private
