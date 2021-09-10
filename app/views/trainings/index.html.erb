@@ -2,7 +2,30 @@
 <div class="container bg-light">
   <div class="row my-3">
 
-    <div class="border col-lg-3 order-lg-2 mb-3 buffer-top buffer-both-sm shadow">
+    <div class="col-lg-8 order-lg-1 mb-3 no-paddings">
+      <h2 id="month">
+        <div class="text_size">
+          <%= link_to "<", date: @date.prev_month %>
+          <%#= t @date.strftime("%B %Y") %>
+        <%= l(@date, format: "%B, %Y") %>
+          <%= link_to ">", date: @date.next_month %>
+        </div>
+      </h2>
+      <%= calendar @date do |date| %>
+        <%= date.day %>
+        <div>
+          <% if @trainings_by_date[date] %>
+            <% @trainings_by_date[date].each do |training| %>
+              <div class="cal-font">
+                <%= link_to training.label, training %>
+              </div>
+            <% end %> 
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="border col-lg-3 order-lg-2 mb-3 buffer-top buffer-both-sm shadow no-margins">
       <%= link_to 'Создать тренировку', new_training_path %>
       <br><br>
       <div>
@@ -14,29 +37,6 @@
         <% end %>
       </div>
     </div>
-
-    <div class="col-lg-8 order-lg-1 mb-3">
-    <h2 id="month">
-      <div class="text_size">
-        <%= link_to "<", date: @date.prev_month %>
-        <%#= t @date.strftime("%B %Y") %>
-      <%= l(@date, format: "%B, %Y") %>
-        <%= link_to ">", date: @date.next_month %>
-      </div>
-    </h2>
-    <%= calendar @date do |date| %>
-      <%= date.day %>
-      <div>
-        <% if @trainings_by_date[date] %>
-          <% @trainings_by_date[date].each do |training| %>
-            <div class="cal-font">
-              <%= link_to training.label, training %>
-            </div>
-          <% end %> 
-        <% end %>
-      </div>
-    <% end %>
-  </div>
     
   </div>
 </div>

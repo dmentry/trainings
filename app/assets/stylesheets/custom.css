@@ -31,7 +31,7 @@
   }
 
   .buffer-top {
-    margin-top: -14px;
+    margin-top: 5px;
   }
 
   .text_size {
@@ -52,7 +52,11 @@
     word-wrap: break-word;
   }
 
-  .order-lg-1 {
+  .no-paddings {
     padding: 0;
+  }
+
+  .no-margins {
+    margin: 0;
   }
 }

@@ -64,11 +64,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   ActionMailer::Base.smtp_settings = {
-    # user_name: Rails.application.credentials.dig(Rails.env.to_sym, :mailjet, :mailjet_username),
-    # password: Rails.application.credentials.dig(Rails.env.to_sym, :mailjet, :mailjet_password),
     user_name: ENV['USERNAME'],
     password: ENV['PASSWORD'],
-    domain: 'heroku.com',
+    domain: 'dack9.ru',
     address: 'in-v3.mailjet.com',
     port: 587,
     authentication: :plain,
