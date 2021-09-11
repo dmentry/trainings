@@ -70,14 +70,22 @@
   }
 
   .no-paddings {
-    padding: -20px;
+    padding: 0;
   }
 
   .no-margins {
-    margin: -20px;
+    margin: 0;
   }
 
   .my-ul {
     padding-left: 14px;
+  }
+
+  .no-margins-row {
+    margin: -15px;
+  }
+
+  .footer-buffer-top {
+    margin-top: 10px;
   }
 }
