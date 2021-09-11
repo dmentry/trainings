@@ -17,7 +17,7 @@ class StatisticsController < ApplicationController
     uniq_exercises_list = current_user.exercises.all.map{ |exercise| exercise.exercise_name_voc.label }.uniq!
 
     ExerciseNameVoc.all.where(user_id: current_user.id).each do |exercise|
-      @exercises_list << [exercise.id, exercise.label] if uniq_exercises_list.include?(exercise.label)
+      @exercises_list << [exercise.id, exercise.label] if uniq_exercises_list&.include?(exercise.label)
     end
 
     @exercises_list << [(@exercises_list.count + 1), 'Все упражнения']
