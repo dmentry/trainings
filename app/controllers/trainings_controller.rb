@@ -56,6 +56,9 @@ class TrainingsController < ApplicationController
     send_data export_data,:type => 'text',:disposition => "attachment; filename=Тренировки_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
 
+  def instruction
+  end
+
   private
 
   def set_current_user_training

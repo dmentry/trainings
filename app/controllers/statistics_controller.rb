@@ -12,18 +12,12 @@ class StatisticsController < ApplicationController
       current_user.update(chart_status: User.chart_statuses.key(@chart_id))
     end
 
-    list_temp = []
-
     @exercises_list = []
 
-    current_user.exercises.all.each do |exercise|
-      list_temp << exercise.exercise_name_voc.label
-    end
+    uniq_exercises_list = current_user.exercises.all.map{ |exercise| exercise.exercise_name_voc.label }.uniq!
 
-    list_temp.uniq!
-
-    ExerciseNameVoc.all.each do |exercise|
-      @exercises_list << [exercise.id, exercise.label] if list_temp.include?(exercise.label)
+    ExerciseNameVoc.all.where(user_id: current_user.id).each do |exercise|
+      @exercises_list << [exercise.id, exercise.label] if uniq_exercises_list.include?(exercise.label)
     end
 
     @exercises_list << [(@exercises_list.count + 1), 'Все упражнения']

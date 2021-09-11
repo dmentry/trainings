@@ -24,7 +24,9 @@
   font-size: 12px;
 }
 
-
+.my-ul {
+  padding-left: 20px;
+}
 
 @media (max-width: 991px) {
   .buffer-both-sm {
@@ -60,5 +62,9 @@
 
   .no-margins {
     margin: 0;
+  }
+
+  .my-ul {
+    padding-left: 14px;
   }
 }
