@@ -3,7 +3,7 @@
   <div class="row my-3">
 
     <div class="col-lg-8 order-lg-1 no-paddings no-margins">
-      <div class="border p-2 m-2">
+      <div class="border p-2 m-2 my-bg-color">
       <div>Названия</div>
       <div class="my-3">
         <% @exercise_name_vocs.each do |exercise_name_voc| %>
@@ -14,8 +14,8 @@
     </div>
 
     <div class="col-lg-4 order-lg-1 no-paddings no-margins">
-      <div class="border p-2 m-2">
-      <div>Создать новое</div>
+      <div class="border p-2 m-2 my-bg-color">
+      <div>Создать новое упражнение</div>
       <div class="row mt-3">
         <div class="col-sm-12 col-md-12">
           <%= render partial: 'exercise_name_vocs/form', locals: {exercise_name_voc: @exercise_name_voc = ExerciseNameVoc.new }  %>
