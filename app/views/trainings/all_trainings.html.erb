@@ -4,11 +4,15 @@
 
     <div class="border col-lg-10 mb-3 buffer-top buffer-both-sm bg-white no-margins">
       <div>
-        <% @trainings.each do |training| %>
-          <% message = "Дата: #{ l training[1][0][:start_time], format: :my_format }. Название: #{ training[1][0][:label] }"%>
-          <div>
-            <%= link_to message, training_path(training[1][0][:id]) %>
-          </div> 
+        <% if @trainings.present? %>
+          <% @trainings.each do |training| %>
+            <% message = "Дата: #{ l training[1][0][:start_time], format: :my_format }. Название: #{ training[1][0][:label] }"%>
+            <div>
+              <%= link_to message, training_path(training[1][0][:id]) %>
+            </div> 
+          <% end %>
+        <% else %>
+          У вас еще нет тернировок.
         <% end %>
       </div>
     </div>
