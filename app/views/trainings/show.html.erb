@@ -1,5 +1,9 @@
 <div class="center">
-  <%= link_to @training.label, edit_training_path(@training), class: "h1" %></h1>
+  <h1> 
+    <%= link_to '<', @training.prev, class: "h1" %>
+    <%= link_to @training.label, edit_training_path(@training) %>
+    <%= link_to '>', @training.next, class: "h1" %>
+  </h1>
 </div>
 
 <div class="container bg-light">

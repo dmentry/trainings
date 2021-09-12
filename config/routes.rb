@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     collection do
       get :download_textfile
       get :instruction
+      get :all_trainings
     end
   end
 

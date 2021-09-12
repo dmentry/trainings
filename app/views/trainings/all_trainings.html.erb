@@ -1,0 +1,17 @@
+<h1 class="center text_size">Тренировки за все время</h1>
+<div class="container bg-light">
+  <div class="row my-3">
+
+    <div class="border col-lg-10 mb-3 buffer-top buffer-both-sm bg-white no-margins">
+      <div>
+        <% @trainings.each do |training| %>
+          <% message = "Дата: #{ l training[1][0][:start_time], format: :my_format }. Название: #{ training[1][0][:label] }"%>
+          <div>
+            <%= link_to message, training_path(training[1][0][:id]) %>
+          </div> 
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -25,6 +25,7 @@ module DackSite
     config.load_defaults 6.0
 
     config.time_zone = 'Moscow'
+    # config.active_record.default_timezone = :local
 
     config.i18n.available_locales = [:ru, :en]
     config.i18n.default_locale = :ru

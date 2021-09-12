@@ -41,6 +41,11 @@
   background:   #eef1f1 ;
 }
 
+h1  a {
+    text-decoration: none !important;
+    padding: 0 10px;
+  }
+
 @media (max-width: 991px) {
   .buffer-both-sm {
     margin-left: 10px;

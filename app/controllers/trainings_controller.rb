@@ -59,6 +59,10 @@ class TrainingsController < ApplicationController
   def instruction
   end
 
+  def all_trainings
+    @trainings = current_user.trainings.all.group_by(&:start_time)
+  end
+
   private
 
   def set_current_user_training

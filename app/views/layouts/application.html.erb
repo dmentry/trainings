@@ -34,14 +34,15 @@
           <ul class="navbar-nav">
             <% if user_signed_in? %>
               <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
+              <li><%= link_to 'Все тренировки', all_trainings_trainings_path, class: "btn bg-light", title: 'Список тренировок за все время' %></li>
               <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
               <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
               <li><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
-              <li><%= link_to 'Помощь', instruction_trainings_path, class: 'btn bg-light', title: 'Помощь по приложению' %></li>
               <li><%= link_to 'Профиль', current_user, class: 'btn bg-light' %></li>
               <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
+              <li><%= link_to 'Помощь', instruction_trainings_path, class: 'btn bg-light', title: 'Помощь по приложению' %></li>
             <% else %>
-              <li><%= link_to 'Войти', new_user_session_path, class: 'btn bg-light pr-3' %></li>
+              <li><%= link_to 'Войти', new_user_session_path, class: 'btn bg-light px-3' %></li>
               <li><%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'btn bg-light px-3' %></li>
               <li><%= link_to 'Восстановить пароль', new_password_path(resource_name), class: 'btn bg-light pl-3' %></li>
             <% end %>
