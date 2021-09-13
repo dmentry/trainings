@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :exercise_name_vocs
 
   resources :trainings do
+    collection do
+      get :trainings_upload_new
+      post :trainings_upload_post
+    end
     # Вложенный ресурс упражнений
     resources :exercises, only: [:create, :destroy, :update, :edit]
     collection do
