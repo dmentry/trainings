@@ -3,12 +3,14 @@
   <div class="row my-3">
 
     <div class="col-lg-8 order-lg-1 mb-3 no-paddings">
-      <h3>Ошибки во время импорта</h3>
-      <div>
-        <%= @warning_message %>
-      </div>
-      <%= @statistics[2] %>
+      <div><%= @warning_message %></div>
+      <div class="row my-3"><b>Ошибки во время импорта:</b></div>
+      <ul>
+        <% @statistics[2].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
     </div>
-  
+
   </div>
 </div>

@@ -6,8 +6,7 @@
       <h2 id="month">
         <div class="text_size">
           <%= link_to "<", date: @date.prev_month %>
-          <%#= t @date.strftime("%B %Y") %>
-        <%= l(@date, format: "%B, %Y") %>
+          <%= l(@date, format: "%B, %Y") %>
           <%= link_to ">", date: @date.next_month %>
         </div>
       </h2>

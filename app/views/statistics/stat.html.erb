@@ -8,10 +8,10 @@
 
       <div class="center">
         <% @exercises_list.each do |list| %>
-          <%= link_to list[1], stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]) %>
-          <% if list != @exercises_list.last %>
-            |
-          <% end %>
+          <span class="vertical-buffers"><%= link_to list[1], stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]), class: 'btn-sm btn-primary vertical-buffers' %></span>
+          <%# if list != @exercises_list.last %>
+            <!-- | -->
+          <%# end %>
         <% end %>
       </div>
 
@@ -49,10 +49,10 @@
         <div class="center">
 
           <% @chart_types.each do |key, value| %>
-            <%= link_to key, stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]) %> 
-            <% if @chart_types.to_a.last[1] != value %>
-             |
-            <% end %>
+            <%= link_to key, stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
+            <%# if @chart_types.to_a.last[1] != value %>
+             <!-- | -->
+            <%# end %>
           <% end %>
         </div>
         <% case @chart_id %>

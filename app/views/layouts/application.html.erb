@@ -37,7 +37,9 @@
               <li><%= link_to 'Все тренировки', all_trainings_trainings_path, class: "btn bg-light", title: 'Список тренировок за все время' %></li>
               <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
               <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
-              <li><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
+              <% if current_user.admin %>
+                <li><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
+              <% end %>
               <li><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
               <li><%= link_to 'Профиль', current_user, class: 'btn bg-light' %></li>
               <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
