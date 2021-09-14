@@ -83,18 +83,24 @@ class TrainingsController < ApplicationController
       return false
     end
 
-    array_size = file_lines.size
-
     file_lines = file_lines.join
 
     start_time = Time.now
-    # В одной большой транзакции создаем сразу массив тренировок, считаем неудачные
-    failed_count = create_trainings_from_lines(file_lines, user_id)
+    # Создаем сразу массив тренировок, считаем неудачные
+    @statistics = create_trainings_from_lines(file_lines, user_id)
 
-    # отправляем на страницу new и выводим статистику о проделаных операциях
-    redirect_to trainings_path, notice: "Обработано #{file_lines.size}," +
-                  " создано #{array_size - failed_count}," +
+    # отправляем на страницу index, если все нормально и выводим статистику о проделаных операциях или на errors_page, если есть ошибки
+    if @statistics.present?
+      @warning_message = "Обработано упражнений: #{@statistics[0]}," +
+                  " создано упражнений: #{@statistics[0] - @statistics[1]}," +
                   " время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
+                  
+      render 'errors_page'
+    else
+    redirect_to trainings_path, notice: "Обработано упражнений: #{@statistics[0]}," +
+                  " создано упражнений: #{@statistics[0] - @statistics[1]}," +
+                  " время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
+    end
   end
 
   private
@@ -109,7 +115,9 @@ class TrainingsController < ApplicationController
 
   # Загрузка массива тренировок в базу
   def create_trainings_from_lines(lines, user_id)
+    overall_execises = 0
     failed           = 0
+    errors           = []
     training_date    = ''
     exercise_label   = ''
     reps             = ''
@@ -120,6 +128,8 @@ class TrainingsController < ApplicationController
 
     # Парсинг каждой тренировки
     all_trainings.each do |training|
+      overall_execises += 1
+
       training_array = training[0].split(/\n/)
 
       training_date = Date.parse(training_array[0])
@@ -129,7 +139,11 @@ class TrainingsController < ApplicationController
         label:      training_date.strftime("%d.%m.%Y"),
         start_time: training_date
       )
-      failed += 1 unless t.valid?
+
+      unless t.valid?
+        failed += 1
+        errors << "Тренировка не создана: #{training_date.strftime("%d.%m.%Y")}"
+      end
 
       # puts training_date
 
@@ -205,24 +219,38 @@ class TrainingsController < ApplicationController
         # puts "#{exercise_label} #{reps} #{exercise_comment}"
 
         exercise_name_voc = ExerciseNameVoc.where('label = ? and user_id = ?', exercise_label, user_id)
-        exercise_name_voc_id = exercise_name_voc.to_a[0][:id]
+
+        if exercise_name_voc.present?
+          exercise_name_voc_id = exercise_name_voc.to_a[0][:id]
+        else
+          failed += 1
+          puts exercise_label
+          errors << "Не найдено упражнение для: #{training_date.strftime("%d.%m.%Y")}, #{exercise_label}"
+
+          next
+        end
 
         options = { exercise: reps, label: exercise_label }
 
         summ = ExercisesHelper::Summ.new(options).overall
 
-        Exercise.create!(
+        e = Exercise.create(
           training_id:          t.id,
           exercise_name_voc_id: exercise_name_voc_id,
           quantity:             reps,
           note:                 exercise_comment,
           summ:                 summ
         )
+
+        unless e.valid?
+          failed += 1
+          errors << "Упражнение не создано: #{training_date.strftime("%d.%m.%Y")}, #{exercise_name_voc_id}, #{reps}"
+        end
       end
       
       # puts
     end
 
-    failed
+    [overall_execises, failed, errors]
   end
 end

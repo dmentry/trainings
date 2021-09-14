@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   resources :trainings do
     collection do
-      get :trainings_upload_new
+      get  :errors_page
+      get  :trainings_upload_new
       post :trainings_upload_post
     end
     # Вложенный ресурс упражнений
