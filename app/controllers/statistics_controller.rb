@@ -20,11 +20,13 @@ class StatisticsController < ApplicationController
       @exercises_list << [exercise.id, exercise.label] if uniq_exercises_list&.include?(exercise.label)
     end
 
-    @exercises_list << [(@exercises_list.count + 1), 'Все упражнения']
+    @exercises_list << [-5, 'Все упражнения']
 
     @data = []
 
-    if params[:exercise_name_id].to_i <= 0
+    if params[:exercise_name_id].to_i == -5
+      id = -5
+    elsif params[:exercise_name_id].to_i <= 0
       if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
         redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
       else
@@ -34,7 +36,7 @@ class StatisticsController < ApplicationController
       id = params[:exercise_name_id].to_i
     end
 
-    unless id == @exercises_list.count
+    unless id == -5
       @name = Exercise&.find_by(exercise_name_voc: id)&.exercise_name_voc&.label
 
       current_user.trainings.all.each do |training|
@@ -64,6 +66,6 @@ class StatisticsController < ApplicationController
       end
     end
 
-    @data
+    @data=@data.sort_by { |h| h.first }
   end
 end

@@ -71,7 +71,11 @@ module TrainingsHelper
 
         exercise_comment = ''
 
-        if exercise.match?(/(Отжимания «Таймфрейм 4»)/)
+        if exercise.match?(/(Отжимания «Руки вдоль тела»)/)
+          exercise_label = exercise.scan(/(Отжимания «Руки вдоль тела»)/).to_s.strip.gsub(/["\[\],]/, '')
+          exercise.gsub!(/(Отжимания «Руки вдоль тела»)/, '').strip!
+          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+        elsif exercise.match?(/(Отжимания «Таймфрейм 4»)/)
           exercise_label = exercise.scan(/(Отжимания «Таймфрейм 4»)/).to_s.strip.gsub(/["\[\],]/, '')
           exercise.gsub!(/(Отжимания «Таймфрейм 4»)/, '').strip!
           reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
