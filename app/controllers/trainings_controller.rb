@@ -61,7 +61,32 @@ class TrainingsController < ApplicationController
   end
 
   def all_trainings
-    @trainings = current_user.trainings.all.group_by(&:start_time)
+    @trainings = current_user.trainings.all.order(start_time: :desc)
+  end
+
+  def copy_training
+    @training = current_user.trainings.find(params[:current_training_id])
+
+    @dublicate_training = @training.dup
+
+    @dublicate_training.start_time = Date.today
+
+    @training.exercises.each do |exercise|
+      @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, exercise_name_voc_id: exercise.exercise_name_voc_id)
+      if @exercise.save
+        options = { exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
+
+        @exercise.summ = ExercisesHelper::Summ.new(options).overall
+
+        @exercise.save!
+      end
+    end
+
+    if @dublicate_training.save
+      redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
+    else
+      render :new, alert: "Тренировка не дублировалась."
+    end
   end
 
   def trainings_upload_new

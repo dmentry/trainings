@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :trainings do
     collection do
       get  :errors_page
+      get  :copy_training
       get  :trainings_upload_new
       post :trainings_upload_post
     end

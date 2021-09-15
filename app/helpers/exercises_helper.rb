@@ -89,7 +89,7 @@ module ExercisesHelper
 
     # бег\лыжи
     def running(label, exercise)
-      exercise.match(/\d+[.,]\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
+      exercise.match(/\d+[.,]\d+|\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
     end
 
     # офп

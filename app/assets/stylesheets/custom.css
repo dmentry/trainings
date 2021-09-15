@@ -54,6 +54,12 @@ h1  a {
   line-height: 160%;
 }
 
+.table-buffers-vertical {
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-bottom: 4px !important;
+}
+
 @media (max-width: 991px) {
   .buffer-both-sm {
     margin-left: 10px;
@@ -67,10 +73,6 @@ h1  a {
   .text_size {
     font-size: large;
   }
-
-/*   .bg-light {
-    background-color: white !important;
-  } */
 
   .buffer-bottom {
     margin-top: -20px;
@@ -100,5 +102,16 @@ h1  a {
 
   .footer-buffer-top {
     margin-top: 10px;
+  }
+
+  .table-font-my {
+    font-size: small;
+  }
+
+  .form-buffers-vertical {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 }

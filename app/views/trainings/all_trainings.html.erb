@@ -6,9 +6,9 @@
       <div>
         <% if @trainings.present? %>
           <% @trainings.each do |training| %>
-            <% message = "Дата: #{ l training[1][0][:start_time], format: :my_format }. Название: #{ training[1][0][:label] }"%>
+            <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
             <div>
-              <%= link_to message, training_path(training[1][0][:id]) %>
+              <%= link_to message, training_path(training[:id]) %>
             </div> 
           <% end %>
         <% else %>

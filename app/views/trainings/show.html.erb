@@ -13,7 +13,7 @@
           <div class="bold">
             Дата: <%= l @training.start_time, format: :my_format %>
           </div>
-          <div class="my-3">
+          <div class="my-1">
             <%= render partial: 'exercises/exercise', collection: @training.exercises.except(@exercise) %>
             <% if @training.exercises.empty? %>
               Вы еще не внесли ни одного упражнения в эту тренировку
@@ -24,9 +24,9 @@
 
     <div class="col-lg-5 order-lg-1 no-paddings">
       <div class="border p-1 m-1">
-        <div>Добавить упражнение:</div>
-        <div class="row mt-3">
-          <div class="col-sm-12 col-md-12">
+        <div class="table-font-my">Добавить упражнение:</div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 table-font-my form-buffers-vertical">
             <%= render partial: 'exercises/form', locals: {exercise: @exercise || @training.exercises.build} %>
           </div>
         </div>
