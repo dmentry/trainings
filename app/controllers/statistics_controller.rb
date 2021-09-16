@@ -49,7 +49,7 @@ class StatisticsController < ApplicationController
     ##################################### переменные для текстовой статистики
 
     @all_tr_by_month = []
-    tr_years = Training.all.map{ |training| training.start_time.year }.uniq
+    tr_years = current_user.trainings.map{ |training| training.start_time.year }.uniq
     (tr_years.size).times do |i|
       tr_summ_by_year = 0
       12.times do |month|
