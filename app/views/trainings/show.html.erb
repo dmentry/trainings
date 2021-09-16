@@ -3,6 +3,7 @@
     <%= link_to '<', @training.prev, class: "h1 btn btn-primary mt-1 buffer-bottom" %>
     <%= link_to @training.label, edit_training_path(@training), class: "h1 btn btn-primary mt-1 buffer-bottom" %>
     <%= link_to '>', @training.next, class: "h1 btn btn-primary mt-1 buffer-bottom" %>
+    <%= link_to 'На главную', trainings_path, class: "h1 btn btn-secondary mt-1 buffer-bottom for-mobile" %>
   </h1>
 </div>
 

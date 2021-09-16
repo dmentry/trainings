@@ -60,6 +60,10 @@ h1  a {
   margin-bottom: 4px !important;
 }
 
+.for-mobile {
+  display: none;
+}
+
 @media (max-width: 991px) {
   .buffer-both-sm {
     margin-left: 10px;
@@ -113,5 +117,12 @@ h1  a {
     margin-bottom: 0 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+  }
+
+  .for-mobile {
+  display: inline-block;
+  position: absolute;
+  right: 4px;
+  top: -2px;
   }
 }

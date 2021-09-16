@@ -45,19 +45,17 @@
 }
 
 #month {
-  margin: 0;
-  padding-bottom: 10px;
+  padding-bottom: 0;
   text-align: center;
   font-size: 22px;
-  margin-top: 5px;
+  margin: 15px;
   a {
     text-decoration: none;
-    padding: 0 10px;
     color: #ffffff;
     border-radius: 5px;
     background: #2f76fb;
-    padding: 0px 20px;
-    margin-top: 5px;
+    padding: 7px 20px;
+    margin: 5px 10px;
   }
 }
 
@@ -93,20 +91,7 @@
   .today { background-color: #D7F2FF; }
 }
 
-#month {
-  margin: 0;
-  padding-bottom: 5px;
-  text-align: center;
-  font-size: 20px;
-  margin-top: 5px;
-  a {
-    text-decoration: none;
-    padding: 0 29px;
-    color: #ffffff;
-    border-radius: 5px;
-    background: #2f76fb;
-    padding: 0px 20px;
-    margin-top: 5px;
+  #month {
+    font-size: 20px;
   }
 }
-  }
