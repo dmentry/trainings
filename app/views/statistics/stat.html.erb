@@ -1,72 +1,153 @@
-<div class="center">
-  <h1 class="center text_size">Статистика тренировок по упражнениям</h1>
-</div>
+<%= link_to 'На главную', trainings_path, class: "h1 btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
 
-<div class="container bg-light">
-  <div class="row my-3">
-    <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
+<ul class="nav nav-tabs my-1">
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#graphs">Графики</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#stats1">Статистика 1</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#stats2">Статистика 2</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade" id="graphs">
 
-      <div class="center">
-        <% @exercises_list.each do |list| %>
-          <span class="vertical-buffers"><%= link_to list[1], stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]), class: 'btn-sm btn-primary vertical-buffers' %></span>
-          <%# if list != @exercises_list.last %>
-            <!-- | -->
-          <%# end %>
-        <% end %>
+    <div class="container bg-light">
+      <div class="row my-3">
+        <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
+
+          <div class="center">
+            <% @exercises_list.each do |list| %>
+              <span class="vertical-buffers"><%= link_to list[1], stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]), class: 'btn-sm btn-primary vertical-buffers' %></span>
+              <%# if list != @exercises_list.last %>
+                <!-- | -->
+              <%# end %>
+            <% end %>
+          </div>
+
+        </div>
       </div>
-
     </div>
+
+    <div class="center">
+      <h3 class="center text_size"><%= @name %></h3>
+    </div>
+
+    <div class="container bg-light">
+      <div class="row my-3">
+        <div class="col-lg-12 order-lg-2 mb-3 mt-2 no-paddings">
+          <div>
+            <div><%#= @name %></div>
+            <%# @data.each do |data| %>
+              <%# if @name && @name.match?(/бег|лыжи|Бег|Лыжи/) %>
+                <%# summ = data[1] %>
+              <%# else %>
+                <%# summ = data[1].to_i %>
+              <%# end %>
+              <!-- <div> <%#= data[0] %> - <%#= summ %></div> -->
+            <%# end %>
+
+            <div class="center">
+              <%# @chart_types.each do |chart| %>
+                <%#= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
+                <%# if chart != @chart_types.last %>
+                 <!-- | -->
+                <%# end %>
+              <%# end %>
+            </div>
+
+            <div class="center">
+
+              <% @chart_types.each do |key, value| %>
+                <%= link_to key, stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
+                <%# if @chart_types.to_a.last[1] != value %>
+                 <!-- | -->
+                <%# end %>
+              <% end %>
+            </div>
+            <% case @chart_id %>
+              <% when 1 then%> 
+                <%= area_chart(@data, {theme: 'palette5'}) %>
+              <% when 2 then  %> 
+                <%= line_chart(@data, {theme: 'palette7', curve: 'stepline'}) %>
+              <% when 3 then  %>
+                <%= line_chart(@data) %>
+              <% when 4 then  %> 
+                <%= column_chart(@data, {theme: 'palette4'}) %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="tab-pane fade show active" id="stats1">
+
+    <div class="container bg-light">
+      <div class="row my-3">
+        <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
+          <h3 class="center text_size">Список упражнений</h3>
+          <div>
+            <div>
+              Тренировок за все время: <%= current_user.trainings.count %>
+            </div>
+            <% if @all_tr_by_month.present? %>
+              Количество тренировок в разбивке по годам и месяцам:
+              <% @all_tr_by_month.size.times do |month| %>
+              <% next if @all_tr_by_month[month][0] > Date.today %>
+                <div><%= "#{ l(@all_tr_by_month[month][0], format: "%m.%Y") } - #{ @all_tr_by_month[month][1] }" %></div> 
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="stats2">
+
+    <div class="container bg-light">
+      <div class="row my-3">
+        <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
+          Больше статистики!
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<div class="center">
-  <h3 class="center text_size"><%= @name %></h3>
-</div>
 
-<div class="container bg-light">
-  <div class="row my-3">
-    <div class="col-lg-12 order-lg-2 mb-3 mt-2 no-paddings">
-      <div>
-        <div><%#= @name %></div>
-        <%# @data.each do |data| %>
-          <%# if @name && @name.match?(/бег|лыжи|Бег|Лыжи/) %>
-            <%# summ = data[1] %>
-          <%# else %>
-            <%# summ = data[1].to_i %>
-          <%# end %>
-          <!-- <div> <%#= data[0] %> - <%#= summ %></div> -->
-        <%# end %>
 
-        <div class="center">
-          <%# @chart_types.each do |chart| %>
-            <%#= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
-            <%# if chart != @chart_types.last %>
-             <!-- | -->
-            <%# end %>
-          <%# end %>
-        </div>
 
-        <div class="center">
 
-          <% @chart_types.each do |key, value| %>
-            <%= link_to key, stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
-            <%# if @chart_types.to_a.last[1] != value %>
-             <!-- | -->
-            <%# end %>
-          <% end %>
-        </div>
-        <% case @chart_id %>
-          <% when 1 then%> 
-            <%= area_chart(@data, {theme: 'palette5'}) %>
-          <% when 2 then  %> 
-            <%= line_chart(@data, {theme: 'palette7', curve: 'stepline'}) %>
-          <% when 3 then  %>
-            <%= line_chart(@data) %>
-          <% when 4 then  %> 
-            <%= column_chart(@data, {theme: 'palette4'}) %>
-        <% end %>
 
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

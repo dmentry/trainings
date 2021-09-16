@@ -7,7 +7,7 @@ class Training < ApplicationRecord
 
   def self.by_month(date)
     Training.all
-      .order(start_time: :asc)
+      .order(start_time: :desc)
         .select{ |training| training.start_time.month == date.month && training.start_time.year == date.year }
   end
 

@@ -3,7 +3,7 @@
     <%= link_to '<', @training.prev, class: "h1 btn btn-primary mt-1 buffer-bottom" %>
     <%= link_to @training.label, edit_training_path(@training), class: "h1 btn btn-primary mt-1 buffer-bottom" %>
     <%= link_to '>', @training.next, class: "h1 btn btn-primary mt-1 buffer-bottom" %>
-    <%= link_to 'На главную', trainings_path, class: "h1 btn btn-secondary mt-1 buffer-bottom for-mobile" %>
+    <%= link_to 'На главную', trainings_path, class: "h1 btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
   </h1>
 </div>
 
@@ -15,7 +15,7 @@
             Дата: <%= l @training.start_time, format: :my_format %>
           </div>
           <div class="my-1">
-            <%= render partial: 'exercises/exercise', collection: @training.exercises.except(@exercise) %>
+            <%= render partial: 'exercises/exercise', collection: @training.exercises.order(:id).except(@exercise) %>
             <% if @training.exercises.empty? %>
               Вы еще не внесли ни одного упражнения в эту тренировку
             <% end %>

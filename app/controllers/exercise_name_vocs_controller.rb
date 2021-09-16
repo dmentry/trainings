@@ -4,7 +4,7 @@ class ExerciseNameVocsController < ApplicationController
 
   # GET /exercise_name_vocs
   def index
-    @exercise_name_vocs = current_user.exercise_name_vocs.all
+    @exercise_name_vocs = current_user.exercise_name_vocs.all.order(:id)
   end
 
   # GET /exercise_name_vocs/1

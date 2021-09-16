@@ -25,7 +25,8 @@ class User < ApplicationRecord
       "Алмазные отжимания",
       "Выход силой",
       "Скручивания",
-      "Бег"
+      "Бег",
+      "\"Лесенка\""
     ]
 
     exercises.each do |exercise|

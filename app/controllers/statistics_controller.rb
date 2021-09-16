@@ -44,9 +44,23 @@ class StatisticsController < ApplicationController
       end
     end
 
+    @data = @data.sort_by{ |h| h.first }
+
+    ##################################### переменные для текстовой статистики
+
+    @all_tr_by_month = []
+    tr_years = Training.all.map{ |training| training.start_time.year }.uniq
+    (tr_years.size).times do |i|
+      tr_summ_by_year = 0
+      12.times do |month|
+        date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
+        tr_by_month = current_user.trainings.by_month(date).count
+        tr_summ_by_year += tr_by_month
+        @all_tr_by_month << [date, tr_by_month]
+      end
+      # @all_tr_by_month << tr_summ_by_year
+    end
 
 
-
-    @data=@data.sort_by { |h| h.first }
   end
 end
