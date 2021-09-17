@@ -3,30 +3,24 @@ module TrainingsHelper
     def self.download_textfile(current_user)
       @current_user = current_user
 
-      trainings = @current_user.trainings.all
+      trainings = @current_user.trainings.all.order(:start_time)
 
       tr = ''
+      tr << "\n"
 
       trainings.find_all do |training|
-        tr << training.label << "\n"
+        tr << training.start_time.strftime("%d.%m.%Y").to_s << "\n"
 
         training.exercises.find_all do |exercise|
-          tr << exercise.exercise_name_voc.label << ": "
+          tr << exercise.exercise_name_voc.label << " "
 
-          tr << exercise.quantity << "\n"
+          tr << exercise.quantity
 
-          tr << "Общее количество: "
-
-          if exercise.exercise_name_voc.label.match?(/бег|лыжи|Бег|Лыжи/)
-            tr << exercise.summ.to_s << "\n"   
-          else
-           tr << exercise.summ.to_i.to_s << "\n"
-          end
-
-          tr << exercise.note << "\n"
+          tr << " " << exercise.note if exercise.note.present?
+          tr << "\n"
         end
+        tr << "\n"
       end
-      
       tr
     end
   end
@@ -63,8 +57,6 @@ module TrainingsHelper
         errors << "Тренировка не создана: #{training_date.strftime("%d.%m.%Y")}"
       end
 
-      # puts training_date
-
       # Парсинг упражнения
       training_array.each do |exercise|
         next if exercise == training_array[0] # пропускаем дату
@@ -72,73 +64,101 @@ module TrainingsHelper
         exercise_comment = ''
 
         if exercise.match?(/(Отжимания «Руки вдоль тела»)/)
-          exercise_label = exercise.scan(/(Отжимания «Руки вдоль тела»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Отжимания «Руки вдоль тела»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Отжимания «Руки вдоль тела»'
+          exercise.gsub!(/Отжимания «Руки вдоль тела» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Отжимания «Таймфрейм 4»)/)
-          exercise_label = exercise.scan(/(Отжимания «Таймфрейм 4»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Отжимания «Таймфрейм 4»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Отжимания «Таймфрейм 4»'
+          exercise.gsub!(/Отжимания «Таймфрейм 4» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1 if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Отжимания «Лесенка»)/)
-          exercise_label = exercise.scan(/(Отжимания «Лесенка»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Отжимания «Лесенка»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Отжимания «Лесенка»'
+          exercise.gsub!(/Отжимания «Лесенка» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Отжимания «4xMax»)/)
-          exercise_label = exercise.scan(/(Отжимания «4xMax»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Отжимания «4xMax»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Отжимания «4xMax»'
+          exercise.gsub!(/Отжимания «4xMax» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Подтягивания медленные «Таймфрейм 4»)/)
-          exercise_label = exercise.scan(/(Подтягивания медленные «Таймфрейм 4»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Подтягивания медленные «Таймфрейм 4»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Подтягивания медленные «Таймфрейм 4»'
+          exercise.gsub!(/Подтягивания медленные «Таймфрейм 4» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Подтягивания медленные «Лесенка»)/)
-          exercise_label = exercise.scan(/(Подтягивания медленные «Лесенка»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Подтягивания медленные «Лесенка»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Подтягивания медленные «Лесенка»'
+          exercise.gsub!(/Подтягивания медленные «Лесенка» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Подтягивания медленные «4xMax»)/)
-          exercise_label = exercise.scan(/(Подтягивания медленные «4xMax»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Подтягивания медленные «4xMax»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Подтягивания медленные «4xMax»'
+          exercise.gsub!(/Подтягивания медленные «4xMax» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Подтягивания «Таймфрейм 4»)/)
-          exercise_label = exercise.scan(/(Подтягивания «Таймфрейм 4»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Подтягивания «Таймфрейм 4»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Подтягивания «Таймфрейм 4»'
+          exercise.gsub!(/Подтягивания «Таймфрейм 4» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')      
         elsif exercise.match?(/(Подтягивания «Лесенка»)/)
-          exercise_label = exercise.scan(/(Подтягивания «Лесенка»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Подтягивания «Лесенка»)/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise_label = 'Подтягивания «Лесенка»'
+          exercise.gsub!(/Подтягивания «Лесенка» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Подтягивания «4xMax»)/)
-          exercise_label = exercise.scan(/(Подтягивания «4xMax»)/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/(Подтягивания «4xMax»)/, '').strip!
-            reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
-        elsif exercise.match?(/^[ОФП]{3}|^[ЛФК]{3}/)
-          next
-        elsif exercise.match?(/^\d+\)/)
-          #берем название упражнения
-          exercise_label = exercise.scan(/^\d+\)/)
-          #готовим строку, преобразовывая ее из массива и убирая ненужные символы
+          exercise_label = 'Подтягивания «4xMax»'
+          exercise.gsub!(/Подтягивания «4xMax» /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
+        elsif exercise.match?(/^ОФП-\d+/)
+          exercise_label = exercise.scan(/^ОФП-\d+/)
           exercise_label = exercise_label.to_s.strip.gsub(/["\[\]]/, '')
-          exercise_label = "ОФП-#{exercise_label}".chomp(')')
-          #убираем из строки название упражнения
-          exercise.gsub!(/^\d+\)/, '')
-          #убираем из строки комментарий
-          exercise_comment = exercise.scan(/[а-яА-ЯЁёa-zA-Z_]+$/)
-          exercise_comment = exercise_comment.to_s.strip.gsub(/["\[\]]/, '')
-          exercise.gsub!(/[а-яА-ЯЁёa-zA-Z_]+$/, '')
-          #готовим строку подходов, преобразовывая ее из массива и убирая ненужные символы
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
-        elsif
-          exercise.match?(/^[бегБ]{3}|^[лыжиЛ]{4}/)
-          exercise_label = exercise.scan(/^[бегБ]{3}|^[лыжиЛ]{4}/).to_s.strip.gsub(/["\[\]]/, '')
-          exercise.gsub!(/^[бегБ]{3}|^[лыжиЛ]{4}/, '').strip!
-          reps = exercise
+          # exercise_label = "ОФП-#{ exercise_label }".chomp(')')
+          exercise.gsub!(/^ОФП-\d+ /, '')
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_.,\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_.,\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
+        elsif exercise.match?(/^[Ббег]{3}|^[Ллыжи]{4}/)
+          exercise_label = exercise.scan(/^[Ббег]{3}|^[Ллыжи]{4}/)
+          exercise_label = exercise_label.to_s.strip.gsub(/["\[\]]/, '')
+          exercise.gsub!(/^[Ббег]{3}|^[Ллыжи]{4} /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         else
-          exercise_label = exercise.scan(/[а-яА-ЯЁёa-zA-Z_]+\b/).to_s.strip.gsub(/["\[\],]/, '')
-          exercise.gsub!(/^[а-яА-ЯЁёa-zA-Z0-9_]+\b/, '').strip!
-          reps = exercise.scan(/[0-9xXхХ-]+/).to_s.strip.gsub(/["\[\]]/, '')
+          exercise.scan(/(^[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_label = $1.strip! if $1
+          exercise.gsub!(/(^[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         end
-
-        # puts "#{exercise_label} #{reps} #{exercise_comment}"
 
         exercise_name_voc = ExerciseNameVoc.where('label = ? and user_id = ?', exercise_label, user_id)
 
@@ -169,8 +189,6 @@ module TrainingsHelper
           errors << "Упражнение не создано: #{training_date.strftime("%d.%m.%Y")}, #{exercise_name_voc_id}, #{reps}"
         end
       end
-      
-      # puts
     end
 
     [overall_execises, failed, errors]

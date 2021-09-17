@@ -11,7 +11,7 @@ module ExercisesHelper
     end
 
     def overall
-      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи|ЛФК|Лфк|лфк/)
+      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи|ОФП|Офп|офп/)
         overall_summ = 0
 
         @exercise.split(',') do |match|
@@ -30,7 +30,7 @@ module ExercisesHelper
 
         return overall_summ
       elsif
-        @label.match?(/ЛФК|Лфк|лфк/)
+        @label.match?(/ОФП|Офп|офп/)
           return self.ofp(@label, @exercise)
       else
         temp_summ_1 = self.dash(@label, @exercise) || 0
@@ -94,7 +94,7 @@ module ExercisesHelper
 
     # офп
     def ofp(label, exercise)
-      if label && label.match?(/ЛФК|Лфк|лфк/)
+      if label && label.match?(/ОФП|Офп|офп/)
         temp_value = exercise.match(/(\d+(x|X|х|Х)\d+)/).to_s
 
         summ = self.multiply(label, temp_value)

@@ -14,13 +14,15 @@ class StatisticsController < ApplicationController
 
     @exercises_list = []
 
-    uniq_exercises_list = current_user.exercises.all.map{ |exercise| exercise.exercise_name_voc.label }.uniq!
+    uniq_exercises_list = current_user.exercises.all.map do |exercise| 
+      exercise.exercise_name_voc.label if current_user.exercises.where(exercise_name_voc_id: exercise.exercise_name_voc_id).count > 1
+    end
+
+    uniq_exercises_list.uniq!
 
     ExerciseNameVoc.all.where(user_id: current_user.id).each do |exercise|
       @exercises_list << [exercise.id, exercise.label] if uniq_exercises_list&.include?(exercise.label)
     end
-
-    #сделать проверку @exercises_list на количество данных по упражнениям. Если <= 1 удалить
 
     @data = []
 

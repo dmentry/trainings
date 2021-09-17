@@ -26,8 +26,7 @@
 
     <div class="border col-lg-3 order-lg-2 mb-3 buffer-top buffer-both-sm bg-white no-margins">
       <%= link_to 'Создать тренировку', new_training_path %>
-      <br><br>
-      <div>
+      <div class="mt-1">
         <% unless @trainings_by_month.empty? %>
           <div>Тренировки в этом месяце:</div>
         <% end %>
