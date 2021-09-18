@@ -14,14 +14,14 @@ class StatisticsController < ApplicationController
 
     @exercises_list = []
 
-    uniq_exercises_list = current_user.exercises.all.map do |exercise| 
+    uniq_exercises = current_user.exercises.all.map do |exercise| 
       exercise.exercise_name_voc.label if current_user.exercises.where(exercise_name_voc_id: exercise.exercise_name_voc_id).count > 1
     end
 
-    uniq_exercises_list.uniq!
+    uniq_exercises.compact!.uniq!
 
     ExerciseNameVoc.all.where(user_id: current_user.id).each do |exercise|
-      @exercises_list << [exercise.id, exercise.label] if uniq_exercises_list&.include?(exercise.label)
+      @exercises_list << [exercise.id, exercise.label] if uniq_exercises&.include?(exercise.label)
     end
 
     @data = []
@@ -67,6 +67,16 @@ class StatisticsController < ApplicationController
     # current_user.trainings.each do |training|
     #   @tr_by_label[training.label] ||= 0
     #   @tr_by_label[training.label] += 1
+    # end
+
+    # @exercises_max_results = []
+    # uniq_exercises.each do |uniq_exercise|
+    #   max_collection = []
+    #   current_user.exercises.all.each do |ex|
+    #      max_collection << ex.summ if ex.exercise_name_voc.label == uniq_exercise 
+    #   end
+    #   max_value = max_collection.to_a.max
+    #   @exercises_max_results << [uniq_exercise, max_value]
     # end
 
     ##################################### все тренировки

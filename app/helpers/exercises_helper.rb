@@ -29,9 +29,9 @@ module ExercisesHelper
         end
 
         return overall_summ
-      elsif
-        @label.match?(/ОФП|Офп|офп/)
-          return self.ofp(@label, @exercise)
+      # elsif
+      #   @label.match?(/ОФП|Офп|офп/)
+      #     return self.ofp(@label, @exercise)
       else
         temp_summ_1 = self.dash(@label, @exercise) || 0
 
@@ -92,14 +92,14 @@ module ExercisesHelper
       exercise.match(/\d+[.,]\d+|\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
     end
 
-    # офп
-    def ofp(label, exercise)
-      if label && label.match?(/ОФП|Офп|офп/)
-        temp_value = exercise.match(/(\d+(x|X|х|Х)\d+)/).to_s
+    # # офп
+    # def ofp(label, exercise)
+    #   if label && label.match?(/ОФП|Офп|офп/)
+    #     temp_value = exercise.match(/(\d+(x|X|х|Х)\d+)/).to_s
 
-        summ = self.multiply(label, temp_value)
-      end
-    end
+    #     summ = self.multiply(label, temp_value)
+    #   end
+    # end
 
     # один подход
     def one_rep(label, exercise)
