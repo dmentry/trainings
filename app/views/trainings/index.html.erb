@@ -2,11 +2,15 @@
 <div class="container bg-light">
   <div class="row my-3">
 
-    <div class="col-lg-8 order-lg-1 mb-3 no-paddings">
+    <div class="col-lg-8 order-lg-1 mb-3 mt-1 no-paddings">
       <h2 id="month">
-        <div class="text_size">
+        <div class="date-my">
           <%= link_to "<", date: @date.prev_month %>
+        </div>
+        <div class="date-my date-width-my">
           <%= l(@date, format: "%B, %Y") %>
+        </div>
+        <div class="date-my">
           <%= link_to ">", date: @date.next_month %>
         </div>
       </h2>
@@ -24,7 +28,7 @@
       <% end %>
     </div>
 
-    <div class="border col-lg-3 order-lg-2 mb-3 buffer-top buffer-both-sm bg-white no-margins">
+    <div class="border col-lg-3 order-lg-2 mb-3 mt-3 buffer-top buffer-both-sm bg-white no-margins max_height_month_tr">
       <%= link_to 'Создать тренировку', new_training_path %>
       <div class="mt-1">
         <% unless @trainings_by_month.empty? %>

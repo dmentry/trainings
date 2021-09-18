@@ -7,16 +7,16 @@
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#stats1">Стат 1</a>
   </li>
-  <li class="nav-item">
+<!--   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#stats2">Стат 2</a>
-  </li>
+  </li> -->
 </ul>
 <div class="tab-content">
   <div class="tab-pane fade show active" id="graphs">
 
     <div class="container bg-light">
       <div class="row my-3">
-        <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
+        <div class="col-lg-12 order-lg-1 mb-2 mt-2 no-paddings">
 
           <div class="center">
             <% @exercises_list.each do |list| %>
@@ -37,7 +37,7 @@
 
     <div class="container bg-light">
       <div class="row my-3">
-        <div class="col-lg-12 order-lg-2 mb-3 mt-2 no-paddings">
+        <div class="col-lg-12 order-lg-2 mb-2 mt-2 no-paddings">
           <div>
             <div><%#= @name %></div>
             <%# @data.each do |data| %>
@@ -49,14 +49,14 @@
               <!-- <div> <%#= data[0] %> - <%#= summ %></div> -->
             <%# end %>
 
-            <div class="center">
+            <!-- <div class="center"> -->
               <%# @chart_types.each do |chart| %>
                 <%#= link_to chart[1], stat_statistics_path(chart_name_id: chart[0]) %> 
                 <%# if chart != @chart_types.last %>
                  <!-- | -->
                 <%# end %>
               <%# end %>
-            </div>
+            <!-- </div> -->
 
             <div class="center">
 
@@ -88,8 +88,8 @@
 
     <div class="container bg-light">
       <div class="row my-3">
-        <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
-          <h3 class="center text_size">Список упражнений</h3>
+        <div class="col-lg-12 order-lg-1 mb-2 mt-2 no-paddings max_height_all_tr">
+          <h3 class="center text_size">Статистика тренировок</h3>
           <div>
             <div>
               Тренировок за все время: <%= current_user.trainings.count %>
