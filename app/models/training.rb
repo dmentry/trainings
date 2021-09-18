@@ -7,17 +7,17 @@ class Training < ApplicationRecord
 
   def self.by_month(date)
     Training.all
-      .order(start_time: :desc)
+      .order(start_time: :asc)
         .select{ |training| training.start_time.month == date.month && training.start_time.year == date.year }
   end
 
   def next
-    all_trainings.select{ |training| training[:id].to_i > id}
+    all_trainings.select{ |training| training[:start_time] > start_time}
       .first || all_trainings.first
   end
 
   def prev
-    all_trainings.select{ |training| training[:id].to_i < id}
+    all_trainings.select{ |training| training[:start_time] < start_time}
       .last || all_trainings.last
   end
 

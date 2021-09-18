@@ -11,7 +11,9 @@ module TrainingsHelper
       trainings.find_all do |training|
         tr << training.start_time.strftime("%d.%m.%Y").to_s << "\n"
 
-        training.exercises.find_all do |exercise|
+        tr << training.label << "\n"
+
+        training.exercises.sort.find_all do |exercise|
           tr << exercise.exercise_name_voc.label << " "
 
           tr << exercise.quantity
@@ -31,6 +33,7 @@ module TrainingsHelper
     failed           = 0
     errors           = []
     training_date    = ''
+    training_label   = ''
     exercise_label   = ''
     reps             = ''
     exercise_comment = ''
@@ -46,9 +49,11 @@ module TrainingsHelper
 
       training_date = Date.parse(training_array[0])
 
+      training_label = training_array[1]
+
       t = Training.create(
         user_id:    user_id,
-        label:      training_date.strftime("%d.%m.%Y"),
+        label:      training_label,
         start_time: training_date
       )
 
@@ -60,6 +65,7 @@ module TrainingsHelper
       # Парсинг упражнения
       training_array.each do |exercise|
         next if exercise == training_array[0] # пропускаем дату
+        next if exercise == training_array[1] # пропускаем название трени
 
         exercise_comment = ''
 
@@ -166,7 +172,7 @@ module TrainingsHelper
           exercise_name_voc_id = exercise_name_voc.to_a[0][:id]
         else
           failed += 1
-          puts exercise_label
+          # puts exercise_label
           errors << "Не найдено упражнение для: #{training_date.strftime("%d.%m.%Y")}, #{exercise_label}"
 
           next
