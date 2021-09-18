@@ -34,7 +34,7 @@
           <ul class="navbar-nav">
             <% if user_signed_in? %>
               <li><%= link_to 'Главная', root_path, class: 'btn bg-light', title: 'На главную' %></li>
-              <li><%= link_to 'Все тренировки', all_trainings_trainings_path, class: "btn bg-light", title: 'Список тренировок за все время' %></li>
+              <li><%#= link_to 'Все тренировки', all_trainings_trainings_path, class: "btn bg-light", title: 'Список тренировок за все время' %></li>
               <li><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
               <li><%= link_to 'Статистика', stat_statistics_path, class: 'btn bg-light', title: 'Страница статистики' %></li>
               <% if current_user.admin %>

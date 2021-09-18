@@ -63,6 +63,14 @@ class StatisticsController < ApplicationController
       # @all_tr_by_month << tr_summ_by_year
     end
 
+    # @tr_by_label = Hash.new
+    # current_user.trainings.each do |training|
+    #   @tr_by_label[training.label] ||= 0
+    #   @tr_by_label[training.label] += 1
+    # end
 
+    ##################################### все тренировки
+    @trainings = current_user.trainings.all.order(start_time: :desc)
+    
   end
 end

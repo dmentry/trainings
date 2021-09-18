@@ -1,10 +1,10 @@
-<h1 class="center text_size mt-2">Тренировки за все время
+<h3 class="center text_size mt-2">Тренировки за все время
   <%= link_to 'На главную', trainings_path, class: "btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
-</h1>
-<div class="container bg-light">
-  <div class="row my-2">
+</h3>
+<div class="container my-bg-color">
+  <div class="row mt-2 mb-3">
 
-    <div class="border col-lg-10 mb-3 buffer-top buffer-both-sm bg-white no-margins max_height_all_tr">
+    <div class="border col-lg-8 my-2 buffer-top buffer-both-sm bg-light no-margins max_height_all_tr">
       <div>
         <% if @trainings.present? %>
           <% @trainings.each do |training| %>

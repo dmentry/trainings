@@ -1,13 +1,12 @@
 <h1 class="center text_size mt-2">Список упражнений</h1>
 <%= link_to 'На главную', trainings_path, class: "btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
 
-<div class="container bg-light">
+<div class="container my-bg-color mb-3">
   <div class="row my-1 no-margins-row">
 
-    <div class="col-lg-8 no-paddings no-margins max_height_all_tr my-2">
-      <div class="border p-2 m-2 my-bg-color">
-      <div>Названия</div>
-      <div class="my-3">
+    <div class="col-lg-8 no-paddings no-margins mt-1 mb-2 max_height_all_tr">
+      <div class="border p-2 m-2 bg-light">
+      <div class="my-0">
         <% @exercise_name_vocs.each do |exercise_name_voc| %>
           <div><%= link_to exercise_name_voc.label, edit_exercise_name_voc_path(exercise_name_voc) %></div>
         <% end %>
@@ -16,7 +15,7 @@
     </div>
 
     <div class="col-lg-4 no-paddings no-margins">
-      <div class="border p-2 m-2 my-bg-color">
+      <div class="border p-2 m-2 bg-light">
       <div>Создать новое упражнение</div>
       <div class="row mt-3">
         <div class="col-sm-12 col-md-12">

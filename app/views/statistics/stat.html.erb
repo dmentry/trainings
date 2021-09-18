@@ -7,14 +7,14 @@
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#stats1">Стат 1</a>
   </li>
-<!--   <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#stats2">Стат 2</a>
-  </li> -->
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#stats2">Все тренировки</a>
+  </li>
 </ul>
 <div class="tab-content">
   <div class="tab-pane fade show active" id="graphs">
 
-    <div class="container bg-light">
+    <div class="container my-bg-color">
       <div class="row my-3">
         <div class="col-lg-12 order-lg-1 mb-2 mt-2 no-paddings">
 
@@ -35,11 +35,11 @@
       <h3 class="center text_size"><%= @name %></h3>
     </div>
 
-    <div class="container bg-light">
+    <div class="container my-bg-color">
       <div class="row my-3">
         <div class="col-lg-12 order-lg-2 mb-2 mt-2 no-paddings">
           <div>
-            <div><%#= @name %></div>
+            <!-- <div><%#= @name %></div> -->
             <%# @data.each do |data| %>
               <%# if @name && @name.match?(/бег|лыжи|Бег|Лыжи/) %>
                 <%# summ = data[1] %>
@@ -59,7 +59,6 @@
             <!-- </div> -->
 
             <div class="center">
-
               <% @chart_types.each do |key, value| %>
                 <%= link_to key, stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
                 <%# if @chart_types.to_a.last[1] != value %>
@@ -85,11 +84,11 @@
 
   </div>
   <div class="tab-pane fade" id="stats1">
+    <h3 class="center text_size mt-2">Статистика тренировок</h3>
 
-    <div class="container bg-light">
+    <div class="container my-bg-color">
       <div class="row my-3">
         <div class="col-lg-12 order-lg-1 mb-2 mt-2 no-paddings max_height_all_tr">
-          <h3 class="center text_size">Статистика тренировок</h3>
           <div>
             <div>
               Тренировок за все время: <%= current_user.trainings.count %>
@@ -109,15 +108,7 @@
 
   </div>
   <div class="tab-pane fade" id="stats2">
-
-    <div class="container bg-light">
-      <div class="row my-3">
-        <div class="col-lg-12 order-lg-1 mb-3 mt-4 no-paddings">
-          Больше статистики!
-        </div>
-      </div>
-    </div>
-
+     <%= render template: 'trainings/all_trainings' %>
   </div>
 </div>
 

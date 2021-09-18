@@ -1,6 +1,6 @@
 <%= link_to 'На главную', trainings_path, class: "h1 btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
 <h1 class="center text_size mt-1">Редактировать название тренировки: <%= @exercise_name_voc.label %></h1>
-<div class="container bg-light">
+<div class="container my-bg-color">
   <div class="row my-3">
     <div class="col-sm-12 col-md-8">
       <%= render 'form', exercise_name_voc: @exercise_name_voc || @exercise_name_voc = current_user.exercise_name_vocs.build(exercise_name_voc_params) %>
