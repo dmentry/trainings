@@ -184,7 +184,7 @@ h1  a {
   }
 
   .max_height_all_tr {
-    max-height: 500px;
+    max-height: 400px;
     overflow: auto;
     }
 
