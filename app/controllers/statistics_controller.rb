@@ -63,8 +63,7 @@ class StatisticsController < ApplicationController
           @all_tr_by_month << [date, tr_by_month]
         end
       end
-@all_tr_by_month = @all_tr_by_month.sort_by{ |h| h.first }
-binding.pry
+      @all_tr_by_month = @all_tr_by_month.sort_by{ |h| h.first }
 
       # все тренировки по названиям
       @tr_by_label = Hash.new
