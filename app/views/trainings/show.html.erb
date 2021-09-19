@@ -1,16 +1,15 @@
-<div class="center">
-  <h1> 
-    <%= link_to '<', @training.prev, class: "h1 btn btn-primary mt-1 buffer-bottom date-my" %>
-    <%= link_to @training.label, edit_training_path(@training), class: "h1 mt-1 buffer-bottom date-my tr-width-my" %>
-    <%= link_to '>', @training.next, class: "h1 btn btn-primary mt-1 buffer-bottom date-my" %>
-    <%= link_to 'На главную', trainings_path, class: "h1 btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
-  </h1>
-</div>
-
-<div class="container my-bg-color">
-  <div class="row my-3">
-    <div class="col-lg-6 order-lg-1 no-paddings max_height_all_tr my-2 bg-light ex_buffer_both_my">
-      <div class="border p-1 m-1">
+<div class="container my-bg-color mt-3 mb-3">
+  <div class="center">
+    <h1> 
+      <%= link_to '<', @training.prev, class: "h1 btn btn-primary mt-1 buffer-bottom date-my" %>
+      <%= link_to @training.label, edit_training_path(@training), class: "h1 mt-1 buffer-bottom date-my tr-width-my" %>
+      <%= link_to '>', @training.next, class: "h1 btn btn-primary mt-1 buffer-bottom date-my" %>
+      <%= link_to 'На главную', trainings_path, class: "h1 btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
+    </h1>
+  </div>
+  <div class="row my-1">
+    <div class="col-lg-6 order-lg-1 no-paddings max_height_all_tr mt-1 mb-2 bg-light ex_buffer_both_my">
+      <!-- <div class="border p-1 m-1"> -->
           <div class="bold">
             Дата: <%= l @training.start_time, format: :my_format %>
           </div>
@@ -20,18 +19,18 @@
               Вы еще не внесли ни одного упражнения в эту тренировку
             <% end %>
           </div>
-      </div>
+      <!-- </div> -->
     </div>
 
-    <div class="col-lg-5 order-lg-1 bg-light no-paddings my-2">
-      <div class="border p-1 m-1">
+    <div class="col-lg-5 order-lg-1 bg-light mt-1 mb-2">
+      <!-- <div class="border p-1 m-1 "> -->
         <div class="table-font-my">Добавить упражнение:</div>
         <div class="row">
-          <div class="col-sm-12 col-md-12 table-font-my form-buffers-vertical">
+          <div class="table-font-my no-paddings ex_buffer_both_my">
             <%= render partial: 'exercises/form', locals: {exercise: @exercise || @training.exercises.build} %>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>

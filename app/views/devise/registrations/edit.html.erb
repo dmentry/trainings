@@ -1,9 +1,9 @@
-<h3 class="center text_size">Календарь тренировок</h3>
+<h3 class="center text_size mt-2">Действия с аккаунтом</h3>
 <div class="container my-bg-color">
   <div class="row my-3">
     <div class="col-lg-8 order-lg-1 mb-3">
 
-      <h2>Редактирование пароля</h2>
+      <h4>Редактирование пароля</h4>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -30,7 +30,7 @@
         </div>
       <% end %>
       <div class="mt-3">
-        <h3>Удалить аккаунт</h3>
+        <h4>Удалить аккаунт</h4>
       </div>
       <%= button_to "Удалить мой аккаунт", registration_path(resource_name), data: { confirm: "Вы уверены?" }, method: :delete, class: 'btn btn-secondary' %>
       <div class="mt-3">

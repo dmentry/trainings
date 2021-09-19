@@ -91,16 +91,16 @@ h1  a {
 }
 
 .btn-width-my {
-  width: 214px;
+  width: 218px;
 }
 
 .max_height_all_tr {
-  max-height: 450px;
+  max-height: 550px;
   overflow: auto;
 }
 
 .max_height_month_tr {
-  max-height: 440px;
+  max-height: 475px;
   overflow: auto;
 }
 
@@ -111,6 +111,14 @@ h1  a {
 
 .top_line_my {
   border-top: 1px solid lightgrey;
+}
+
+.top_line_stat_my {
+  border-top: 2px solid black;
+}
+
+.bottom_line_stat_my {
+  border-bottom: 2px solid black;
 }
 
 @media (max-width: 991px) {
@@ -175,18 +183,22 @@ h1  a {
   top: -2px;
   }
 
-.max_height_all_tr {
-  max-height: 500px;
-  overflow: auto;
-  }
+  .max_height_all_tr {
+    max-height: 500px;
+    overflow: auto;
+    }
 
-.max_height_month_tr {
-  max-height: 350px;
-  overflow: auto;
-  }
+  .max_height_month_tr {
+    max-height: 320px;
+    overflow: auto;
+    }
 
-.ex_buffer_both_my {
-  margin-left: 0;
-  margin-right: 0;
+  .ex_buffer_both_my {
+    margin-left: 3px;
+    margin-right: 3px;
+    }
+
+  .bt_buffer_top_my {
+    margin-top: 8px;
   }
 }

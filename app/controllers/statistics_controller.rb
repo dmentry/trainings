@@ -50,37 +50,40 @@ class StatisticsController < ApplicationController
 
     ##################################### переменные для текстовой статистики
 
+    # все тренировки по годам и месяцам
     @all_tr_by_month = []
     tr_years = current_user.trainings.map{ |training| training.start_time.year }.uniq
     (tr_years.size).times do |i|
       tr_summ_by_year = 0
       12.times do |month|
         date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
+        break if date > Date.today
         tr_by_month = current_user.trainings.by_month(date).count
         tr_summ_by_year += tr_by_month
         @all_tr_by_month << [date, tr_by_month]
       end
-      # @all_tr_by_month << tr_summ_by_year
     end
 
-    # @tr_by_label = Hash.new
-    # current_user.trainings.each do |training|
-    #   @tr_by_label[training.label] ||= 0
-    #   @tr_by_label[training.label] += 1
-    # end
+    # все тренировки по названиям
+    @tr_by_label = Hash.new
+    current_user.trainings.each do |training|
+      @tr_by_label[training.label] ||= 0
+      @tr_by_label[training.label] += 1
+    end
+    @tr_by_label_chart = []
+    @tr_by_label.each{ |value| @tr_by_label_chart << value }
+    @tr_by_label_chart = @tr_by_label_chart.sort_by{ |h| h.second }.reverse!
 
-    # @exercises_max_results = []
-    # uniq_exercises.each do |uniq_exercise|
-    #   max_collection = []
-    #   current_user.exercises.all.each do |ex|
-    #      max_collection << ex.summ if ex.exercise_name_voc.label == uniq_exercise 
-    #   end
-    #   max_value = max_collection.to_a.max
-    #   @exercises_max_results << [uniq_exercise, max_value]
-    # end
+    # максимальная сумма в каждом упражнении
+    @exercises_max_results = Hash.new
+      current_user.exercises.all.each do |ex|
+        next if ex.exercise_name_voc.label.match?(/ОФП|Офп|офп/)
+        @exercises_max_results[ex.exercise_name_voc.label] ||= 0
+        @exercises_max_results[ex.exercise_name_voc.label] = ex.summ if ex.summ > @exercises_max_results[ex.exercise_name_voc.label]
+    end
+    @exercises_max_results = @exercises_max_results.sort_by{ |h| h.second }.reverse!
 
-    ##################################### все тренировки
+    # все тренировки
     @trainings = current_user.trainings.all.order(start_time: :desc)
-    
   end
 end
