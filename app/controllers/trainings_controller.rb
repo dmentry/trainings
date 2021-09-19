@@ -116,7 +116,7 @@ class TrainingsController < ApplicationController
     @statistics = TrainingsHelper.create_trainings_from_lines(file_lines, user_id)
 
     # отправляем на страницу index, если все нормально и выводим статистику о проделаных операциях или на errors_page, если есть ошибки
-    text = "Обработано упражнений: #{@statistics[0]}, создано упражнений: #{@statistics[0] - @statistics[1]}, время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
+    text = "Обработано упражнений: #{@statistics[0]}, ошибок: #{@statistics[1]}, время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
     message = { notice: text }
     @warning_message = text
 
