@@ -15,7 +15,6 @@ class User < ApplicationRecord
 
   enum chart_status: { area: 1, stepline: 2, linear: 3, column: 4 }
 
-
   private
 
   def add_exercises
@@ -25,8 +24,7 @@ class User < ApplicationRecord
       "Алмазные отжимания",
       "Выход силой",
       "Скручивания",
-      "Бег",
-      "\"Лесенка\""
+      "Бег"
     ]
 
     exercises.each do |exercise|

@@ -1,0 +1,53 @@
+<%= link_to 'На главную', trainings_path, class: "btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
+
+    <div class="container my-bg-color">
+      <div class="row mt-3">
+        <div class="col-lg-12 order-lg-1 mb-2 mt-0 no-paddings">
+          <h4 class="center text_size mt-2">Тренировок за все время: <%= current_user.trainings.count %></h4>
+
+          <div class="container my-bg-color">
+            <div class="row">
+              <div class="col-lg-12 order-lg-1 my-2 no-paddings max_height_all_tr">
+                <div class="ex_buffer_both_my">
+                  <% if @all_tr_by_month.present? %>
+                    <div class="center mt-0 bg-light">
+                      <b>Количество тренировок по годам и месяцам</b>
+                      <%= area_chart(@all_tr_by_month, { theme: 'palette5' }) %>
+                    </div>
+                  <% end %>
+
+                  <% if @tr_by_label_chart.present? %>
+                    <div class="bg-light">
+                      <div class="center">
+                        <div class="mt-3">
+                          <b>Количество проведенных тренировок</b>
+                          <%= bar_chart(@tr_by_label_chart, { height: 500, theme: 'palette7' }) %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  
+                  <% if @exercises_max_results.present? %>
+                    <div class="bg-light">
+                      <div class="center">
+                        <div class="mt-3">
+                          <b>Максимальное количество повторов в каждом упражнении</b>
+                          <%= bar_chart(@exercises_max_results, { height: 500, theme: 'palette7' }) %>
+                        </div>
+                      </div>
+                    </div>
+                      <%# if ex[0].match?(/бег|лыжи|Бег|Лыжи/) %>
+                        <%# summ = ex[1] %>
+                      <%# else %>
+                        <%# summ = ex[1].to_i %>
+                      <%# end %>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>

@@ -5,6 +5,7 @@ class TrainingsController < ApplicationController
  
   def index
     @trainings = current_user.trainings.all
+    # @trainings = current_user.trainings.all.order(start_time: :desc)
 
     @trainings_by_date = @trainings.group_by(&:start_time)
 

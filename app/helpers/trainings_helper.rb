@@ -142,7 +142,6 @@ module TrainingsHelper
         elsif exercise.match?(/^ОФП-\d+/)
           exercise_label = exercise.scan(/^ОФП-\d+/)
           exercise_label = exercise_label.to_s.strip.gsub(/["\[\]]/, '')
-          # exercise_label = "ОФП-#{ exercise_label }".chomp(')')
           exercise.gsub!(/^ОФП-\d+ /, '')
           exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_.,\s]+)/)
           exercise_comment = $1.strip! if $1
@@ -172,7 +171,7 @@ module TrainingsHelper
           exercise_name_voc_id = exercise_name_voc.to_a[0][:id]
         else
           failed += 1
-          # puts exercise_label
+          
           errors << "Не найдено упражнение для: #{training_date.strftime("%d.%m.%Y")}, #{exercise_label}"
 
           next

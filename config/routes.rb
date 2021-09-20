@@ -25,8 +25,9 @@ Rails.application.routes.draw do
 
   resources :statistics, only: [:show] do
     collection do
-      get :stat
-      post :stat
+      get  :main_stat
+      post :main_stat
+      get  :secondary_stat
     end
   end
 end
