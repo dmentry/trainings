@@ -1,4 +1,4 @@
-<h3 class="center text_size mt-2">Календарь тренировок v0.9.3
+<h3 class="center text_size mt-2">Календарь тренировок v0.9.4
   <%= link_to 'На главную', trainings_path, class: "btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
 </h3>
 <div class="container my-bg-color">
@@ -27,11 +27,13 @@
         <br><br>
         В планах:
         <ul class="my-ul">
-          <li>Отображение иконок тренировок в календаре</li>
           <li>Выбор упражений с помощью выпадающего списка</li>
           <li>Выбор дня на календаре с помощью клика на нем</li>
         </ul>
       </div>
+      <div class="my-1">
+        <p>Автор: <%= link_to "&copy; Dack9 #{Time.now.year}".html_safe, "https://vk.com/dack9", target: "blanc", rel: "noreferrer", title: "VK" %></p>
+      </div>      
       <div class="my-3">
         <%= link_to 'На главную', trainings_path %>
       </div>

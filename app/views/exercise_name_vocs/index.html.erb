@@ -1,10 +1,10 @@
 <h3 class="center text_size mt-2">Список упражнений</h3>
 <%= link_to 'На главную', trainings_path, class: "btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
 
-<div class="container my-bg-color mb-3">
+<div class="container my-bg-color">
   <div class="row my-1 no-margins-row">
 
-    <div class="col-lg-8 no-paddings no-margins mt-1 mb-2 max_height_all_tr">
+    <div class="col-lg-8 no-paddings no-margins mt-2 mb-0 max_height_all_tr">
       <div class="border p-2 m-2 bg-light">
       <div class="my-0">
         <% @exercise_name_vocs.each do |exercise_name_voc| %>

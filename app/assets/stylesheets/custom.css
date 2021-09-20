@@ -125,6 +125,14 @@ h1  a {
   max-width:25px;
 }
 
+.top_buffer_my {
+  margin-top: 20px;
+}
+
+.top_buffer_two_my {
+  margin-top: 23px;
+}
+
 @media (max-width: 991px) {
   .buffer-both-sm {
     margin-left: 10px;
@@ -204,5 +212,13 @@ h1  a {
 
   .bt_buffer_top_my {
     margin-top: 8px;
+  }
+
+  .top_buffer_my {
+    margin-top: 2px;
+  }
+
+  .top_buffer_two_my {
+    margin-top: 5px;
   }
 }
