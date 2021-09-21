@@ -18,16 +18,17 @@ class StatisticsController < ApplicationController
 
   def secondary_stat
     ##################################### переменные для текстовой статистики
+    @all_trainings_by_user = current_user.trainings.all
     
     # все тренировки по годам и месяцам
     @all_tr_by_month = []
-    tr_years = current_user.trainings.map{ |training| training.start_time.year }.uniq
+    tr_years = @all_trainings_by_user.map{ |training| training.start_time.year }.uniq
     tr_years.size.times do |i|
       tr_summ_by_year = 0
       12.times do |month|
         date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
         break if date > Date.today
-        tr_by_month = current_user.trainings.by_month(date).count
+        tr_by_month = @all_trainings_by_user.by_month(date).count
         # next unless tr_by_month >= 1
         tr_summ_by_year += tr_by_month
         @all_tr_by_month << [date, tr_by_month]
@@ -37,7 +38,7 @@ class StatisticsController < ApplicationController
 
     # все тренировки по названиям
     @tr_by_label = Hash.new
-    current_user.trainings.each do |training|
+    @all_trainings_by_user.each do |training|
       @tr_by_label[training.label] ||= 0
       @tr_by_label[training.label] += 1
     end
