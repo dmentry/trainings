@@ -30,11 +30,14 @@
   td:nth-last-child(1) { color: red; }
   td:nth-last-child(2) { color: red; }
 
-  a { color: #0000ff; }
+  a { color: #0000ff;
+      overflow-wrap: anywhere;
+  }
 
   .notmonth { 
     background-color: #f0f0f0; 
     color: #a3a3a3;
+    overflow-wrap: anywhere;
   }
 
   .notmonth a { color:  #5e81f0; }
@@ -86,6 +89,7 @@
     vertical-align: top;
     font-size: 70%;
     cellpadding: 0;
+
   }
 
   .notmonth, .notmonth a { color: #CCC; }

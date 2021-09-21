@@ -2,7 +2,7 @@ class Training < ApplicationRecord
   belongs_to :user
   has_many :exercises, dependent: :destroy
 
-  validates :label, presence: true, length: {maximum: 255}
+  validates :label, presence: true, length: { maximum: 45, message: "Не более 45 символов!" }
   validates :start_time, presence: true
 
   def self.by_month(date)

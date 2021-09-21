@@ -1,7 +1,12 @@
 <table class="table table-sm table-buffers-vertical table-font-my">
   <thead>
     <tr class="table-buffers-vertical">
-      <th class="table-info table-buffers-vertical"><%= exercise.exercise_name_voc.label %></th>
+      <th class="table-info table-buffers-vertical"><%= exercise.exercise_name_voc.label %>
+        <div class="float-right">
+          <%= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise)) %> |
+          <%= link_to(image_pack_tag("del.png", alt: 'delete', class: 'img-execise delete_symbol'), training_exercise_path(exercise.training, exercise), method: :delete, data: { confirm: t('.destroy_confirm') }) %>
+        </div>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -25,12 +30,6 @@
       <td class="table-buffers-vertical">            
         Заметки:
         <%= exercise.note %>
-      </td>
-    </tr>
-    <tr class="table-buffers-vertical">
-      <td class="table-buffers-vertical">            
-        <%= link_to('Удалить | ', training_exercise_path(exercise.training, exercise), method: :delete, data: {confirm: t('.destroy_confirm')} ) %>
-        <%= link_to 'Редактировать', edit_training_exercise_path(exercise.training, exercise) %>
       </td>
     </tr>
   </tbody>

@@ -82,12 +82,14 @@ h1  a {
 .tr-width-my {
   max-width: 240px;
   width: 100%;
-  padding-bottom: 1px;
   font-size: 20px;
   padding-left: 0;
   padding-right: 0;
   margin-left: 0;
   margin-right: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  overflow-wrap: anywhere;
 }
 
 .btn-width-my {
@@ -100,7 +102,7 @@ h1  a {
 }
 
 .max_height_month_tr {
-  max-height: 475px;
+  max-height: 477px;
   overflow: auto;
 }
 
@@ -125,6 +127,10 @@ h1  a {
   max-width:25px;
 }
 
+.img-execise {
+  max-width:20px;
+}
+
 .top_buffer_my {
   margin-top: 20px;
 }
@@ -138,6 +144,26 @@ h1  a {
 }
 
 .my_dropdown_item {
+  display: block;
+}
+
+.tr_display {
+  display: inline-block;
+}
+
+.edit_symbol {
+  margin-right: 8px;
+}
+
+.delete_symbol {
+  margin-left: 8px;
+}
+
+.add_float {
+  display: none;
+}
+
+.remove_for_small_screen {
   display: block;
 }
 
@@ -197,26 +223,26 @@ h1  a {
   }
 
   .for-mobile {
-  display: inline-block;
-  position: absolute;
-  right: 4px;
-  top: -2px;
+    display: inline-block;
+    position: absolute;
+    right: 4px;
+    top: -2px;
   }
 
   .max_height_all_tr {
     max-height: 400px;
     overflow: auto;
-    }
+  }
 
   .max_height_month_tr {
-    max-height: 320px;
+    max-height: 325px;
     overflow: auto;
-    }
+  }
 
   .ex_buffer_both_my {
     margin-left: 3px;
     margin-right: 3px;
-    }
+  }
 
   .bt_buffer_top_my {
     margin-top: 8px;
@@ -245,5 +271,33 @@ h1  a {
     padding-left: 13px;
     padding-top: 7px;
     padding-bottom: 7px;
+  }
+
+  .img-execise {
+    max-width:18px;
+  }
+
+  .img-add {
+    max-width:32px;
+  }
+
+  .add_float {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    right: 10px;
+    top: 1px;
+  }
+
+  .remove_for_small_screen {
+    display: none;
+  }
+
+  .top_buffer_mobile {
+    margin-top: -5px !important;
+  }
+
+  .bottom_buffer_mobile {
+    margin-bottom: 8px;
   }
 }

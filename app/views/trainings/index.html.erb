@@ -1,6 +1,10 @@
 <div class="container my-bg-color">
   <div class="row top_buffer_my">
 
+    <div class="add_float">
+      <%= link_to(image_pack_tag("add.png", alt: 'add', class: 'img-add'), new_training_path) %>
+    </div>
+
     <div class="col-lg-8 order-lg-1 mb-3 no-paddings">
       <h2 id="month">
         <div class="date-my">
@@ -33,6 +37,8 @@
                   <%= link_to(image_pack_tag("run.png", alt: 'logo', class: 'img-calendar'), training, class: 'date-my') %>
                 <% elsif training.label == 'Лыжи' %>
                   <%= link_to(image_pack_tag("ski.png", alt: 'logo', class: 'img-calendar'), training) %>
+                <% elsif training.label == 'Пресс' %>
+                  <%= link_to(image_pack_tag("abs.png", alt: 'logo', class: 'img-calendar'), training) %>
                 <% else  %>
                   <%= link_to training.label, training %>
                 <% end %>
@@ -43,14 +49,22 @@
       <% end %>
     </div>
 
-    <div class="border col-lg-3 order-lg-2 mt-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr">
-      <%= link_to 'Создать тренировку', new_training_path %>
+    <div class="border col-lg-3 order-lg-2 mt-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile  bottom_buffer_mobile">
+      <%= link_to 'Создать тренировку', new_training_path, class: 'remove_for_small_screen' %>
       <div class="mt-1">
         <% unless @trainings_by_month.empty? %>
-          <div class="top_line_my">Тренировки в этом месяце:</div>
+          <div class="top_line_my remove_for_small_screen"></div>
+          <div>Тренировки в этом месяце:</div>
         <% end %>
         <% @trainings_by_month.each do |training| %>
-          <div> <%= link_to training.label, training %></div>
+          <div class="tr_display">
+            <% if training != @trainings_by_month.last %>
+              <%= link_to "#{training.label}, ", training %>
+            <% else %>
+              <%= link_to training.label, training %>
+            <% end %>
+          </div>
+
         <% end %>
       </div>
     </div>

@@ -2,7 +2,7 @@
   <div class="center">
     <h3> 
       <%= link_to '<', @training.prev, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
-      <%= link_to @training.label, edit_training_path(@training), class: "mt-1 buffer-bottom date-my tr-width-my" %>
+      <%= link_to @training.label, edit_training_path(@training), class: "btn btn-outline-primary mt-1 buffer-bottom tr-width-my" %>
       <%= link_to '>', @training.next, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
       <%= link_to 'На главную', trainings_path, class: "btn-sm btn-secondary mt-1 buffer-bottom for-mobile" %>
     </h3>

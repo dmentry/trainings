@@ -22,7 +22,7 @@ class StatisticsController < ApplicationController
     # все тренировки по годам и месяцам
     @all_tr_by_month = []
     tr_years = current_user.trainings.map{ |training| training.start_time.year }.uniq
-    (tr_years.size).times do |i|
+    tr_years.size.times do |i|
       tr_summ_by_year = 0
       12.times do |month|
         date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
