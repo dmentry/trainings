@@ -1,6 +1,6 @@
 module StatisticsHelper
   def self.main_stat_helper(current_user, exercise_name_id)
-    uniq_exercises = current_user.exercises.all.map do |exercise| 
+    uniq_exercises ||= current_user.exercises.all.map do |exercise| 
       exercise.exercise_name_voc.label if current_user.exercises.where(exercise_name_voc_id: exercise.exercise_name_voc_id).count > 1
     end
 

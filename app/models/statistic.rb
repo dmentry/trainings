@@ -1,5 +1,5 @@
 class Statistic
   include ActiveModel::Model
 
-  # attr_accessor :stat_data
+  # attr_accessor :stats_output
 end

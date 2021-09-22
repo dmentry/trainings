@@ -1,4 +1,11 @@
 class Training < ApplicationRecord
+  def self.pics
+    {
+      "Общая": "common.png", "ОФП": "ofp.png", "Выход силой": "powerpullup.png", "Подтягивания": "pullup.png",
+      "Отжимания": "pushup.png", "Бег": "run.png", "Лыжи": "ski.png", "Пресс": "abs.png", "Флажок": "flag.png" 
+    }
+  end
+
   belongs_to :user
   has_many :exercises, dependent: :destroy
 
@@ -28,6 +35,7 @@ class Training < ApplicationRecord
   #     .order(start_time: :asc)
   #       .select{ |training| training.start_time.month == self.start_time.month && training.start_time.year == self.start_time.year }
   # end
+  
   def all_trainings
     user.trainings.order(start_time: :asc)
   end

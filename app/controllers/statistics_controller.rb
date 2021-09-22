@@ -16,9 +16,9 @@ class StatisticsController < ApplicationController
     end
   end
 
+  ##################################### переменные для текстовой статистики
   def secondary_stat
-    ##################################### переменные для текстовой статистики
-    @all_trainings_by_user = current_user.trainings.all
+    @all_trainings_by_user ||= current_user.trainings.all
     
     # все тренировки по годам и месяцам
     @all_tr_by_month = []

@@ -23,22 +23,8 @@
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
               <div class="cal-font date-my">
-                <% if training.label == 'Общая' %>
-                  <%= link_to(image_pack_tag("common.png", alt: 'logo', class: 'img-calendar'), training) %>
-                <% elsif training.label == 'ОФП' %>
-                  <%= link_to(image_pack_tag("ofp.png", alt: 'logo', class: 'img-calendar'), training) %>
-                <% elsif training.label == 'Выход силой' %>
-                  <%= link_to(image_pack_tag("powerpullup.png", alt: 'logo', class: 'img-calendar'), training) %>
-                <% elsif training.label == 'Подтягивания' %>
-                  <%= link_to(image_pack_tag("pullup.png", alt: 'logo', class: 'img-calendar'), training) %>
-                <% elsif training.label == 'Отжимания' %>
-                  <%= link_to(image_pack_tag("pushup.png", alt: 'logo', class: 'img-calendar'), training, class: 'date-my') %>
-                <% elsif training.label == 'Бег' %>
-                  <%= link_to(image_pack_tag("run.png", alt: 'logo', class: 'img-calendar'), training, class: 'date-my') %>
-                <% elsif training.label == 'Лыжи' %>
-                  <%= link_to(image_pack_tag("ski.png", alt: 'logo', class: 'img-calendar'), training) %>
-                <% elsif training.label == 'Пресс' %>
-                  <%= link_to(image_pack_tag("abs.png", alt: 'logo', class: 'img-calendar'), training) %>
+                <% if Training.pics[training.label.to_sym] %>  
+                  <%= link_to(image_pack_tag(Training.pics[training.label.to_sym], alt: 'logo', class: 'img-calendar'), training) %>
                 <% else  %>
                   <%= link_to training.label, training %>
                 <% end %>

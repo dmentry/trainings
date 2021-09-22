@@ -62,7 +62,7 @@ class TrainingsController < ApplicationController
   end
 
   def all_trainings
-    @trainings = current_user.trainings.all.order(start_time: :desc)
+    @trainings ||= current_user.trainings.all.order(start_time: :desc)
   end
 
   def copy_training

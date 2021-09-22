@@ -93,11 +93,16 @@ h1  a {
 }
 
 .btn-width-my {
-  width: 217px;
+  width: 215px;
 }
 
 .max_height_all_tr {
   max-height: 550px;
+  overflow: auto;
+}
+
+.max_height_stat_second {
+  max-height: 600px;
   overflow: auto;
 }
 
@@ -278,6 +283,14 @@ h1  a {
   }
 
   .img-add {
+/*     max-width:48px; */
+    opacity: 0.8;
+    position: fixed;
+    right: -1px;
+    bottom: 1%;
+  }
+
+  .img-home {
     max-width:32px;
   }
 
@@ -299,5 +312,18 @@ h1  a {
 
   .bottom_buffer_mobile {
     margin-bottom: 8px;
+  }
+
+  .max_height_stat_second {
+    max-height: 470px;
+    overflow: auto;
+  }
+
+  .buffer_top_home {
+    margin-top: 5px;
+  }
+
+  .buffer_top_home_for_tr_edit {
+    margin-top: 2px;
   }
 }
