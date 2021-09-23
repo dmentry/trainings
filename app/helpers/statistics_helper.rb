@@ -1,16 +1,13 @@
 module StatisticsHelper
   def self.main_stat_helper(current_user, exercise_name_id)
-    uniq_exercises ||= current_user.exercises.all.map do |exercise| 
-      exercise.exercise_name_voc.label if current_user.exercises.where(exercise_name_voc_id: exercise.exercise_name_voc_id).count > 1
-    end
-
-    uniq_exercises.compact!.uniq!
-
+    # массив всех уникальных упражнений пользователя [id, название], если одинаковых упражнений > 1
     exercises_list = []
 
     ExerciseNameVoc.where(user_id: current_user.id).each do |exercise|
-      exercises_list << [exercise.id, exercise.label] if uniq_exercises&.include?(exercise.label)
+      exercises_list << [exercise.id, exercise.label] if current_user.exercises.where(exercise_name_voc_id: exercise.id).count > 1
     end
+
+    exercises_list.uniq! {|e| e.second} 
 
     exercises_list.sort_by!{ |h| h.first }
 
@@ -26,7 +23,10 @@ module StatisticsHelper
       end
     end
 
-    data.sort_by!{ |h| h.first }
+   # data = Exercise.where('exercise_name_voc_id =? AND training_id = ?', id, current_user.training_ids)
+
+
+    data.to_a.sort_by!{ |h| h.first }
 
     [data, exercises_list, name]
   end
