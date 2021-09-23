@@ -5,7 +5,7 @@
       <%= link_to(image_pack_tag("add.png", alt: 'add', class: 'img-add'), new_training_path) %>
     </div>
 
-    <div class="col-lg-8 order-lg-1 mb-3 no-paddings">
+    <div class="col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings">
       <h2 id="month">
         <div class="date-my">
           <%= link_to "<", date: @date.prev_month %>
@@ -35,12 +35,12 @@
       <% end %>
     </div>
 
-    <div class="border col-lg-3 order-lg-2 mt-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile  bottom_buffer_mobile">
+    <div class="border col-lg-3 order-lg-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile">
       <%= link_to 'Создать тренировку', new_training_path, class: 'remove_for_small_screen' %>
       <div class="mt-1">
         <% unless @trainings_by_month.empty? %>
           <div class="top_line_my remove_for_small_screen"></div>
-          <div>Тренировки в этом месяце:</div>
+          <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
         <% end %>
         <% @trainings_by_month.each do |training| %>
           <div class="tr_display">

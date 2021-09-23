@@ -25,6 +25,9 @@ class UsersController < ApplicationController
       redirect_to users_url, notice: "Пользователь был удален."
   end
 
+  def achivements
+  end
+
   private
 
   def set_user

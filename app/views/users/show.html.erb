@@ -6,6 +6,9 @@
       <h3 class="text_size mt-1"><%= @user.name %></h3>
       <div class="buffer-top">
         <div>
+        <div>
+          <%#= link_to 'Достижения', achivements_user_path, class: 'btn btn-secondary mt-2' %>
+        </div>
           <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-secondary mt-2' %>
         </div>
         <div>
