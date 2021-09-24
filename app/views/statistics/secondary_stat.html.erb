@@ -2,7 +2,7 @@
 
     <div class="container my-bg-color">
       <div class="row mt-2">
-        <div class="col-lg-12 order-lg-1 mb-2 no-paddings max_height_stat_second">
+        <div class="col-lg-12 order-lg-1 mb-2 max_height_stat_second">
           <h4 class="center text_size mt-1">
             Тренировок с <%= "#{ l @all_tr_by_month.first[0], format: :my_format }: #{@all_trainings_by_user.count}" %>
           </h4>
@@ -12,7 +12,7 @@
                 <div class="ex_buffer_both_my">
                   <% if @all_tr_by_month.present? %>
                     <div class="center mt-0 bg-light">
-                      <b>Количество тренировок по годам и месяцам</b>
+                      <b>Количество тренировок по месяцам</b>
                       <%= area_chart(@all_tr_by_month, { theme: 'palette5' }) %>
                     </div>
                   <% end %>

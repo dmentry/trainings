@@ -1,8 +1,9 @@
 class Training < ApplicationRecord
   def self.pics
     {
-      "Общая": "common.png", "ОФП": "ofp.png", "Выход силой": "powerpullup.png", "Подтягивания": "pullup.png",
-      "Отжимания": "pushup.png", "Бег": "run.png", "Лыжи": "ski.png", "Пресс": "abs.png", "Флажок": "flag.png" 
+      "общая": "common.png", "офп": "ofp.png", "выход силой": "powerpullup.png", "подтягивания": "pullup.png",
+      "отжимания": "pushup.png", "бег": "run.png", "лыжи": "ski.png", "пресс": "abs.png", "флажок": "flag.png",
+      "стойка на руках": "handstand.png"
     }
   end
 

@@ -1,4 +1,6 @@
 module StatisticsHelper
+  REJECT_EXERCISES = ['Отжимания на брусьях', 'Флажок с поддержкой']
+
   def self.main_stat_helper(current_user, exercise_name_id)
     # массив всех уникальных упражнений пользователя [id, название], если одинаковых упражнений > 1
     exercises_list = []
@@ -7,19 +9,21 @@ module StatisticsHelper
       exercises_list << [exercise.id, exercise.label] if current_user.exercises.where(exercise_name_voc_id: exercise.id).count > 1
     end
 
-    exercises_list.uniq! {|e| e.second} 
+    exercises_list.uniq! { |e| e.second }
+
+    exercises_list.reject! { |e| REJECT_EXERCISES.include?(e.second) }
 
     exercises_list.sort_by!{ |h| h.first }
 
     data = []
 
-    exercise_name_id.present? ? id = exercise_name_id.to_i : id = current_user.exercises.first.exercise_name_voc_id
+    exercise_name_id.present? ? id = exercise_name_id.to_i : id = exercises_list.first[0]
 
     name = Exercise&.find_by(exercise_name_voc: id)&.exercise_name_voc&.label
 
     current_user.trainings.each do |training|
       training.exercises.each do |exercise|
-        data << [training.start_time, exercise.summ] if exercise.exercise_name_voc_id == id
+        data << [training.start_time, exercise.summ] if exercise.exercise_name_voc_id == id && REJECT_EXERCISES.exclude?(exercise.exercise_name_voc.label)
       end
     end
 

@@ -197,11 +197,15 @@ h1  a {
   }
 
   .no-paddings {
-    padding: 0;
+    padding: 0 !important;
+  }
+
+  .no-paddings_second_stat {
+    padding: 2px !important;
   }
 
   .no-margins {
-    margin: 0;
+    margin: 0 !important;
   }
 
   .my-ul {
@@ -319,7 +323,7 @@ h1  a {
   }
 
   .max_height_stat_second {
-    max-height: 470px;
+    max-height: 550px;
     overflow: auto;
   }
 
