@@ -129,7 +129,8 @@ h1  a {
 }
 
 .img-calendar {
-  max-width:25px;
+  max-height: 30px;
+  max-width: 30px;
 }
 
 .img-execise {
@@ -280,6 +281,11 @@ h1  a {
     padding-left: 13px;
     padding-top: 7px;
     padding-bottom: 7px;
+  }
+
+  .img-calendar {
+    max-height: 25px;
+    max-width: 25px;
   }
 
   .img-execise {
