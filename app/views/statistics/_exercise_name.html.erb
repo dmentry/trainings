@@ -1,0 +1,27 @@
+<script>
+
+
+
+</script>
+
+<%= form_with url: main_stat_statistics_path, method: :post do |form| %>
+  <div class="form-group mt-3">
+    <%= form.collection_select :exercise_name_id, ExerciseNameVoc.all, :id, :label, prompt: '[Выберите упражнение]', id: 'ex' %>
+
+
+
+<%#= form.select :exercise_name_id, @exercises_list, remote: true, onChange: main_stat_statistics_path(exercise_name_id: 5) %>
+
+<%#= select_tag "ex", options_from_collection_for_select(@exercises_list, @exercises_list[0], @exercises_list[1]) %>
+
+<%#= select_tag "ex", raw("<option>5</option>"), :onChange => "javascript: this.form.whatever.click();" %>
+
+  </div>
+
+   <%= form.submit 'Сохранить', id: "whatever", class: 'btn btn-success mt-2 btn-width-my' %>
+
+  <%#= form.select :permissions, [['none', 0], ['admin', 9]], {}, :onchange => 'this.form.submit()' %>
+
+
+
+<% end %>

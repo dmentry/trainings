@@ -58,6 +58,6 @@ class ExerciseNameVocsController < ApplicationController
   end
 
   def exercise_name_voc_params
-    params.require(:exercise_name_voc).permit(:label)
+    params.require(:exercise_name_voc).permit(:label, :exp, :level)
   end
 end

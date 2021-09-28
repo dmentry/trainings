@@ -4,8 +4,10 @@
     <div class="col-lg-8 order-lg-1 mb-3">
 
       <div class="buffer-top">
-
-     </div>
+        Текущий уровень в подтягиваниях: <%= current_user.exercise_name_vocs.where(label: "Подтягивания").to_a[0].exercises.last.level  %><br>
+        Очки опыта в подтягиваниях: <%= current_user.exercise_name_vocs.where(label: "Подтягивания").to_a[0].exp.to_i  %><br>
+        Следующий уровень в подтягиваниях: <%= current_user.exercise_name_vocs.where(label: "Подтягивания").to_a[0].exercises.last.next_level_exp %>
+      </div>
 
     </div>
   </div>

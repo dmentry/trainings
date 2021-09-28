@@ -4,6 +4,9 @@
       <div class="row my-2">
         <div class="col-lg-12 order-lg-1 mb-2 mt-3 no-paddings_second_stat">
           <div class="center">
+<div>
+<%#= render 'exercise_name' %>
+</div>
             <% @exercises_list.each do |list| %>
               <span class="vertical-buffers"><%= link_to list[1], main_stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]), class: 'btn-sm btn-primary vertical-buffers' %></span>
             <% end %>

@@ -4,4 +4,8 @@ class Exercise < ApplicationRecord
 
   validates :training, presence: true
   validates :exercise_name_voc, presence: true
+
+  def set_next_level_exp
+    (self.summ * 3.15).round(1).round(half: :up)
+  end
 end

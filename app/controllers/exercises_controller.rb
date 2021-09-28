@@ -1,16 +1,19 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_training, only: [:create, :destroy, :update, :edit]
-  before_action :set_exercise, only: [:destroy, :edit, :update]
+  before_action :set_exercise, only: [:destroy, :update, :edit, :achivs_add]
 
   # POST /exercises
   def create
     @exercise = @training.exercises.build(exercise_params)
 
+    @message = { notice: 'Упражнение добавлено успешно.' }
+
     if @exercise.save
       count_summ
+      achivs_add
 
-      redirect_to @training, notice: "Упражнение успешно создано."
+      redirect_to @training, @message
     else
       # Если ошибки — рендерим здесь же шаблон тренировки (своих шаблонов у упражнения нет)
       render 'trainings/show', alert: "Упражнение добавить не удалось."
@@ -18,29 +21,45 @@ class ExercisesController < ApplicationController
   end
 
   def edit
+    session[:ex_current_summ] = @exercise.summ.to_i
   end
 
   def update
-    if @exercise.update(exercise_params)
-      count_summ
+    # можно редактировать только последнее упражнение
+    if @exercise == Exercise.all.order(id: :asc).last
+      if @exercise.update(exercise_params)
+        count_summ
+        achivs_edit
+      else
+        @message = { alert: 'Упражнение не было изменено.' }
+      end
 
-      message = { notice: 'Упражнение изменено успешно.' }
+      redirect_to @training, @message
+      return
     else
-      message = { alert: 'Упражнение не было изменено.' }
+      redirect_to @training, alert: 'Редактировать можно только последнее упражнение.'
     end
-
-    redirect_to @training, message
   end
 
   # DELETE /exercises/1
   def destroy
-    if @exercise.destroy!
-      message = { notice: 'Упражнение удалено успешно.' }
-    else
-      message = { alert: 'Упражнение не было удалено.' }
-    end
+    # можно удалять только последнее упражнение
+    if @exercise == Exercise.all.order(id: :asc).last
+      session[:ex_current_summ] = @exercise.summ.to_i
+      session[:ex_current_level] = @exercise.level
 
-    redirect_to @training, message
+      if @exercise.destroy!
+        achivs_delete
+        @message = { notice: 'Упражнение удалено успешно.' }
+      else
+        @message = { alert: 'Упражнение не было удалено.' }
+      end
+
+      redirect_to @training, @message
+      return
+    else
+      redirect_to @training, alert: 'Удалить можно только последнее упражнение.'
+    end
   end
 
   private
@@ -59,6 +78,95 @@ class ExercisesController < ApplicationController
 
   def set_exercise
     @exercise = @training.exercises.find(params[:id])
+  end
+
+  def achivs_add
+    exercise_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
+
+    exercise_name_voc.exp += @exercise.summ.to_i
+
+    # next_level_exp = exercise_name_voc.exercises.select{ |ex| ex[:id] < @exercise.id}.last.next_level_exp
+    next_level_exp = exercise_name_voc.exercises.order(id: :asc).last(2).first.next_level_exp
+    level = exercise_name_voc.exercises.order(id: :asc).last(2).first.level
+
+    if exercise_name_voc.exp >= exercise_name_voc.exercises.order(id: :asc).last(2).first.next_level_exp
+      # next_level_exp = @exercise.set_next_level_exp + exercise_name_voc.exp
+      next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
+
+      level += 1
+
+      @message = { notice: 'Упражнение добавлено успешно. Вы получаете новый уровень. Поздравляем!' }
+    end
+
+    exercise_name_voc.save!
+    @exercise.update_attributes!(next_level_exp: next_level_exp, level: level)
+  end
+
+  def achivs_edit
+    exercise_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
+
+    exercise_name_voc.exp = exercise_name_voc.exp - session[:ex_current_summ].to_i + @exercise.summ.to_i
+
+    next_level_exp = 0
+    level = @exercise.level
+
+    next_level_exp_before = exercise_name_voc.exercises.order(id: :asc).last(2).first.next_level_exp
+
+    level_before = exercise_name_voc.exercises.order(id: :asc).last(2).first.level
+
+    if (exercise_name_voc.exp >= next_level_exp_before) && (level == level_before)
+      level += 1
+      # next_level_exp = @exercise.set_next_level_exp + exercise_name_voc.exp
+      next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
+      @message = { notice: 'Упражнение изменено успешно. Вы получаете новый уровень. Поздравляем!' }
+    elsif (exercise_name_voc.exp >= next_level_exp_before) && (level > level_before)
+      next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
+      @message = { notice: 'Упражнение изменено успешно.' }
+    elsif (exercise_name_voc.exp < next_level_exp_before) && (@exercise.level > level_before)
+      level -= 1
+      next_level_exp = next_level_exp_before
+      # next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
+      @message = { notice: 'Упражнение изменено успешно. Ваш уровень понижен.' }
+    else
+     next_level_exp = next_level_exp_before
+     @message = { notice: 'Упражнение изменено успешно.' }
+    end
+
+    exercise_name_voc.save!
+    @exercise.update_attributes!(next_level_exp: next_level_exp, level: level)
+  end
+
+  def achivs_delete
+    exercise_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
+
+    exercise_name_voc.exp = exercise_name_voc.exp - session[:ex_current_summ].to_i
+
+    # # next_level_exp = 0
+    # # current_level = session[:ex_current_level].to_i
+    # level = session[:ex_current_level].to_i
+
+    # next_level_exp_before = exercise_name_voc.exercises.order(id: :asc).last.next_level_exp
+
+    # level_before = exercise_name_voc.exercises.order(id: :asc).last.level
+
+    # # if (exercise_name_voc.exp < next_level_exp_before) && (level > level_before)
+    #   level -= 1
+    #   @message = { notice: 'Упражнение удалено успешно. Ваш уровень понижен.' }
+    # else
+    #   @message = { notice: 'Упражнение удалено успешно.' }
+    # end
+
+    # next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
+
+    exercise_name_voc.save!
+    # ex = exercise_name_voc.exercises.order(id: :asc).last(2).first
+    # ex.update_attributes!(level: level, next_level_exp: next_level_exp)
+  end
+
+  def next_level_exp(exercise_name_voc)
+    next_level_exp = 0
+    exercise_name_voc.exercises.order(id: :asc).last(3).each { |ex| next_level_exp += ex.summ }
+    ((next_level_exp / 3)  * 3.15).round(1).round(half: :up)
   end
 
   def exercise_params
