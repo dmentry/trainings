@@ -26,6 +26,11 @@ class UsersController < ApplicationController
   end
 
   def achivements
+    if Exercise.all.count <= 1
+      redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
+    else
+      @exercise_name_vocs ||= current_user.exercise_name_vocs.order(label: :asc).reject{ |exercise| exercise.exp == 0 }
+    end
   end
 
   private

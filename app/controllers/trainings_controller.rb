@@ -128,6 +128,12 @@ class TrainingsController < ApplicationController
     end
   end
 
+  def achivs
+    log = AchievmentsHelper.create_levels(current_user)
+
+    send_data log,:type => 'text',:disposition => "attachment; filename=Log_achivs.txt"
+  end
+
   private
 
   def set_current_user_training

@@ -26,8 +26,9 @@ class ExercisesController < ApplicationController
 
   def update
     # можно редактировать только последнее упражнение
-    if @exercise == Exercise.all.order(id: :asc).last
-      if @exercise.update(exercise_params)
+    exercise_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
+    if @exercise == exercise_name_voc.exercises.order(id: :asc).last
+     if @exercise.update(exercise_params)
         count_summ
         achivs_edit
       else
@@ -43,13 +44,13 @@ class ExercisesController < ApplicationController
 
   # DELETE /exercises/1
   def destroy
-    # можно удалять только последнее упражнение
-    if @exercise == Exercise.all.order(id: :asc).last
+    # можно удалять только последнее упражнение и только если админ
+    if @exercise == Exercise.all.order(id: :asc).last && current_user.admin
       session[:ex_current_summ] = @exercise.summ.to_i
       session[:ex_current_level] = @exercise.level
 
       if @exercise.destroy!
-        achivs_delete
+        # achivs_delete
         @message = { notice: 'Упражнение удалено успешно.' }
       else
         @message = { alert: 'Упражнение не было удалено.' }
