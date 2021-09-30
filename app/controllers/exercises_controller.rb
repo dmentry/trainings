@@ -11,7 +11,7 @@ class ExercisesController < ApplicationController
 
     if @exercise.save
       count_summ
-      achivs_add
+      # achivs_add
 
       redirect_to @training, @message
     else
@@ -30,7 +30,7 @@ class ExercisesController < ApplicationController
     if @exercise == exercise_name_voc.exercises.order(id: :asc).last
      if @exercise.update(exercise_params)
         count_summ
-        achivs_edit
+        # achivs_edit
       else
         @message = { alert: 'Упражнение не было изменено.' }
       end
