@@ -13,48 +13,65 @@ module AchievmentsHelper
 
       first_ex = ex_name_voc.exercises.all.order(:id).first
 
-      next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
-      current_level = 1
+      # next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
+      # current_level = 1
 
       ex_name_voc.exercises.all.order(id: :asc).each do |exercise|
-        overall_execises += 1
+        exercise_exp_process(ex_name_voc, exercise, current_user)
+      #   if exercise != first_ex
+      #     previous_exercise = all_ex.find_by("id < ?", exercise.id)
 
-        log << "ex_name_voc.id: #{ex_name_voc.id}. Упражнение #{overall_execises} - #{exercise.exercise_name_voc.label}" << "\n"
+      #     next_level_exp = previous_exercise.next_level_exp
 
-        if exercise != first_ex
-          # previous_exercise = ex_name_voc.exercises.all.order(:id).find_by("id < ?", exercise.id)
-          # previous_exercise = ex_name_voc.exercises.select{ |ex| ex[:id] < exercise.id}.first
+      #     current_level = previous_exercise.level
+      #   end
 
-          previous_exercise = all_ex.find_by("id < ?", exercise.id)
+      #   ex_name_voc.exp += exercise.summ.round
 
-          next_level_exp = previous_exercise.next_level_exp
+      #   if ex_name_voc.exp >= next_level_exp
+      #     current_level += 1
 
-          current_level = previous_exercise.level
+      #     next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
+      #   end
 
-          # log << "previous_exercise.id: #{previous_exercise.id}" << "\n"
-          # log << "exercise.id: #{exercise.id}" << "\n"
-        end
-
-        ex_name_voc.exp += exercise.summ.round
-
-        if ex_name_voc.exp >= next_level_exp
-          current_level += 1
-
-          next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
-        end
-
-        ex_name_voc.save!
-        exercise.update_attributes!(next_level_exp: next_level_exp, level: current_level)
-
-        log << "current_level: #{current_level}" << "\n"
-        log << "exercise.summ: #{exercise.summ}" << "\n"
-        log << "ex_name_voc.exp: #{ex_name_voc.exp}" << "\n"
-        log << "next_level_exp: #{next_level_exp}" << "\n\n"
+      #   ex_name_voc.save!
+      #   exercise.update_attributes!(next_level_exp: next_level_exp, level: current_level)
       end
     end
 
-    log
+    # log
   end
+
+    def self.exercise_exp_process(ex_name_voc, exercise, current_user)
+      next_level = false
+      all_ex = ex_name_voc.exercises.order(id: :desc)
+      first_ex = ex_name_voc.exercises.order(:id).first
+
+      next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
+      current_level = 1
+
+      if exercise != first_ex
+        previous_exercise = all_ex.find_by("id < ?", exercise.id)
+
+        next_level_exp = previous_exercise.next_level_exp
+
+        current_level = previous_exercise.level
+      end
+
+      ex_name_voc.exp += exercise.summ.round
+
+      if ex_name_voc.exp >= next_level_exp
+        current_level += 1
+        next_level = true
+
+        next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
+      end
+
+      ex_name_voc.save!
+      exercise.update_attributes!(next_level_exp: next_level_exp, level: current_level)
+
+      next_level
+    end
 
   private
 
