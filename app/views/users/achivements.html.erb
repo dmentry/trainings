@@ -1,4 +1,4 @@
-<h3 class="center text_size mt-2">Достижения пользователя <%= current_user.name %></h3>
+<h3 class="center text_size mt-2">Достижения пользователя <b><%= current_user.name %></b></h3>
 <div class="container my-bg-color">
   <div class="row my-3">
     <div class="col-lg-12 order-lg-1 mb-3 max_height_all_tr">
@@ -8,25 +8,25 @@
           <% @exercise_name_vocs.each do |exercise_name_voc| %>
           <thead>
             <tr class="table-buffers-vertical">
-              <th class="table-info table-buffers-vertical">Упражнение: <%= exercise_name_voc.label %></th>
+              <th class="table-info table-buffers-vertical">Упражнение: <%= exercise_name_voc[0][:exercise_name_voc].label %></th>
             </tr>
           </thead>
           <tbody>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Текущий уровень: <%= exercise_name_voc.exercises.last.level %></td>
+              <td class="table-buffers-vertical">Текущий уровень: <%= exercise_name_voc[0][:exercise_name_voc].exercises.last.level %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Опыт: <%= exercise_name_voc.exp.to_i  %></td>
+              <td class="table-buffers-vertical">Проведено тренировок: <%= exercise_name_voc[0][:exercise_name_voc_times] %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Следующий уровень: <%= exercise_name_voc.exercises.last.next_level_exp %></td>
+              <td class="table-buffers-vertical">Опыт: <%= exercise_name_voc[0][:exercise_name_voc].exp.to_i  %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical"><progress value="<%=  exercise_name_voc.exp.to_i %>" max="<%= exercise_name_voc.exercises.last.next_level_exp %>"></progress></td>
+              <td class="table-buffers-vertical">До следующего уровня: <%= exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp - exercise_name_voc[0][:exercise_name_voc].exp.to_i %></td>
             </tr>
-<!--             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Следующий уровень: <progress value="<%#=  exercise_name_voc.exp.to_i %>" max="<%= exercise_name_voc.exercises.last.next_level_exp %>"></progress></td>
-            </tr> -->
+            <tr class="table-buffers-vertical">
+              <td class="table-buffers-vertical"><progress value="<%=  exercise_name_voc[0][:exercise_name_voc].exp.to_i %>" max="<%= exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp %>"></progress></td>
+            </tr>
           </tbody>
           <% end %>
         </table>

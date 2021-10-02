@@ -39,14 +39,11 @@ class StatisticsController < ApplicationController
       end
       @all_tr_by_month = @all_tr_by_month.sort_by{ |h| h.first }
 
-      # все тренировки по названиям
-      @tr_by_label = Hash.new
-      @all_trainings_by_user.each do |training|
-        @tr_by_label[training.label] ||= 0
-        @tr_by_label[training.label] += 1
-      end
+      # Количество проведенных упражнений по названиям
+      ex_by_label = StatisticsHelper.exercises_by_quantity(current_user)
       @tr_by_label_chart = []
-      @tr_by_label.each{ |value| @tr_by_label_chart << value }
+      # ex_by_label.each{ |value| @tr_by_label_chart << value if value[1] > 1 }
+      ex_by_label.each{ |value| @tr_by_label_chart << value }
       @tr_by_label_chart = @tr_by_label_chart.sort_by{ |h| h.second }.reverse!
 
       # максимальная сумма в каждом упражнении

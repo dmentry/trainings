@@ -55,7 +55,7 @@ class TrainingsController < ApplicationController
   def download_textfile
     export_data = TrainingsHelper::TrainingExport.download_textfile(current_user)
 
-    send_data export_data,:type => 'text',:disposition => "attachment; filename=Тренировки_#{ Date.today.strftime("%d.%m.%Y") }.txt"
+    send_data export_data, :type => 'text',:disposition => "attachment; filename=Тренировки_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
 
   def instruction
@@ -131,7 +131,18 @@ class TrainingsController < ApplicationController
   def achivs
     log = AchievmentsHelper.create_levels(current_user)
 
-    send_data log,:type => 'text',:disposition => "attachment; filename=Log_achivs.txt"
+    send_data log, type: 'text', disposition: "attachment; filename=Log_achivs.txt"
+  end
+
+  def clear_states
+    User.find(1).trainings.destroy_all
+    
+    ExerciseNameVoc.all.each do |exercise_name_voc|
+      exercise_name_voc.exp = 0
+      exercise_name_voc.save!
+    end
+
+    redirect_to :root, notice: "Уровни очищены."
   end
 
   private

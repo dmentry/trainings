@@ -27,11 +27,36 @@ module StatisticsHelper
       end
     end
 
-   # data = Exercise.where('exercise_name_voc_id =? AND training_id = ?', id, current_user.training_ids)
-
-
     data.to_a.sort_by!{ |h| h.first }
 
     [data, exercises_list, name]
+  end
+
+  # Количество проведенных упражнений по названиям
+  def self.exercises_by_quantity(current_user)
+    ex_by_label = Hash.new
+    current_user.exercise_name_vocs.each do |exercise_name_voc|
+      exercise_name_voc.exercises.each do |exercise|
+        ex_by_label[exercise.exercise_name_voc.label] ||= 0
+        ex_by_label[exercise.exercise_name_voc.label] += 1
+      end
+    end
+
+    ex_by_label
+  end
+
+  # Статистика для профиля юзера: exercise_name_vocs + количество проведенных упражнений
+  def self.user_profile_stat(current_user)
+    exercise_name_vocs = current_user.exercise_name_vocs.order(label: :asc).reject{ |exercise| exercise.exp == 0 }
+    exercise_name_vocs = exercise_name_vocs.sort_by{ |e| e.exercises.last.level }.reverse!
+
+    ex_by_label = exercises_by_quantity(current_user)
+
+    user_exercise_name_vocs = []
+    exercise_name_vocs.each do |exercise_name_voc|
+      user_exercise_name_vocs << [exercise_name_voc: exercise_name_voc, exercise_name_voc_times: ex_by_label[exercise_name_voc.label]]
+    end
+
+    user_exercise_name_vocs
   end
 end

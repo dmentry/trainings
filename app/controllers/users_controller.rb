@@ -29,7 +29,11 @@ class UsersController < ApplicationController
     if Exercise.all.count <= 1
       redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
     else
-      @exercise_name_vocs ||= current_user.exercise_name_vocs.order(label: :asc).reject{ |exercise| exercise.exp == 0 }
+      # @exercise_name_vocs ||= current_user.exercise_name_vocs.order(label: :asc).reject{ |exercise| exercise.exp == 0 }
+
+      # @exercise_name_vocs = @exercise_name_vocs.sort_by{ |e| e.exercises.last.level }.reverse!
+
+      @exercise_name_vocs ||= @exercise_name_vocs = StatisticsHelper.user_profile_stat(current_user)
     end
   end
 

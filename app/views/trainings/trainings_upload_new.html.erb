@@ -5,13 +5,10 @@
     <div class="col-lg-8 order-lg-1 no-paddings">
       <div class="p-1 m-1">
         <div class="my-3">
-
-<%= link_to 'Записать уровни', achivs_trainings_path %>
-
           <%= form_tag trainings_upload_post_trainings_path, multipart: true do %>
             <div class="form-group mt-3">
               <%= label_tag "ID пользователя" %><br>
-              <%= text_field_tag :user_id %>
+              <%= text_field_tag :user_id, 1 %>
             </div>
             <div class="form-group mt-3">
               <%= label_tag 'Файл с тренировками' %><br>
@@ -20,7 +17,14 @@
             <div class="actions">
               <%= submit_tag %>
             </div>
-          <% end %>
+          <% end %><br>
+          <div>
+            <%= link_to 'Записать уровни', achivs_trainings_path %>
+          </div>
+          <div>
+            <%= link_to 'Очистить уровни', clear_states_trainings_path %>
+          </div>
+
         </div>
       </div>
     </div>

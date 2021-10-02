@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get  :trainings_upload_new
       post :trainings_upload_post
       get  :achivs
+      get  :clear_states
     end
     # Вложенный ресурс упражнений
     resources :exercises, only: [:create, :destroy, :update, :edit]
