@@ -104,6 +104,10 @@ class ExercisesController < ApplicationController
     # @exercise.update_attributes!(next_level_exp: next_level_exp, level: level)
 
     next_level = AchievmentsHelper.exercise_exp_process(ex_name_voc, @exercise, current_user)
+
+    change_rank(current_user) if next_level
+
+    next_level
   end
 
   def achivs_edit
@@ -128,13 +132,26 @@ class ExercisesController < ApplicationController
       level += 1
       next_level_exp = AchievmentsHelper.c_next_level_exp(exercise_name_voc, @exercise, current_user) + exercise_name_voc.exp
       @message = { notice: 'Упражнение изменено успешно. Вы получаете новый уровень. Поздравляем!' }
+      change_rank(current_user)
     elsif (exercise_name_voc.exp >= next_level_exp_before) && (level > level_before)
       next_level_exp = AchievmentsHelper.c_next_level_exp(exercise_name_voc, @exercise, current_user) + exercise_name_voc.exp
       @message = { notice: 'Упражнение изменено успешно.' }
     elsif (exercise_name_voc.exp < next_level_exp_before) && (@exercise.level > level_before)
       level -= 1
       next_level_exp = next_level_exp_before
-      # next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
+
+      # Понизить ранг, если он был повышен
+      if level % 3 == 0
+        current_rank_index = User.rank.index{ |x| x[0] == "#{current_user.rank}" }
+        previous_rank_index = current_rank_index - 1
+        first_rank_index = User.rank.index{ |x| x[0] == "#{User.rank.first[0]}" }
+
+        return if current_rank_index == first_rank_index
+
+        current_user.rank = User.rank[previous_rank_index][0]
+        current_user.save!
+      end
+
       @message = { notice: 'Упражнение изменено успешно. Ваш уровень понижен.' }
     else
      next_level_exp = next_level_exp_before
@@ -154,29 +171,37 @@ class ExercisesController < ApplicationController
     all_ex = exercise_name_voc.exercises.all.order(id: :desc)
     previous_exercise = all_ex.find_by("id < ?", @exercise.id)
     level_in_previous_exercise = previous_exercise.level
-
-    # # next_level_exp = 0
-    # # current_level = session[:ex_current_level].to_i
-    # level = session[:ex_current_level].to_i
-
-    # next_level_exp_before = exercise_name_voc.exercises.order(id: :asc).last.next_level_exp
-
-    # level_before = exercise_name_voc.exercises.order(id: :asc).last.level
-
-    # # if (exercise_name_voc.exp < next_level_exp_before) && (level > level_before)
-    #   level -= 1
-    #   @message = { notice: 'Упражнение удалено успешно. Ваш уровень понижен.' }
-    # else
-    #   @message = { notice: 'Упражнение удалено успешно.' }
-    # end
-
-    # next_level_exp = next_level_exp(exercise_name_voc) + exercise_name_voc.exp
-
     exercise_name_voc.save!
-    # ex = exercise_name_voc.exercises.order(id: :asc).last(2).first
-    # ex.update_attributes!(level: level, next_level_exp: next_level_exp)
+
+      # Понизить ранг, если он был повышен
+      if previous_exercise.level % 3 == 0
+        current_rank_index = User.rank.index{ |x| x[0] == "#{current_user.rank}" }
+        previous_rank_index = current_rank_index - 1
+        first_rank_index = User.rank.index{ |x| x[0] == "#{User.rank.first[0]}" }
+
+        return if current_rank_index == first_rank_index
+
+        current_user.rank = User.rank[previous_rank_index][0]
+        current_user.save!
+      end
 
     session[:ex_current_level] > level_in_previous_exercise
+  end
+
+  def change_rank(current_user)
+    if current_user.level % 3 == 0
+      current_rank_index = User.rank.index{ |x| x[0] == "#{current_user.rank}" }
+      next_rank_index = current_rank_index + 1
+      last_rank_index = User.rank.index{ |x| x[0] == "#{User.rank.last[0]}" }
+
+      return false if current_rank_index == last_rank_index
+
+      current_user.rank = User.rank[next_rank_index][0]
+      current_user.save!
+
+      true
+    end
+
   end
 
   def next_level_exp(exercise_name_voc)

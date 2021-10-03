@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_09_26_124108) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.float "money", default: 0.0
-    t.integer "rank", default: 1
+    t.string "rank"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
