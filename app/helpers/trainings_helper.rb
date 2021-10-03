@@ -196,6 +196,16 @@ module TrainingsHelper
       end
     end
 
+    # Расчет пиастр
+    user = User.find(user_id)
+    user.trainings.each do |training|
+      training.exercises.each do |exercise|
+        user.money += exercise.summ
+      end
+    end
+    user.money = user.money / 3
+    user.save!
+
     [overall_execises, failed, errors]
   end
 end

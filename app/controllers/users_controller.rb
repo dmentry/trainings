@@ -37,6 +37,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def take_money
+  end
+
+  def process_money_out
+    @rubles = current_user.money.round
+    current_user.money = 0.0
+    # current_user.save!
+
+    # redirect_to @user, notice: "Пиастры были успешно конверитрованы в рубли и выведены."
+  end
+
   private
 
   def set_user

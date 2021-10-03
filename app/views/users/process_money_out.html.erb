@@ -1,0 +1,22 @@
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
+<div class="container my-bg-color">
+  <div class="row my-3">
+    <div class="col-lg-12 order-lg-1 mb-3">
+
+      <div class="center">
+        <h1 class="center text_size mt-2"><b>Сертификат</b></h1>
+        <h2 class="text_size mt-1">Данным подтвержается, что <%= @user.name %>, предъявитель сего сертификата, заработал своим трудом и мастерством кучу богатства в размере:<br>
+        <b><%= @rubles %></b> пиастр.<br>
+        Конвертировал их в рубли и имеет серьезное намерение обналичить.</h2><br>
+        <h2 class="text_size mt-1">Всемерно необходимо способствовать этой транзакционной банковской операции как можно быстрее и выдать сумму:<br>
+        <b><%= @rubles %></b> рублей.</h2><br><br>
+      </div>
+        <div class="right_align">
+        <h2 class="text_size mt-1">Дата: <%= Date.today.strftime("%d.%m.%Y") %></h2>
+        <h2 class="text_size mt-1">Код транзакции: <b><%= AchievmentsHelper.token %></b><br></h2>
+        <h2 class="text_size mt-1">Капитан Крюк <%= image_pack_tag("seal.png", alt: 'seal', class: 'img-seal') %></h2>
+      </div>
+
+  </div>
+</div>
+</div>

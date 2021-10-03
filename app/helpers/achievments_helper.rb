@@ -91,6 +91,18 @@ module AchievmentsHelper
       }
     end
 
+    def self.token
+      numbers = ('0'..'9').to_a
+      letters1 = ('a'..'z').to_a
+      letters2 = ('A'..'Z').to_a
+      psw_arr = (letters1 + numbers + letters2).shuffle!
+      psw = ''
+
+      10.times { psw << psw_arr.sample }
+
+      psw
+    end
+
   private
 
   def self.c_next_level_exp(ex_name_voc, exercise, current_user)

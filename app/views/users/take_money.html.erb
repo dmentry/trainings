@@ -1,0 +1,17 @@
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
+<h3 class="center text_size mt-2">Забрать пиастры</h3>
+<div class="container my-bg-color">
+  <div class="row my-3">
+    <div class="col-lg-8 order-lg-1 mb-3">
+
+      <h3 class="text_size mt-1">Накоплено богатств: <%= current_user.money.round %> пиастров => <%= current_user.money.round %> рублей</h3>
+      <h5 class="text_size mt-1"><%= @user.name %>, ты точно решил перевести пиастры в рубли и забрать их?</h5>
+      <div class="buffer-top">
+        <div>
+        <div>
+          <%= link_to('Да', process_money_out_user_path, data: { confirm: "Ты точно уверен?" }, class: 'btn btn-danger mt-2') %> <%= link_to "Нет", user_path(@user), class: 'btn btn-success mt-2' %>
+     </div> 
+    </div>
+  </div>
+</div>
+

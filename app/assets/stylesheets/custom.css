@@ -137,6 +137,10 @@ h1  a {
   max-width:20px;
 }
 
+.img-seal {
+  max-width: 190px;
+}
+
 .top_buffer_my {
   margin-top: 20px;
 }
@@ -171,6 +175,10 @@ h1  a {
 
 .remove_for_small_screen {
   display: block;
+}
+
+.right_align {
+  text-align: right;
 }
 
 @media (max-width: 991px) {
@@ -302,6 +310,10 @@ h1  a {
 
   .img-home {
     max-width:32px;
+  }
+
+  .img-seal {
+    max-width: 130px;
   }
 
   .add_float {

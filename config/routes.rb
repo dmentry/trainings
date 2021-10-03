@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy] do
     member do
-      get  :achivements    
+      get :achivements
+      get :take_money
+      get :process_money_out
     end
   end
 

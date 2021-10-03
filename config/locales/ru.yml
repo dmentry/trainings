@@ -1,5 +1,15 @@
 ru:
   activerecord:
+    attributes:
+      user/rank:
+        yunga: Юнга
+        starshiy_yunga: Старший юнга
+        moryak: Юнга
+        botsnam: Юнга
+        pomoshnik_kapitana: Юнга
+        kapitan: Юнга
+        morskoi_volk: Юнга
+        groza_morei: Юнга
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'

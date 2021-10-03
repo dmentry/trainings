@@ -86,6 +86,9 @@ class ExercisesController < ApplicationController
   end
 
   def achivs_add
+    current_user.money += @exercise.summ / 3.0
+    current_user.save!
+
     ex_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
     # exercise_name_voc.exp += @exercise.summ.round
     # next_level_exp = exercise_name_voc.exercises.order(id: :asc).last(2).first.next_level_exp
@@ -104,6 +107,10 @@ class ExercisesController < ApplicationController
   end
 
   def achivs_edit
+    current_user.money -= session[:ex_current_summ] / 3.0
+    current_user.money += @exercise.summ / 3.0
+    current_user.save!
+
     exercise_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
 
     exercise_name_voc.exp = exercise_name_voc.exp - session[:ex_current_summ].to_i + @exercise.summ.round
@@ -139,10 +146,11 @@ class ExercisesController < ApplicationController
   end
 
   def achivs_delete
+    current_user.money -= session[:ex_current_summ] / 3.0
+    current_user.save!
+
     exercise_name_voc = ExerciseNameVoc.find(@exercise.exercise_name_voc_id)
-
     exercise_name_voc.exp = exercise_name_voc.exp - session[:ex_current_summ].to_i
-
     all_ex = exercise_name_voc.exercises.all.order(id: :desc)
     previous_exercise = all_ex.find_by("id < ?", @exercise.id)
     level_in_previous_exercise = previous_exercise.level
