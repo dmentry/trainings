@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
       # @exercise_name_vocs = @exercise_name_vocs.sort_by{ |e| e.exercises.last.level }.reverse!
 
-      @exercise_name_vocs ||= @exercise_name_vocs = StatisticsHelper.user_profile_stat(current_user)
+      @exercise_name_vocs = StatisticsHelper.user_profile_stat(current_user)
     end
   end
 

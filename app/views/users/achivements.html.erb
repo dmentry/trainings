@@ -6,26 +6,27 @@
 
         <table class="table table-sm table-buffers-vertical table-font-my">
           <% @exercise_name_vocs.each do |exercise_name_voc| %>
+          <% output = AchievmentsHelper.visual_progress(exercise_name_voc) %>
           <thead>
             <tr class="table-buffers-vertical">
-              <th class="table-info table-buffers-vertical">Упражнение: <%= exercise_name_voc[0][:exercise_name_voc].label %></th>
+              <th class="table-info table-buffers-vertical">Упражнение: <%= output[:exercise_label] %></th>
             </tr>
           </thead>
           <tbody>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Текущий уровень: <%= exercise_name_voc[0][:exercise_name_voc].exercises.last.level %></td>
+              <td class="table-buffers-vertical">Текущий уровень: <%= output[:current_level] %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Проведено тренировок: <%= exercise_name_voc[0][:exercise_name_voc_times] %></td>
+              <td class="table-buffers-vertical">Проведено упражнений: <%= exercise_name_voc[0][:exercise_name_voc_times] %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">Опыт: <%= exercise_name_voc[0][:exercise_name_voc].exp.to_i  %></td>
+              <td class="table-buffers-vertical">Опыт: <%= output[:current_progress]  %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">До следующего уровня: <%= exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp - exercise_name_voc[0][:exercise_name_voc].exp.to_i %></td>
+              <td class="table-buffers-vertical">До следующего уровня: <%= output[:next_level] %></td>
             </tr>
             <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical"><progress value="<%=  exercise_name_voc[0][:exercise_name_voc].exp.to_i %>" max="<%= exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp %>"></progress></td>
+              <td class="table-buffers-vertical"><meter value="<%= output[:current_position] %>" max="100"></meter></td>
             </tr>
           </tbody>
           <% end %>

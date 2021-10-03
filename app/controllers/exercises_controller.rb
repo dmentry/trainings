@@ -11,7 +11,8 @@ class ExercisesController < ApplicationController
 
     if @exercise.save
       count_summ
-      @message = { notice: 'Упражнение добавлено успешно. Вы получаете новый уровень. Поздравляем!' } if achivs_add
+      is_new_level = achivs_add
+      @message = { notice: 'Упражнение добавлено успешно. Вы получаете новый уровень. Поздравляем!' } if is_new_level
       
       redirect_to @training, @message
     else

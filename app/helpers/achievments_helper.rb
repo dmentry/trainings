@@ -1,6 +1,7 @@
 module AchievmentsHelper
   NUMBER_OF_LAST_EX_FOR_AVRG = 3
-  NEXT_LEVEL_EXP_RATIO = 1.15
+  # Для первоначального внесения упражнений: 1.08 Текущие настройки: 1.39
+  NEXT_LEVEL_EXP_RATIO = 1.39
 
   def self.create_levels(current_user)
     overall_execises = 0
@@ -59,6 +60,7 @@ module AchievmentsHelper
       end
 
       ex_name_voc.exp += exercise.summ.round
+      ex_name_voc.save!
 
       if ex_name_voc.exp >= next_level_exp
         current_level += 1
@@ -67,10 +69,26 @@ module AchievmentsHelper
         next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
       end
 
-      ex_name_voc.save!
-      exercise.update_attributes!(next_level_exp: next_level_exp, level: current_level)
+      exercise.update!(next_level_exp: next_level_exp, level: current_level)
 
       next_level
+    end
+
+    def self.visual_progress(exercise_name_voc)
+      current_ex       = exercise_name_voc[0][:exercise_name_voc].exercises.last
+      next_l           = exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp - exercise_name_voc[0][:exercise_name_voc].exp
+      progress_current = exercise_name_voc[0][:exercise_name_voc].exp
+      progress_max     = exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp
+      progress_min     = exercise_name_voc[0][:exercise_name_voc].exercises.order(id: :desc).find_by("id < ? AND next_level_exp < ?", current_ex.id, current_ex.next_level_exp).next_level_exp
+      current_position = 100 * (progress_current - progress_min) / (progress_max - progress_min)
+
+      output = {
+        next_level:       next_l,
+        exercise_label:   exercise_name_voc[0][:exercise_name_voc].label,
+        current_level:    exercise_name_voc[0][:exercise_name_voc].exercises.last.level,
+        current_progress: progress_current,
+        current_position: current_position
+      }
     end
 
   private
