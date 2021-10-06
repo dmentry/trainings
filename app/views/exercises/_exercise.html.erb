@@ -4,8 +4,10 @@
       <th class="table-info table-buffers-vertical"><%= exercise.exercise_name_voc.label %>
         <div class="float-right">
           <% if exercise == ExerciseNameVoc.find(exercise.exercise_name_voc_id).exercises.order(id: :asc).last %>
-            <%= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise)) %> |
-            <%= link_to(image_pack_tag("del.png", alt: 'delete', class: 'img-execise delete_symbol'), training_exercise_path(exercise.training, exercise), method: :delete, data: { confirm: "Вы уверены?" }) %>
+            <%= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise)) %>
+            <% if current_user.admin %>
+             | <%= link_to(image_pack_tag("del.png", alt: 'delete', class: 'img-execise delete_symbol'), training_exercise_path(exercise.training, exercise), method: :delete, data: { confirm: "Вы уверены?" }) %>
+             <% end %>
           <% end %>
         </div>
       </th>

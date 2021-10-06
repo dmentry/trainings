@@ -26,6 +26,12 @@ class TrainingsController < ApplicationController
 
   def create
     @training = current_user.trainings.build(training_params)
+
+    # unless @training.training_per_day_uniq?(current_user)
+    #   redirect_to @training, alert: "Только одна тренировка в день может быть создана!"
+
+    #   return
+    # end
     
     if @training.save
       redirect_to @training, notice: "Тренировка успешно создана."
@@ -43,6 +49,8 @@ class TrainingsController < ApplicationController
   end
 
   def destroy
+    return unless current_user.admin
+    
     if @training.destroy!
       message = { notice: 'Тренировка удалена успешно.' }
     else
@@ -72,19 +80,31 @@ class TrainingsController < ApplicationController
 
     @dublicate_training.start_time = Date.today
 
+    message = { notice: 'Тренировка успешно дублирована.' }
+
     @training.exercises.each do |exercise|
-      @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, exercise_name_voc_id: exercise.exercise_name_voc_id)
+      exercise_name_voc = ExerciseNameVoc.find(exercise.exercise_name_voc_id)
+      latest_level = exercise_name_voc.exercises.last.level
+      latest_next_level_exp = exercise_name_voc.exercises.last.next_level_exp
+
+      @exercise = @dublicate_training.exercises.build(
+        quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, 
+        exercise_name_voc_id: exercise.exercise_name_voc_id, level: latest_level, next_level_exp: latest_next_level_exp
+        )
+      
       if @exercise.save
         options = { exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
 
         @exercise.summ = ExercisesHelper::Summ.new(options).overall
 
         @exercise.save!
+
+        message = { notice: 'Упражнение добавлено успешно. Вы получаете новый уровень. Поздравляем!' } if ExercisesHelper.achivs_add(current_user, @exercise)
       end
     end
 
     if @dublicate_training.save
-      redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
+      redirect_to @dublicate_training, message
     else
       render :new, alert: "Тренировка не дублировалась."
     end
@@ -138,6 +158,7 @@ class TrainingsController < ApplicationController
     User.find(1).trainings.destroy_all
     u = User.find(1)
     u.rank = 'Юнга'
+    u.money = 0
     u.save!
     
     ExerciseNameVoc.all.each do |exercise_name_voc|

@@ -14,94 +14,79 @@ module AchievmentsHelper
 
       first_ex = ex_name_voc.exercises.all.order(:id).first
 
-      # next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
-      # current_level = 1
-
       ex_name_voc.exercises.all.order(id: :asc).each do |exercise|
         exercise_exp_process(ex_name_voc, exercise, current_user)
-      #   if exercise != first_ex
-      #     previous_exercise = all_ex.find_by("id < ?", exercise.id)
-
-      #     next_level_exp = previous_exercise.next_level_exp
-
-      #     current_level = previous_exercise.level
-      #   end
-
-      #   ex_name_voc.exp += exercise.summ.round
-
-      #   if ex_name_voc.exp >= next_level_exp
-      #     current_level += 1
-
-      #     next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
-      #   end
-
-      #   ex_name_voc.save!
-      #   exercise.update_attributes!(next_level_exp: next_level_exp, level: current_level)
       end
     end
 
     # log
   end
 
-    def self.exercise_exp_process(ex_name_voc, exercise, current_user)
-      next_level = false
-      all_ex = ex_name_voc.exercises.order(id: :desc)
-      first_ex = ex_name_voc.exercises.order(:id).first
+  def self.exercise_exp_process(ex_name_voc, exercise, current_user)
+    next_level = false
+    all_ex = ex_name_voc.exercises.order(id: :desc)
+    first_ex = ex_name_voc.exercises.order(:id).first
 
-      next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
-      current_level = 1
+    next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
+    current_level = 1
 
-      if exercise != first_ex
-        previous_exercise = all_ex.find_by("id < ?", exercise.id)
+    if exercise != first_ex
+      previous_exercise = all_ex.find_by("id < ?", exercise.id)
 
-        next_level_exp = previous_exercise.next_level_exp
+      next_level_exp = previous_exercise.next_level_exp
 
-        current_level = previous_exercise.level
-      end
-
-      ex_name_voc.exp += exercise.summ.round
-      ex_name_voc.save!
-
-      if ex_name_voc.exp >= next_level_exp
-        current_level += 1
-        next_level = true
-
-        next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
-      end
-
-      exercise.update!(next_level_exp: next_level_exp, level: current_level)
-
-      next_level
+      current_level = previous_exercise.level
     end
 
-    def self.visual_progress(exercise_name_voc)
-      current_ex       = exercise_name_voc[0][:exercise_name_voc].exercises.last
-      next_l           = exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp - exercise_name_voc[0][:exercise_name_voc].exp
-      progress_current = exercise_name_voc[0][:exercise_name_voc].exp
-      progress_max     = exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp
-      progress_min     = exercise_name_voc[0][:exercise_name_voc].exercises.order(id: :desc).find_by("id < ? AND next_level_exp < ?", current_ex.id, current_ex.next_level_exp).next_level_exp
-      current_position = 100 * (progress_current - progress_min) / (progress_max - progress_min)
+    ex_name_voc.exp += exercise.summ.round
+    ex_name_voc.save!
 
-      output = {
-        next_level:       next_l,
-        exercise_label:   exercise_name_voc[0][:exercise_name_voc].label,
-        current_level:    exercise_name_voc[0][:exercise_name_voc].exercises.last.level,
-        current_progress: progress_current,
-        current_position: current_position
-      }
+    if ex_name_voc.exp >= next_level_exp
+      current_level += 1
+      next_level = true
+
+      next_level_exp = c_next_level_exp(ex_name_voc, exercise, current_user) + ex_name_voc.exp
     end
 
-    def self.token
-      numbers = ('0'..'9').to_a
-      letters1 = ('a'..'z').to_a
-      letters2 = ('A'..'Z').to_a
-      psw_arr = (letters1 + numbers + letters2).shuffle!
-      psw = ''
+    exercise.update!(next_level_exp: next_level_exp, level: current_level)
 
-      10.times { psw << psw_arr.shuffle!.sample }
+    next_level
+  end
 
-      psw
+  def self.visual_progress(exercise_name_voc)
+    current_ex       = exercise_name_voc[0][:exercise_name_voc].exercises.last
+    next_l           = exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp - exercise_name_voc[0][:exercise_name_voc].exp
+    progress_current = exercise_name_voc[0][:exercise_name_voc].exp
+    progress_max     = exercise_name_voc[0][:exercise_name_voc].exercises.last.next_level_exp
+
+    unless exercise_name_voc[0][:exercise_name_voc].exercises.order(id: :desc).find_by("id < ? AND next_level_exp < ?", current_ex.id, current_ex.next_level_exp)&.next_level_exp
+      progress_min = progress_max - 0.1
+    else
+      progress_min   = exercise_name_voc[0][:exercise_name_voc].exercises.order(id: :desc).find_by("id < ? AND next_level_exp < ?", current_ex.id, current_ex.next_level_exp).next_level_exp
     end
+    
+    current_position = 100 * (progress_current - progress_min) / (progress_max - progress_min)
+
+    output = {
+      next_level:       next_l,
+      exercise_label:   exercise_name_voc[0][:exercise_name_voc].label,
+      current_level:    exercise_name_voc[0][:exercise_name_voc].exercises.last.level,
+      current_progress: progress_current,
+      current_position: current_position
+    }
+  end
+
+  def self.token
+    numbers  = ('0'..'9').to_a
+    letters1 = ('a'..'z').to_a
+    letters2 = ('A'..'Z').to_a
+    psw_arr  = (letters1 + numbers + letters2).shuffle!
+    psw      = ''
+
+    10.times { psw << psw_arr.shuffle!.sample }
+
+    psw
+  end
 
   private
 
@@ -115,7 +100,6 @@ module AchievmentsHelper
       previous_exercises.each { |ex| average_summ += ex.summ }
       
       average_summ = (average_summ / NUMBER_OF_LAST_EX_FOR_AVRG)
-
     else
       average_summ = ex_name_voc.exercises.order(id: :asc).first.summ * 1.5
     end
@@ -128,9 +112,8 @@ module AchievmentsHelper
     ratio = 0.2 if ratio <= 0
     ratio_number = (average_summ ** NEXT_LEVEL_EXP_RATIO) * ratio
     ratio_number = 0 if ratio_number == (average_summ ** NEXT_LEVEL_EXP_RATIO)
-    ###############################################################################################################
+    #####################################################################################################################
 
-    # average_summ = ((average_summ ** NEXT_LEVEL_EXP_RATIO) - ratio_number).round(1).round(half: :up)
     average_summ = (average_summ * 4.3 - ratio_number).round(1).round(half: :up)
   end  
 end

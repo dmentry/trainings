@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   after_create :add_exercises
   after_create :assign_rank
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :trainings, dependent: :destroy
@@ -15,7 +14,6 @@ class User < ApplicationRecord
   # validates :email, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
 
   enum chart_status: { area: 1, stepline: 2, linear: 3, column: 4 }
-  # enum rank: { yunga: 1, starshiy_yunga: 2, moryak: 3, botsman: 4, pomoshnik_kapitana: 5, kapitan: 6, morskoi_volk: 7, groza_morei: 8 }
 
   # def self.rank
   #   [

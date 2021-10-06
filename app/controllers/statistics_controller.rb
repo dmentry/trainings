@@ -16,14 +16,14 @@ class StatisticsController < ApplicationController
     end
   end
 
-  ##################################### переменные для текстовой статистики
+  # Переменные для текстовой статистики
   def secondary_stat
     if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
       redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
     else
       @all_trainings_by_user ||= current_user.trainings.all
       
-      # все тренировки по годам и месяцам
+      # Все тренировки по годам и месяцам
       @all_tr_by_month = []
       tr_years = @all_trainings_by_user.map{ |training| training.start_time.year }.uniq
       tr_years.size.times do |i|
@@ -42,11 +42,10 @@ class StatisticsController < ApplicationController
       # Количество проведенных упражнений по названиям
       ex_by_label = StatisticsHelper.exercises_by_quantity(current_user)
       @tr_by_label_chart = []
-      # ex_by_label.each{ |value| @tr_by_label_chart << value if value[1] > 1 }
       ex_by_label.each{ |value| @tr_by_label_chart << value }
       @tr_by_label_chart = @tr_by_label_chart.sort_by{ |h| h.second }.reverse!
 
-      # максимальная сумма в каждом упражнении
+      # Максимальная сумма в каждом упражнении
       @exercises_max_results = Hash.new
         current_user.exercises.all.each do |ex|
           next if ex.exercise_name_voc.label.match?(/ОФП|Офп|офп/)
