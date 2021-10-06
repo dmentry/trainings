@@ -98,7 +98,7 @@ module AchievmentsHelper
       psw_arr = (letters1 + numbers + letters2).shuffle!
       psw = ''
 
-      10.times { psw << psw_arr.sample }
+      10.times { psw << psw_arr.shuffle!.sample }
 
       psw
     end
@@ -130,6 +130,7 @@ module AchievmentsHelper
     ratio_number = 0 if ratio_number == (average_summ ** NEXT_LEVEL_EXP_RATIO)
     ###############################################################################################################
 
-    average_summ = ((average_summ ** NEXT_LEVEL_EXP_RATIO) - ratio_number).round(1).round(half: :up)
+    # average_summ = ((average_summ ** NEXT_LEVEL_EXP_RATIO) - ratio_number).round(1).round(half: :up)
+    average_summ = (average_summ * 4.3 - ratio_number).round(1).round(half: :up)
   end  
 end

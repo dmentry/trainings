@@ -5,5 +5,6 @@ class AddExpLevelNextLevelToTables < ActiveRecord::Migration[6.0]
     add_column :exercises, :next_level_exp, :bigint, default: 0
     add_column :users, :money, :float, default: 0
     add_column :users, :rank, :string
+    add_column :users, :awards, :json, default: {}
   end
 end

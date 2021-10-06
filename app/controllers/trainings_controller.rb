@@ -136,6 +136,9 @@ class TrainingsController < ApplicationController
 
   def clear_states
     User.find(1).trainings.destroy_all
+    u = User.find(1)
+    u.rank = 'Юнга'
+    u.save!
     
     ExerciseNameVoc.all.each do |exercise_name_voc|
       exercise_name_voc.exp = 0

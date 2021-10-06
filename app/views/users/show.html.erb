@@ -5,6 +5,7 @@
     <div class="col-lg-8 order-lg-1 mb-3">
 
       <h3 class="text_size mt-1"><b><%= @user.name %></h3></b>
+
       <div><%= image_pack_tag("#{User.rank[User.rank.index{ |x| x[0] == "#{@user.rank}" }][1]}", alt: 'rank-image', class: 'img-rank') %></div>
       <h5 class="text_size mt-1">Ваш статус: <%= t current_user.rank %></h5>
       <h5 class="text_size mt-1">Накоплено богатств: <%= current_user.money.round %> пиастров</h5>
