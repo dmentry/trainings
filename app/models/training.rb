@@ -11,8 +11,7 @@ class Training < ApplicationRecord
   has_many :exercises, dependent: :destroy
 
   validates :label, presence: true, length: { maximum: 45, message: "Не более 45 символов!" }
-  # validates :start_time, presence: true
-  validates :start_time, uniqueness: { scope: :start_time, message: "Только одна тренировка в день может быть создана!" }
+  validates :start_time, uniqueness: { scope: [:start_time, :user_id], message: "Только одна тренировка в день может быть создана!" }
 
   def self.by_month(date)
     Training.all
@@ -27,10 +26,6 @@ class Training < ApplicationRecord
   def prev
     all_trainings.select{ |training| training[:start_time] < start_time}.last || all_trainings.last
   end
-
-  # def training_per_day_uniq?(current_user)
-  #   !current_user.trainings.find_by("start_time = ?", self.start_time)
-  # end
 
   private
   

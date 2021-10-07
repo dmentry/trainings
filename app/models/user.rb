@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   # def self.rank
   #   [
-  #     ['Юнга', 'yunga.png', 0], ['Старший юнга', 'starshiy_yunga.png', 6100], ['Моряк', 'moryak.png', 8200], ['Боцман', 'botsman.png', 11000], 
+  #     ['Юнга', 'yunga.png', 0], ['Старший юнга', 'starshiy_yunga.png', 6500], ['Моряк', 'moryak.png', 8600], ['Боцман', 'botsman.png', 11700], 
   #     ['Помощник капитана', 'pomoshnik_kapitana.png', 14000], ['Капитан', 'kapitan.png', 17000], ['Морской волк', 'morskoi_volk.png', 21000], 
   #     ['Гроза морей', 'groza_morei.png', 25000]
   #   ]

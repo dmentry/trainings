@@ -1,11 +1,9 @@
 module AchievmentsHelper
   NUMBER_OF_LAST_EX_FOR_AVRG = 3
-  # Для первоначального внесения упражнений: 1.08 Текущие настройки: 1.39
   NEXT_LEVEL_EXP_RATIO = 1.39
 
   def self.create_levels(current_user)
     overall_execises = 0
-    log              = ''
 
     current_user.exercise_name_vocs.all.each do |ex_name_voc|
       next unless ex_name_voc.exercises.size > 0
@@ -18,8 +16,6 @@ module AchievmentsHelper
         exercise_exp_process(ex_name_voc, exercise, current_user)
       end
     end
-
-    # log
   end
 
   def self.exercise_exp_process(ex_name_voc, exercise, current_user)
@@ -28,7 +24,7 @@ module AchievmentsHelper
     first_ex = ex_name_voc.exercises.order(:id).first
 
     next_level_exp = (first_ex.summ * NEXT_LEVEL_EXP_RATIO * 1.5).round(1).round(half: :up)
-    current_level = 1
+    current_level = 20
 
     if exercise != first_ex
       previous_exercise = all_ex.find_by("id < ?", exercise.id)
@@ -95,7 +91,7 @@ module AchievmentsHelper
 
     if ex_name_voc.exercises.count >= NUMBER_OF_LAST_EX_FOR_AVRG
 
-      previous_exercises = ex_name_voc.exercises.order(:id).where("id <= ?", exercise.id).last(3)
+      previous_exercises = ex_name_voc.exercises.order(:id).where("id <= ?", exercise.id).last(NUMBER_OF_LAST_EX_FOR_AVRG)
 
       previous_exercises.each { |ex| average_summ += ex.summ }
       
@@ -104,7 +100,7 @@ module AchievmentsHelper
       average_summ = ex_name_voc.exercises.order(id: :asc).first.summ * 1.5
     end
 
-    # Вычисляю коэффициент уменьшения экспы до следующего уровня для тех упражений, которых присутствует малое количество
+    # Вычисляю коэффициент уменьшения экспы до следующего уровня для тех упражнений, которых присутствует малое количество
     exs_by_quantity = StatisticsHelper.exercises_by_quantity(current_user)
     max_quantity_ex = exs_by_quantity.values.max
     current_quantity_ex = exs_by_quantity[exercise.exercise_name_voc.label]
@@ -112,8 +108,13 @@ module AchievmentsHelper
     ratio = 0.2 if ratio <= 0
     ratio_number = (average_summ ** NEXT_LEVEL_EXP_RATIO) * ratio
     ratio_number = 0 if ratio_number == (average_summ ** NEXT_LEVEL_EXP_RATIO)
+    ratio_number = average_summ / 4 if ratio_number > average_summ
     #####################################################################################################################
 
-    average_summ = (average_summ * 4.3 - ratio_number).round(1).round(half: :up)
+    # Формула для постоянного подсчета уровней
+    # average_summ = (average_summ * 4.3 - ratio_number).round(1).round(half: :up)
+
+    # Формула для начального внесения уровней
+    average_summ = (average_summ * 0.3).round(1).round(half: :up)
   end  
 end

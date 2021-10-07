@@ -149,9 +149,8 @@ class TrainingsController < ApplicationController
   end
 
   def achivs
-    log = AchievmentsHelper.create_levels(current_user)
+    AchievmentsHelper.create_levels(current_user)
     redirect_to trainings_path, notice: "Уровни записаны."
-    # send_data log, type: 'text', disposition: "attachment; filename=Log_achivs.txt"
   end
 
   def clear_states
