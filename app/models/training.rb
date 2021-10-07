@@ -23,6 +23,17 @@ class Training < ApplicationRecord
     all_trainings.select{ |training| training[:start_time] > start_time}.first || all_trainings.first
   end
 
+#   def next(exect_training_id)
+#     training_day = all_trainings.select{ |training| training[:start_time] > start_time}.first
+#     trainings_per_day = all_trainings.select{ |training| training[:start_time] == training_day.start_time}
+#     nex=0
+# trainings_per_day.each do |training| 
+#   nex=training.id if training.id > exect_training_id
+# end
+# ret=trainings_per_day.select{ |training| training[:id] == nex}
+# ret
+#   end
+
   def prev
     all_trainings.select{ |training| training[:start_time] < start_time}.last || all_trainings.last
   end
