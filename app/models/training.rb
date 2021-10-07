@@ -20,22 +20,14 @@ class Training < ApplicationRecord
   end
 
   def next
-    all_trainings.select{ |training| training[:start_time] > start_time}
-      .first || all_trainings.first
+    all_trainings.select{ |training| training[:start_time] > start_time}.first || all_trainings.first
   end
 
   def prev
-    all_trainings.select{ |training| training[:start_time] < start_time}
-      .last || all_trainings.last
+    all_trainings.select{ |training| training[:start_time] < start_time}.last || all_trainings.last
   end
 
   private
-
-  # def month_trainings
-  #   user.trainings
-  #     .order(start_time: :asc)
-  #       .select{ |training| training.start_time.month == self.start_time.month && training.start_time.year == self.start_time.year }
-  # end
   
   def all_trainings
     user.trainings.order(start_time: :asc)

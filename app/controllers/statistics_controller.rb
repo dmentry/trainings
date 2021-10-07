@@ -18,42 +18,42 @@ class StatisticsController < ApplicationController
 
   ##################################### переменные для текстовой статистики
   def secondary_stat
-    @all_trainings_by_user ||= current_user.trainings.all
-    
-    # все тренировки по годам и месяцам
-    @all_tr_by_month = []
-    tr_years = @all_trainings_by_user.map{ |training| training.start_time.year }.uniq
-    tr_years.size.times do |i|
-      tr_summ_by_year = 0
-      12.times do |month|
-        date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
-        break if date > Date.today
-        tr_by_month = @all_trainings_by_user.by_month(date).count
-        # next unless tr_by_month >= 1
-        tr_summ_by_year += tr_by_month
-        @all_tr_by_month << [date, tr_by_month]
+    if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
+      redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
+    else
+      @all_trainings_by_user ||= current_user.trainings.all
+      
+      # все тренировки по годам и месяцам
+      @all_tr_by_month = []
+      tr_years = @all_trainings_by_user.map{ |training| training.start_time.year }.uniq
+      tr_years.size.times do |i|
+        tr_summ_by_year = 0
+        12.times do |month|
+          date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
+          break if date > Date.today
+          tr_by_month = @all_trainings_by_user.by_month(date).count
+          # next unless tr_by_month >= 1
+          tr_summ_by_year += tr_by_month
+          @all_tr_by_month << [date, tr_by_month]
+        end
       end
-    end
-    @all_tr_by_month = @all_tr_by_month.sort_by{ |h| h.first }
+      @all_tr_by_month = @all_tr_by_month.sort_by{ |h| h.first }
 
-    # все тренировки по названиям
-    @tr_by_label = Hash.new
-    @all_trainings_by_user.each do |training|
-      @tr_by_label[training.label] ||= 0
-      @tr_by_label[training.label] += 1
-    end
-    @tr_by_label_chart = []
-    @tr_by_label.each{ |value| @tr_by_label_chart << value }
-    @tr_by_label_chart = @tr_by_label_chart.sort_by{ |h| h.second }.reverse!
+      # Количество проведенных упражнений по названиям
+      ex_by_label = StatisticsHelper.exercises_by_quantity(current_user)
+      @tr_by_label_chart = []
+      ex_by_label.each{ |value| @tr_by_label_chart << value }
+      @tr_by_label_chart = @tr_by_label_chart.sort_by{ |h| h.second }.reverse!
 
-    # максимальная сумма в каждом упражнении
-    @exercises_max_results = Hash.new
-      current_user.exercises.all.each do |ex|
-        next if ex.exercise_name_voc.label.match?(/ОФП|Офп|офп/)
-        @exercises_max_results[ex.exercise_name_voc.label] ||= 0
-        @exercises_max_results[ex.exercise_name_voc.label] = ex.summ if ex.summ > @exercises_max_results[ex.exercise_name_voc.label]
+      # максимальная сумма в каждом упражнении
+      @exercises_max_results = Hash.new
+        current_user.exercises.all.each do |ex|
+          next if ex.exercise_name_voc.label.match?(/ОФП|Офп|офп/)
+          @exercises_max_results[ex.exercise_name_voc.label] ||= 0
+          @exercises_max_results[ex.exercise_name_voc.label] = ex.summ if ex.summ > @exercises_max_results[ex.exercise_name_voc.label]
+      end
+      @exercises_max_results = @exercises_max_results.sort_by{ |h| h.second }.reverse!
     end
-    @exercises_max_results = @exercises_max_results.sort_by{ |h| h.second }.reverse!
   end
 
   private

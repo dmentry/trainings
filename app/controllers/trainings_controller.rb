@@ -62,7 +62,11 @@ class TrainingsController < ApplicationController
   end
 
   def all_trainings
-    @trainings ||= current_user.trainings.all.order(start_time: :desc)
+    if current_user.trainings.count <= 1
+      redirect_to trainings_url, alert: " У вас еще нет тренировок."
+    else
+      @trainings ||= current_user.trainings.order(start_time: :desc)
+    end
   end
 
   def copy_training

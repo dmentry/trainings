@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="form-group mt-1">
-    <%= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.all, :id, :label, prompt: '[Выберите упражнение]' %>
+    <%= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.order(label: :asc), :id, :label, prompt: '[Выберите упражнение]' %>
   </div>
 
   <div class="form-group form-buffers-vertical">

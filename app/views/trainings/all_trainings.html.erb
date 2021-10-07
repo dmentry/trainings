@@ -1,3 +1,4 @@
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 <h3 class="center text_size mt-2">Тренировки за все время
   <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 </h3>
@@ -6,15 +7,11 @@
 
     <div class="border col-lg-8 my-2 buffer-top buffer-both-sm bg-light no-margins max_height_all_tr">
       <div>
-        <% if @trainings.present? %>
-          <% @trainings.each do |training| %>
-            <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
-            <div>
-              <%= link_to message, training_path(training[:id]) %>
-            </div> 
-          <% end %>
-        <% else %>
-          У вас еще нет тренировок
+        <% @trainings.each do |training| %>
+          <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
+          <div>
+            <%= link_to message, training_path(training[:id]) %>
+          </div> 
         <% end %>
       </div>
     </div>

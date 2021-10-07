@@ -34,4 +34,17 @@ module StatisticsHelper
 
     [data, exercises_list, name]
   end
+
+  # Количество проведенных упражнений по названиям
+  def self.exercises_by_quantity(current_user)
+    ex_by_label = Hash.new
+    current_user.exercise_name_vocs.each do |exercise_name_voc|
+      exercise_name_voc.exercises.each do |exercise|
+        ex_by_label[exercise.exercise_name_voc.label] ||= 0
+        ex_by_label[exercise.exercise_name_voc.label] += 1
+      end
+    end
+
+    ex_by_label
+  end
 end
