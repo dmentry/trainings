@@ -3,7 +3,7 @@ class ExerciseNameVocsController < ApplicationController
   before_action :set_current_user_exercise_name_voc, only: %i[show edit update destroy]
 
   def index
-    @exercise_name_vocs = current_user.exercise_name_vocs.all.order(:id)
+    @exercise_name_vocs = current_user.exercise_name_vocs.order(:label)
   end
 
   def show
