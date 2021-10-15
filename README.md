@@ -27,5 +27,5 @@
 
 ## Попробовать:
 https://fitc.herokuapp.com
-* login: guest
+* email: guest@guest.com
 * password: guest1
