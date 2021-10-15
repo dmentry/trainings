@@ -9,8 +9,14 @@ class TrainingsController < ApplicationController
 
     @trainings_by_date = @trainings.group_by(&:start_time)
 
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-
+    if params[:date]
+      @date = Date.parse(params[:date])
+    elsif current_user.name == 'guest'
+      @date = '01.10.2021'.to_date
+    else
+      @date = Date.today
+    end
+      
     @trainings_by_month = @trainings.by_month(@date)
   end
 
