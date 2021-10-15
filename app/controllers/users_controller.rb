@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   before_action :set_user, except: :index
   before_action :authenticate_user!
 
-  # GET /users/1
   def show
   end
 
-  # GET /users/1/edit
   def edit
   end
 
@@ -19,7 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
       redirect_to users_url, notice: "Пользователь был удален."

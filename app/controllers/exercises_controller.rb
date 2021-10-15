@@ -3,7 +3,6 @@ class ExercisesController < ApplicationController
   before_action :set_training, only: [:create, :destroy, :update, :edit]
   before_action :set_exercise, only: [:destroy, :edit, :update]
 
-  # POST /exercises
   def create
     @exercise = @training.exercises.build(exercise_params)
 
@@ -32,7 +31,6 @@ class ExercisesController < ApplicationController
     redirect_to @training, message
   end
 
-  # DELETE /exercises/1
   def destroy
     if @exercise.destroy!
       message = { notice: 'Упражнение удалено успешно.' }

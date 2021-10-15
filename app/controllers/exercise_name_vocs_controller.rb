@@ -2,25 +2,20 @@ class ExerciseNameVocsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user_exercise_name_voc, only: %i[show edit update destroy]
 
-  # GET /exercise_name_vocs
   def index
-    @exercise_name_vocs = current_user.exercise_name_vocs.all.order(:id)
+    @exercise_name_vocs = current_user.exercise_name_vocs.order(:label)
   end
 
-  # GET /exercise_name_vocs/1
   def show
   end
 
-  # GET /exercise_name_vocs/new
   def new
     @exercise_name_vocs = current_user.exercise_name_vocs.build
   end
 
-  # GET /exercise_name_vocs/1/edit
   def edit
   end
 
-  # POST /exercise_name_vocs
   def create
     @exercise_name_voc = current_user.exercise_name_vocs.build(exercise_name_voc_params)
 
@@ -31,7 +26,6 @@ class ExerciseNameVocsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exercise_name_vocs/1
   def update
     if @exercise_name_voc.update(exercise_name_voc_params)
       redirect_to exercise_name_vocs_path, notice: "Упражнение было успешно изменено."
@@ -40,7 +34,6 @@ class ExerciseNameVocsController < ApplicationController
     end
   end
 
-  # DELETE /exercise_name_vocs/1
   def destroy
     if @exercise_name_voc.destroy!
       message = { notice: 'Упражнение удалено успешно.' }

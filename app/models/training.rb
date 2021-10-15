@@ -19,20 +19,26 @@ class Training < ApplicationRecord
         .select{ |training| training.start_time.month == date.month && training.start_time.year == date.year }
   end
 
-  def next
-    all_trainings.select{ |training| training[:start_time] > start_time}.first || all_trainings.first
-  end
+  # def next
+  #   all_trainings_per_day = all_trainings.select{ |training| training[:start_time] > start_time}.first || all_trainings.first
+  # end
 
-#   def next(exect_training_id)
-#     training_day = all_trainings.select{ |training| training[:start_time] > start_time}.first
-#     trainings_per_day = all_trainings.select{ |training| training[:start_time] == training_day.start_time}
-#     nex=0
-# trainings_per_day.each do |training| 
-#   nex=training.id if training.id > exect_training_id
-# end
-# ret=trainings_per_day.select{ |training| training[:id] == nex}
-# ret
-#   end
+  def next(current_training_index)
+    next_day_first_training = all_trainings.select{ |training| training[:start_time] > start_time}.first || all_trainings.first
+
+    all_trainings_per_day = Training.where(start_time: next_day_first_training.start_time).to_a
+
+binding.pry
+    # all_trainings_per_day.each.with_index do |training, index|
+      if all_trainings_per_day.size > 1 && all_trainings_per_day.find_index(Training.find(current_training_index))
+        return all_trainings_per_day[all_trainings_per_day.find_index(Training.find(current_training_index)) + 1] if all_trainings_per_day[all_trainings_per_day.find_index(Training.find(current_training_index)) + 1].present?
+      else
+        return all_trainings_per_day.first
+      # end
+
+
+    end
+  end
 
   def prev
     all_trainings.select{ |training| training[:start_time] < start_time}.last || all_trainings.last

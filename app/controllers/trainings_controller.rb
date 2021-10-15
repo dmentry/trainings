@@ -15,7 +15,8 @@ class TrainingsController < ApplicationController
   end
 
   def show
-    params[:exect_training_id] = @training.id
+    # params[:exect_training_id] = @training.id
+    session[:current_training_index] = @training.id
   end
 
   def new

@@ -26,4 +26,6 @@
 Будет позже
 
 ## Посмотреть:
-Позже
+https://fitc.herokuapp.com
+login: guest
+password: guest
