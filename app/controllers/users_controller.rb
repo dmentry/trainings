@@ -10,16 +10,24 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to @user, notice: "Данные были успешно обновлены."
+    unless current_user.name == 'guest'
+      if @user.update(user_params)
+        redirect_to @user, notice: "Данные были успешно обновлены."
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to @user, alarm: "Вам такое нельзя."
     end
   end
 
   def destroy
-    @user.destroy
-      redirect_to users_url, notice: "Пользователь был удален."
+    unless current_user.name == 'guest'
+      @user.destroy
+        redirect_to users_url, notice: "Пользователь был удален."
+    else
+      redirect_to @user, alarm: "Вам такое нельзя."
+    end
   end
 
   def achivements
