@@ -27,5 +27,5 @@
 
 ## Посмотреть:
 https://fitc.herokuapp.com
-login: guest
-password: guest
+* login: guest
+* password: guest
