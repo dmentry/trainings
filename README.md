@@ -23,7 +23,7 @@
 * Apexcharts
 
 ## Screenshot
-Будет позже
+![Application screenshot](https://github.com/dmentry/trainings/blob/master/screen_fitcalendar.png)
 
 ## Посмотреть:
 https://fitc.herokuapp.com
