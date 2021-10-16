@@ -1,5 +1,4 @@
 # Русский перевод для https://github.com/plataformatec/devise/tree/v4.7.1
-# Другие переводы на https://github.com/plataformatec/devise/wiki/I18n
 
 ru:
   devise:
@@ -62,7 +61,7 @@ ru:
       not_found: "не найдена"
       not_locked: "не заблокирована"
       not_saved:
-        one: "%{resource}: сохранение не удалось из-за %{count} ошибки"
-        few: "%{resource}: сохранение не удалось из-за %{count} ошибок"
-        many: "%{resource}: сохранение не удалось из-за %{count} ошибок"
-        other: "%{resource}: сохранение не удалось из-за %{count} ошибки"
+        one: "Сохранение не удалось из-за %{count} ошибки:"
+        few: "Сохранение не удалось из-за %{count} ошибок:"
+        many: "Сохранение не удалось из-за %{count} ошибок:"
+        other: "Сохранение не удалось из-за %{count} ошибки:"

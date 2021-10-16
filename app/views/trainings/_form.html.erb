@@ -1,10 +1,10 @@
 <%= form_with(model: training, local: true) do |form| %>
   <% if training.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(training.errors.count, "error") %> prohibited this training from being saved:</h2>
+      <h2><%= I18n.t('errors.messages.not_saved', count: training.errors.count) %></h2>
       <ul>
-        <% training.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% training.errors.messages.each do |message| %>
+          <li><%= message[1][0] %></li>
         <% end %>
       </ul>
     </div>
@@ -24,5 +24,3 @@
     <%= form.submit 'Сохранить', class: 'btn btn-success mt-2 btn-width-my' %>
   </div>
 <% end %>
-
-
