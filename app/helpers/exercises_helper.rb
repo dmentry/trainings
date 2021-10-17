@@ -72,6 +72,8 @@ module ExercisesHelper
     # лесенка
     def ladder(label, exercise)
       if label.match?(/лесен|Лесен/)
+        max = exercise.match(/(\A\d+\z)|(\d+\z)/).to_s.to_i
+        
         max ** 2
       end
     end
