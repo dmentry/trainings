@@ -97,6 +97,13 @@ module TrainingsHelper
           exercise_comment = $1.strip! if $1
           exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
           reps = exercise.strip.gsub(/["\[\]]/, '')
+        elsif exercise.match?(/(Подтягивания 1 час)/)
+          exercise_label = 'Подтягивания 1 час'
+          exercise.gsub!(/Подтягивания 1 час /, '').strip!
+          exercise.scan(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/)
+          exercise_comment = $1.strip! if $1
+          exercise.gsub!(/(\s[а-яА-ЯЁёa-zA-Z_\s]+)/, '').strip! if $1
+          reps = exercise.strip.gsub(/["\[\]]/, '')
         elsif exercise.match?(/(Подтягивания медленные «Таймфрейм 4»)/)
           exercise_label = 'Подтягивания медленные «Таймфрейм 4»'
           exercise.gsub!(/Подтягивания медленные «Таймфрейм 4» /, '').strip!

@@ -74,13 +74,7 @@ module ExercisesHelper
       if label.match?(/лесен|Лесен/)
         max = exercise.match(/(\A\d+\z)|(\d+\z)/).to_s.to_i
 
-        result = 0
-
-        max.times { |i| result += i }
-
-        result = 2 * result + max
-
-        result
+        max ** 2
       end
     end
 
