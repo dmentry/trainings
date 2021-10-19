@@ -60,13 +60,14 @@ class StatisticsController < ApplicationController
 
   def user_chart_status
     @chart_types = User.chart_statuses
-    
+
     if params[:chart_name_id].to_i <= 0
-      @chart_id = User.chart_statuses[current_user.chart_status]
+      @chart_id = User.chart_statuses[current_user.options['chart_status']]
     else
       @chart_id = params[:chart_name_id].to_i
 
-      current_user.update(chart_status: User.chart_statuses.key(@chart_id))
+      current_user.options['chart_status'] = User.chart_statuses.key(@chart_id)
+      current_user.save!
     end
   end
 end

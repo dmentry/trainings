@@ -5,7 +5,7 @@
     <div class="col-sm-12 col-md-10">
       <div>
         <%= render 'form', training: @training %>
-        <%= link_to('Дублировать тренировку', copy_training_trainings_path(current_training_id: @training.id), class: 'btn btn-secondary mt-2') %><br>
+        <%= link_to('Дублировать тренировку', copy_training_trainings_path(current_training_id: @training.id), class: 'btn btn-secondary mt-2 btn-width-my') %><br>
         <%= link_to('Удалить', training_path, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-danger mt-2 btn-width-my') %>
       </div>
       <div class="my-3">

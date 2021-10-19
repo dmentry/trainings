@@ -96,6 +96,10 @@ h1  a {
   width: 215px;
 }
 
+.btn-width-my-two {
+  width: 150px;
+}
+
 .max_height_all_tr {
   max-height: 550px;
   overflow: auto;

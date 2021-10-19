@@ -13,11 +13,22 @@ module StatisticsHelper
 
     exercises_list.reject! { |e| REJECT_EXERCISES.include?(e.second) }
 
-    exercises_list.sort_by!{ |h| h.first }
+    exercises_list.sort_by!{ |h| h.second }
 
     data = []
 
-    exercise_name_id.present? ? id = exercise_name_id.to_i : id = exercises_list.first[0]
+    # Выбор упражнения, показываемого по умолчанию
+    id = 0
+    if exercise_name_id
+      id = exercise_name_id.to_i
+
+      current_user.options['exercise_show_in_stat'] = exercise_name_id
+      current_user.save!      
+    elsif current_user.options['exercise_show_in_stat']
+      id = current_user.options['exercise_show_in_stat'].to_i
+    else
+      id = exercises_list.first[0]
+    end
 
     name = Exercise&.find_by(exercise_name_voc: id)&.exercise_name_voc&.label
 

@@ -11,10 +11,13 @@ class TrainingsController < ApplicationController
 
     if params[:date]
       @date = Date.parse(params[:date])
+
+      current_user.options['calendar_date'] = @date
+      current_user.save!
     elsif current_user.name == 'guest'
       @date = '01.10.2021'.to_date
     else
-      @date = Date.today
+      @date = Date.parse(current_user.options['calendar_date'])
     end
       
     @trainings_by_month = @trainings.by_month(@date)
@@ -76,27 +79,32 @@ class TrainingsController < ApplicationController
   end
 
   def copy_training
-    @training = current_user.trainings.find(params[:current_training_id])
-
-    @dublicate_training = @training.dup
-
-    @dublicate_training.start_time = Date.today
-
-    @training.exercises.each do |exercise|
-      @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, exercise_name_voc_id: exercise.exercise_name_voc_id)
-      if @exercise.save
-        options = { exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
-
-        @exercise.summ = ExercisesHelper::Summ.new(options).overall
-
-        @exercise.save!
-      end
-    end
-
-    if @dublicate_training.save
-      redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
+    if current_user.trainings.where(start_time: Date.today).present?
+      redirect_to :root, alert: "Для сегодняшней даты тренировка уже существует."
+      return
     else
-      render :new, alert: "Тренировка не дублировалась."
+      @training = current_user.trainings.find(params[:current_training_id])
+
+      @dublicate_training = @training.dup
+
+      @dublicate_training.start_time = Date.today
+
+      @training.exercises.each do |exercise|
+        @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, exercise_name_voc_id: exercise.exercise_name_voc_id)
+        if @exercise.save
+          options = { exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
+
+          @exercise.summ = ExercisesHelper::Summ.new(options).overall
+
+          @exercise.save!
+        end
+      end
+
+      if @dublicate_training.save
+        redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
+      else
+        render :new, alert: "Тренировка не дублировалась."
+      end
     end
   end
 

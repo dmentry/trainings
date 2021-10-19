@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_create :add_exercises
+  after_create :initiate_options
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -28,5 +29,9 @@ class User < ApplicationRecord
 
       exc.save(validate: false)
     end
+  end
+
+  def initiate_options
+    self.update(options: { 'chart_status' => 'area', 'calendar_date' => Date.today, 'exercise_show_in_stat' => nil })
   end
 end
