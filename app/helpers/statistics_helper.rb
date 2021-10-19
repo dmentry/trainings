@@ -1,5 +1,5 @@
 module StatisticsHelper
-  REJECT_EXERCISES = ['Отжимания на брусьях', 'Флажок с поддержкой']
+  REJECT_EXERCISES = ['Флажок с поддержкой']
 
   def self.main_stat_helper(current_user, exercise_name_id)
     # массив всех уникальных упражнений пользователя [id, название], если одинаковых упражнений > 1
