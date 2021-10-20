@@ -132,6 +132,10 @@ h1  a {
   border-bottom: 2px solid black;
 }
 
+.button_position {
+  /* filter: drop-shadow(0 6px 4px rgba(0,0,0,0.26)); */
+}
+
 .img-calendar {
   max-height: 30px;
   max-width: 30px;
@@ -346,4 +350,14 @@ h1  a {
     margin-top: 2px;
     margin-right: 4px;
   }
+}
+
+@media (max-width: 480px) {
+  .button_position {
+    position: fixed;
+    left: 120px;
+    top: 2px;
+    opacity: 0.8;
+    filter: drop-shadow(0 6px 4px rgba(0,0,0,0.26));
+  }  
 }
