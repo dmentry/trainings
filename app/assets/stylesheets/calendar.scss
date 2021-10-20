@@ -98,7 +98,16 @@
 }
 
   #month {
-    font-size: 20px;
-    margin: 9px;
+    font-size: 12px;
+    margin: 8px;
+
+    a {
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 5px;
+    background: #2f76fb;
+    padding:  7px 10px;
+    margin: 2px 2px;
+    }
   }
 }

@@ -145,6 +145,10 @@ h1  a {
   max-width:20px;
 }
 
+.img-home {
+  max-width:28px;
+}
+
 .top_buffer_my {
   margin-top: 20px;
 }
@@ -309,7 +313,18 @@ h1  a {
   }
 
   .img-home {
-    max-width:32px;
+    max-width:24px;
+  }
+
+  .date-my {
+    display: inline-block;
+  }
+
+  .date-width-my {
+    max-width: 110px;
+    width: 100%;
+    padding-bottom: 0;
+    font-size: 14px;
   }
 
   .add_float {
@@ -352,7 +367,7 @@ h1  a {
   }
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .button_position {
     position: fixed;
     left: 120px;
@@ -360,4 +375,4 @@ h1  a {
     opacity: 0.8;
     filter: drop-shadow(0 6px 4px rgba(0,0,0,0.26));
   }  
-}
+} */
