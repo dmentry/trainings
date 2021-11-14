@@ -26,14 +26,10 @@
         </ul>
         Отредактировать, клонировать или удалить тренировку можно, нажав на ее заголовок при просмотре нужной тренировки.
         <br><br>
-        В планах:
-        <ul class="my-ul">
-          <li>Выбор упражений с помощью выпадающего списка</li>
-          <li>Выбор дня на календаре с помощью клика на нем</li>
-        </ul>
       </div>
       <div class="my-1">
-        <p>Автор: <%= link_to "&copy; Dack9 #{Time.now.year}".html_safe, "https://vk.com/dack9", target: "blanc", rel: "noreferrer", title: "VK" %></p>
+        <%= link_to "&copy; Dack9 #{Time.now.year}".html_safe, "https://vk.com/dack9", target: "blanc", rel: "noreferrer", title: "VK" %><br>
+        <%= link_to 'GitHub', "https://github.com/dmentry", target: "blanc", rel: "noreferrer", title: "GitHub" %>
       </div>      
       <div class="my-3">
         <%= link_to 'На главную', trainings_path %>
