@@ -26,11 +26,13 @@
         <% end %>
       </td>
     </tr>
+  <% if exercise.note.present? %>
     <tr class="table-buffers-vertical">
       <td class="table-buffers-vertical">            
-        Заметки:
+        Заметка:
         <%= exercise.note %>
       </td>
     </tr>
+    <% end %>
   </tbody>
 </table>
