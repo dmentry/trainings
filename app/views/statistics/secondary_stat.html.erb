@@ -13,7 +13,8 @@
                   <% if @all_tr_by_month.present? %>
                     <div class="center mt-0 bg-light">
                       <b>Количество тренировок по месяцам</b>
-                      <%= area_chart(@all_tr_by_month, { theme: 'palette5' }) %>
+                      <%#= area_chart(@all_tr_by_month, { theme: 'palette5' }) %>
+                      <%= column_chart(@all_tr_by_month, {theme: 'palette4'}) %>
                     </div>
                   <% end %>
 
