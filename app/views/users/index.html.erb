@@ -10,18 +10,21 @@
         <table class="table table-sm table-buffers-vertical table-font-my">
           <thead>
             <tr class="table-buffers-vertical">
+              <th class="table-info table-buffers-vertical">id</th>
               <th class="table-info table-buffers-vertical">Имя</th>
               <th class="table-info table-buffers-vertical">Email</th>
               <th class="table-info table-buffers-vertical">Создан</th>
               <th class="table-info table-buffers-vertical">Изменен</th>
-              <th class="table-info table-buffers-vertical">Действия</th>
             </tr>
           </thead>
           <tbody>
             <% @users.each do |user| %>
               <tr class="table-buffers-vertical">
                 <td class="table-buffers-vertical">            
-                  <%= user.name %>
+                  <%= user.id %>
+                </td>
+                <td class="table-buffers-vertical">            
+                  <%= link_to user.name, user %>
                 </td>
                 <td class="table-buffers-vertical">            
                   <%= user.email %>
@@ -31,10 +34,6 @@
                 </td>
                 <td class="table-buffers-vertical">            
                   <%= user.updated_at.strftime("%d.%m.%Y, %H:%M") %>
-                </td>
-                <td class="table-buffers-vertical">            
-                  <%= link_to 'Show', user %> | 
-                  <%= link_to 'Destroy', user, method: :delete, data: { confirm: "Вы уверены?" } %>        
                 </td>
               </tr>
             <% end %>
