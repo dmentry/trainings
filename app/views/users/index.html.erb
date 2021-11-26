@@ -12,6 +12,8 @@
             <tr class="table-buffers-vertical">
               <th class="table-info table-buffers-vertical">Имя</th>
               <th class="table-info table-buffers-vertical">Email</th>
+              <th class="table-info table-buffers-vertical">Создан</th>
+              <th class="table-info table-buffers-vertical">Изменен</th>
               <th class="table-info table-buffers-vertical">Действия</th>
             </tr>
           </thead>
@@ -23,6 +25,12 @@
                 </td>
                 <td class="table-buffers-vertical">            
                   <%= user.email %>
+                </td>
+                <td class="table-buffers-vertical">            
+                  <%= user.created_at.strftime("%d.%m.%Y, %H:%M") %>
+                </td>
+                <td class="table-buffers-vertical">            
+                  <%= user.updated_at.strftime("%d.%m.%Y, %H:%M") %>
                 </td>
                 <td class="table-buffers-vertical">            
                   <%= link_to 'Show', user %> | 
