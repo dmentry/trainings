@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:show, :edit, :update, :destroy] do
+  resources :users do
     member do
       get  :achivements    
     end

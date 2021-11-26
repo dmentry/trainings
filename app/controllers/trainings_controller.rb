@@ -153,8 +153,4 @@ class TrainingsController < ApplicationController
   def training_params
     params.require(:training).permit(:label, :start_time)
   end
-
-  def user_admin?
-    redirect_to trainings_path, alert: "Вам сюда не надо!" unless current_user.admin
-  end
 end

@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
   # Настройка для работы Девайза, когда юзер правит профиль
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def user_admin?
+    redirect_to trainings_path, alert: "Вам сюда не надо!" unless current_user.admin
+  end
+
   protected
 
   def configure_permitted_parameters

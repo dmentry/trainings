@@ -3,7 +3,7 @@ class Training < ApplicationRecord
     {
       "общая": "common.png", "офп": "ofp.png", "выход силой": "powerpullup.png", "подтягивания": "pullup.png",
       "отжимания": "pushup.png", "бег": "run.png", "лыжи": "ski.png", "пресс": "abs.png", "флажок": "flag.png",
-      "стойка на руках": "handstand.png"
+      "стойка на руках": "handstand.png", "брусья": "pushup2.png"
     }
   end
 
