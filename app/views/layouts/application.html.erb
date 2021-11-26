@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Тренировки</title>
-    <%#= favicon_link_tag asset_path('favicon.ico') %>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -59,36 +58,10 @@
               <li><%= link_to 'Восстановить пароль', new_password_path(resource_name), class: 'btn bg-light pl-3' %></li>
             <% end %>
           </ul>
-
-<!--           <div class="navbar navbar-responsive d-md-block">
-            <ul class="navbar-nav"> -->
-              <%# if current_user %>
-                <!-- <li> <%#= link_to t('app.navbar.menu.load_photo'), new_photo_path, class: "btn my_font_size remove_padding" %> </li> -->
-                <!-- <li> <%#= link_to t('app.navbar.menu.profile'), current_user, class: "btn my_font_size remove_padding" %> </li> -->
-                <!-- <li> <%#= link_to t('app.navbar.menu.exit'), destroy_user_session_path, :method => :delete, class: "btn my_font_size remove_padding" %> </li> -->
-              <%# else %>
-
-                <!-- <li> <%#= link_to t('app.navbar.menu.admin'), new_user_session_path, class: "btn my_font_size remove_padding" %> </li> -->
-              <%# end %>
-
-<!--               <% if params[:locale] == 'ru' || params[:locale] == nil %>
-                <% locale_class_eng = '' %>
-                <% locale_class_ru = 'locale_class_na' %>
-              <% else %>
-                <% locale_class_eng = 'locale_class_na' %>
-                <% locale_class_ru = '' %>
-              <% end %> -->
-
-              <!-- <li><%#= link_to image_pack_tag("rus.jpg", alt: 'rus',  class: "btn flag_position #{locale_class_ru}"), controller: controller_name, action: action_name, locale: "ru", title: 'Переключиться на русский' %></li> -->
-
-              <!-- <li><%#= link_to image_pack_tag("eng.jpg", alt: 'eng',  class: "btn flag_position #{locale_class_eng}"), controller: controller_name, action: action_name, locale: "en", title: 'Switch to english' %></li> -->
-
-            <!-- </ul> -->
-          </div>
         </div>
       </div>
+    </div>
     
-
     <a class="navbar-toggler d-lg-none d-sm" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu">
       <%= image_pack_tag("menu-4x.png", alt: 'menu') %>
     </a>
