@@ -33,7 +33,7 @@
                 <%= user.first.created_at.strftime("%d.%m.%Y, %H:%M") %>
               </td>
               <td class="table-buffers-vertical">            
-                <%= user.first.last_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
+                <%= user.first.current_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
               </td>
               <td class="table-buffers-vertical">            
                 <%= user.second %>
