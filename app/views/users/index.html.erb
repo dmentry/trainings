@@ -32,11 +32,15 @@
               <td class="table-buffers-vertical">            
                 <%= user.first.created_at.strftime("%d.%m.%Y, %H:%M") %>
               </td>
-              <td class="table-buffers-vertical">            
-                <%= user.first.current_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
+              <td class="table-buffers-vertical">
+                <% if user.second == '0001-01-01 01:00:00 +0000' %>
+                    -
+                <% else %>
+                  <%= user.first.current_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
+                <% end %>
               </td>
               <td class="table-buffers-vertical">            
-                <%= user.second %>
+                <%= user.third %>
               </td>
             </tr>
           <% end %>

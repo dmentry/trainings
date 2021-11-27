@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @data = []
 
     @users.each do |user|
-      user_operator = IpFinderHelper.ip_address(user.last_sign_in_ip)
+      user_operator = IpFinderHelper.ip_address(user.current_sign_in_ip)
 
       if user_operator.empty?
         user_data = '-'
@@ -17,10 +17,16 @@ class UsersController < ApplicationController
         user_data = "#{user_operator[:country]}, #{user_operator[:regionName]}, #{user_operator[:city]}, #{user_operator[:isp]}"
       end
 
-      @data << [user, user_data]
+      if user.current_sign_in_at.present?
+        td = user.current_sign_in_at
+      else
+        td = Time.new(1, 1, 1, 1, 0, 0, 0)
+      end
+
+      @data << [user, td, user_data]
     end
 
-    @data = @data.sort_by{ |h| h.second }
+    @data = @data.sort_by{ |h| h.second }.reverse
   end
 
   def show
