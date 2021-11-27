@@ -4,7 +4,23 @@ class UsersController < ApplicationController
   before_action :user_admin?, only: %i[index]
 
   def index
-    @users = User.all.order(created_at: :asc)
+    @users = User.all
+
+    @data = []
+
+    @users.each do |user|
+      user_operator = IpFinderHelper.ip_address(user.last_sign_in_ip)
+
+      if user_operator.empty?
+        user_data = '-'
+      else  
+        user_data = "#{user_operator[:country]}, #{user_operator[:regionName]}, #{user_operator[:city]}, #{user_operator[:isp]}"
+      end
+
+      @data << [user, user_data]
+    end
+
+    @data = @data.sort_by{ |h| h.second }
   end
 
   def show

@@ -213,6 +213,10 @@ h1  a {
     padding: 0 !important;
   }
 
+  .no-paddings-admin {
+    padding: -15px !important;
+  }
+
   .no-paddings_second_stat {
     padding: 2px !important;
   }
