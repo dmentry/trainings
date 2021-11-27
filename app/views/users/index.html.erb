@@ -14,7 +14,8 @@
               <th class="table-info table-buffers-vertical">Имя</th>
               <th class="table-info table-buffers-vertical">Email</th>
               <th class="table-info table-buffers-vertical">Создан</th>
-              <th class="table-info table-buffers-vertical">Изменен</th>
+              <th class="table-info table-buffers-vertical">Заходил</th>
+              <th class="table-info table-buffers-vertical">IP</th>
             </tr>
           </thead>
           <tbody>
@@ -33,7 +34,10 @@
                   <%= user.created_at.strftime("%d.%m.%Y, %H:%M") %>
                 </td>
                 <td class="table-buffers-vertical">            
-                  <%= user.updated_at.strftime("%d.%m.%Y, %H:%M") %>
+                  <%= user.last_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
+                </td>
+                <td class="table-buffers-vertical">            
+                  <%= user.last_sign_in_ip %>
                 </td>
               </tr>
             <% end %>
