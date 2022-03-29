@@ -43,7 +43,7 @@ module StatisticsHelper
 
     data.to_a.sort_by!{ |h| h.first }
 
-    [data, exercises_list, name]
+    [data, exercises_list, name, id]
   end
 
   # Количество проведенных упражнений по названиям

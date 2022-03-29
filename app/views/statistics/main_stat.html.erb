@@ -1,38 +1,51 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 
-    <div class="container my-bg-color">
-      <div class="row my-2">
-        <div class="col-lg-12 order-lg-1 mb-2 mt-3 no-paddings_second_stat">
-          <div class="center">
-            <% @exercises_list.each do |list| %>
-              <span class="vertical-buffers"><%= link_to list[1], main_stat_statistics_path(exercise_name_id: list[0], chart_name_id: params[:chart_name_id]), class: 'btn-sm btn-primary vertical-buffers' %></span>
+  <div class="container my-bg-color">
+    <div class="row mt-3">
+      <div class="col-lg-12 order-lg-2 mb-2 mt-2 no-paddings_second_stat">
+        <div class="center">
+          <%= select :list[0], :list[1], @exercises_list.collect { |p| [ p[1], p[0] ] }, prompt: '[Выберите упражнение]' %>
+        </div>
+        <div>
+          <div class="center mt-3">
+            <% @chart_types.each do |key, value| %>
+              <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
             <% end %>
           </div>
+          <% case @chart_id %>
+            <% when 1 then%> 
+              <%= area_chart(@data, {theme: 'palette5'}) %>
+            <% when 2 then  %> 
+              <%= line_chart(@data) %>
+            <% when 3 then  %> 
+              <%= column_chart(@data, {theme: 'palette4'}) %>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="container my-bg-color">
-      <div class="row mt-3">
-        <div class="col-lg-12 order-lg-2 mb-2 mt-2 no-paddings_second_stat">
-          <div class="center">
-            <h4 class="center text_size"><%= @name %></h4>
-          </div>
-          <div>
-            <div class="center">
-              <% @chart_types.each do |key, value| %>
-                <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
-              <% end %>
-            </div>
-            <% case @chart_id %>
-              <% when 1 then%> 
-                <%= area_chart(@data, {theme: 'palette5'}) %>
-              <% when 2 then  %> 
-                <%= line_chart(@data) %>
-              <% when 3 then  %> 
-                <%= column_chart(@data, {theme: 'palette4'}) %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+<script>
+  $(function(){
+    if (!$('.center #l_i').val()) {
+      $('.center #l_i').val('<%= @id %>')
+    }
+  });
+
+  $(".center #l_i" ).change(function() {
+    $.ajax({
+      url: '/statistics/main_stat_graph', 
+      data: {'chart_name_id' : '2', 'exercise_name_id' : $('.center #l_i').val()},
+      dataType: "html",
+      success: function (data) {
+        $("#graphs").load(data);
+        location.reload();
+      }
+    });
+
+    // location.reload();
+    // $( "#rrr" ).load(window.location.href + "#rrr" );
+    // $("#rrr").load("./main_stat_graph.html");
+    // $("#rrr").load(" #rrr");
+  });
+</script>

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     collection do
       get  :main_stat
       post :main_stat
+      get :main_stat_graph
       get  :secondary_stat
     end
   end
