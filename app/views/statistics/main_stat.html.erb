@@ -12,14 +12,16 @@
               <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
             <% end %>
           </div>
-          <% case @chart_id %>
-            <% when 1 then%> 
-              <%= area_chart(@data, {theme: 'palette5'}) %>
-            <% when 2 then  %> 
-              <%= line_chart(@data) %>
-            <% when 3 then  %> 
-              <%= column_chart(@data, {theme: 'palette4'}) %>
-          <% end %>
+          <div id="graphs">
+            <% case @chart_id %>
+              <% when 1 then%> 
+                <%= area_chart(@data, {theme: 'palette5'}) %>
+              <% when 2 then  %> 
+                <%= line_chart(@data) %>
+              <% when 3 then  %> 
+                <%= column_chart(@data, {theme: 'palette4'}) %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -30,22 +32,13 @@
     if (!$('.center #l_i').val()) {
       $('.center #l_i').val('<%= @id %>')
     }
-  });
 
-  $(".center #l_i" ).change(function() {
-    $.ajax({
-      url: '/statistics/main_stat_graph', 
-      data: {'chart_name_id' : '2', 'exercise_name_id' : $('.center #l_i').val()},
-      dataType: "html",
-      success: function (data) {
-        $("#graphs").load(data);
-        location.reload();
-      }
-    });
-
-    // location.reload();
-    // $( "#rrr" ).load(window.location.href + "#rrr" );
-    // $("#rrr").load("./main_stat_graph.html");
-    // $("#rrr").load(" #rrr");
+    $(".center #l_i" ).change(function() {
+      $("#graphs").load(
+                        "/statistics/main_stat #graphs", 
+                        { 'chart_name_id' : '<%= @chart_id %>', 'exercise_name_id' : $('.center #l_i').val() }, 
+                        function() { location.reload(); }
+                       );
+     });
   });
 </script>

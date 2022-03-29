@@ -6,12 +6,16 @@ class StatisticsController < ApplicationController
     if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
       redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
     else
-      stat_data
-    end
-  end
+      stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id])
 
-  def main_stat_graph
-    stat_data
+      @data = stats_output[0]
+
+      @exercises_list = stats_output[1]
+
+      @name = stats_output[2]
+
+      @id = stats_output[3]
+    end
   end
 
   ##################################### переменные для текстовой статистики
@@ -67,17 +71,5 @@ class StatisticsController < ApplicationController
       current_user.options['chart_status'] = User.chart_statuses.key(@chart_id)
       current_user.save!
     end
-  end
-
-  def stat_data
-    stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id])
-
-    @data = stats_output[0]
-
-    @exercises_list = stats_output[1]
-
-    @name = stats_output[2]
-
-    @id = stats_output[3]
   end
 end
