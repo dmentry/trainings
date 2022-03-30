@@ -17,10 +17,21 @@
 
   <div class="form-group mt-3">
     <%= form.label 'Дата' %>
-    <%= form.date_select :start_time, class: 'form-control'  %>
+    <%= form.date_select :start_time, default: @new_date, class: 'form-control'  %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= form.label 'Дата2' %>
+    <%= form.text_field :start_time, class: 'form-control', id: 'datepicker'  %>
   </div>
 
   <div class="actions">
     <%= form.submit 'Сохранить', class: 'btn btn-success mt-2 btn-width-my' %>
   </div>
 <% end %>
+
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>

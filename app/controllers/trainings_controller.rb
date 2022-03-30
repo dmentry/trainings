@@ -28,6 +28,12 @@ class TrainingsController < ApplicationController
 
   def new
     @training = current_user.trainings.build
+
+    day = params[:day].strip
+
+    new_date = current_user.options['calendar_date'].to_s[0,8] + day
+
+    @new_date = Date.parse(new_date)
   end
 
   def edit

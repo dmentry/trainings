@@ -62,3 +62,16 @@
     
   </div>
 </div>
+
+<script>
+  $(function(){
+    $(".calendar td").click(function() {
+      if (!$(this).find("a").length > 0) {
+        location = "/trainings/new?day=" + $(this).text().replace(/\s/g, "");
+      }
+      else {
+        location = $(this).find("a").attr('href');
+      }
+     });
+  });
+</script>
