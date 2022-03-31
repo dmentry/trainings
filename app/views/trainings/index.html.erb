@@ -36,12 +36,11 @@
     </div>
 
     <div class="border col-lg-3 order-lg-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile">
-      <%= link_to 'Создать тренировку', new_training_path, class: 'remove_for_small_screen' %>
       <div class="mt-1">
         <% unless @trainings_by_month.empty? %>
-          <div class="top_line_my remove_for_small_screen"></div>
           <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
         <% end %>
+
         <% @trainings_by_month.each do |training| %>
           <div class="tr_display">
             <% if training != @trainings_by_month.last %>
