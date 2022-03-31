@@ -1,1 +1,1 @@
- $("#graphs").html("<%= j (render partial: 'graphics') %>")
+ $("#graphs").html("<%= escape_javascript (render partial: 'graphics') %>")
