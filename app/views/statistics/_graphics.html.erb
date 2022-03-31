@@ -1,0 +1,8 @@
+<% case @chart_id %>
+  <% when 1 then%> 
+    <%= area_chart(@data, {theme: 'palette5'}) %>
+  <% when 2 then  %> 
+    <%= line_chart(@data) %>
+  <% when 3 then  %> 
+    <%= column_chart(@data, {theme: 'palette4'}) %>
+<% end %>

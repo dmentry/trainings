@@ -15,6 +15,11 @@ class StatisticsController < ApplicationController
       @name = stats_output[2]
 
       @id = stats_output[3]
+
+      respond_to do |format|
+        format.js { render layout: false }
+        format.html { render 'main_stat' }
+      end
     end
   end
 

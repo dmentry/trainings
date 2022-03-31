@@ -34,11 +34,11 @@
     }
 
     $(".center #l_i" ).change(function() {
-      $("#graphs").load(
-                        "/statistics/main_stat #graphs", 
-                        { 'chart_name_id' : '<%= @chart_id %>', 'exercise_name_id' : $('.center #l_i').val() }, 
-                        function() { location.reload(); }
-                       );
+      $.ajax({
+              url: "/statistics/main_stat", 
+              data: { 'chart_name_id' : '<%= @chart_id %>', 'exercise_name_id' : $('.center #l_i').val() }, 
+            });
      });
+
   });
 </script>
