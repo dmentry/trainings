@@ -10,22 +10,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="form-group mt-1">
+  
+  <div class="mt-1 mr-1">
+    <button type="button" class="close btn btn-success mb-2" data-dismiss="modal">X</button>
+  </div>
+  <div class="form-group mt-1 mx-1">
     <%= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.order(label: :asc), :id, :label, prompt: '[Выберите упражнение]' %>
   </div>
 
-  <div class="form-group form-buffers-vertical">
+  <div class="form-group form-buffers-vertical mx-1">
     <%= form.label 'Количество подходов и/или повторов' %>
     <%= form.text_field :quantity, class: 'form-control' %>
   </div>
 
-  <div class="form-group form-buffers-vertical">
+  <div class="form-group form-buffers-vertical mx-1">
     <%= form.label 'Заметка' %>
     <%= form.text_field :note, class: 'form-control' %>
   </div>
 
-  <div class="actions bt_buffer_top_my">
+  <div class="actions bt_buffer_top_my mx-1">
     <%= form.submit 'Сохранить', class: 'btn btn-success mb-2' %>
   </div>
 <% end %>

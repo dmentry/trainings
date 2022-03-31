@@ -8,7 +8,11 @@
     </h3>
   </div>
   <div class="row my-1">
-    <div class="col-lg-6 order-lg-1 no-paddings mt-1 mb-2 bg-light ex_buffer_both_my max_height_all_tr">
+    <div class="col-lg-3 order-lg-2 order-sm-1 mt-1 mb-2 center">
+    <%= link_to 'Добавить упражнение', new_training_exercise_path(@training),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-sm'}  %>
+    </div>
+
+    <div class="col-lg-8 order-lg-1 order-sm-2 no-paddings mt-1 mb-2 bg-light ex_buffer_both_my max_height_all_tr">
       <div class="bold">
         Дата: <%= l @training.start_time, format: :my_format %>
       </div>
@@ -19,14 +23,12 @@
         <% end %>
       </div>
     </div>
-
-    <div class="col-lg-5 order-lg-1 bg-light mt-1 mb-2">
-      <div class="table-font-my">Добавить упражнение:</div>
-      <div class="row">
-        <div class="table-font-my no-paddings ex_buffer_both_my">
-          <%= render partial: 'exercises/form', locals: {exercise: @exercise || @training.exercises.build} %>
-        </div>
+ 
+    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
       </div>
-    </div>
+    </div>   
+
   </div>
 </div>

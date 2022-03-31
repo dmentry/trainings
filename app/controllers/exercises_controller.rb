@@ -3,6 +3,16 @@ class ExercisesController < ApplicationController
   before_action :set_training, only: [:create, :destroy, :update, :edit]
   before_action :set_exercise, only: [:destroy, :edit, :update]
 
+def new
+  @training = Training.find(params[:training_id])
+  @exercise = @training.exercises.build
+
+  respond_to do |format|
+    format.html
+    format.js { render layout: false }
+  end
+end
+
   def create
     @exercise = @training.exercises.build(exercise_params)
 
