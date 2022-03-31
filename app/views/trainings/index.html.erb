@@ -1,10 +1,5 @@
 <div class="container my-bg-color">
   <div class="row top_buffer_my">
-
-    <div class="add_float">
-      <%= link_to(image_pack_tag("add.png", alt: 'add', class: 'img-add'), new_training_path) %>
-    </div>
-
     <div class="col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings">
       <h2 id="month">
         <div class="date-my">
@@ -64,14 +59,47 @@
 </div>
 
 <script>
+  function current_month(month_class) {
+    let answer = true;
+    if (month_class == 'notmonth') {
+      answer = false;
+    }
+    return answer;
+  };
+
   $(function(){
     $(".calendar td").click(function() {
-      if (!$(this).find("a").length > 0) {
-        location = "/trainings/new?day=" + $(this).text().replace(/\s/g, "");
+      answer = current_month ($(this).attr('class'));
+
+      if (answer == false) {
+        $(this).attr('title', 'Чтобы создать тренировку в другом месяце, перейдите в него');
+        return false;
       }
       else {
-        location = $(this).find("a").attr('href');
+        if (!$(this).find("a").length > 0) {
+          location = "/trainings/new?day=" + $(this).text().replace(/\s/g, "");
+        }
+        else {
+          location = $(this).find("a").attr('href');
+        }
       }
      });
+
+    $(".calendar td").hover(function() {
+      answer = current_month ($(this).attr('class'));
+
+      if (answer == true) {
+        if (!$(this).find("a").length > 0) {
+          $(this).attr('title', 'Создать тренировку ' + $(this).text().replace(/\D+/g, "") + ' числа');
+        }
+        else {
+          $(this).attr('title', 'Тренировка от ' + $(this).text().replace(/\D+/g, "") + ' числа');
+        }
+      }
+      else {
+        $(this).attr('title', 'Чтобы создать тренировку в другом месяце, перейдите в него');
+        return false;
+      }
+    });
   });
 </script>
