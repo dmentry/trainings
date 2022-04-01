@@ -144,10 +144,6 @@ h1  a {
   border-bottom: 2px solid black;
 }
 
-.button_position {
-  /* filter: drop-shadow(0 6px 4px rgba(0,0,0,0.26)); */
-}
-
 .img-calendar {
   max-height: 30px;
   max-width: 30px;
@@ -330,7 +326,7 @@ h1  a {
 
   .img-home {
     position: absolute;
-    right: 3px;
+    right: -4px;
     max-width:28px;
     opacity: 0.4;
     z-index: 1000;
@@ -349,7 +345,6 @@ h1  a {
     position: absolute;
     z-index: 1000;
     top: -2px;
-    left: 8px;
   }
 
   .menu_img {
@@ -396,6 +391,10 @@ h1  a {
   .buffer_top_home_for_tr_edit {
     margin-top: 2px;
     margin-right: 4px;
+  }
+
+  #train_title {
+    font-size: 3px;
   }
 }
 
