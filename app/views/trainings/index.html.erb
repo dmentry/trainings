@@ -17,16 +17,17 @@
           <%= link_to ">", date: @date.next_month %>
         </div>
       </h2>
+
       <%= calendar @date do |date| %>
         <%= date.day %>
         <div>
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
-              <div class="cal-font date-my">
+              <div class=" date-my">
                 <% if Training.pics[training.label&.downcase&.to_sym] %>  
                   <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training) %>
                 <% else  %>
-                  <%= link_to training.label, training %>
+                  <%= link_to training.label.truncate(29), training, class: 'cal-font' %>
                 <% end %>
               </div>
             <% end %> 
