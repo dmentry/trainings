@@ -3,7 +3,7 @@
   <div class="center">
     <p id='train_title'> 
       <%= link_to '<', @training.prev, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
-      <%= link_to @training.label, edit_training_path(@training), class: "btn btn-outline-primary mt-1 buffer-bottom tr-width-my" %>
+      <%= link_to @training.label, edit_training_path(@training), class: "btn btn-primary mt-1 buffer-bottom tr-width-my" %>
       <%= link_to '>', @training.next, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
     </p>
   </div>
