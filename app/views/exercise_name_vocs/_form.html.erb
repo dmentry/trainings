@@ -11,12 +11,14 @@
     </div>
   <% end %>
 
-  <div class="form-group mt-1">
+  <div class="mt-1 mr-1">
+    <button type="button" class="close btn btn-success mb-2" data-dismiss="modal">X</button>
+  </div>
+  <div class="form-group mt-1 mx-1">
     <%= form.label 'Название' %>
     <%= form.text_field :label, class: 'form-control field-width-my' %>
   </div>
-
-  <div class="actions">
+  <div class="actions mx-1 my-1">
     <%= form.submit 'Сохранить', class: 'btn btn-success mt-2 btn-width-my-two' %>
   </div>
 <% end %>
