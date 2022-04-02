@@ -1,5 +1,5 @@
 <div class="container my-bg-color">
-  <div class="row top_buffer_my">
+  <div class="row top_buffer">
     <div class="col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings">
       <h2 id="month">
         <div class="date-my">
@@ -36,25 +36,25 @@
       <% end %>
     </div>
 
-    <div class="border col-lg-3 order-lg-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile">
-      <div class="mt-1">
-        <% unless @trainings_by_month.empty? %>
+    <% unless @trainings_by_month.empty? %>
+      <div class="border col-lg-3 order-lg-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile">
+        <div class="mt-1">
           <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
-        <% end %>
+          
+          <% @trainings_by_month.each do |training| %>
+            <div class="tr_display">
+              <% if training != @trainings_by_month.last %>
+                <%= link_to "#{training.label}, ", training %>
+              <% else %>
+                <%= link_to training.label, training %>
+              <% end %>
+            </div>
 
-        <% @trainings_by_month.each do |training| %>
-          <div class="tr_display">
-            <% if training != @trainings_by_month.last %>
-              <%= link_to "#{training.label}, ", training %>
-            <% else %>
-              <%= link_to training.label, training %>
-            <% end %>
-          </div>
-
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
-    
+    <% end %>
+  
   </div>
 </div>
 
