@@ -59,9 +59,9 @@
 </div>
 
 <script>
-  function current_month(month_class) {
+  function current_month(month) {
     let answer = true;
-    if (month_class == 'notmonth') {
+    if (month.is('.notmonth') || (month.is('.notmonth.today'))) {
       answer = false;
     }
     return answer;
@@ -69,10 +69,10 @@
 
   $(function(){
     $(".calendar td").click(function() {
-      answer = current_month ($(this).attr('class'));
+      answer = current_month ($(this));
 
       if (answer == false) {
-        alert('Чтобы создать тренировку в другом месяце, перейдите в него')
+        alert('Чтобы создать/отредактировать тренировку в другом месяце, перейдите в него')
         return false;
       }
       else {
@@ -86,7 +86,7 @@
      });
 
     $(".calendar td").hover(function() {
-      answer = current_month ($(this).attr('class'));
+      answer = current_month ($(this));
 
       if (answer == true) {
         if (!$(this).find("a").length > 0) {
@@ -97,7 +97,7 @@
         }
       }
       else {
-        $(this).attr('title', 'Чтобы создать тренировку в другом месяце, перейдите в него');
+        $(this).attr('title', 'Чтобы создать/отредактировать тренировку в другом месяце, перейдите в него');
         return false;
       }
     });
