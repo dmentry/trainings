@@ -127,7 +127,7 @@ h1  a {
 }
 
 .max_height_month_tr {
-  max-height: 477px;
+  max-height: 470px;
   overflow: auto;
 }
 
@@ -331,14 +331,14 @@ h1  a {
   .img-home {
     position: absolute;
     right: -7px;
-    top:  -1px;
-    max-width:34px;
+    top:  -3px;
+    max-width: 33px;
     opacity: 0.4;
     z-index: 1000;
   }
 
   .img-home-white {
-    max-width: 20px;
+    max-width: 15px;
   }
 
   .cal-font {
@@ -407,13 +407,3 @@ h1  a {
     font-size: 3px;
   }
 }
-
-/* @media (max-width: 480px) {
-  .button_position {
-    position: fixed;
-    left: 120px;
-    top: 2px;
-    opacity: 0.8;
-    filter: drop-shadow(0 6px 4px rgba(0,0,0,0.26));
-  }  
-} */

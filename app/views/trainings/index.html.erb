@@ -5,7 +5,7 @@
         <div class="date-my">
           <%= link_to "<", date: @date.prev_month %>
         </div>
-      <div  class="date-my button_position ">
+      <div  class="date-my">
         <% if @date.month != Date.today.month %>
           <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), date: Date.today) %>
         <% end %>
@@ -37,7 +37,7 @@
     </div>
 
     <% unless @trainings_by_month.empty? %>
-      <div class="border col-lg-3 order-lg-2 buffer-top bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile">
+      <div class="border col-lg-3 order-lg-2 buffer-top mt-3 bg-light buffer-both-sm no-margins max_height_month_tr top_buffer_mobile">
         <div class="mt-1">
           <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
           
