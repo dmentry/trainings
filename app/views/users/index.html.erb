@@ -23,8 +23,8 @@
               <td class="table-buffers-vertical">            
                 <%= user.first.id %>
               </td>
-              <td class="table-buffers-vertical">      
-                <%= link_to user.first.name, user.first %>
+              <td class="table-buffers-vertical">
+                <%= link_to user.first.name, admin_login_as_user_user_path(user.first) %>
               </td>
               <td class="table-buffers-vertical">            
                 <%= user.first.email %>

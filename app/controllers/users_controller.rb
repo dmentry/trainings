@@ -59,6 +59,14 @@ class UsersController < ApplicationController
   def achivements
   end
 
+  def admin_login_as_user
+    user = User.find(params[:id])
+
+    sign_in :user, user
+
+    redirect_to root_path
+  end
+
   private
 
   def set_user
