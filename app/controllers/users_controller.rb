@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   def admin_login_as_user
     user = User.find(params[:id])
 
-    sign_in :user, user
+    sign_in(:user, user, { :bypass => true })
 
     redirect_to root_path
   end
