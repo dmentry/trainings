@@ -14,7 +14,8 @@
 
     <div class="col-lg-8 order-lg-1 order-sm-2 no-paddings mt-1 mb-2 bg-light ex_buffer_both_my max_height_all_tr">
       <div class="bold">
-        Дата: <%= l @training.start_time, format: :my_format %>
+        <% formatted_date = l @training.start_time, format: :my_format %>
+        Дата: <%= link_to formatted_date, trainings_path(date: @training.start_time), class: "btn btn-primary btn-sm" %>
       </div>
       <div class="my-1">
         <%= render partial: 'exercises/exercise', collection: @training.exercises.order(:id).except(@exercise) %>
