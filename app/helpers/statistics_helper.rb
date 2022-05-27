@@ -41,7 +41,7 @@ module StatisticsHelper
     current_trainings.each do |training|
     # current_user.trainings.each do |training|
       training.exercises.each do |exercise|
-        data << [training.start_time, exercise.summ] if exercise.exercise_name_voc_id == id && REJECT_EXERCISES.exclude?(exercise.exercise_name_voc.label)
+        data << [training.start_time.strftime("%d.%m.%Y"), exercise.summ] if exercise.exercise_name_voc_id == id && REJECT_EXERCISES.exclude?(exercise.exercise_name_voc.label)
       end
     end
 
