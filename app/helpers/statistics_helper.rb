@@ -1,7 +1,8 @@
 module StatisticsHelper
   REJECT_EXERCISES = ['Флажок с поддержкой']
 
-  def self.main_stat_helper(current_user, exercise_name_id)
+  def self.main_stat_helper(current_user, exercise_name_id, months_quantity, last_training)
+
     # массив всех уникальных упражнений пользователя [id, название], если одинаковых упражнений > 1
     exercises_list = []
 
@@ -32,14 +33,19 @@ module StatisticsHelper
 
     name = Exercise&.find_by(exercise_name_voc: id)&.exercise_name_voc&.label
 
-    current_user.trainings.each do |training|
+    # Вычисление промежутка показа тренировок
+    # last_training = current_user.trainings.last.start_time.end_of_month
+    first_training = (last_training - (months_quantity.to_i - 1).months).beginning_of_month
+    current_trainings = current_user.trainings.where('start_time >= ? AND start_time <= ?', first_training, last_training)
+
+    current_trainings.each do |training|
+    # current_user.trainings.each do |training|
       training.exercises.each do |exercise|
         data << [training.start_time, exercise.summ] if exercise.exercise_name_voc_id == id && REJECT_EXERCISES.exclude?(exercise.exercise_name_voc.label)
       end
     end
 
-   # data = Exercise.where('exercise_name_voc_id =? AND training_id = ?', id, current_user.training_ids)
-
+    # data = Exercise.where('exercise_name_voc_id =? AND training_id = ?', id, current_user.training_ids)
 
     data.to_a.sort_by!{ |h| h.first }
 

@@ -6,7 +6,13 @@ class StatisticsController < ApplicationController
     if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
       redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
     else
-      stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id])
+      # first_date = Training.where(user_id: current_user).first.start_time
+      # last_date = Training.where(user_id: current_user).last.start_time
+      first_training = current_user.trainings.first.start_time
+      last_training = current_user.trainings.last.start_time.end_of_month
+      @max_months_quantity = (last_training.year * 12 + last_training.month) - (first_training.year * 12 + first_training.month)
+
+      stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity] ||= @max_months_quantity, last_training)
 
       @data = stats_output[0]
 
