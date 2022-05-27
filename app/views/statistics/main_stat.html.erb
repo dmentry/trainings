@@ -8,18 +8,21 @@
       </div>
       <div>
         <div class="center mt-3">
+          <label for="months_range" id='current_number'></label>
+          <input type="range" min="1" max='<%= @max_months_quantity %>' step="1" value='<%= @max_months_quantity %>' id="months_range">
+
           <% @chart_types.each do |key, value| %>
             <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
           <% end %>
         </div>
         <div id="graphs">
           <% case @chart_id %>
-            <% when 1 then%> 
-              <%= area_chart(@data, {theme: 'palette5'}) %>
+            <% when 1 then%>
+              <%= area_chart(@data, { theme: 'palette5' }) %>
             <% when 2 then  %> 
               <%= line_chart(@data) %>
             <% when 3 then  %> 
-              <%= column_chart(@data, {theme: 'palette4'}) %>
+              <%= column_chart(@data, { theme: 'palette4' }) %>
           <% end %>
         </div>
       </div>
@@ -28,6 +31,18 @@
 </div>
 
 <script>
+  let slider = $("#months_range");
+  let quantity_label = $("#current_number");
+
+  function print_label(slider) {
+    let text = "Показать это упражнение за последние " + slider.val() + " месяцев"
+    if (slider.val() == <%= @max_months_quantity %>) {
+      text = "Показать это упражнение за все время тренировок"
+    }
+
+    return text;
+  };
+
   $(function(){
     if (!$('.center #l_i').val()) {
       $('.center #l_i').val('<%= @id %>')
@@ -36,8 +51,25 @@
     $(".center #l_i" ).change(function() {
       $.ajax({
               url: "/statistics/main_stat", 
-              data: { 'chart_name_id' : '<%= @chart_id %>', 'exercise_name_id' : $('.center #l_i').val() }, 
+              data: { 'chart_name_id' : '<%= @chart_id %>', 'exercise_name_id' : $('.center #l_i').val(), 'months_quantity' : $("#months_range").val() }, 
             });
      });
+
+    // Показ текущего значения диапазона месяцев при открытии страницы и при протаскивании 
+    quantity_label.text(print_label(slider))
+
+    slider.on("input", function() {
+      let output_text = print_label(slider)
+      quantity_label.text(output_text)
+    });
+
+    // Отправка выбранного диапазона месяцев в экшен контроллера
+    slider.change(function() { 
+      let input_value = $(this).val();
+      $.ajax({
+              url: "/statistics/main_stat", 
+              data: { 'months_quantity' : input_value }, 
+            });
+    })
   });
 </script>

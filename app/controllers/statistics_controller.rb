@@ -6,7 +6,11 @@ class StatisticsController < ApplicationController
     if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
       redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
     else
-      stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id])
+      first_training = current_user.trainings.first.start_time
+      last_training = current_user.trainings.last.start_time.end_of_month
+      @max_months_quantity = (last_training.year * 12 + last_training.month) - (first_training.year * 12 + first_training.month)
+
+      stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity] ||= @max_months_quantity, last_training)
 
       @data = stats_output[0]
 
@@ -36,12 +40,12 @@ class StatisticsController < ApplicationController
       tr_years.size.times do |i|
         tr_summ_by_year = 0
         12.times do |month|
-          date = Date.parse("01.#{month + 1}.#{tr_years[i]}")
+          date = ("01.#{month + 1}.#{tr_years[i]}").to_date
           break if date > Date.today
           tr_by_month = @all_trainings_by_user.by_month(date).count
           # next unless tr_by_month >= 1
           tr_summ_by_year += tr_by_month
-          @all_tr_by_month << [date, tr_by_month]
+          @all_tr_by_month << [date.strftime("%d.%m.%Y"), tr_by_month]
         end
       end
       @all_tr_by_month = @all_tr_by_month.sort_by{ |h| h.first }
