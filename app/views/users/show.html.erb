@@ -4,6 +4,7 @@
   <div class="row my-3">
     <div class="col-lg-8 order-lg-1 mb-3">
 
+      <%= image_pack_tag("user.png", alt: 'avatar', class: 'mt-2') %>
       <h3 class="text_size mt-1"><%= @user.name %></h3>
       <div class="buffer-top">
         <% unless current_user.name == 'guest' %>

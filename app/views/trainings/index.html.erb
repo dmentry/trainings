@@ -24,7 +24,7 @@
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
               <% if @training_highlight.present? && training.id == @training_highlight %>
-                <div class=" date-my highlight">
+                <div class=" date-my" id="highlight">
               <% else %>
                 <div class=" date-my">
               <% end %>
@@ -111,5 +111,9 @@
         return false;
       }
     });
+
+    // Закраска фона выбранной тренировки
+    let td_element = $('div.date-my#highlight');
+    if (td_element) { td_element.closest("td").addClass('highlight') };
   });
 </script>
