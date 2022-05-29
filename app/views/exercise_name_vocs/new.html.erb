@@ -1,0 +1,14 @@
+<h3 class="center text_size mt-2">Новое упражение</h3>
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
+<div class="container bg-light">
+  <div class="row m3">
+    <div class="col-sm-12 col-md-10">
+      <div>
+        <%= render 'form', exercise_name_voc: @exercise_name_voc %>
+      </div>
+      <div class="my-3">
+        <%= link_to 'Обратно', trainings_path %>
+      </div>
+    </div>
+  </div>
+</div>

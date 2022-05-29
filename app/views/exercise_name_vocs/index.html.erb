@@ -5,23 +5,18 @@
   <div class="row my-3 no-margins-row">
 
     <div class="col-lg-3 order-lg-2 order-sm-1 mt-1 mb-2 center">
-      <%= link_to 'Создать новое упражнение', new_exercise_name_voc_path(@exercise_name_voc),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window2', class: 'btn btn-primary btn-sm mt-3'}  %>
+      <%= link_to 'Создать новое упражнение', new_exercise_name_voc_path(@exercise_name_voc), class: 'btn btn-primary btn-sm mt-3' %>
     </div>  
 
     <div class="col-lg-8 no-paddings no-margins mt-2 mb-0 order-lg-1 order-sm-2 max_height_all_tr">
       <div class="border p-2 m-2 bg-light">
       <div class="my-0">
         <% @exercise_name_vocs.each do |exercise_name_voc| %>
-          <div><%= link_to exercise_name_voc.label, edit_exercise_name_voc_path(exercise_name_voc), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window2'} %></div>
+          <div><%= link_to exercise_name_voc.label, edit_exercise_name_voc_path(exercise_name_voc) %></div>
         <% end %>
         </div>
       </div>
     </div>
 
-    <div id="modal-window2" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content"></div>
-      </div>
-    </div>
   </div>
 </div>

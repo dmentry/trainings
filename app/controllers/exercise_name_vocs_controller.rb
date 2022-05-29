@@ -7,19 +7,10 @@ class ExerciseNameVocsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def new
-    @exercise_name_vocs = current_user.exercise_name_vocs.build
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @exercise_name_voc = current_user.exercise_name_vocs.build
   end
 
   def edit

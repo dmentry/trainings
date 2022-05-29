@@ -1,2 +1,0 @@
-$("#modal-window2").find(".modal-content").html("<%= j (render partial: 'form', locals: { exercise_name_voc: @exercise_name_voc || @exercise_name_voc = current_user.exercise_name_vocs.build(exercise_name_voc_params) }) %>");
-$("#modal-window2").modal();
