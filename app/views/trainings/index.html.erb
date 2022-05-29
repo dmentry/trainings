@@ -23,13 +23,17 @@
         <div>
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
-              <div class=" date-my">
-                <% if Training.pics[training.label&.downcase&.to_sym] %>  
-                  <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training) %>
-                <% else  %>
-                  <%= link_to training.label.truncate(29), training, class: 'cal-font' %>
-                <% end %>
-              </div>
+              <% if @training_highlight.present? && training.id == @training_highlight %>
+                <div class=" date-my" id="highlight">
+              <% else %>
+                <div class=" date-my">
+              <% end %>
+              <% if Training.pics[training.label&.downcase&.to_sym] %>  
+                <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training) %>
+              <% else %>
+                <%= link_to training.label.truncate(29), training, class: 'cal-font' %>
+              <% end %>
+                </div>
             <% end %> 
           <% end %>
         </div>
@@ -107,5 +111,9 @@
         return false;
       }
     });
+
+    // Закраска фона выбранной тренировки
+    let td_element = $('div.date-my#highlight');
+    if (td_element) { td_element.closest("td").addClass('highlight') };
   });
 </script>

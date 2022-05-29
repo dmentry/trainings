@@ -48,6 +48,21 @@
   .notmonth a { color:  #5e81f0; }
   .today { background-color: #eafecc; }
 
+  .highlight {
+    width: 10%;
+    height: 10%;
+    border-radius: 1%;
+    background: mistyrose;
+  }
+  @keyframes glowing {
+    0% { background-color: #effceb; box-shadow: 0 0 5px #effceb; }
+    50% { background-color: #b3f0a1; box-shadow: 0 0 20px #b3f0a1; }
+    100% { background-color: #effceb; box-shadow: 0 0 5px #effceb; }
+  }
+  .highlight {
+    animation: glowing 1500ms infinite;
+  }
+
   .notmonth:nth-last-child(1) { color: #ff80ac; }
   .notmonth:nth-last-child(2) { color: #ff80ac; }
 }

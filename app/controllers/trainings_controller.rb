@@ -9,6 +9,8 @@ class TrainingsController < ApplicationController
 
     @trainings_by_date = @trainings.group_by(&:start_time)
 
+    @training_highlight = params[:training_highlight].to_i if params[:training_highlight]
+
     if params[:date]
       @date = Date.parse(params[:date])
 
