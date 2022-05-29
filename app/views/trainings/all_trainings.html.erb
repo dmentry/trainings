@@ -12,6 +12,13 @@
           <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
           <div>
             <%= link_to message, training_path(training[:id]) %>
+
+              <% training.exercises.each do |exercise| %>
+                <div class="exercise_margin_left">
+                  <%= exercise.exercise_name_voc.label %>
+                </div> 
+             <% end %>
+
           </div> 
         <% end %>
       </div>
