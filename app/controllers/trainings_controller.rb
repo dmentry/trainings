@@ -72,7 +72,7 @@ class TrainingsController < ApplicationController
   def download_textfile
     export_data = TrainingsHelper::TrainingExport.download_textfile(current_user)
 
-    send_data export_data,:type => 'text',:disposition => "attachment; filename=Тренировки_#{ Date.today.strftime("%d.%m.%Y") }.txt"
+    send_data export_data,:type => 'text',:disposition => "attachment; filename=Тренировки_#{ current_user.name }_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
 
   def instruction
