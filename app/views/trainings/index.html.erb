@@ -6,7 +6,7 @@
           <%= link_to "<", date: @date.prev_month %>
         </div>
       <div  class="date-my">
-        <% if @date.month != Date.today.month %>
+        <% if @date.month != Date.today.month || @date.year != Date.today.year %>
           <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), date: Date.today) %>
         <% end %>
       </div>
