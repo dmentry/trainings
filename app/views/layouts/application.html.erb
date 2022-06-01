@@ -84,12 +84,16 @@
     $("#menu_pic").click(function() {
       if ($("#collapseMenu").height() > 50) {
         $("#collapseMenu").slideToggle(500);
+        $('.menu_img').hide(500);
+        $('.img-home').hide(500);
       }
      });
 
     $(".navbar").click(function() {
       if ($("#collapseMenu").height() > 60) {
         $("#collapseMenu").slideUp(500);
+        $('.menu_img').show(500);
+        $('.img-home').show(500);
       }
      });
   });

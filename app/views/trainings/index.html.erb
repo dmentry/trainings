@@ -41,7 +41,7 @@
     </div>
 
     <% unless @trainings_by_month.empty? %>
-      <div class="border col-lg-3 order-lg-2 buffer-top mt-3 buffer-both-sm no-margins max_height_month_tr top_buffer_mobile tr-list-bg-color">
+      <div class="border col-lg-3 order-lg-2 buffer-both-sm no-margins  top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
         <div class="mt-1">
           <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
           
@@ -58,7 +58,7 @@
         </div>
       </div>
     <% else %>
-      <div class="col-lg-3 order-lg-2 buffer-top mt-3 buffer-both-sm no-margins top_buffer_mobile">
+      <div class="border col-lg-3 order-lg-2 buffer-both-sm no-margins  top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
         <div class="mt-1">
           <div>В этом месяце у вас еще нет тренировок</div>
         </div>
@@ -111,6 +111,23 @@
         return false;
       }
     });
+
+    // Синхронизаци высоты календаря и списка тренировок
+    let cal_height = $('.calendar').height();
+    let browser_width = $(window).width();
+
+    if (cal_height == 505 && browser_width > '991') {
+      $('#trainings_list').css({'height' : '505px'});
+    }
+    else if (cal_height == 425 && browser_width > '991') {
+      $('#trainings_list').css({'height' : '426px'});
+    }
+    else if (cal_height == 345 && browser_width > '991') {
+      $('#trainings_list').css({'height' : '348px'});
+    }
+    else {
+      $('#trainings_list').css({'height' : 'auto'});
+    }
 
     // Закраска фона выбранной тренировки
     let td_element = $('div.date-my#highlight');
