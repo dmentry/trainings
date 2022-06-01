@@ -36,6 +36,10 @@
   font-size: 13px;
 }
 
+.head_color {
+  color: #010b91;
+}
+
 .my-ul {
   padding-left: 20px;
 }
@@ -57,8 +61,13 @@
   display: none;
 }
 
+body {
+  background:   #f4f4f4 ;
+}
+
 .my-bg-color {
-  background:   #eef1f1 ;
+  background:   white ;
+  border: 1px solid #dedede;
 }
 
 .tr-list-bg-color {
@@ -174,7 +183,7 @@ h1  a {
 }
 
 .top_buffer_two_my {
-  margin-top: 23px;
+  margin-top: 8px;
 }
 
 .drop_down_button_my {
@@ -407,6 +416,11 @@ h1  a {
 
   .buffer_top_home {
     margin-top: 5px;
+    margin-right: 4px;
+  }
+
+  .buffer_top_home_for_tr_show {
+    margin-top: 8px;
     margin-right: 4px;
   }
 

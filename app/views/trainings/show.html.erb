@@ -1,7 +1,8 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
+<h3 class="center text_size mt-2 head_color drop_down_button_my">Тренировки</h3>
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home_for_tr_show') %>
 <div class="container my-bg-color top_buffer_two_my">
   <div class="center">
-    <p id='train_title'> 
+    <p id='train_title' class="my-lg-2"> 
       <%= link_to '<', @training.prev, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
       <%= link_to @training.label, edit_training_path(@training), class: "btn btn-primary mt-1 buffer-bottom tr-width-my" %>
       <%= link_to '>', @training.next, class: "btn btn-primary mt-1 buffer-bottom date-my" %>

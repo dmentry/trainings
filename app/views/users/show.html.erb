@@ -1,11 +1,11 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-2">Профиль</h3>
+<h3 class="center text_size mt-2 head_color">Профиль</h3>
 <div class="container my-bg-color">
   <div class="row my-3">
     <div class="col-lg-8 order-lg-1 mb-3">
 
       <%= image_pack_tag("user.png", alt: 'avatar', class: 'mt-2') %>
-      <h3 class="text_size mt-1"><%= @user.name %></h3>
+      <h3 class="text_size mt-1 head_color"><%= @user.name %></h3>
       <div class="buffer-top">
         <% unless current_user.name == 'guest' %>
           <div>

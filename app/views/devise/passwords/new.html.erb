@@ -1,9 +1,9 @@
-<h3 class="center text_size buffer-top">Восстановление пароля</h3>
+<h3 class="center text_size buffer-top head_color">Восстановление пароля</h3>
 <div class="container my-bg-color">
   <div class="row my-3">
 
     <div class="col-lg-8 order-lg-1 mb-3">
-      <h2>Восстановить пароль</h2>
+      <h4>Восстановить пароль</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="form-group mt-3">
