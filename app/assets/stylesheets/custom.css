@@ -7,6 +7,10 @@
   font-weight: bold;
 }
 
+.border_my {
+  border: 1px solid #999 !important;
+}
+
 .buffer-top {
   margin-top: 10px;
 }
@@ -210,9 +214,17 @@ h1  a {
   display: block;
 }
 
+.without_borders {
+  border-style: none !important;
+}
+
 @media (max-width: 991px) {
   html {
     margin-top: -2px;
+  }
+
+  body {
+    background: white !important;
   }
 
   .buffer-both-sm {
