@@ -9,7 +9,7 @@
     </div>  
 
     <div class="col-lg-8 no-paddings no-margins mt-2 mb-2 order-lg-1 order-sm-2 max_height_all_tr">
-      <div class="border p-2 m-2 bg-light">
+      <div class="border p-2 m-2 bg-light without_borders">
       <div class="my-0">
         <% @exercise_name_vocs.each do |exercise_name_voc| %>
           <div><%= link_to exercise_name_voc.label, edit_exercise_name_voc_path(exercise_name_voc) %></div>
