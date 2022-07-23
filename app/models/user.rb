@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   enum chart_status: { area: 1, linear: 2, column: 3 }
 
+  mount_uploader :avatar, AvatarUploader
+
   private
 
   def add_exercises

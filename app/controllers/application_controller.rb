@@ -26,11 +26,21 @@ class ApplicationController < ActionController::Base
   #   redirect_to(request.referrer || root_path)
   # end
 
+  helper_method :user_avatar
+
   # Настройка для работы Девайза, когда юзер правит профиль
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def user_admin?
     redirect_to trainings_path, alert: "Вам сюда не надо!" unless current_user.admin
+  end
+
+  def user_avatar(user)
+    if user.avatar?
+      [true, user.avatar.thumb.url]
+    else
+      [false, 'user.png']
+    end
   end
 
   protected

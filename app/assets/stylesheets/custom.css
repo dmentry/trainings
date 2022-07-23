@@ -141,6 +141,11 @@ h1  a {
   width: 150px;
 }
 
+.btn_without_margins {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .max_height_all_tr {
   max-height: 550px;
   overflow: auto;
@@ -212,6 +217,27 @@ h1  a {
 
 .remove_for_small_screen {
   display: block;
+}
+
+.profile_align {
+  width: 214px;
+  text-align: center;
+}
+
+.user_avatar {
+  height: 70px;
+  margin-top: 10px;
+  border-radius: 50px;
+}
+
+.user_avatar_edit {
+  border-radius: 250px;
+  width: 70%;
+}
+
+.user_avatar_small {
+  height: 37px;
+  border-radius: 50px;  
 }
 
 .without_borders {

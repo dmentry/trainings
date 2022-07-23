@@ -11,6 +11,7 @@
         <thead>
           <tr class="table-buffers-vertical">
             <th class="table-info table-buffers-vertical">id</th>
+            <th class="table-info table-buffers-vertical">Аватарка</th>
             <th class="table-info table-buffers-vertical">Имя</th>
             <th class="table-info table-buffers-vertical">Email</th>
             <th class="table-info table-buffers-vertical">Создан</th>
@@ -24,6 +25,15 @@
               <td class="table-buffers-vertical">            
                 <%= user.first.id %>
               </td>
+
+              <td class="table-buffers-vertical">            
+                <% if user.first.avatar? %>
+                  <%= image_tag(user.first.avatar.url, class: 'user_avatar_small') %></li>
+                <% else %>
+                   <%= image_pack_tag('user.png', class: 'user_avatar_small') %></li>
+                <% end %>
+              </td>
+
               <td class="table-buffers-vertical">
                 <%= link_to user.first.name, admin_login_as_user_user_path(user.first) %>
               </td>
