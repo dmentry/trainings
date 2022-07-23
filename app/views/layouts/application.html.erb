@@ -49,7 +49,12 @@
                 <li class="left_margin"><%= link_to 'Пользователи', users_path, class: 'btn bg-light' %></li>
               <% end %>
               <li class="left_margin"><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
-              <li class="left_margin"><%= link_to 'Профиль', current_user, class: 'btn bg-light' %></li>
+              <!-- <li class="left_margin"><%= link_to 'Профиль', current_user, class: 'btn bg-light' %></li> -->
+              <% if current_user.avatar? %>
+                <li class="left_margin"><%= link_to(image_tag(current_user.avatar.url, class: 'user_avatar_small'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
+              <% else %>
+                 <li class="left_margin"><%=  link_to(image_pack_tag('user.png', class: 'user_avatar_small'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
+              <% end %>  
               <li class="left_margin"><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
               <li class="left_margin"><%= link_to 'О программе', instruction_trainings_path, class: 'btn bg-light', title: 'Помощь по приложению' %></li>
             <% else %>

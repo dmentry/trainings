@@ -16,6 +16,8 @@ gem 'devise-i18n'
 # gem 'traco'
 gem 'rails-i18n'
 gem 'apexcharts'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :development, :test do
   gem 'pry', '~> 0.13.1'
