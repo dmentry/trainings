@@ -21,36 +21,34 @@
         </thead>
         <tbody>
           <% @data.each do |user| %>
-            <tr class="table-buffers-vertical">
-              <td class="table-buffers-vertical">            
+            <tr>
+              <td>            
                 <%= user.first.id %>
               </td>
-
-              <td class="table-buffers-vertical">            
+              <td>            
                 <% if user.first.avatar? %>
                   <%= image_tag(user.first.avatar.url, class: 'user_avatar_small') %></li>
                 <% else %>
-                   <%= image_pack_tag('user.png', class: 'user_avatar_small') %></li>
+                  <%= image_pack_tag('user.png', class: 'user_avatar_small') %></li>
                 <% end %>
               </td>
-
-              <td class="table-buffers-vertical">
+              <td>
                 <%= link_to user.first.name, admin_login_as_user_user_path(user.first) %>
               </td>
-              <td class="table-buffers-vertical">            
+              <td>            
                 <%= user.first.email %>
               </td>
-              <td class="table-buffers-vertical">            
+              <td>            
                 <%= user.first.created_at.strftime("%d.%m.%Y, %H:%M") %>
               </td>
-              <td class="table-buffers-vertical">
+              <td>
                 <% if user.second == '0001-01-01 01:00:00 +0000' %>
                     -
                 <% else %>
                   <%= user.first.current_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
                 <% end %>
               </td>
-              <td class="table-buffers-vertical">            
+              <td>            
                 <%= user.third %>
               </td>
             </tr>
