@@ -87,12 +87,12 @@ h1  a {
   line-height: 160%;
 }
 
-/* .table-buffers-vertical {
+.table-buffers-vertical {
   padding: 0 !important;
   margin: 0 !important;
-  margin-bottom: 4px !important;
+  /* margin-bottom: 4px !important; */
 }
- */
+
 .for-mobile {
   display: none;
 }
