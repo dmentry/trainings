@@ -5,13 +5,9 @@
     <div class="col-lg-8 order-lg-1 mb-3">
 
 <div class="profile_align">
-      <% if user_avatar(@user)[0] %>
-        <%= image_tag user_avatar(@user)[1], class: 'user_avatar' %>
-      <% else %>
-        <%= image_pack_tag user_avatar(@user)[1], class: 'user_avatar' %>
-      <% end %>
+  <%= user_avatar(@user) %>
 
-      <h3 class="text_size mt-1 head_color"><%= @user.name %></h3>
+  <h3 class="text_size mt-1 head_color"><%= @user.name %></h3>
 </div>
 
       <div class="buffer-top">

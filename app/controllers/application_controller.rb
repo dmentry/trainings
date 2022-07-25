@@ -37,9 +37,9 @@ class ApplicationController < ActionController::Base
 
   def user_avatar(user)
     if user.avatar?
-      [true, user.avatar.thumb.url]
+      ActionController::Base.helpers.image_tag(user.avatar.thumb.url, class: 'user_avatar')
     else
-      [false, 'user.png']
+      ActionController::Base.helpers.image_pack_tag('user.png')
     end
   end
 

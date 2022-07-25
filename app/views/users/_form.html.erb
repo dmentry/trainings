@@ -12,10 +12,8 @@
 
   <div class="form-group mt-3">
     <% if @user.avatar? %>
-      <%= form.label 'Аватарка' %><br>
       <p><%= image_tag(@user.avatar.url, class: 'user_avatar_edit') %></p>
     <% else %>
-      <%= form.label 'Стандартная аватарка' %><br>
       <p><%= image_pack_tag'user.png', class: 'user_avatar' %></p>
     <% end %>   
     <%= form.file_field :avatar %>
