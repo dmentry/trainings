@@ -61,7 +61,7 @@
   max-width: 24px;
 }
 
-#menu_pic {
+#menu_pic, .menu_close_img {
   display: none;
 }
 
@@ -334,6 +334,14 @@ h1  a {
   .max_height_month_tr {
     max-height: 325px;
     overflow: auto;
+  }
+
+  .menu_close_img {
+    position: absolute;
+    z-index: 1000;
+    top: 18px;
+    right: 10px;
+    opacity: 0.4;   
   }
 
   .ex_buffer_both_my {

@@ -70,6 +70,11 @@
     <a id="menu_pic" href="#">
       <%= image_pack_tag("menu-4x.png", alt: 'menu', class: 'menu_img') %>
     </a>
+
+    <a href="#">
+      <%= image_pack_tag("close.png", alt: 'menu', class: 'menu_close_img') %>
+    </a>
+
     <% flash.each do |key, value| %>
       <div class="<%= flash_class(key) %>" role="alert">
         <%= value %>
@@ -85,21 +90,28 @@
 </html>
 
 <script>
+  function click_element(elem) {
+    elem.click(function() {
+      if ($("#collapseMenu").height() > 80) {
+        $("#collapseMenu").slideUp(500);
+        $(".menu_close_img").slideUp(500);
+        $('.menu_img').show(500);
+      }
+     })
+  };
+
   $(function(){
     $("#menu_pic").click(function() {
-      if ($("#collapseMenu").height() > 50) {
+      if ($("#collapseMenu").height() > 80) {
         $("#collapseMenu").slideToggle(500);
+        $(".menu_close_img").slideDown(500);
         $('.menu_img').hide(500);
         $('.img-home').hide(500);
       }
      });
 
-    $(".navbar").click(function() {
-      if ($("#collapseMenu").height() > 60) {
-        $("#collapseMenu").slideUp(500);
-        $('.menu_img').show(500);
-        $('.img-home').show(500);
-      }
-     });
+  click_element($(".navbar"));
+
+  click_element($(".menu_close_img"));
   });
 </script>

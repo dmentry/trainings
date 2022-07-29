@@ -17,6 +17,7 @@ gem 'devise-i18n'
 gem 'rails-i18n'
 gem 'apexcharts'
 gem 'carrierwave'
+# gem 'carrierwave-ftp', :require => 'carrierwave/storage/ftp'
 gem 'rmagick'
 
 group :development, :test do
