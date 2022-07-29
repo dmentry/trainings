@@ -13,7 +13,10 @@ Rails.application.routes.draw do
       post :trainings_upload_post
     end
     # Вложенный ресурс упражнений
-    resources :exercises, only: [:new, :create, :destroy, :update, :edit]
+    resources :exercises, only: [:new, :create, :destroy, :update, :edit] do
+      get :up
+      get :down
+    end
     collection do
       get :download_textfile
       get :instruction
