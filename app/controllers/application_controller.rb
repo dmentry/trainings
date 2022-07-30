@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     if user.avatar?
       ActionController::Base.helpers.image_tag(user.avatar.thumb.url, class: 'user_avatar')
     else
-      ActionController::Base.helpers.image_pack_tag('user.png')
+      ActionController::Base.helpers.image_pack_tag('user.png', class: 'user_avatar')
     end
   end
 
