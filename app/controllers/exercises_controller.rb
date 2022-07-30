@@ -74,7 +74,7 @@ end
       end
 
       respond_to do |format|
-        format.js{ render layout: 'trainings/show' }
+        format.js{ render 'trainings/show' }
         format.html{ render 'trainings/show' }
       end
     end
@@ -98,7 +98,7 @@ end
       end
 
       respond_to do |format|
-        format.js{ render layout: 'trainings/show' }
+        format.js{ render 'trainings/show' }
         format.html{ render 'trainings/show' }
       end
     end
