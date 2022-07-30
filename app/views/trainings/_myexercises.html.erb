@@ -1,0 +1,6 @@
+<div class="my-1" id="myexercises">
+  <%= render partial: 'exercises/exercise', collection: @training.exercises.order(:ordnung).except(@exercise) %>
+  <% if @training.exercises.empty? %>
+    Вы еще не внесли ни одного упражнения в эту тренировку
+  <% end %>
+</div>
