@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   #   redirect_to(request.referrer || root_path)
   # end
 
-  helper_method :user_avatar
+  helper_method :user_avatar, :sortable
 
   # Настройка для работы Девайза, когда юзер правит профиль
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -41,6 +41,24 @@ class ApplicationController < ActionController::Base
     else
       ActionController::Base.helpers.image_pack_tag('user.png', class: 'user_avatar')
     end
+  end
+
+  def sortable(column, title)
+    direction = (column == params[:sort_by] && params[:sort_direction] == "asc") ? "desc" : "asc"
+
+    title = if (column == params[:sort_by])
+              if params[:sort_direction] == "asc"
+                "#{title} ↓"
+              else
+                "#{title} ↑"
+              end
+            elsif params[:sort_by].present? == false && column == 'start_time'
+              "#{title} ↑"
+            else
+              "#{title}"
+            end
+
+    ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(sort_by: column, sort_direction: direction), class: 'btn-sm btn-primary')
   end
 
   protected

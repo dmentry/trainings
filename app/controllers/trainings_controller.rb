@@ -80,8 +80,15 @@ class TrainingsController < ApplicationController
 
   def all_trainings
     redirect_to trainings_url, alert: " У вас еще нет тренировок." if current_user.trainings.count <= 1
-      
-    @trainings ||= current_user.trainings.order(start_time: :desc)
+
+    if params[:sort_by].present?
+      Training.column_names.include?(params[:sort_by]) ? params[:sort_by] : params[:sort_by] = "start_time"
+      %w[asc desc].include?(params[:sort_direction]) ? params[:sort_direction] : params[:sort_direction] = "asc"
+
+      @trainings = current_user.trainings.order(params[:sort_by] + ' ' + params[:sort_direction])
+    else
+      @trainings = current_user.trainings.order(start_time: :desc)    
+    end
   end
 
   def copy_training

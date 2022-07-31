@@ -4,16 +4,24 @@
   <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 </h3>
 <div class="container my-bg-color without_borders full_screen_height">
-  <div class="row mt-3 mb-3">
 
-    <div class="border col-lg-8 my-2 buffer-top buffer-both-sm bg-light no-margins max_height_all_tr without_borders full_screen_height">
+  <div class="row mt-3 ml-sm-4">
+    <div class="col-lg-8 order-lg-1 mb-2 mt-2 pl-sm-2">
+      Сортировать по:
+      <%= sortable("start_time", 'дате')%>
+      <%= sortable("label", 'названию') %>
+    </div>
+  </div>
+
+  <div class="row mt-1 mb-3 ml-sm-4">
+    <div class="col-lg-8 order-lg-2 my-2 ml-2 buffer-top bg-light no-margins max_height_all_tr full_screen_height">
       <div>
         <% @trainings.each do |training| %>
           <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
           <div>
             <%= link_to message, training_path(training[:id]) %>
 
-              <% training.exercises.each do |exercise| %>
+              <% training.exercises.order(:ordnung).each do |exercise| %>
                 <div class="exercise_margin_left">
                   <%= exercise.exercise_name_voc.label %>
                 </div> 
@@ -23,6 +31,17 @@
         <% end %>
       </div>
     </div>
-    
+
+    <div class="col-lg-3 order-lg-3 my-2 bg-light ml-4 no-margins top_buffer_mobile buffer-top2">
+      <div class="mt-1">
+        <div class="head_color bold my-lg-2">Уникальные тренировки</div>
+          <% Training.all.pluck(:label).uniq.sort.each do |training_label| %>
+            <div>
+              <%= training_label %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
   </div>
 </div>
