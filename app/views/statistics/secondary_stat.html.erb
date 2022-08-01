@@ -6,6 +6,11 @@
       <h4 class="center text_size mt-1 head_color">
         Тренировок с <%= "#{ @all_tr_by_month_formatted.first[0] }: #{@all_trainings_by_user.count}" %>
       </h4>
+      <% if @worse_trainings_ration > 0 %>
+        <h6 class="center text_size mt-1 head_color">
+          Текущий месяц по тренировкам лучше, чем <%= @worse_trainings_ration %>% предыдущих месяцев
+        </h6>
+      <% end %>  
       <div class="container my-bg-color without_borders">
         <div class="row">
           <div class="col-lg-12 order-lg-1 my-2 no-paddings">

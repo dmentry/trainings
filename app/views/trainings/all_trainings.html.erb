@@ -10,11 +10,12 @@
       Сортировать по:
       <%= sortable("start_time", 'дате')%>
       <%= sortable("label", 'названию') %>
+      <%= link_to("сбросить", all_trainings_trainings_path(sort_by: nil, collect_by_name: nil), class: 'btn-sm btn-primary') %>
     </div>
   </div>
 
   <div class="row mt-1 mb-3 ml-sm-4">
-    <div class="col-lg-8 order-lg-2 my-2 ml-2 buffer-top bg-light no-margins max_height_all_tr full_screen_height">
+    <div class="col-lg-8 order-lg-2 my-2 ml-2 buffer-top bg-light no-margins max_height_all_tr screen_height_tr_list">
       <div>
         <% @trainings.each do |training| %>
           <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
@@ -34,10 +35,10 @@
 
     <div class="col-lg-3 order-lg-3 my-2 bg-light ml-4 no-margins top_buffer_mobile buffer-top2">
       <div class="mt-1">
-        <div class="head_color bold my-lg-2">Уникальные тренировки</div>
+        <div class="head_color bold my-lg-2">Выбор тренировок по названиям</div>
           <% Training.all.pluck(:label).uniq.sort.each do |training_label| %>
             <div>
-              <%= training_label %>
+              <%= link_to(training_label, all_trainings_trainings_path(collect_by_name: training_label)) %>
             </div>
           <% end %>
       </div>
