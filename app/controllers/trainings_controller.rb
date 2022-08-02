@@ -111,15 +111,11 @@ class TrainingsController < ApplicationController
       @dublicate_training.start_time = Date.today
 
       @training.exercises.each do |exercise|
-        @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, exercise_name_voc_id: exercise.exercise_name_voc_id)
-        if @exercise.save
-          options = { exercise: @exercise.quantity, label: @exercise.exercise_name_voc.label }
+        @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, 
+                                                        exercise_name_voc_id: exercise.exercise_name_voc_id, summ: exercise.summ, ordnung: exercise.ordnung)
 
-          @exercise.summ = ExercisesHelper::Summ.new(options).overall
-
-          @exercise.save!
-        end
-      end
+      @exercise.save!
+    end
 
       if @dublicate_training.save
         redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
