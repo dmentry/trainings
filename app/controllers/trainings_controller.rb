@@ -72,7 +72,7 @@ class TrainingsController < ApplicationController
   def download_textfile
     export_data = TrainingsHelper::TrainingExport.download_textfile(current_user)
 
-    send_data export_data,:type => 'text',:disposition => "attachment; filename=Тренировки_#{ current_user.name }_#{ Date.today.strftime("%d.%m.%Y") }.txt"
+    send_data export_data, :type => 'text', :disposition => "attachment; filename=Тренировки_#{ current_user.name }_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
 
   def instruction
@@ -100,28 +100,26 @@ class TrainingsController < ApplicationController
   end
 
   def copy_training
-    if current_user.trainings.where(start_time: Date.today).present?
-      redirect_to :root, alert: "Для сегодняшней даты тренировка уже существует."
-      return
-    else
-      @training = current_user.trainings.find(params[:current_training_id])
+    (redirect_to :root, alert: "Для сегодняшней даты тренировка уже существует." and return) if current_user.trainings.where(start_time: Date.today).present?
 
-      @dublicate_training = @training.dup
+    @training = current_user.trainings.find(params[:current_training_id])
 
-      @dublicate_training.start_time = Date.today
+    @dublicate_training = @training.dup
 
-      @training.exercises.each do |exercise|
-        @exercise = @dublicate_training.exercises.build(quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, 
-                                                        exercise_name_voc_id: exercise.exercise_name_voc_id, summ: exercise.summ, ordnung: exercise.ordnung)
+    @dublicate_training.start_time = Date.today
 
+    @training.exercises.each do |exercise|
+      @exercise = @dublicate_training.exercises.build(
+                                                      quantity: exercise.quantity, note: exercise.note, training_id: @dublicate_training.id, 
+                                                      exercise_name_voc_id: exercise.exercise_name_voc_id, summ: exercise.summ, ordnung: exercise.ordnung
+                                                     )
       @exercise.save!
     end
 
-      if @dublicate_training.save
-        redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
-      else
-        render :new, alert: "Тренировка не дублировалась."
-      end
+    if @dublicate_training.save
+      redirect_to @dublicate_training, notice: "Тренировка успешно дублирована."
+    else
+      render :new, alert: "Тренировка не дублировалась."
     end
   end
 

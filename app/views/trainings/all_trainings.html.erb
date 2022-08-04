@@ -10,7 +10,7 @@
       Сортировать по:
       <%= sortable("start_time", 'дате')%>
       <%= sortable("label", 'названию') %>
-      <%= link_to("сбросить", all_trainings_trainings_path(sort_by: nil, collect_by_name: nil), class: 'btn-sm btn-primary') %>
+      <%= link_to("сбросить фильтр", all_trainings_trainings_path(sort_by: nil, collect_by_name: nil), class: 'btn-sm btn-primary', id: 'reset_filtr') %>
     </div>
   </div>
 
@@ -51,6 +51,7 @@
   $(function(){
     if (window.location.href.includes('collect_by_name')) {
       $('#label').css({'display' : 'none'});
+      $('#reset_filtr').css({'display' : 'inline'});
     }
   });
 </script>

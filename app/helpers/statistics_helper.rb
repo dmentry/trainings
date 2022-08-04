@@ -1,20 +1,24 @@
 module StatisticsHelper
-  REJECT_EXERCISES = ['Флажок с поддержкой']
+  REJECT_EXERCISES = ['Флажок с поддержкой', 'Флажок']
 
   def self.main_stat_helper(current_user, exercise_name_id, months_quantity, last_training)
 
-    # массив всех уникальных упражнений пользователя [id, название], если одинаковых упражнений > 1
+    # массив всех уникальных названий упражнений [id, название] пользователя, если одинаковых упражнений > 1
     exercises_list = []
 
-    ExerciseNameVoc.where(user_id: current_user.id).each do |exercise|
-      exercises_list << [exercise.id, exercise.label] if current_user.exercises.where(exercise_name_voc_id: exercise.id).count > 1
-    end
+    query = <<-SQL
+      SELECT label, exercise_name_vocs.id AS exercise_name_voc_id
+      FROM exercises JOIN exercise_name_vocs
+        ON exercise_name_voc_id = exercise_name_vocs.id
+      WHERE exercise_name_vocs.user_id = #{current_user.id} 
+      GROUP BY label, exercise_name_vocs.id
+      HAVING COUNT(exercise_name_voc_id) > 1
+      ORDER BY label;
+    SQL
 
-    exercises_list.uniq! { |e| e.second }
+    exercises_list = ActiveRecord::Base.connection.execute(query).to_a.flatten
 
-    exercises_list.reject! { |e| REJECT_EXERCISES.include?(e.second) }
-
-    exercises_list.sort_by!{ |h| h.second }
+    exercises_list.reject! { |e| REJECT_EXERCISES.include?(e['label']) }
 
     data = []
 
@@ -28,7 +32,7 @@ module StatisticsHelper
     elsif current_user.options['exercise_show_in_stat']
       id = current_user.options['exercise_show_in_stat'].to_i
     else
-      id = exercises_list.first[0]
+      id = exercises_list.first['label']
     end
 
     name = Exercise&.find_by(exercise_name_voc: id)&.exercise_name_voc&.label

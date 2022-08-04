@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   def sortable(column, title)
     direction = (column == params[:sort_by] && params[:sort_direction] == "asc") ? "desc" : "asc"
 
-    title = if (column == params[:sort_by])
+    title = if column == params[:sort_by]
               if params[:sort_direction] == "asc"
                 "#{title} ↓"
               else
@@ -59,7 +59,10 @@ class ApplicationController < ActionController::Base
             end
 
     if params[:collect_by_name].present?
-      ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(sort_by: column, sort_direction: direction, collect_by_name: params[:collect_by_name]), class: 'btn-sm btn-primary', id: "#{column}")
+      ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(
+                                                                                 sort_by: column, sort_direction: direction, collect_by_name: params[:collect_by_name]), 
+                                                                                 class: 'btn-sm btn-primary', id: "#{column}"
+                                                                                )
     else
       ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(sort_by: column, sort_direction: direction), class: 'btn-sm btn-primary') 
     end

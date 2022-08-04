@@ -3,27 +3,26 @@ class StatisticsController < ApplicationController
   before_action :user_chart_status, only: :main_stat
 
   def main_stat
-    if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
-      redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики."
-    else
-      first_training = current_user.trainings.first.start_time
-      last_training = current_user.trainings.last.start_time.end_of_month
-      @max_months_quantity = (last_training.year * 12 + last_training.month) - (first_training.year * 12 + first_training.month)
+    redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики." if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
 
-      stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity] ||= @max_months_quantity, last_training)
+    first_training = current_user.trainings.first.start_time
+    last_training = current_user.trainings.last.start_time.end_of_month
 
-      @data = stats_output[0]
+    @max_months_quantity = (last_training.year * 12 + last_training.month) - (first_training.year * 12 + first_training.month)
 
-      @exercises_list = stats_output[1]
+    stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity] ||= @max_months_quantity, last_training)
 
-      @name = stats_output[2]
+    @data = stats_output[0]
 
-      @id = stats_output[3]
+    @exercises_list = stats_output[1]
 
-      respond_to do |format|
-        format.js { render layout: false }
-        format.html { render 'main_stat' }
-      end
+    @name = stats_output[2]
+
+    @id = stats_output[3]
+
+    respond_to do |format|
+      format.js { render layout: false }
+      format.html { render 'main_stat' }
     end
   end
 
@@ -61,6 +60,7 @@ class StatisticsController < ApplicationController
     worse_trainings_quantity = 0
 
     @all_tr_by_month_formatted.each do |training|
+      next if training[1] == 0
       worse_trainings_quantity += 1 if current_month_trainings_quantity > training[1]
     end
 

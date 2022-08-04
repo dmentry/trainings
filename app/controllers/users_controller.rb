@@ -6,27 +6,27 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    @data = []
+    data = []
 
     @users.each do |user|
       user_operator = IpFinderHelper.ip_address(user.current_sign_in_ip)
 
-      if user_operator.empty?
-        user_data = '-'
-      else  
-        user_data = "#{user_operator[:country]}, #{user_operator[:regionName]}, #{user_operator[:city]}, #{user_operator[:isp]}"
-      end
+      user_data = if user_operator.empty?
+                    '-'
+                  else  
+                    "#{user_operator[:country]}, #{user_operator[:regionName]}, #{user_operator[:city]}, #{user_operator[:isp]}"
+                  end
 
-      if user.current_sign_in_at.present?
-        td = user.current_sign_in_at
-      else
-        td = Time.new(1, 1, 1, 1, 0, 0, 0)
-      end
+      td = if user.current_sign_in_at.present?
+             user.current_sign_in_at
+           else
+             Time.new(1, 1, 1, 1, 0, 0, 0)
+           end
 
-      @data << [user, td, user_data]
+      data << [user, td, user_data]
     end
 
-    @data = @data.sort_by{ |h| h.second }.reverse
+    @data = data.sort_by{ |h| h.second }.reverse
   end
 
   def show
@@ -36,24 +36,21 @@ class UsersController < ApplicationController
   end
 
   def update
-    unless current_user.name == 'guest'
-      if @user.update(user_params)
-        redirect_to @user, notice: "Данные были успешно обновлены."
-      else
-        render :edit
-      end
+    (redirect_to @user, alarm: "Вам такое нельзя." and return) if current_user.name == 'guest'
+
+    if @user.update(user_params)
+      redirect_to @user, notice: "Данные были успешно обновлены."
     else
-      redirect_to @user, alarm: "Вам такое нельзя."
+      render :edit
     end
   end
 
   def destroy
-    unless current_user.name == 'guest'
-      @user.destroy
-        redirect_to users_url, notice: "Пользователь был удален."
-    else
-      redirect_to @user, alarm: "Вам такое нельзя."
-    end
+    (redirect_to @user, alarm: "Вам такое нельзя." and return) if current_user.name == 'guest'
+
+    @user.destroy
+
+    redirect_to users_url, notice: "Пользователь был удален."
   end
 
   def achivements
