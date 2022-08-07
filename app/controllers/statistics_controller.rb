@@ -12,13 +12,13 @@ class StatisticsController < ApplicationController
 
     stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity] ||= @max_months_quantity, last_training)
 
-    @data = stats_output[0]
+    @data = stats_output[:data_formatted]
 
-    @exercises_list = stats_output[1]
+    @exercises_list = stats_output[:exercises_list]
 
-    @name = stats_output[2]
+    @name = stats_output[:name]
 
-    @id = stats_output[3]
+    @id = stats_output[:id]
 
     respond_to do |format|
       format.js { render layout: false }
@@ -26,12 +26,12 @@ class StatisticsController < ApplicationController
     end
   end
 
-  ##################################### переменные для текстовой статистики
+##################################### переменные для второй статистики
   def secondary_stat
     redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики." if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
 
     @all_trainings_by_user ||= current_user.trainings.all
-    
+
     # все тренировки по годам и месяцам
     all_tr_by_month = []
     tr_years = @all_trainings_by_user.map{ |training| training.start_time.year }.uniq
@@ -67,19 +67,10 @@ class StatisticsController < ApplicationController
     @worse_trainings_ration = worse_trainings_quantity * 100 / @all_tr_by_month_formatted.size
 
     # Количество проведенных упражнений по названиям
-    ex_by_label = StatisticsHelper.exercises_by_quantity(current_user)
-    @tr_by_label_chart = []
-    ex_by_label.each{ |value| @tr_by_label_chart << value }
-    @tr_by_label_chart = @tr_by_label_chart.sort_by{ |h| h.second }.reverse!
+    @tr_by_label_chart = StatisticsHelper.exercises_by_quantity(current_user)
 
-    # максимальная сумма в каждом упражнении
-    @exercises_max_results = Hash.new
-      current_user.exercises.all.each do |ex|
-        next if ex.exercise_name_voc.label.match?(/ОФП|Офп|офп/)
-        @exercises_max_results[ex.exercise_name_voc.label] ||= 0
-        @exercises_max_results[ex.exercise_name_voc.label] = ex.summ if ex.summ > @exercises_max_results[ex.exercise_name_voc.label]
-    end
-    @exercises_max_results = @exercises_max_results.sort_by{ |h| h.second }.reverse!
+    # Максимальное количество повторов в каждом упражнении
+    @exercises_max_results = StatisticsHelper.max_reps_in_each_exercise(current_user)
   end
 
   private

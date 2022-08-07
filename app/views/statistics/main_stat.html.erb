@@ -15,16 +15,22 @@
             <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
           <% end %>
         </div>
-        <div id="graphs">
-          <% case @chart_id %>
-            <% when 1 then%>
-              <%= area_chart(@data, { theme: 'palette5' }) %>
-            <% when 2 then  %> 
-              <%= line_chart(@data) %>
-            <% when 3 then  %> 
-              <%= column_chart(@data, { theme: 'palette4' }) %>
-          <% end %>
-        </div>
+
+        <% unless @data.empty?  %>
+          <div id="graphs">
+            <% case @chart_id %>
+              <% when 1 then%>
+                <%= area_chart(@data, { theme: 'palette5' }) %>
+              <% when 2 then  %> 
+                <%= line_chart(@data) %>
+              <% when 3 then  %> 
+                <%= column_chart(@data, { theme: 'palette4' }) %>
+            <% end %>
+          </div>
+        <% else %>
+          <h4 class="center">В выбранном периоде упражнение не выполнялось</h4>
+        <% end %>
+
       </div>
     </div>
   </div>

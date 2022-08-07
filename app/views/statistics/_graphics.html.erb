@@ -1,8 +1,14 @@
-<% case @chart_id %>
-  <% when 1 then%> 
-    <%= area_chart(@data, {theme: 'palette5'}) %>
-  <% when 2 then  %> 
-    <%= line_chart(@data) %>
-  <% when 3 then  %> 
-    <%= column_chart(@data, {theme: 'palette4'}) %>
+<% unless @data.empty?  %>
+  <div id="graphs">
+    <% case @chart_id %>
+      <% when 1 then%>
+        <%= area_chart(@data, { theme: 'palette5' }) %>
+      <% when 2 then  %> 
+        <%= line_chart(@data) %>
+      <% when 3 then  %> 
+        <%= column_chart(@data, { theme: 'palette4' }) %>
+    <% end %>
+  </div>
+<% else %>
+  <h4 class="center">В выбранном периоде упражнение не выполнялось</h4>
 <% end %>
