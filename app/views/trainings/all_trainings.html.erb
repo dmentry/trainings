@@ -36,7 +36,7 @@
     <div class="col-lg-3 order-lg-3 my-2 bg-light ml-4 no-margins top_buffer_mobile buffer-top2">
       <div class="mt-1">
         <div class="head_color bold my-lg-2">Выбор тренировок по названиям</div>
-          <% Training.all.pluck(:label).uniq.sort.each do |training_label| %>
+          <% Training.where(user_id: current_user.id).pluck(:label).uniq.sort.each do |training_label| %>
             <div>
               <%= link_to(training_label, all_trainings_trainings_path(collect_by_name: training_label)) %>
             </div>

@@ -32,27 +32,8 @@ class StatisticsController < ApplicationController
 
     @all_trainings_by_user ||= current_user.trainings.all
 
-    # все тренировки по годам и месяцам
-    all_tr_by_month = []
-    tr_years = @all_trainings_by_user.map{ |training| training.start_time.year }.uniq
-    tr_years.size.times do |i|
-      tr_summ_by_year = 0
-      12.times do |month|
-        date = ("01.#{month + 1}.#{tr_years[i]}").to_date
-        break if date > Date.today
-        tr_by_month = @all_trainings_by_user.by_month(date).count
-        # next unless tr_by_month >= 1
-        tr_summ_by_year += tr_by_month
-        all_tr_by_month << [date, tr_by_month]
-      end
-    end
-    all_tr_by_month = all_tr_by_month.sort_by{ |h| h.first }
-
-    @all_tr_by_month_formatted = []
-
-    all_tr_by_month.each do |datum|
-      @all_tr_by_month_formatted << [datum.first.strftime("%d.%m.%Y"), datum.second]
-    end
+    # Количество тренировок по месяцам
+    @all_tr_by_month_formatted = StatisticsHelper.tr_by_years_months(current_user, @all_trainings_by_user)
 
     # Процент худших месяцев по количеству тренировок по сравнению с текущим
     current_month_trainings_quantity = @all_tr_by_month_formatted.last[1]

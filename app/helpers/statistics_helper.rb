@@ -10,8 +10,7 @@ module StatisticsHelper
 
     query = <<-SQL
       SELECT label, exercise_name_vocs.id AS exercise_name_voc_id
-      FROM exercises JOIN exercise_name_vocs
-        ON exercise_name_voc_id = exercise_name_vocs.id
+      FROM exercises JOIN exercise_name_vocs ON exercise_name_voc_id = exercise_name_vocs.id
       WHERE exercise_name_vocs.user_id = #{current_user.id} 
       GROUP BY label, exercise_name_vocs.id
       HAVING COUNT(exercise_name_voc_id) > 1
@@ -107,5 +106,56 @@ module StatisticsHelper
     data.each { |datum| data_formatted[datum['label']] = datum['max'] }
 
     data_formatted    
+  end
+
+  def self.tr_by_years_months(current_user, all_trainings_by_user)
+    # query = <<-SQL
+    #   SELECT extract('year' from trainings.start_time)::int as year,
+    #   sum(case when extract('month' from trainings.start_time) = 1 then 1 else 0 end ) as Jan,
+    #   sum(case when extract('month' from trainings.start_time) = 2 then 1 else 0 end ) as Feb,
+    #   sum(case when extract('month' from trainings.start_time) = 3 then 1 else 0 end ) as Mar,
+    #   sum(case when extract('month' from trainings.start_time) = 4 then 1 else 0 end ) as Apr,
+    #   sum(case when extract('month' from trainings.start_time) = 5 then 1 else 0 end ) as May,
+    #   sum(case when extract('month' from trainings.start_time) = 6 then 1 else 0 end ) as Jun,
+    #   sum(case when extract('month' from trainings.start_time) = 7 then 1 else 0 end ) as Jul,
+    #   sum(case when extract('month' from trainings.start_time) = 8 then 1 else 0 end ) as Aug,
+    #   sum(case when extract('month' from trainings.start_time) = 9 then 1 else 0 end ) as Sep,
+    #   sum(case when extract('month' from trainings.start_time) = 10 then 1 else 0 end ) as Oct,
+    #   sum(case when extract('month' from trainings.start_time) = 11 then 1 else 0 end ) as Nov,
+    #   sum(case when extract('month' from trainings.start_time) = 12 then 1 else 0 end ) as Dec
+    #   FROM users JOIN trainings ON users.id = trainings.user_id
+    #   GROUP BY year
+    #   ORDER BY year
+    # SQL
+
+    all_tr_by_month = []
+
+    query = <<-SQL
+      SELECT DISTINCT extract('year' from trainings.start_time)::int AS year 
+      FROM users JOIN trainings ON users.id = trainings.user_id
+    SQL
+    tr_years = ActiveRecord::Base.connection.execute(query).to_a.flatten
+    tr_years = tr_years.map{|h| h['year']}
+
+    tr_years.size.times do |i|
+      12.times do |month|
+        date = ("01.#{month + 1}.#{tr_years[i]}").to_date
+
+        break if date > Date.today
+
+        tr_by_month = all_trainings_by_user.by_month(date).count
+        # next unless tr_by_month >= 1
+        all_tr_by_month << [date, tr_by_month]
+      end
+    end
+    all_tr_by_month = all_tr_by_month.sort_by{ |h| h.first }
+
+    all_tr_by_month_formatted = []
+
+    all_tr_by_month.each do |datum|
+      all_tr_by_month_formatted << [datum.first.strftime("%m.%Y"), datum.second]
+    end
+
+    all_tr_by_month_formatted
   end
 end
