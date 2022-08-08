@@ -14,10 +14,18 @@ class Training < ApplicationRecord
   # validates :start_time, presence: true
   validates :start_time, uniqueness: { scope: [:start_time, :user_id], message: "Только одна тренировка в день может быть создана!" }
 
-  def self.by_month(date)
-    Training.all
-      .order(start_time: :asc)
-        .select{ |training| training.start_time.month == date.month && training.start_time.year == date.year }
+  def self.by_month(date, current_user_id)
+    query = <<-SQL
+      SELECT trainings.id, trainings.label, trainings.start_time, trainings.user_id 
+      FROM users 
+        JOIN trainings ON users.id = trainings.user_id 
+      WHERE users.id = #{current_user_id} 
+        AND extract('year' from trainings.start_time)::int = #{date.year} 
+        AND extract('month' from trainings.start_time)::int = #{date.month} 
+      ORDER BY trainings.start_time
+    SQL
+
+    Training.find_by_sql(query)
   end
 
   def next

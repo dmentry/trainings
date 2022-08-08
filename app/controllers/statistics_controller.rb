@@ -16,7 +16,7 @@ class StatisticsController < ApplicationController
 
     @exercises_list = stats_output[:exercises_list]
 
-    @name = stats_output[:name]
+    @name = stats_output[:label]
 
     @id = stats_output[:id]
 

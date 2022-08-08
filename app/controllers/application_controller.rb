@@ -59,10 +59,11 @@ class ApplicationController < ActionController::Base
             end
 
     if params[:collect_by_name].present?
-      ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(
-                                                                                 sort_by: column, sort_direction: direction, collect_by_name: params[:collect_by_name]), 
-                                                                                 class: 'btn-sm btn-primary', id: "#{column}"
-                                                                                )
+      ActionController::Base.helpers.link_to(
+                                             title, all_trainings_trainings_path(
+                                                                                 sort_by: column, sort_direction: direction, collect_by_name: params[:collect_by_name]
+                                                                                ), class: 'btn-sm btn-primary', id: "#{column}"
+                                            )
     else
       ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(sort_by: column, sort_direction: direction), class: 'btn-sm btn-primary') 
     end

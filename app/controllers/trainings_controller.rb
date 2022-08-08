@@ -21,8 +21,8 @@ class TrainingsController < ApplicationController
     else
       @date = Date.parse(current_user.options['calendar_date'])
     end
-      
-    @trainings_by_month = @trainings.by_month(@date)
+
+    @trainings_by_month = Training.by_month(@date, current_user.id)
   end
 
   def show
@@ -72,7 +72,7 @@ class TrainingsController < ApplicationController
   def download_textfile
     export_data = TrainingsHelper::TrainingExport.download_textfile(current_user)
 
-    send_data export_data, :type => 'text', :disposition => "attachment; filename=Тренировки_#{ current_user.name }_#{ Date.today.strftime("%d.%m.%Y") }.txt"
+    send_data export_data, type: 'text', :disposition => "attachment; filename=Тренировки_#{ current_user.name }_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
 
   def instruction
