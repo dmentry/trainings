@@ -19,6 +19,7 @@ gem 'apexcharts'
 gem 'carrierwave'
 # gem 'carrierwave-ftp', :require => 'carrierwave/storage/ftp'
 gem 'rmagick'
+gem 'ransack'
 
 group :development, :test do
   gem 'pry', '~> 0.13.1'
