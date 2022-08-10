@@ -1,0 +1,50 @@
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
+
+<h3 class="center text_size mt-2 head_color">Поиск</h3>
+<div class="container my-bg-color without_borders full_screen_height px-0">
+  <div class="row my-2 mr-1">
+    <div class="col-12 mr-0">
+
+      <%= search_form_for @q, url: searchingw_trainings_path, class: "row mt-1 mt-lg-3 ml-lg-3 ml-0 mr-lg-0 bg-light pl-3 py-2 mb-1", html: { method: :post } do |f| %>
+        Введите название тренировки, упражнения или текст заметки: <br>
+        <div class="input-group">
+          <%= f.search_field :label_or_exercises_note_or_exercises_exercise_name_voc_label_cont, placeholder: "Текст", class: '' %>
+        </div>
+        Дата тренировки между: <br>
+        <div class="input-group mt-2">
+          <%= f.search_field :start_time_gteq, placeholder: "01.01.2020" %>&nbsp;
+        </div>
+          и <br>
+        <div class="input-group mb-2">
+          <%= f.search_field :start_time_lteq, placeholder: "15.11.2021" %>
+        </div>
+        <%= f.submit %>
+        <%= link_to "Очистить", searchingw_trainings_path, class: "btn btn-secondary ml-2" %>
+      <% end %>
+
+      <% if @trainings_searched.present? && !@trainings_searched.empty? %>
+          <%#= sort_link(@q, :label, "label") %>
+          <%= sort_link(@q, :start_time, "Дата", class: "btn-sm btn-primary ml-3") %>
+
+          <div class="row order-lg-2 ml-lg-3 ml-0 mr-lg-0 mb-0 pl-3 mt-1 buffer-top bg-light max_height_search">
+            <div>
+              <% @trainings_searched.each do |training| %>
+                <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
+                <div>
+
+                  <%= link_to message, training_path(training[:id]) %>
+                    <% training.exercises.order(:ordnung).each do |exercise| %>
+                      <div class="exercise_margin_left">
+                        <%= exercise.exercise_name_voc.label %>
+                      </div> 
+                   <% end %>
+
+                </div> 
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

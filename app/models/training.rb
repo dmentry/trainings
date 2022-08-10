@@ -9,6 +9,7 @@ class Training < ApplicationRecord
 
   belongs_to :user
   has_many :exercises, dependent: :destroy
+  has_many :exercise_name_vocs, through: :exercises
 
   validates :label, presence: true, length: { maximum: 45, message: "Не более 45 символов!" }
   # validates :start_time, presence: true

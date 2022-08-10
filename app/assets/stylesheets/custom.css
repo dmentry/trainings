@@ -159,6 +159,11 @@ h1  a {
   overflow: auto;
 }
 
+.max_height_search {
+  max-height: 335px;
+  overflow: auto;
+}
+
 .max_height_stat_second {
   max-height: 600px;
   overflow: auto;
@@ -360,6 +365,11 @@ h1  a {
 
   .max_height_month_tr {
     max-height: 325px;
+    overflow: auto;
+  }
+
+  .max_height_search {
+    max-height: 50vh;
     overflow: auto;
   }
 

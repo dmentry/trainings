@@ -161,6 +161,15 @@ class TrainingsController < ApplicationController
     end
   end
 
+  def searchingw
+    @q = Training.ransack(params[:q])
+
+    if params[:q]
+      @q.sorts = 'start_time DESC' if @q.sorts.empty?
+      @trainings_searched = @q.result.includes(:exercises, :exercise_name_vocs)
+    end
+  end
+
   private
 
   def set_current_user_training
@@ -168,6 +177,6 @@ class TrainingsController < ApplicationController
   end
 
   def training_params
-    params.require(:training).permit(:label, :start_time)
+    params.require(:training).permit(:label, :start_time, :q)
   end
 end
