@@ -7,11 +7,11 @@
 
       <%= search_form_for @q, url: searchingw_trainings_path, class: "row mt-1 mt-lg-3 ml-lg-3 ml-0 mr-lg-0 bg-light pl-3 py-2 mb-1", html: { method: :post } do |f| %>
         Введите название тренировки, упражнения или текст заметки: <br>
-        <div class="input-group">
+        <div class="input-group mb-1">
           <%= f.text_field :label_or_exercises_note_or_exercises_exercise_name_voc_label_cont, placeholder: "Текст", class: '' %>
         </div>
         Дата тренировки между: <br>
-        <div class="input-group mt-2">
+        <div class="input-group">
           <%= f.text_field :start_time_gteq, placeholder: "01.01.2020" %>&nbsp;
         </div>
           и <br>
