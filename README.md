@@ -19,7 +19,6 @@
 * Поиск по упражнениям, тренировкам и заметкам
 
 ## В планах:
-* Пагинация
 * Таблица достижениий пользователей
 * Загрузка аватарки в профиле
 * Выбор дня на календаре с помощью js
@@ -27,6 +26,7 @@
 ## Gems:
 * Devise
 * Apexcharts
+* Ransack
 
 ## Главный экран:
 ![Application screenshot](https://github.com/dmentry/trainings/blob/master/screen_fitcalendar.png)

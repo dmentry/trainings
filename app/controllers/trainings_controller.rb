@@ -161,7 +161,7 @@ class TrainingsController < ApplicationController
     end
   end
 
-  def searchingw
+  def searching
     @q = Training.ransack(params[:q])
 
     if params[:q]

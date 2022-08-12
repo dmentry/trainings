@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       get  :trainings_upload_new
       post :trainings_upload_post
       # match 'search' => 'trainings#searchingw', via: [:get, :post], as: :searchingw #запись для для соответствия нескольким методам сразу
-      get  'searchingw', to: 'trainings#searchingw'
-      post 'searchingw', to: 'trainings#searchingw'
+      get  'searching', to: 'trainings#searching'
+      post 'searching', to: 'trainings#searching'
     end
     # Вложенный ресурс упражнений
     resources :exercises, only: [:new, :create, :destroy, :update, :edit] do
@@ -26,8 +26,6 @@ Rails.application.routes.draw do
       get :all_trainings
     end
   end
-
-  # get 'searchingw', to: 'trainings#searchingw'
 
   resources :users do
     member do

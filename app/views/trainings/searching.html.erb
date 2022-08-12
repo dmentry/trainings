@@ -5,7 +5,7 @@
   <div class="row my-2 mr-1">
     <div class="col-12 mr-0">
 
-      <%= search_form_for @q, url: searchingw_trainings_path, class: "row mt-1 mt-lg-3 ml-lg-3 ml-0 mr-lg-0 bg-light pl-3 py-2 mb-1", html: { method: :post } do |f| %>
+      <%= search_form_for @q, url: searching_trainings_path, class: "row mt-1 mt-lg-3 ml-lg-3 ml-0 mr-lg-0 bg-light pl-2 py-2 mb-1", html: { method: :post } do |f| %>
         Введите название тренировки, упражнения или текст заметки: <br>
         <div class="input-group mb-1">
           <%= f.text_field :label_or_exercises_note_or_exercises_exercise_name_voc_label_cont, placeholder: "Текст", class: '' %>
@@ -19,7 +19,7 @@
           <%= f.text_field :start_time_lteq, placeholder: "15.11.2021" %>
         </div>
         <%= f.submit %>
-        <%= link_to "Очистить", searchingw_trainings_path, class: "btn btn-secondary ml-2" %>
+        <%= link_to "Очистить", searching_trainings_path, class: "btn btn-secondary ml-2" %>
       <% end %>
 
       <% if @trainings_searched.present? && !@trainings_searched.empty? %>
