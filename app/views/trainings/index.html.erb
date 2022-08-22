@@ -117,14 +117,14 @@
     let cal_height = $('.calendar').height();
     let browser_width = $(window).width();
 
-    if (cal_height == 505 && browser_width > '991') {
+    if (cal_height >= 505 && cal_height < 506 && browser_width > '991') {
       $('#trainings_list').css({'height' : '505px'});
 
       // Установка margin-top списка тренировок в зависимости от наполнения календаря
       let home_btn_element = $('#home_btn a').length;
       if (home_btn_element == 0 && $('td div div a').length) {$('#trainings_list').css({'margin-top' : '60px'})}
     }
-    else if (cal_height == 425 && browser_width > '991') {
+    else if (cal_height >= 425 && cal_height < 426 && browser_width > '991') {
       $('#trainings_list').css({'height' : '425px'});
 
       // Установка margin-top списка тренировок в зависимости от наполнения календаря
@@ -132,7 +132,7 @@
       if (home_btn_element == 0 && $('td div div a').length) {$('#trainings_list').css({'margin-top' : '59px'})}
       else if (home_btn_element || (home_btn_element && $('td div div a').length)) {$('#trainings_list').css({'margin-top' : '61px'})}
     }
-    else if (cal_height == 345 && browser_width > '991') {
+    else if (cal_height >= 345 && cal_height < 346 &&  browser_width > '991') {
       $('#trainings_list').css({'height' : '348px'});
     }
     else {
