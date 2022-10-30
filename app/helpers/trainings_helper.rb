@@ -14,11 +14,14 @@ module TrainingsHelper
         tr << training.label << "\n"
 
         training.exercises.sort.find_all do |exercise|
-          tr << exercise.exercise_name_voc.label << "####"
+          tr << exercise.exercise_name_voc.label << "#####"
 
-          tr << exercise.quantity
+          tr << exercise.quantity << "####"
 
-          tr << "###" << exercise.note << "###" if exercise.note.present?
+          tr << exercise.ordnung.to_s << "###"
+
+          tr << exercise.note << "##" if exercise.note.present?
+
           tr << "\n"
         end
         tr << "\n"
@@ -67,19 +70,16 @@ module TrainingsHelper
         next if exercise == training_array[0] # пропускаем дату
         next if exercise == training_array[1] # пропускаем название трени
 
-        exercise_comment = ''
+        exercise_label = exercise.match(/^.+\#{5}/).to_s.gsub(/\#{5}/, '').strip
+        exercise = exercise.gsub(exercise_label, '').gsub(/\#{5}/, '').strip
 
-        exercise_label = exercise.match(/(^.+\#{4})/)
-        exercise = exercise.gsub(exercise_label.to_s, '').strip
-        exercise_label = exercise_label.to_s.gsub(/\#{4}/, '').strip
-        exercise_comment = exercise.match(/\#{3}.+\#{3}/)
+        reps = exercise.match(/^.+\#{4}/).to_s.gsub(/\#{4}/, '').strip
+        exercise = exercise.gsub(reps, '').gsub(/\#{4}/, '').strip
 
-        if exercise_comment.present?
-          exercise = exercise.gsub(exercise_comment.to_s, '').strip
-          exercise_comment = exercise_comment.to_s.gsub(/\#{3}/, '').strip
-        end
+        exercise_ordnung = exercise.match(/^.+\#{3}/).to_s.gsub(/\#{3}/, '').strip
+        exercise = exercise.gsub(exercise_ordnung, '').gsub(/\#{3}/, '').strip
 
-        reps = exercise.strip.gsub(/["\[\]]/, '')
+        exercise_comment = exercise.match(/^.+\#{2}/).to_s.gsub(/\#{2}/, '').strip
 
         exercise_name_voc = ExerciseNameVoc.where('label = ? and user_id = ?', exercise_label, user_id)
 
@@ -102,7 +102,8 @@ module TrainingsHelper
           exercise_name_voc_id: exercise_name_voc_id,
           quantity:             reps,
           note:                 exercise_comment,
-          summ:                 summ
+          summ:                 summ,
+          ordnung:              exercise_ordnung
         )
 
         unless e.valid?

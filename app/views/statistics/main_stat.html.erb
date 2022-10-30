@@ -9,7 +9,7 @@
       <div>
         <div class="center mt-3">
           <label for="months_range" id='current_number'></label>
-          <input type="range" min="1" max='<%= @max_months_quantity %>' step="1" value='<%= @max_months_quantity %>' id="months_range">
+          <input type="range" min="1" max='<%= @max_months_quantity %>' step="1" value='<%= params[:months_quantity] %>' id="months_range">
 
           <% @chart_types.each do |key, value| %>
             <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 

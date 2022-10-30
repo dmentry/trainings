@@ -1,4 +1,6 @@
 class StatisticsController < ApplicationController
+  STAT_MONTHS_TO_SHOW_INITIALLY = 8
+
   before_action :authenticate_user!
   before_action :user_chart_status, only: :main_stat
 
@@ -10,7 +12,9 @@ class StatisticsController < ApplicationController
 
     @max_months_quantity = (last_training.year * 12 + last_training.month) - (first_training.year * 12 + first_training.month)
 
-    stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity] ||= @max_months_quantity, last_training)
+    params[:months_quantity] = STAT_MONTHS_TO_SHOW_INITIALLY if params[:months_quantity].nil?
+
+    stats_output = StatisticsHelper.main_stat_helper(current_user, params[:exercise_name_id], params[:months_quantity], last_training)
 
     @data = stats_output[:data_formatted]
 
