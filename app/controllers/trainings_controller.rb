@@ -162,7 +162,7 @@ class TrainingsController < ApplicationController
   end
 
   def searching
-    @q = Training.ransack(params[:q])
+    @q = current_user.trainings.all.ransack(params[:q])
 
     if params[:q]
       @q.sorts = 'start_time DESC' if @q.sorts.empty?
