@@ -37,10 +37,25 @@ class StatisticsController < ApplicationController
     @all_trainings_by_user ||= current_user.trainings.all
 
     # Количество тренировок по месяцам
-    @all_tr_by_month_formatted = StatisticsHelper.tr_by_years_months(current_user, @all_trainings_by_user)
+    @all_tr_by_month_formatted = StatisticsHelper.tr_by_years_months(current_user)
+
+    # Количество лет\месяцев с тренировками
+    overall_training_time = 0
+
+    @all_tr_by_month_formatted.each do |month|
+      overall_training_time += 1 if month[1] > 0
+    end
+
+    years = (overall_training_time / 12).to_i
+    months = overall_training_time % 12
+
+    @overall_training_time = "Тренировки идут уже #{ years } года и #{ months } месяцев. "
 
     # Процент худших месяцев по количеству тренировок по сравнению с текущим
     current_month_trainings_quantity = @all_tr_by_month_formatted.last[1]
+
+    # Среднее количество тренировок в месяц
+    @average_in_month = (@all_trainings_by_user.count / @all_tr_by_month_formatted.size).round
 
     worse_trainings_quantity = 0
 

@@ -109,7 +109,7 @@ module StatisticsHelper
   end
 
   # Количество тренировок по месяцам
-  def self.tr_by_years_months(current_user, all_trainings_by_user)
+  def self.tr_by_years_months(current_user)
     # query = <<-SQL
     #   SELECT extract('year' from trainings.start_time)::int as year,
     #   sum(case when extract('month' from trainings.start_time) = 1 then 1 else 0 end ) as Jan,
