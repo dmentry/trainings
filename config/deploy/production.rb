@@ -59,4 +59,4 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-server 'photo.dack9.ru', user: 'deploy', roles: %w[app db web resque_worker]
+server 'fit.dack9.ru', user: 'deploy', roles: %w[app db web resque_worker]

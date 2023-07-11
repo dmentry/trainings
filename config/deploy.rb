@@ -2,29 +2,19 @@
 lock "~> 3.16.0"
 
 # Это имя приложения
-set :application, 'photo'
+set :application, 'fit'
 
 # Это url вашего репозитория, откуда Capistrano будет брать свежие версии исходников
 set :repo_url, 'git@github.com:dmentry/site_rails.git'
 
 # Папка, где будет храниться приложение
-set :deploy_to, '/home/deploy/www/photo'
+set :deploy_to, '/home/deploy/www/fit'
 
 # Файлы, которые лежат вне репозитория
 append :linked_files, 'config/master.key'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads'
 
 Rake::Task["deploy:assets:backup_manifest"].clear_actions
-
-# Копировать папку blog рекурсивно на сервер
-namespace :blog do
-  desc 'Blog photos copy'
-  task :copy do
-    run_locally do
-      execute "scp -r /home/dmitry/RoR/Apps/site_rails/public/blog deploy@185.12.127.17:/home/deploy/www/photo/current/public/"
-    end
-  end
-end
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

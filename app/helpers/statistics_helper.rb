@@ -58,6 +58,13 @@ module StatisticsHelper
 
     data.each { |datum| data_formatted[datum['start_date']] = datum['summ'] }
 
+##################
+all_months_btw_dates = (first_training..last_training).map{ |d| "01.#{ d.month }.#{ d.year }".to_date }.uniq
+# теперь нужно сравнить месяца и года фактических тренировок (data) со списком всех месяцев и годов внутри периода тренировок (all_months_btw_dates). 
+# Если в какой-нибудь из месяцев тренировок не было, надо его добавить с кол-вом 0.
+# Как-то так: Date.today.strftime("%m.%d").to_f.between?(12.1,12.25)
+##################
+
     { data_formatted: data_formatted, exercises_list: exercises_list, label: label, id: id }
   end
 
