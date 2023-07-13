@@ -29,7 +29,8 @@ module StatisticsHelper
          elsif current_user.options['exercise_show_in_stat']
            current_user.options['exercise_show_in_stat'].to_i
          else
-           exercises_list.first['label']
+           # exercises_list.first['label']
+           exercises_list.first['exercise_name_voc_id']
          end
 
     label = Exercise&.find_by(exercise_name_voc: id)&.exercise_name_voc&.label
