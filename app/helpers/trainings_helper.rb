@@ -54,13 +54,15 @@ module TrainingsHelper
 
       training_label = training_array[1]
 
-      t = Training.create(
+      t = Training.new(
         user_id:    user_id,
         label:      training_label,
         start_time: training_date
       )
 
-      unless t.valid?
+      if t.valid?
+        t.save
+      else
         failed += 1
         errors << "Тренировка не создана: #{training_date.strftime("%d.%m.%Y")}"
       end
@@ -97,7 +99,7 @@ module TrainingsHelper
 
         summ = ExercisesHelper::Summ.new(options).overall
 
-        e = Exercise.create(
+        e = Exercise.new(
           training_id:          t.id,
           exercise_name_voc_id: exercise_name_voc_id,
           quantity:             reps,
@@ -106,7 +108,9 @@ module TrainingsHelper
           ordnung:              exercise_ordnung
         )
 
-        unless e.valid?
+        if e.valid?
+          e.save
+        else
           failed += 1
           errors << "Упражнение не создано: #{training_date.strftime("%d.%m.%Y")}, #{exercise_name_voc_id}, #{reps}"
         end
