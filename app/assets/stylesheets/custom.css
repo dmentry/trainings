@@ -247,9 +247,15 @@ h1  a {
   border-radius: 70px;
 }
 
+.user_avatar_sm {
+  height: 30px;
+  margin-top: 4px;
+  border-radius: 15px;
+}
+
 .user_avatar_edit {
   border-radius: 250px;
-  width: 70%;
+  width: 30%;
 }
 
 .without_borders {
@@ -288,6 +294,12 @@ h1  a {
 
   .additional_buffer_top {
     margin-top: 0px;
+  }
+
+  .user_avatar_sm {
+    height: 30px;
+    margin-top: 1px;
+    border-radius: 15px;
   }
 
   .text_size {
