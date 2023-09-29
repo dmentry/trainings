@@ -46,7 +46,7 @@
 
 .cal-font {
   font-size: 13px;
-  line-height: 0.7;
+  line-height: 0.9;
 }
 
 .head_color {
@@ -128,10 +128,6 @@ h1  a {
   width: 100%;
   padding-bottom: 0;
   font-size: 22px;
-}
-
-.day_cell {
-  margin-top: -3px;
 }
 
 .tr-width-my {

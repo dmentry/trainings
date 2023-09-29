@@ -21,7 +21,7 @@
 
       <%= calendar @date do |date| %>
         <%= date.day %>
-        <div class="day_cell">
+        <div>
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
               <% if @training_highlight.present? && training.id == @training_highlight %>
