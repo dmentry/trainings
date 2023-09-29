@@ -21,13 +21,13 @@
 
       <%= calendar @date do |date| %>
         <%= date.day %>
-        <div>
+        <div class="day_cell">
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
               <% if @training_highlight.present? && training.id == @training_highlight %>
-                <div class=" date-my" id="highlight">
+                <div class="date-my" id="highlight cal-font">
               <% else %>
-                <div class=" date-my">
+                <div class="date-my cal-font">
               <% end %>
               <% if Training.pics[training.label&.downcase&.to_sym] %>  
                 <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training) %>
