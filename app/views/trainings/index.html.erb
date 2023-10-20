@@ -21,16 +21,23 @@
 
       <%= calendar @date do |date| %>
         <%= date.day %>
+
+        <% if date.month != @date.month %>
+          <% css_class = 'not_curr_month_shading' %>
+        <% else %>
+          <% css_class = '' %>
+        <% end %>
+
         <div>
           <% if @trainings_by_date[date] %>
             <% @trainings_by_date[date].each do |training| %>
               <% if @training_highlight.present? && training.id == @training_highlight %>
-                <div class="date-my" id="highlight cal-font">
+                <div class="date-my cal-font" id="highlight">
               <% else %>
                 <div class="date-my cal-font">
               <% end %>
-              <% if Training.pics[training.label&.downcase&.to_sym] %>  
-                <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training) %>
+              <% if Training.pics[training.label&.downcase&.to_sym] %>
+                <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training, class: css_class) %>
               <% else %>
                 <%= link_to training.label.truncate(29), training, class: 'cal-font' %>
               <% end %>
@@ -80,18 +87,23 @@
 
   $(function(){
     $(".calendar td").click(function() {
-      answer = current_month ($(this));
+      answer = current_month($(this));
 
-      if (answer == false) {
-        alert('Чтобы создать/отредактировать тренировку в другом месяце, перейдите в него')
-        return false;
-      }
-      else {
-        if (!$(this).find("a").length > 0) {
-          location = "/trainings/new?day=" + $(this).text().replace(/\s/g, "");
+      if (answer) {
+        if ($(this).find("a").length > 0) {
+          location = $(this).find("a").attr('href');
         }
         else {
+          location = "/trainings/new?day=" + $(this).text().replace(/\s/g, "");
+        }
+      }
+      else {
+        if ($(this).find("a").length > 0) {
           location = $(this).find("a").attr('href');
+        }
+        else {
+          alert('Чтобы создать тренировку в другом месяце, перейдите в него');
+          return false;
         }
       }
      });
@@ -108,7 +120,7 @@
         }
       }
       else {
-        $(this).attr('title', 'Чтобы создать/отредактировать тренировку в другом месяце, перейдите в него');
+        $(this).attr('title', 'Чтобы создать тренировку в другом месяце, перейдите в него');
         return false;
       }
     });
@@ -140,7 +152,7 @@
     }
 
     // Закраска фона выбранной тренировки
-    let td_element = $('div.date-my#highlight');
+    let td_element = $('#highlight');
     if (td_element) { td_element.closest("td").addClass('highlight') };
   });
 </script>

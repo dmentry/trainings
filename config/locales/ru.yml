@@ -300,3 +300,15 @@ ru:
       - Октябрь
       - Ноябрь
       - Декабрь
+  year:
+    zero: 'лет'
+    one: '%{count} год'
+    few: '%{count} года'
+    many: '%{count} лет'
+    other: 'лет'
+  month:
+    zero: 'месяцев'
+    one: '%{count} месяц'
+    few: '%{count} месяца'
+    many: '%{count} месяцев'
+    other: 'месяцев'

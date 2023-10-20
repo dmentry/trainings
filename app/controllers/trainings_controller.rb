@@ -4,11 +4,6 @@ class TrainingsController < ApplicationController
   before_action :user_admin?, only: %i[trainings_upload_post]
  
   def index
-    @trainings = current_user.trainings.all
-    # @trainings = current_user.trainings.all.order(start_time: :desc)
-
-    @trainings_by_date = @trainings.group_by(&:start_time)
-
     @training_highlight = params[:training_highlight].to_i if params[:training_highlight]
 
     if params[:date]
@@ -23,6 +18,21 @@ class TrainingsController < ApplicationController
     end
 
     @trainings_by_month = Training.by_month(@date, current_user.id)
+
+    ###### Собираю тренировки для показа. Текущая дата + 1 месяц до нее + 1 месяц после нее
+    dt_before_curr_dt = @date - 1.month
+    trainings_by_month_before_curr_dt = Training.by_month(dt_before_curr_dt, current_user.id)
+    trainings_by_dt_before_curr_dt = trainings_by_month_before_curr_dt.group_by(&:start_time) if trainings_by_month_before_curr_dt.size > 0
+
+    dt_after_curr_dt = @date + 1.month
+    trainings_by_month_after_curr_dt = Training.by_month(dt_after_curr_dt, current_user.id)
+    trainings_by_dt_after_curr_dt = trainings_by_month_after_curr_dt.group_by(&:start_time) if trainings_by_month_after_curr_dt.size > 0
+
+    @trainings_by_date = Training.by_month(@date, current_user.id).group_by(&:start_time)
+
+    @trainings_by_date = @trainings_by_date.merge(trainings_by_dt_before_curr_dt) if trainings_by_dt_before_curr_dt
+    @trainings_by_date = @trainings_by_date.merge(trainings_by_dt_after_curr_dt) if trainings_by_dt_after_curr_dt
+    ######
   end
 
   def show

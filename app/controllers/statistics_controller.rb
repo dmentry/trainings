@@ -46,10 +46,9 @@ class StatisticsController < ApplicationController
       overall_training_time += 1 if month[1] > 0
     end
 
-    years = (overall_training_time / 12).to_i
-    months = overall_training_time % 12
-
-    @overall_training_time = "Тренировки идут уже #{ years } года и #{ months } месяцев. "
+    # Продолжительность тренировок
+    @years = (overall_training_time / 12).to_i
+    @months = overall_training_time % 12
 
     # Процент худших месяцев по количеству тренировок по сравнению с текущим
     current_month_trainings_quantity = @all_tr_by_month_formatted.last[1]
