@@ -35,7 +35,7 @@
     <tr class="table-buffers-vertical">
       <td class="table-buffers-vertical">            
         Сумма:
-        <% if exercise.exercise_name_voc.label && exercise.exercise_name_voc.label.match?(/бег|лыжи|Бег|Лыжи/) %>
+        <% if exercise.exercise_name_voc.label && exercise.exercise_name_voc.label.match?(/бег|лыжи|Бег|Лыжи|ролики|Ролики/) %>
           <%= exercise.summ %>
         <% else %>
           <%= exercise.summ.to_i %>

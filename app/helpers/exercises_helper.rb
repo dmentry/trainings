@@ -11,7 +11,7 @@ module ExercisesHelper
     end
 
     def overall
-      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи|ОФП|Офп|офп/)
+      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|ролики|Бег|Лыжи|Ролики|ОФП|Офп|офп/)
         overall_summ = 0
 
         @exercise.split(',') do |match|
@@ -80,12 +80,12 @@ module ExercisesHelper
 
     # бег\лыжи
     def running(label, exercise)
-      exercise.match(/\d+[.,]\d+|\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
+      exercise.match(/\d+[.,]\d+|\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи|ролики|Ролики/)
     end
 
     # один подход
     def one_rep(label, exercise)
-      unless label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи/)
+      unless label.match?(/лесен|Лесен|бег|лыжи|Бег|Лыжи|ролики|Ролики/)
         exercise.match(/\A\d+\z/).to_s.to_i if exercise.match?(/\A\d+\z/)
       end
     end
