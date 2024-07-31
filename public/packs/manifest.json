@@ -1,0 +1,44 @@
+{
+  "application.css": "/packs/css/application-aef97fbb.css",
+  "application.js": "/packs/js/application-4fef0f184adcb6c6ec1c.js",
+  "application.js.map": "/packs/js/application-4fef0f184adcb6c6ec1c.js.map",
+  "entrypoints": {
+    "application": {
+      "css": [
+        "/packs/css/application-aef97fbb.css"
+      ],
+      "js": [
+        "/packs/js/application-4fef0f184adcb6c6ec1c.js"
+      ],
+      "js.map": [
+        "/packs/js/application-4fef0f184adcb6c6ec1c.js.map"
+      ]
+    }
+  },
+  "media/images/abs.png": "/packs/media/images/abs-371cec580bb99b35189c2313f6f72dc3.png",
+  "media/images/add.png": "/packs/media/images/add-96352f68f1941e91c57323992b9ca54a.png",
+  "media/images/android-chrome-192x192.png": "/packs/media/images/android-chrome-192x192-0b4f75d51a28fc672c8cc44449a424ab.png",
+  "media/images/close.png": "/packs/media/images/close-d69ca4b257d96a4bb5d41d0c25ffa70c.png",
+  "media/images/common.png": "/packs/media/images/common-d6c6acfbf89c07cfed2fc7627b92a6f3.png",
+  "media/images/del.png": "/packs/media/images/del-c030e92fa9b8a667832664ca1a6c5cb3.png",
+  "media/images/down.png": "/packs/media/images/down-daf1440deb935ae54f2ad56ae746c529.png",
+  "media/images/dublicate.png": "/packs/media/images/dublicate-2feec6300f84bd849cddb4532b846ef9.png",
+  "media/images/dumbbell.png": "/packs/media/images/dumbbell-1490cc4c5f9adf0fcbc379a8e2999425.png",
+  "media/images/edit.png": "/packs/media/images/edit-5598ca94da320bf19137a14901e06275.png",
+  "media/images/flag.png": "/packs/media/images/flag-781c37feb8f17f5cb1d1eb43bc624810.png",
+  "media/images/handstand.png": "/packs/media/images/handstand-ed25ac5249a02637a1eb0ea7f1e4f101.png",
+  "media/images/home.png": "/packs/media/images/home-86fc6a5dcb485540d1bf7a0e9ce7aee5.png",
+  "media/images/home_white.png": "/packs/media/images/home_white-2418e7086184714eb297911fd4519c90.png",
+  "media/images/menu-4x.png": "/packs/media/images/menu-4x-d7952ff8870437c99ed3d631732dbc29.png",
+  "media/images/ofp.png": "/packs/media/images/ofp-b41a9e6ed25ed420dff03303604fa4a7.png",
+  "media/images/ok.png": "/packs/media/images/ok-fcb8806e017dfd3639daffe712052088.png",
+  "media/images/powerpullup.png": "/packs/media/images/powerpullup-7f9fffab56da7133d671344f8792a528.png",
+  "media/images/pullup.png": "/packs/media/images/pullup-30a8f645268dfd4875bd57e14059d23f.png",
+  "media/images/pushup.png": "/packs/media/images/pushup-06115533e6c1b39982222a2b4355f655.png",
+  "media/images/pushup2.png": "/packs/media/images/pushup2-3ef2835e784fb3e5890925a41619ce8f.png",
+  "media/images/pushup3.png": "/packs/media/images/pushup3-67845cfa11e6426c2146502d90b0d272.png",
+  "media/images/run.png": "/packs/media/images/run-e2594cdfe9d0b1b9df93dc3136a5b70b.png",
+  "media/images/ski.png": "/packs/media/images/ski-c1c4c82deed322744d4fbcd7d51cc0da.png",
+  "media/images/up.png": "/packs/media/images/up-ea0ad55ac3222b72c579663b88c1d3e6.png",
+  "media/images/user.png": "/packs/media/images/user-d8c09ca909e4371c2f5222d5b90348c0.png"
+}
