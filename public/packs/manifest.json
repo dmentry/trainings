@@ -1,17 +1,17 @@
 {
   "application.css": "/packs/css/application-aef97fbb.css",
-  "application.js": "/packs/js/application-4fef0f184adcb6c6ec1c.js",
-  "application.js.map": "/packs/js/application-4fef0f184adcb6c6ec1c.js.map",
+  "application.js": "/packs/js/application-bfb4932fed65d9472140.js",
+  "application.js.map": "/packs/js/application-bfb4932fed65d9472140.js.map",
   "entrypoints": {
     "application": {
       "css": [
         "/packs/css/application-aef97fbb.css"
       ],
       "js": [
-        "/packs/js/application-4fef0f184adcb6c6ec1c.js"
+        "/packs/js/application-bfb4932fed65d9472140.js"
       ],
       "js.map": [
-        "/packs/js/application-4fef0f184adcb6c6ec1c.js.map"
+        "/packs/js/application-bfb4932fed65d9472140.js.map"
       ]
     }
   },
@@ -37,6 +37,7 @@
   "media/images/pushup.png": "/packs/media/images/pushup-06115533e6c1b39982222a2b4355f655.png",
   "media/images/pushup2.png": "/packs/media/images/pushup2-3ef2835e784fb3e5890925a41619ce8f.png",
   "media/images/pushup3.png": "/packs/media/images/pushup3-67845cfa11e6426c2146502d90b0d272.png",
+  "media/images/rollerblade.png": "/packs/media/images/rollerblade-f9bc24609f95518b6ca1b058e4bb6454.png",
   "media/images/run.png": "/packs/media/images/run-e2594cdfe9d0b1b9df93dc3136a5b70b.png",
   "media/images/ski.png": "/packs/media/images/ski-c1c4c82deed322744d4fbcd7d51cc0da.png",
   "media/images/up.png": "/packs/media/images/up-ea0ad55ac3222b72c579663b88c1d3e6.png",

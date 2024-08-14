@@ -11,7 +11,7 @@ module ExercisesHelper
     end
 
     def overall
-      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|ролики|Бег|Лыжи|Ролики|ОФП|Офп|офп/)
+      if @exercise.split(',').size > 1 && !@label.match?(/лесен|Лесен|бег|лыжи|ролики|Ролики|Бег|Лыжи|ОФП|Офп|офп/)
         overall_summ = 0
 
         @exercise.split(',') do |match|
@@ -40,7 +40,9 @@ module ExercisesHelper
 
         temp_summ_5 = self.one_rep(@label, @exercise) || 0
 
-        return temp_summ_1 + temp_summ_2 + temp_summ_3 + temp_summ_4 + temp_summ_5
+        temp_summ_6 = self.rollerblade(@label, @exercise) || 0
+
+        return temp_summ_1 + temp_summ_2 + temp_summ_3 + temp_summ_4 + temp_summ_5 + temp_summ_6
       end
     end
 
@@ -80,7 +82,21 @@ module ExercisesHelper
 
     # бег\лыжи
     def running(label, exercise)
-      exercise.match(/\d+[.,]\d+|\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи|ролики|Ролики/)
+      exercise.match(/\d+[.,]\d+|\d+/).to_s.gsub(",", ".").to_f if label && label.match?(/бег|лыжи|Бег|Лыжи/)
+    end
+
+    # ролики
+    def rollerblade(label, exercise)
+      return if label && !label.match?(/ролики|Ролики/)
+
+      result = exercise.scan(/(\d+[.,]?\d*)(\s?круг)?/).flatten
+
+      kilo = result&.first&.gsub(",", ".").to_f if result&.size > 0
+      krug = result&.last if !result.nil? && result&.size > 1
+
+      kilo = kilo * 1.37 if krug
+
+      kilo.round(1)
     end
 
     # один подход

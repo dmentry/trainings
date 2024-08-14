@@ -46,13 +46,23 @@ class ExercisesController < ApplicationController
   end
 
   def destroy
+    @exercise.destroy
+
+    i = 1
+
+    @training.exercises.order(:ordnung).each do |exercise|
+      exercise.update_column(:ordnung, i)
+
+      i += 1
+    end
+
     if @exercise.destroy!
       message = { notice: 'Упражнение удалено успешно.' }
     else
       message = { alert: 'Упражнение не было удалено.' }
     end
 
-    redirect_to @training, message
+    redirect_to @training, notice: ('Упражнение удалено успешно.')
   end
 
   def up
@@ -61,10 +71,9 @@ class ExercisesController < ApplicationController
     if exercise_to_change.ordnung <= @training.exercises.pluck(:ordnung).min
       redirect_to @training
     else
-      exercise_before = nil
-      exercise_before = @training.exercises&.where(ordnung: exercise_to_change.ordnung - 1).first
+      exercise_before = @training.exercises.where(ordnung: exercise_to_change.ordnung - 1)&.first
 
-      if exercise_before.present?
+      if exercise_before&.present?
         exercise_to_change.ordnung = exercise_to_change.ordnung - 1
         exercise_to_change.save!
 

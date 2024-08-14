@@ -6,8 +6,26 @@ class TrainingsController < ApplicationController
   def index
     @training_highlight = params[:training_highlight].to_i if params[:training_highlight]
 
-    if params[:date]
-      @date = Date.parse(params[:date])
+    if params[:date] && params[:date] == 'next_month'
+      @date = begin
+                Date.parse(session[:current_date]) + 1.month
+              rescue
+                Date.today
+              end
+
+      current_user.options['calendar_date'] = @date
+      current_user.save!
+    elsif params[:date] && params[:date] == 'prev_month'
+      @date = begin
+                Date.parse(session[:current_date]) - 1.month
+              rescue
+                Date.today
+              end
+
+      current_user.options['calendar_date'] = @date
+      current_user.save!
+    elsif params[:date] && params[:date] == 'current_month'
+      @date = Date.today
 
       current_user.options['calendar_date'] = @date
       current_user.save!
@@ -16,6 +34,8 @@ class TrainingsController < ApplicationController
     else
       @date = Date.parse(current_user.options['calendar_date'])
     end
+
+    session[:current_date] = @date
 
     @trainings_by_month = Training.by_month(@date, current_user.id)
 
@@ -183,7 +203,7 @@ class TrainingsController < ApplicationController
   private
 
   def set_current_user_training
-    @training = current_user.trainings.find(params[:id])
+    @training = current_user.trainings.where(id: params[:id])&.first || current_user.trainings&.last
   end
 
   def training_params
