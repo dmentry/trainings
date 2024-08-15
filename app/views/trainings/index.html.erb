@@ -4,18 +4,18 @@
     <div class="col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings">
       <h2 id="month">
         <div class="date-my">
-          <%= link_to "<", date: @date.prev_month %>
+          <%= link_to "<", date: 'prev_month' %>
         </div>
       <div class="date-my" id='home_btn'>
         <% if @date.month != Date.today.month || @date.year != Date.today.year %>
-          <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), date: Date.today) %>
+          <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), date: 'current_month') %>
         <% end %>
       </div>
         <div class="date-my date-width-my">
           <%= l(@date, format: "%B, %Y") %>
         </div>
         <div class="date-my">
-          <%= link_to ">", date: @date.next_month %>
+          <%= link_to ">", date: 'next_month' %>
         </div>
       </h2>
 
@@ -37,7 +37,7 @@
                 <div class="date-my cal-font">
               <% end %>
               <% if Training.pics[training.label&.downcase&.to_sym] %>
-                <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: 'logo', class: 'img-calendar'), training, class: css_class) %>
+                <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: "#{ training.label }", class: 'img-calendar'), training, class: css_class) %>
               <% else %>
                 <%= link_to training.label.truncate(29), training, class: 'cal-font' %>
               <% end %>
@@ -115,6 +115,11 @@
         if (!$(this).find("a").length > 0) {
           $(this).attr('title', 'Создать тренировку ' + $(this).text().replace(/\D+/g, "") + ' числа');
         }
+
+        else if ($(this).find("img").attr('alt')) {
+          $(this).attr('title', 'Тренировка: ' + $(this).find("img").attr('alt'));
+        }
+
         else {
           $(this).attr('title', 'Тренировка от ' + $(this).text().replace(/\D+/g, "") + ' числа');
         }
