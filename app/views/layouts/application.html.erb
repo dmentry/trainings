@@ -38,8 +38,8 @@
                 <li class="dropdown left_margin">
                   <button type="button" class="btn dropdown-toggle drop_down_button_my bg-light" data-toggle="dropdown"><%= 'Статистика' %></button>
                   <div class="dropdown-menu my_control my_font_size" aria-labelledby="dropdownMenuButton">
-                    <%= link_to 'Статистика упражнений', main_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
                     <%= link_to 'Статистика общая', secondary_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
+                    <%= link_to 'Статистика упражнений', main_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
                     <%= link_to 'Список тренировок', all_trainings_trainings_path, class: "dropdown-item my_dropdown_item bg-light" %>
                   </div>
                 </li>
@@ -87,6 +87,20 @@
 
     <%= yield %>
 
+    <div class="container">
+      <footer>
+        <div class="row">
+          <div class="col-sm-10 col-md-4 dackbottomicons dackbottomicons-range text-center buffer-bottom mt-1 text-secondary">
+            <%= link_to 'Календарь тренировок', root_path, title: 'На главную', class: 'copyright text-secondary' %>
+          </div>
+          <div class="col-sm-10 col-md-4 dackbottomicons dackbottomicons-range text-center buffer-bottom mt-1 text-secondary">
+            <%= link_to 'О программе', instruction_trainings_path, title: 'О программе', class: 'copyright text-secondary' %>
+          </div>
+          <div class="col-sm-10 col-md-4 dackbottomicons dackbottomicons-range text-center buffer-bottom mt-1 text-secondary">
+            <%= link_to 'Разработка Dack9', 'https://dack9.ru/ru/cv_rus', target: "blanc", rel: 'noreferrer', title: 'dack9', class: 'copyright text-secondary' %>
+          </div>
+      </footer>
+    </div>
   </body>
 </html>
 

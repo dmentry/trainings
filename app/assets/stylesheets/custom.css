@@ -11,6 +11,15 @@
   margin-top: -3px;
 }
 
+.copyright {
+  text-decoration: none;
+}
+
+.copyright:hover {
+  text-decoration: none;
+  color: black;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -296,6 +305,10 @@ h1  a {
 
   .buffer-top {
     margin-top: 5px;
+  }
+
+  .copyright {
+    font-size: 70%;
   }
 
   .additional_buffer_top {
