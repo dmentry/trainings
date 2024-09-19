@@ -51,7 +51,7 @@ class StatisticsController < ApplicationController
     @months = overall_training_time % 12
 
     # Процент худших месяцев по количеству тренировок по сравнению с текущим
-    current_month_trainings_quantity = @all_tr_by_month_formatted.last[1]
+    current_month_trainings_quantity = @all_tr_by_month_formatted.first[1]
 
     # Среднее количество тренировок в месяц
     @average_in_month = (@all_trainings_by_user.count / @all_tr_by_month_formatted.size).round
