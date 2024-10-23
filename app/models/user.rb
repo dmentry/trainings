@@ -2,8 +2,7 @@ class User < ApplicationRecord
   after_create :add_exercises
   after_create :initiate_options
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :trackable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :trackable, :rememberable, :validatable
   has_many :trainings, dependent: :destroy
   has_many :exercises, through: :trainings
   has_many :exercise_name_vocs, dependent: :destroy

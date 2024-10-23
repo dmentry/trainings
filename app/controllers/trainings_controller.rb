@@ -31,6 +31,8 @@ class TrainingsController < ApplicationController
       current_user.save!
     elsif current_user.name == 'guest'
       @date = '01.10.2021'.to_date
+    elsif params[:date]
+      @date = Date.parse(params[:date])
     else
       @date = Date.parse(current_user.options['calendar_date'])
     end
@@ -100,7 +102,7 @@ class TrainingsController < ApplicationController
   end
 
   def download_textfile
-    export_data = TrainingsHelper::TrainingExport.download_textfile(current_user)
+    export_data = TrainingsHelper.export_trainings(current_user)
 
     send_data export_data, type: 'text', :disposition => "attachment; filename=Тренировки_#{ current_user.name }_#{ Date.today.strftime("%d.%m.%Y") }.txt"
   end
@@ -158,30 +160,35 @@ class TrainingsController < ApplicationController
 
   def trainings_upload_post
     user_id = params[:user_id].to_i
-    t_file = params[:trainings_file]
+    t_file  = params[:trainings_file]
 
     # читаем содержимое файла в массив
     # http://stackoverflow.com/questions/2521053/how-to-read-a-user-uploaded-file-without-saving-it-to-the-database
-    if t_file.respond_to?(:readlines)
-      file_lines = t_file.readlines
+    if t_file.respond_to?(:read)
+      js_string = t_file.read
+
+      js_string_parsed = JSON.parse(js_string, symbolize_names: true)
     elsif t_file.respond_to?(:path)
-      file_lines = File.readlines(t_file.path)
+      js_string = t_file.read
+
+      js_string_parsed = JSON.parse(js_string, symbolize_names: true)
     else
       # если файл нельзя прочитать, отправляем на экшен new c инфой об ошибках
-      redirect_to trainings_upload_new_trainings_path, alert: "Bad file_data: #{t_file.class.name}, #{t_file.inspect}"
+      redirect_to trainings_upload_new_trainings_path, alert: "Некорректный файл: #{t_file.class.name}, #{t_file.inspect}"
 
       return false
     end
 
-    file_lines = file_lines.join
-
     start_time = Time.now
+
     # создаем массив тренировок, считаем неудачные
-    @statistics = TrainingsHelper.create_trainings_from_lines(file_lines, user_id)
+    @statistics = TrainingsHelper.import_trainings(js_string_parsed, user_id)
 
     # отправляем на страницу index, если все нормально и выводим статистику о проделаных операциях или на errors_page, если есть ошибки
-    text = "Обработано упражнений: #{@statistics[0]}, ошибок: #{@statistics[1]}, время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
+    text = "Обработано упражнений: #{ @statistics[0] }, ошибок: #{ @statistics[1] }, время #{ Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек' }"
+
     message = { notice: text }
+
     @warning_message = text
 
     if @statistics[2].present?       

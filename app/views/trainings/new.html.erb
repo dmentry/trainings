@@ -7,10 +7,7 @@
       <div>
         <%= render 'form', training: @training || @training = Training.new %>
       </div>
-
-      <div class="my-3">
-        <%= link_to 'Обратно', trainings_path %>
-      </div>
+      <%= link_to('Обратно', trainings_path, class: 'btn btn-sm btn-secondary btn-width-my my-2') %>
     </div>
   </div>
 </div>
