@@ -46,8 +46,8 @@
               <% end %>
               <li class="left_margin"><%= link_to 'Поиск', searching_trainings_path, class: 'btn bg-light' %></li>
               <% if current_user.admin %>
-                <li class="left_margin"><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
                 <li class="left_margin"><%= link_to 'Пользователи', users_path, class: 'btn bg-light' %></li>
+                <li class="left_margin"><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
               <% end %>
               <li class="left_margin"><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
               <!-- <li class="left_margin"><%#= link_to 'Профиль', current_user, class: 'btn bg-light' %></li> -->

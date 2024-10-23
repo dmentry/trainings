@@ -76,7 +76,7 @@
 }
 
 .img-home-white {
-  max-width: 24px;
+  max-width: 20px;
 }
 
 #menu_pic, .menu_close_img {
@@ -153,7 +153,7 @@ h1  a {
 }
 
 .btn-width-my {
-  width: 215px;
+  width: 200px;
 }
 
 .btn-width-my-two {
@@ -190,6 +190,10 @@ h1  a {
   /* margin-right: 60px; */
 }
 
+.search_text_field {
+  width: 50%;
+}
+
 .symbol_opacity {
   opacity: 0.2;
 }
@@ -200,6 +204,10 @@ h1  a {
 
 .top_line_stat_my {
   border-top: 2px solid black;
+}
+
+#trainings_list {
+  margin-top: 56px;
 }
 
 .bottom_line_stat_my {
@@ -285,9 +293,9 @@ h1  a {
   min-height: 70vh;
 }
 
-  .top_buffer_statistics {
-    margin-top: 10px;
-  }
+.top_buffer_statistics {
+  margin-top: 10px;
+}
 
 @media (max-width: 991px) {
   html {
@@ -319,6 +327,10 @@ h1  a {
     height: 30px;
     margin-top: 1px;
     border-radius: 15px;
+  }
+
+  .search_text_field {
+    width: 90%;
   }
 
   .text_size {

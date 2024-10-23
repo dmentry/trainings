@@ -4,18 +4,18 @@
     <div class="col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings">
       <h2 id="month">
         <div class="date-my">
-          <%= link_to "<", date: 'prev_month' %>
+          <%= link_to "<", controller: 'trainings', date: 'prev_month' %>
         </div>
       <div class="date-my" id='home_btn'>
         <% if @date.month != Date.today.month || @date.year != Date.today.year %>
-          <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), date: 'current_month') %>
+          <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), { controller: 'trainings', date: 'current_month' }, class: 'home_btn') %>
         <% end %>
       </div>
         <div class="date-my date-width-my">
           <%= l(@date, format: "%B, %Y") %>
         </div>
         <div class="date-my">
-          <%= link_to ">", date: 'next_month' %>
+          <%= link_to ">", controller: 'trainings', date: 'next_month' %>
         </div>
       </h2>
 
@@ -136,21 +136,12 @@
 
     if (cal_height >= 505 && cal_height < 506 && browser_width > '991') {
       $('#trainings_list').css({'height' : '505px'});
-
-      // Установка margin-top списка тренировок в зависимости от наполнения календаря
-      let home_btn_element = $('#home_btn a').length;
-      if (home_btn_element == 0 && $('td div div a').length) {$('#trainings_list').css({'margin-top' : '60px'})}
     }
     else if (cal_height >= 425 && cal_height < 426 && browser_width > '991') {
       $('#trainings_list').css({'height' : '425px'});
-
-      // Установка margin-top списка тренировок в зависимости от наполнения календаря
-      let home_btn_element = $('#home_btn a').length;
-      if (home_btn_element == 0 && $('td div div a').length) {$('#trainings_list').css({'margin-top' : '59px'})}
-      else if (home_btn_element || (home_btn_element && $('td div div a').length)) {$('#trainings_list').css({'margin-top' : '61px'})}
     }
     else if (cal_height >= 345 && cal_height < 346 &&  browser_width > '991') {
-      $('#trainings_list').css({'height' : '348px'});
+      $('#trainings_list').css({'height' : '349px'});
     }
     else {
       $('#trainings_list').css({'height' : 'auto'});

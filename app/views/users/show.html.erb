@@ -14,15 +14,13 @@
       <div class="buffer-top">
         <% unless current_user.name == 'guest' %>
           <div>
-            <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-secondary mt-2 btn-width-my' %>
+            <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-sm btn-info mt-2 btn-width-my' %>
           </div>
           <div>
-            <%= link_to 'Сменить пароль', edit_user_registration_path, class: 'btn btn-secondary mt-2 btn-width-my' %>
+            <%= link_to 'Сменить пароль', edit_user_registration_path, class: 'btn btn-sm btn-warning mt-2 btn-width-my' %>
           </div>
         <% end %>  
-      <div class="mt-3">
-        <%= link_to 'Обратно', root_path %>
-      </div>
+        <%= link_to('Обратно', root_path, class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
      </div> 
     </div>
   </div>
