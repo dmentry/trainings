@@ -11,8 +11,6 @@
   <div class="row my-1">
     <div class="col-lg-3 order-lg-2 order-sm-1 mt-1 mb-2 center">
       <%= link_to 'Добавить упражнение', new_training_exercise_path(@training), { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-sm' }  %>
-
-      <!-- <div class="btn btn-primary btn-sm mt-sm-4" id="change_ordnung_btn">Изменить порядок</div> -->
     </div>
 
     <div class="col-lg-8 order-lg-1 order-sm-2 no-paddings mt-1 mb-lg-3 mb-sm-2 bg-light ex_buffer_both_my max_height_all_tr full_screen_height">
@@ -38,32 +36,3 @@
 
   </div>
 </div>
-
-<script>
-  // let is_change = false
-
-  // function switch_arrows() {
-  //   if (is_change == true) {
-  //    $(".up_direction").show();
-  //    $(".down_direction").show();
-  //    $("#change_ordnung_btn").text('В режиме изменения')
-  //   }
-  //   else {
-  //    $(".up_direction").hide();
-  //    $(".down_direction").hide();
-  //    $("#change_ordnung_btn").text('Изменить порядок')        
-  //   }
-  // };
-
-  // $(function(){
-
-  //   $("#change_ordnung_btn").click(function() {
-  //     if (is_change == true) {is_change = false}
-  //     else {is_change = true}
-  //     console.log(is_change);
-
-  //     switch_arrows();
-  //   });
-      
-  // });
-</script>

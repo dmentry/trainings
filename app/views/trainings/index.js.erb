@@ -1,0 +1,76 @@
+ $("#whole_calendar").html("<%= escape_javascript (render partial: 'trainings/calendar') %>");
+
+   function current_month(month) {
+    let answer = true;
+    if (month.is('.notmonth') || (month.is('.notmonth.today'))) {
+      answer = false;
+    }
+    return answer;
+  };
+
+  $(function(){
+    $(".calendar td").click(function() {
+      answer = current_month($(this));
+
+      if (answer) {
+        if ($(this).find("a").length > 0) {
+          location = $(this).find("a").attr('href');
+        }
+        else {
+          location = "/trainings/new?day=" + $(this).text().replace(/\s/g, "");
+        }
+      }
+      else {
+        if ($(this).find("a").length > 0) {
+          location = $(this).find("a").attr('href');
+        }
+        else {
+          alert('Чтобы создать тренировку в другом месяце, перейдите в него');
+          return false;
+        }
+      }
+     });
+
+    $(".calendar td").hover(function() {
+      answer = current_month ($(this));
+
+      if (answer == true) {
+        if (!$(this).find("a").length > 0) {
+          $(this).attr('title', 'Создать тренировку ' + $(this).text().replace(/\D+/g, "") + ' числа');
+        }
+
+        else if ($(this).find("img").attr('alt')) {
+          $(this).attr('title', 'Тренировка: ' + $(this).find("img").attr('alt'));
+        }
+
+        else {
+          $(this).attr('title', 'Тренировка от ' + $(this).text().replace(/\D+/g, "") + ' числа');
+        }
+      }
+      else {
+        $(this).attr('title', 'Чтобы создать тренировку в другом месяце, перейдите в него');
+        return false;
+      }
+    });
+
+    // Синхронизаци высоты календаря и списка тренировок
+    let cal_height = $('.calendar').height();
+    let browser_width = $(window).width();
+
+    if (cal_height >= 505 && cal_height < 506 && browser_width > '991') {
+      $('#trainings_list').css({'height' : '505px'});
+    }
+    else if (cal_height >= 425 && cal_height < 426 && browser_width > '991') {
+      $('#trainings_list').css({'height' : '425px'});
+    }
+    else if (cal_height >= 345 && cal_height < 346 &&  browser_width > '991') {
+      $('#trainings_list').css({'height' : '349px'});
+    }
+    else {
+      $('#trainings_list').css({'height' : 'auto'});
+    }
+
+    // Закраска фона выбранной тренировки
+    let td_element = $('#highlight');
+    if (td_element) { td_element.closest("td").addClass('highlight') };
+  });

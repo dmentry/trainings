@@ -1,0 +1,77 @@
+
+
+<div class="container my-bg-color without_borders">
+  <div class="row top_buffer">
+    <div class="col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings">
+      <h2 id="month">
+        <div class="date-my">
+          <%= link_to "<", controller: 'trainings', date: 'prev_month', remote: true %>
+        </div>
+      <div class="date-my" id='home_btn'>
+        <% if @date.month != Date.today.month || @date.year != Date.today.year %>
+          <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), { controller: 'trainings', date: 'current_month' }, class: 'home_btn') %>
+        <% end %>
+      </div>
+        <div class="date-my date-width-my">
+          <%= l(@date, format: "%B, %Y") %>
+        </div>
+        <div class="date-my">
+          <%= link_to ">", controller: 'trainings', date: 'next_month' %>
+        </div>
+      </h2>
+
+      <%= calendar @date do |date| %>
+        <%= date.day %>
+
+        <% if date.month != @date.month %>
+          <% css_class = 'not_curr_month_shading' %>
+        <% else %>
+          <% css_class = '' %>
+        <% end %>
+
+        <div>
+          <% if @trainings_by_date[date] %>
+            <% @trainings_by_date[date].each do |training| %>
+              <% if @training_highlight.present? && training.id == @training_highlight %>
+                <div class="date-my cal-font" id="highlight">
+              <% else %>
+                <div class="date-my cal-font">
+              <% end %>
+              <% if Training.pics[training.label&.downcase&.to_sym] %>
+                <%= link_to(image_pack_tag(Training.pics[training.label.downcase.to_sym], alt: "#{ training.label }", class: 'img-calendar'), training, class: css_class) %>
+              <% else %>
+                <%= link_to training.label.truncate(29), training, class: 'cal-font' %>
+              <% end %>
+                </div>
+            <% end %> 
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <% unless @trainings_by_month.empty? %>
+      <div class="border_my col-lg-3 order-lg-2 buffer-both-sm no-margins top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
+        <div class="mt-1">
+          <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
+          
+          <% @trainings_by_month.each do |training| %>
+            <div class="tr_display">
+              <% if training != @trainings_by_month.last %>
+                <%= link_to "#{training.label}, ", training %>
+              <% else %>
+                <%= link_to training.label, training %>
+              <% end %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="border_my col-lg-3 order-lg-2 buffer-both-sm no-margins top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
+        <div class="mt-1">
+          <div>В этом месяце у вас еще нет тренировок</div>
+        </div>
+      </div>
+    <% end %>
+  
+  </div>
+</div>
