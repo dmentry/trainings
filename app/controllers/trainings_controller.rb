@@ -207,6 +207,12 @@ class TrainingsController < ApplicationController
     end
   end
 
+  def autocomplete_exercise
+    scope = current_user.exercise_name_vocs.quick_search(params[:term]).map{ |exercise| { label: exercise.label, id: exercise.id }}
+
+    respond_with scope.to_json
+  end
+
   private
 
   def set_current_user_training
@@ -214,6 +220,6 @@ class TrainingsController < ApplicationController
   end
 
   def training_params
-    params.require(:training).permit(:label, :start_time, :q)
+    params.require(:training).permit(:label, :start_time, :q, :term)
   end
 end

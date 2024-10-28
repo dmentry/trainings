@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'trainings#index'
 
+  get 'autocomplete_exercise' => 'trainings#autocomplete_exercise'
+
   resources :exercise_name_vocs
 
   resources :trainings do

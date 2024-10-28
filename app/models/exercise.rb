@@ -4,4 +4,6 @@ class Exercise < ApplicationRecord
 
   validates :training, presence: true
   validates :exercise_name_voc, presence: true
+
+  attr_accessor :find_exercise
 end
