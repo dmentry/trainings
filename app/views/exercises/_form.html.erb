@@ -15,13 +15,22 @@
     <button type="button" class="close btn btn-success mb-2" data-dismiss="modal">X</button>
   </div> -->
   <div class="form-group mt-1 mx-1">
+    Выберите из списка или начните вводить название в строке ниже
     <%= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.order(label: :asc), :id, :label, prompt: '[Выберите упражнение]' %>
   </div>
 
   <div class="form-group mt-1 mx-1">
-    Поиск упражнения
     <%= form.text_field :find_exercise, class: 'form-control', id: 'find_exercise', placeholder: 'Начните вводить название упражнения'  %>
   </div>
+
+<!--   <div class="form-group mt-1 mx-1">
+    Поиск упражнения 2
+    <%#= form.text_field :find_exercise, class: 'form-control', id: 'find_exercise2'  %>
+  </div> -->
+
+<!-- <div class="form-group mt-1 mx-1">
+  <select id="id_pic_credits" class="form-group mt-1 mx-1"></select>
+</div> -->
 
   <div class="form-group form-buffers-vertical mx-1">
     <%= form.label 'Количество подходов и/или повторов' %>
@@ -78,6 +87,27 @@
     $("#exercise_exercise_name_voc_id").click(function() {
       $("#find_exercise").val('');
     });
+
+
+
+$('#id_pic_credits').select2({
+  ajax: {
+    url: '/autocomplete_exercise2',
+    dataType: 'json'
+  }
+
+});
+// Фикс для select2, чтобы при открытии списка значений фокус был на строке поиска
+$(document).on('select2:open', () => {
+    document.querySelector('.select2-search__field').focus();
+});
+
+ 
+  $('#id_pic_credits').on('change', function(){
+    console.log('Selected Value : ' + $(this).val() + ' - Selected Text : ' +  $('#id_pic_credits option:selected').text());
+  });
+
+
 
   })
 </script>

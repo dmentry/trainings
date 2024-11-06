@@ -213,6 +213,14 @@ class TrainingsController < ApplicationController
     respond_with scope.to_json
   end
 
+  def autocomplete_exercise2
+    scope = current_user.exercise_name_vocs.quick_search(params[:term]).map{ |exercise| { text: exercise.label, id: exercise.id }}
+
+    out = {'results' => scope}
+
+    respond_with out.to_json
+  end
+
   private
 
   def set_current_user_training

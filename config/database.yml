@@ -1,23 +1,16 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: training
+  password: <%= Rails.application.credentials.dig(Rails.env.to_sym, :pg, :password) %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   #раскомментировать при деплое:
   # host: localhost
 
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
 development:
   <<: *default
-  database: fit_cal_development
-
-test:
-  <<: *default
-  database: fit_cal_test
+  database: training_development
 
 production:
   <<: *default
-  database: fit_cal_production
-  username: fit_cal
-  password: <%= Rails.application.credentials.dig(Rails.env.to_sym, :pg, :password) %>
+  database: training_production

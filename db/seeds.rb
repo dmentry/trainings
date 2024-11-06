@@ -55,5 +55,9 @@ exercises = [
 ]
 
 exercises.each do |exercise|
+  ex = ExerciseNameVoc.where(label: exercise, user_id: 1).first
+
+  next if ex
+
   ExerciseNameVoc.create!(label: exercise, user_id: 1)
 end
