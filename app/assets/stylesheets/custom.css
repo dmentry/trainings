@@ -194,6 +194,10 @@ h1  a {
   width: 50%;
 }
 
+.select2-container--default {
+  width: 100% !important;
+}
+
 .symbol_opacity {
   opacity: 0.2;
 }

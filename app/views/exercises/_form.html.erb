@@ -14,23 +14,29 @@
 <!--   <div class="mt-1 mr-1">
     <button type="button" class="close btn btn-success mb-2" data-dismiss="modal">X</button>
   </div> -->
-  <div class="form-group mt-1 mx-1">
-    Выберите из списка или начните вводить название в строке ниже
-    <%= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.order(label: :asc), :id, :label, prompt: '[Выберите упражнение]' %>
-  </div>
-
-  <div class="form-group mt-1 mx-1">
-    <%= form.text_field :find_exercise, class: 'form-control', id: 'find_exercise', placeholder: 'Начните вводить название упражнения'  %>
-  </div>
 
 <!--   <div class="form-group mt-1 mx-1">
-    Поиск упражнения 2
-    <%#= form.text_field :find_exercise, class: 'form-control', id: 'find_exercise2'  %>
+    Выберите из списка или начните вводить название в строке ниже
+    <%#= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.order(label: :asc), :id, :label, prompt: '[Выберите упражнение]' %>
   </div> -->
 
-<!-- <div class="form-group mt-1 mx-1">
-  <select id="id_pic_credits" class="form-group mt-1 mx-1"></select>
-</div> -->
+<!--   <div class="form-group mt-1 mx-1">
+    <%#= form.text_field :find_exercise, class: 'form-control', id: 'find_exercise', placeholder: 'Начните вводить название упражнения'  %>
+  </div> -->
+
+  <%= form.hidden_field :exercise_name_voc_id, value: exercise.exercise_name_voc_id, id: 'exercise_name_voc_id' %>
+
+  <div class="form-group form-buffers-vertical mx-1">
+    <%= form.label 'Упражнение' %>
+
+    <select id="find_exercise2" class="mt-1 mx-1">
+
+      <% if !exercise.new_record? %>
+        <option value='<%= exercise.exercise_name_voc_id %>'><%= ExerciseNameVoc.find(exercise.exercise_name_voc_id)&.label %></option>
+      <% end %>
+
+    </select>
+  </div>
 
   <div class="form-group form-buffers-vertical mx-1">
     <%= form.label 'Количество подходов и/или повторов' %>
@@ -49,26 +55,65 @@
 
 <script>
   $(function(){
+    // Фикс для select2, чтобы при открытии списка значений фокус был на строке поиска
+    $(document).on('select2:open', () => {
+      document.querySelector('.select2-search__field').focus();
+    });
 
-    $('#find_exercise').autocomplete({
-      minLength: 2,
-      source: '/autocomplete_exercise.json',
-      autoFocus: true,
-      select: function( event, ui ) {
-        let value = ui.item.value;
+    $(document).on('select2:select', function (e) {
+      let chosen_variant = $('#find_exercise2').select2('data')[0].text;
 
-        $('#find_exercise').val(value);
+      if (chosen_variant) {
+        $('#exercise_name_voc_id').val($('#find_exercise2').select2('data')[0].id);
 
         // Ищем элемент с нужным значением в полеExerciseNameVocId и присваиваем его значение выбранному полю элемента exercise_name_voc_id
-        $('#exercise_exercise_name_voc_id option').each(function() {
-          if ($(this).text() === value) {
-            $('#exercise_exercise_name_voc_id').val($(this).val());
-            // прерываем цикл после нахождения совпадения
-            return false;
-          }
-        });
+        // $('#exercise_exercise_name_voc_id option').each(function() {
+        //   if ($(this).text() === chosen_variant) {
+        //     $('#exercise_exercise_name_voc_id').val($(this).val());
+        //     // прерываем цикл после нахождения совпадения
+        //     return false;
+        //   }
+        // });
       }
     });
+
+    $('#find_exercise2').on('select2:clear', function (e) {
+      // $('#exercise_exercise_name_voc_id').val('');
+      $('#exercise_name_voc_id').val('');
+    });
+
+    $('#find_exercise2').select2({
+      placeholder: 'Начните вводить название упражнения или выберите его',
+      allowClear: true,
+      ajax: {
+        url: '/autocomplete_exercise2',
+        dataType: 'json'
+      }
+    });
+
+    // $("#exercise_exercise_name_voc_id").click(function() {
+    //   $("#find_exercise").val('');
+    // });
+
+    // $('#find_exercise').autocomplete({
+    //   minLength: 2,
+    //   source: '/autocomplete_exercise.json',
+    //   autoFocus: true,
+    //   select: function( event, ui ) {
+    //     let value = ui.item.value;
+
+    //     $('#find_exercise').val(value);
+
+    //     // Ищем элемент с нужным значением в полеExerciseNameVocId и присваиваем его значение выбранному полю элемента exercise_name_voc_id
+    //     $('#exercise_exercise_name_voc_id option').each(function() {
+    //       if ($(this).text() === value) {
+    //         $('#exercise_exercise_name_voc_id').val($(this).val());
+    //         // прерываем цикл после нахождения совпадения
+    //         return false;
+    //       }
+    //     });
+    //   }
+    // });
 
     // Дублирование названия упражнения в поле find_exercise
     // $("#exercise_exercise_name_voc_id").click(function() {
@@ -84,30 +129,9 @@
     //   }
     // });
 
-    $("#exercise_exercise_name_voc_id").click(function() {
-      $("#find_exercise").val('');
-    });
-
-
-
-$('#id_pic_credits').select2({
-  ajax: {
-    url: '/autocomplete_exercise2',
-    dataType: 'json'
-  }
-
-});
-// Фикс для select2, чтобы при открытии списка значений фокус был на строке поиска
-$(document).on('select2:open', () => {
-    document.querySelector('.select2-search__field').focus();
-});
-
- 
-  $('#id_pic_credits').on('change', function(){
-    console.log('Selected Value : ' + $(this).val() + ' - Selected Text : ' +  $('#id_pic_credits option:selected').text());
-  });
-
-
-
+    // Еще один (неофициальный) вариант получить выбранное в select2 значение
+    // $('#find_exercise2').on('change', function(){
+    //   $('#find_exercise2 option:selected').text());
+    // });
   })
 </script>
