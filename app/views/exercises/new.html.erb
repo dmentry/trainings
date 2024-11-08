@@ -1,13 +1,13 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-1">Редактировать упражнение</h3>
-<div class="container my-bg-color">
+<h3 class="center text_size mt-1">Создать упражнение</h3>
+<div class="container my-bg-color mt-3">
   <div class="row mb-3">
     <div class="col-lg-8 order-lg-1">
       <div class="mt-2">
         <%= render 'form', exercise: @exercise %>
         </div>
         <div class="mb-3">
-          <%= link_to('Обратно', training_path(@training), class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
+          <%= link_to('Обратно', trainings_path, class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
         </div>
     </div>
   </div>

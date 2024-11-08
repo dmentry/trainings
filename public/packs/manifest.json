@@ -1,20 +1,30 @@
 {
-  "application.css": "/packs/css/application-bf735094.css",
-  "application.js": "/packs/js/application-bfb4932fed65d9472140.js",
-  "application.js.map": "/packs/js/application-bfb4932fed65d9472140.js.map",
+  "application.css": "/packs/css/application-a9473a66.css",
+  "application.js": "/packs/js/application-294c64e8296093d8167a.js",
+  "application.js.map": "/packs/js/application-294c64e8296093d8167a.js.map",
   "entrypoints": {
     "application": {
       "css": [
-        "/packs/css/application-bf735094.css"
+        "/packs/css/application-a9473a66.css"
       ],
       "js": [
-        "/packs/js/application-bfb4932fed65d9472140.js"
+        "/packs/js/application-294c64e8296093d8167a.js"
       ],
       "js.map": [
-        "/packs/js/application-bfb4932fed65d9472140.js.map"
+        "/packs/js/application-294c64e8296093d8167a.js.map"
+      ]
+    },
+    "jquery-ui": {
+      "js": [
+        "/packs/js/jquery-ui-33c35aab8ed048e06012.js"
+      ],
+      "js.map": [
+        "/packs/js/jquery-ui-33c35aab8ed048e06012.js.map"
       ]
     }
   },
+  "jquery-ui.js": "/packs/js/jquery-ui-33c35aab8ed048e06012.js",
+  "jquery-ui.js.map": "/packs/js/jquery-ui-33c35aab8ed048e06012.js.map",
   "media/images/abs.png": "/packs/media/images/abs-371cec580bb99b35189c2313f6f72dc3.png",
   "media/images/add.png": "/packs/media/images/add-96352f68f1941e91c57323992b9ca54a.png",
   "media/images/android-chrome-192x192.png": "/packs/media/images/android-chrome-192x192-0b4f75d51a28fc672c8cc44449a424ab.png",
@@ -40,6 +50,12 @@
   "media/images/rollerblade.png": "/packs/media/images/rollerblade-f9bc24609f95518b6ca1b058e4bb6454.png",
   "media/images/run.png": "/packs/media/images/run-e2594cdfe9d0b1b9df93dc3136a5b70b.png",
   "media/images/ski.png": "/packs/media/images/ski-c1c4c82deed322744d4fbcd7d51cc0da.png",
+  "media/images/ui-icons_444444_256x240.png": "/packs/media/images/ui-icons_444444_256x240-a0b5d800.png",
+  "media/images/ui-icons_555555_256x240.png": "/packs/media/images/ui-icons_555555_256x240-b6498da6.png",
+  "media/images/ui-icons_777620_256x240.png": "/packs/media/images/ui-icons_777620_256x240-3a6055be.png",
+  "media/images/ui-icons_777777_256x240.png": "/packs/media/images/ui-icons_777777_256x240-f623d4c1.png",
+  "media/images/ui-icons_cc0000_256x240.png": "/packs/media/images/ui-icons_cc0000_256x240-6d65e5c1.png",
+  "media/images/ui-icons_ffffff_256x240.png": "/packs/media/images/ui-icons_ffffff_256x240-c5c1ce7b.png",
   "media/images/up.png": "/packs/media/images/up-ea0ad55ac3222b72c579663b88c1d3e6.png",
   "media/images/user.png": "/packs/media/images/user-d8c09ca909e4371c2f5222d5b90348c0.png"
 }

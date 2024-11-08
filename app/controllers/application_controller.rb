@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  # Все форматы, на которые могут отвечать экшены
+  respond_to :html, :json
+
   # переключение локалей
     # before_action :switch_locale
   # передача параметра текущей локали через запросы
