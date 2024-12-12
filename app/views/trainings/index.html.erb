@@ -89,10 +89,10 @@
   };
 
   $(function(){
-    $("#swipe_area").on('swipeleft', function() {
+    $("#swipe_area").on('swiperight', function() {
       $.ajax({url: '/trainings?date=prev_month', datavalue: 'js' });
     });
-    $("#swipe_area").on('swiperight', function() {
+    $("#swipe_area").on('swipeleft', function() {
       $.ajax({url: '/trainings?date=next_month', datavalue: 'js' });
     });
 
