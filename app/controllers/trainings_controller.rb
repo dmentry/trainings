@@ -41,7 +41,7 @@ class TrainingsController < ApplicationController
 
     @trainings_by_month = Training.by_month(@date, current_user.id)
 
-    ###### Собираю тренировки для показа. Текущая дата + 1 месяц до нее + 1 месяц после нее
+    ###### Собираю тренировки для показа. Текущая дата + 1 месяц до нее + 1 месяц после нее ##############################
     dt_before_curr_dt = @date - 1.month
     trainings_by_month_before_curr_dt = Training.by_month(dt_before_curr_dt, current_user.id)
     trainings_by_dt_before_curr_dt = trainings_by_month_before_curr_dt.group_by(&:start_time) if trainings_by_month_before_curr_dt.size > 0
@@ -54,7 +54,12 @@ class TrainingsController < ApplicationController
 
     @trainings_by_date = @trainings_by_date.merge(trainings_by_dt_before_curr_dt) if trainings_by_dt_before_curr_dt
     @trainings_by_date = @trainings_by_date.merge(trainings_by_dt_after_curr_dt) if trainings_by_dt_after_curr_dt
-    ######
+    ######################################################################################################################
+
+    respond_to do |format|
+      format.js { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def show
