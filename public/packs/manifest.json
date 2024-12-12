@@ -1,13 +1,13 @@
 {
   "Tocca.js": "/packs/js/Tocca-a2ef57dc47d9d9ac1928.js",
   "Tocca.js.map": "/packs/js/Tocca-a2ef57dc47d9d9ac1928.js.map",
-  "application.css": "/packs/css/application-62287788.css",
+  "application.css": "/packs/css/application-3fd125cc.css",
   "application.js": "/packs/js/application-d244aa837b90cb80d587.js",
   "application.js.map": "/packs/js/application-d244aa837b90cb80d587.js.map",
   "entrypoints": {
     "application": {
       "css": [
-        "/packs/css/application-62287788.css"
+        "/packs/css/application-3fd125cc.css"
       ],
       "js": [
         "/packs/js/application-d244aa837b90cb80d587.js"
