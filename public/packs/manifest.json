@@ -1,30 +1,40 @@
 {
-  "application.css": "/packs/css/application-a9473a66.css",
-  "application.js": "/packs/js/application-294c64e8296093d8167a.js",
-  "application.js.map": "/packs/js/application-294c64e8296093d8167a.js.map",
+  "Tocca.js": "/packs/js/Tocca-a2ef57dc47d9d9ac1928.js",
+  "Tocca.js.map": "/packs/js/Tocca-a2ef57dc47d9d9ac1928.js.map",
+  "application.css": "/packs/css/application-62287788.css",
+  "application.js": "/packs/js/application-d244aa837b90cb80d587.js",
+  "application.js.map": "/packs/js/application-d244aa837b90cb80d587.js.map",
   "entrypoints": {
     "application": {
       "css": [
-        "/packs/css/application-a9473a66.css"
+        "/packs/css/application-62287788.css"
       ],
       "js": [
-        "/packs/js/application-294c64e8296093d8167a.js"
+        "/packs/js/application-d244aa837b90cb80d587.js"
       ],
       "js.map": [
-        "/packs/js/application-294c64e8296093d8167a.js.map"
+        "/packs/js/application-d244aa837b90cb80d587.js.map"
       ]
     },
     "jquery-ui": {
       "js": [
-        "/packs/js/jquery-ui-33c35aab8ed048e06012.js"
+        "/packs/js/jquery-ui-3b98bb46d81dd77f0956.js"
       ],
       "js.map": [
-        "/packs/js/jquery-ui-33c35aab8ed048e06012.js.map"
+        "/packs/js/jquery-ui-3b98bb46d81dd77f0956.js.map"
+      ]
+    },
+    "Tocca": {
+      "js": [
+        "/packs/js/Tocca-a2ef57dc47d9d9ac1928.js"
+      ],
+      "js.map": [
+        "/packs/js/Tocca-a2ef57dc47d9d9ac1928.js.map"
       ]
     }
   },
-  "jquery-ui.js": "/packs/js/jquery-ui-33c35aab8ed048e06012.js",
-  "jquery-ui.js.map": "/packs/js/jquery-ui-33c35aab8ed048e06012.js.map",
+  "jquery-ui.js": "/packs/js/jquery-ui-3b98bb46d81dd77f0956.js",
+  "jquery-ui.js.map": "/packs/js/jquery-ui-3b98bb46d81dd77f0956.js.map",
   "media/images/abs.png": "/packs/media/images/abs-371cec580bb99b35189c2313f6f72dc3.png",
   "media/images/add.png": "/packs/media/images/add-96352f68f1941e91c57323992b9ca54a.png",
   "media/images/android-chrome-192x192.png": "/packs/media/images/android-chrome-192x192-0b4f75d51a28fc672c8cc44449a424ab.png",
