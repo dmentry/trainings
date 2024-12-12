@@ -7,6 +7,7 @@ window.$ = window.jQuery = jQuery;
 
 import '../../assets/stylesheets/application'
 import './Tocca'
+import './select2'
 import 'bootstrap/dist/js/bootstrap'
 import './jquery-ui'
 import ApexCharts from 'apexcharts'
