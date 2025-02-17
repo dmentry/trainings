@@ -29,7 +29,7 @@
 /config/master.key
 /config/database.yml
 
-#/public/packs
+/public/packs
 /public/uploads
 /public/packs-test
 /node_modules
@@ -37,4 +37,4 @@
 yarn-debug.log*
 .yarn-integrity
 favicon_package
-/package-lock.json
+#/package-lock.json
