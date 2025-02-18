@@ -10,6 +10,7 @@ import './Tocca'
 import './select2'
 import 'bootstrap/dist/js/bootstrap'
 import './jquery-ui'
+import './flatpickr'
 import ApexCharts from 'apexcharts'
 window.ApexCharts = ApexCharts
 

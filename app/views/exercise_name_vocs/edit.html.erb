@@ -1,13 +1,9 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-1 head_color">Редактировать: <%= @exercise_name_voc.label %></h3>
-<div class="container my-bg-color mt-3 without_borders">
+<h3 class="center text_size mt-5 mt-lg-2 head_color">Редактировать: <%= @exercise_name_voc.label %></h3>
+<div class="container bg-light mt-3 borders-rounded">
   <div class="row my-2">
-    <div class="col-sm-12 col-md-8">
+    <div class="col-sm-12 col-md-10 mx-auto">
       <%= render 'form', exercise_name_voc: @exercise_name_voc || @exercise_name_voc = current_user.exercise_name_vocs.build(exercise_name_voc_params) %>
-      <div class="my-2">
-        <%= link_to('Удалить', @exercise_name_voc, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger btn-width-my') %><br>
-        <%= link_to('Обратно', exercise_name_vocs_path, class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
-      </div>
     </div>
   </div>
 </div>

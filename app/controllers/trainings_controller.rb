@@ -66,13 +66,13 @@ class TrainingsController < ApplicationController
   end
 
   def new
-    @training = current_user.trainings.build
-
     day = params[:day].strip
 
     new_date = current_user.options['calendar_date'].to_s[0,8] + day
 
-    @new_date = Date.parse(new_date)
+    new_date = Date.parse(new_date)
+
+    @training = current_user.trainings.build(start_time: new_date)
   end
 
   def edit
@@ -208,6 +208,7 @@ class TrainingsController < ApplicationController
 
     if params[:q]
       @q.sorts = 'start_time DESC' if @q.sorts.empty?
+
       @trainings_searched = @q.result.includes(:exercises, :exercise_name_vocs)
     end
   end

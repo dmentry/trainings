@@ -1,7 +1,7 @@
-<h3 class="center text_size mt-2 head_color drop_down_button_my">Тренировки</h3>
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home_for_tr_show') %>
-<div class="container my-bg-color top_buffer_two_my without_borders full_screen_height">
-  <div class="center">
+<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
+<h3 class="center text_size mt-2 head_color mt-5 mt-lg-2">Тренировки</h3>
+<div class="container bg-light borders-rounded pt-2">
+  <div class="text-center">
     <p id='train_title' class="my-lg-2"> 
       <%= link_to '<', @training.prev, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
       <%= link_to @training.label, edit_training_path(@training), class: "btn btn-primary mt-1 buffer-bottom tr-width-my" %>
@@ -14,7 +14,7 @@
       <%= link_to 'Добавить упражнение', new_training_exercise_path(@training), { class: 'btn btn-primary btn-sm' }  %>
     </div>
 
-    <div class="col-lg-8 order-lg-1 order-sm-2 no-paddings mt-1 mb-lg-3 mb-sm-2 bg-light ex_buffer_both_my max_height_all_tr full_screen_height">
+    <div class="col-lg-8 order-lg-1 order-sm-2 no-paddings mt-1 mb-lg-3 mb-sm-2 bg-light ex_buffer_both_my bg-white borders-rounded ">
       <div class="bold">
         <% formatted_date = l @training.start_time, format: :my_format %>
         Дата: <%= link_to formatted_date, trainings_path(date: @training.start_time, training_highlight: @training), class: "btn btn-primary btn-sm" %>

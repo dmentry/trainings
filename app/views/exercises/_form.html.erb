@@ -26,7 +26,7 @@
 
   <%= form.hidden_field :exercise_name_voc_id, value: exercise.exercise_name_voc_id, id: 'exercise_name_voc_id' %>
 
-  <div class="form-group form-buffers-vertical mx-1">
+  <div class="form-group mx-1 mt-2">
     <%= form.label 'Упражнение' %>
 
     <select id="find_exercise2" class="mt-1 mx-1">
@@ -38,19 +38,25 @@
     </select>
   </div>
 
-  <div class="form-group form-buffers-vertical mx-1">
+  <div class="form-group mx-1">
     <%= form.label 'Количество подходов и/или повторов' %>
     <%= form.text_field :quantity, class: 'form-control' %>
   </div>
 
-  <div class="form-group form-buffers-vertical mx-1">
+  <div class="form-group mx-1">
     <%= form.label 'Заметка' %>
     <%= form.text_field :note, class: 'form-control' %>
   </div>
 
-  <div class="actions bt_buffer_top_my">
-    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mb-2 btn-width-my' %>
+  <div class="row justify-content-start mb-2">
+    <div class='col-12 col-lg-4 mr-lg-0 pr-0'>
+      <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success btn-width-my mt-2 lg_text ml-1' %>
+    </div>
+    <div class='col-12 col-lg-3 ml-lg-0 pl-lg-0'>
+      <%= link_to('Обратно', training_path(@training), class: 'btn btn-sm btn-secondary btn-width-my mt-2 lg_text px-0  ml-1') %>
+    </div>
   </div>
+
 <% end %>
 
 <script>

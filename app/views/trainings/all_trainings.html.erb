@@ -1,12 +1,9 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 
-<h3 class="center text_size mt-2 head_color">Тренировки за все время
-  <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-</h3>
-<div class="container my-bg-color without_borders full_screen_height">
-
+<h3 class="text-center text_size mt-5 mt-lg-2 head_color">Тренировки за все время</h3>
+<div class="container bg-light without_borders full_screen_height borders-rounded">
   <div class="row mt-3 ml-sm-4">
-    <div class="col-lg-8 order-lg-1 mb-2 mt-2 pl-sm-2">
+    <div class="col-lg-8 order-lg-1 my-2 lg_text">
       Сортировать по:
       <%= sortable("start_time", 'дате')%>
       <%= sortable("label", 'названию') %>
@@ -14,44 +11,29 @@
     </div>
   </div>
 
-  <div class="row mt-1 mb-3 ml-sm-4">
-    <div class="col-lg-8 order-lg-2 my-2 ml-2 buffer-top bg-light no-margins max_height_all_tr screen_height_tr_list">
-      <div>
+  <div class="row mt-1 mb-3 ml-sm-4 lg_text">
+    <div class="col-lg-8 order-lg-2 mt-2 mb-3 ml-2 bg-white no-margins max_height_all_tr borders-rounded">
         <% @trainings.each do |training| %>
           <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
           <div>
             <%= link_to message, training_path(training[:id]) %>
-
               <% training.exercises.order(:ordnung).each do |exercise| %>
-                <div class="exercise_margin_left">
+                <div class='ml-3'>
                   <%= exercise.exercise_name_voc.label %>
                 </div> 
              <% end %>
-
           </div> 
         <% end %>
-      </div>
     </div>
 
-    <div class="col-lg-3 order-lg-3 my-2 bg-light ml-4 no-margins top_buffer_mobile buffer-top2">
-      <div class="mt-1">
-        <div class="head_color bold my-lg-2">Выбор тренировок по названиям</div>
-          <% Training.where(user_id: current_user.id).pluck(:label).uniq.sort.each do |training_label| %>
-            <div>
-              <%= link_to(training_label, all_trainings_trainings_path(collect_by_name: training_label)) %>
-            </div>
-          <% end %>
-      </div>
+    <div class="col-lg-3 order-lg-3 mt-2 mb-3 bg-white ml-4 no-margins top_buffer_mobile borders-rounded">
+      <div class="head_color bold my-lg-2">Выбор тренировок по названиям</div>
+      <% Training.where(user_id: current_user.id).pluck(:label).uniq.sort.each do |training_label| %>
+        <div>
+          <%= link_to(training_label, all_trainings_trainings_path(collect_by_name: training_label)) %>
+        </div>
+      <% end %>
     </div>
 
   </div>
 </div>
-
-<script>
-  $(function(){
-    if (window.location.href.includes('collect_by_name')) {
-      $('#label').css({'display' : 'none'});
-      $('#reset_filtr').css({'display' : 'inline'});
-    }
-  });
-</script>

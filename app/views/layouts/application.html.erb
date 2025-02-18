@@ -27,74 +27,79 @@
   </head>
 
   <body>
-    <div id="collapseMenu" class="collapse d-lg-block">
-      <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
-        <div class="container-fluid">
-          <ul class="navbar-nav">
-            <% if user_signed_in? %>
-              <li class="left_margin"><%= link_to 'Главная', root_path, class: 'btn bg-light left_border', title: 'На главную' %></li>
-              <li class="left_margin"><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
-              <% unless current_user.exercises.count <= 1 && current_user.trainings.count <= 1 %>
-                <li class="dropdown left_margin">
-                  <button type="button" class="btn dropdown-toggle drop_down_button_my bg-light" data-toggle="dropdown"><%= 'Статистика' %></button>
-                  <div class="dropdown-menu my_control my_font_size" aria-labelledby="dropdownMenuButton">
-                    <%= link_to 'Статистика общая', secondary_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
-                    <%= link_to 'Статистика упражнений', main_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
-                    <%= link_to 'Список тренировок', all_trainings_trainings_path, class: "dropdown-item my_dropdown_item bg-light" %>
-                  </div>
-                </li>
-              <% end %>
-              <li class="left_margin"><%= link_to 'Поиск', searching_trainings_path, class: 'btn bg-light' %></li>
-              <% if current_user.admin %>
-                <li class="left_margin"><%= link_to 'Пользователи', users_path, class: 'btn bg-light' %></li>
-                <li class="left_margin"><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
-              <% end %>
-              <li class="left_margin"><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
-              <!-- <li class="left_margin"><%#= link_to 'Профиль', current_user, class: 'btn bg-light' %></li> -->
-              <% if current_user.avatar? %>
-                <li class="left_margin"><%= link_to(image_tag(current_user.avatar.url, class: 'user_avatar_sm'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
+
+    <div class="content">
+      <div id="collapseMenu" class="collapse d-lg-block">
+        <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+          <div class="container-fluid">
+            <ul class="navbar-nav">
+              <% if user_signed_in? %>
+                <li class="left_margin"><%= link_to 'Главная', root_path, class: 'btn bg-light left_border', title: 'На главную' %></li>
+                <li class="left_margin"><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
+                <% unless current_user.exercises.count <= 1 && current_user.trainings.count <= 1 %>
+                  <li class="dropdown left_margin">
+                    <button type="button" class="btn dropdown-toggle drop_down_button_my bg-light" data-toggle="dropdown"><%= 'Статистика' %></button>
+                    <div class="dropdown-menu my_control my_font_size" aria-labelledby="dropdownMenuButton">
+                      <%= link_to 'Статистика общая', secondary_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
+                      <%= link_to 'Статистика упражнений', main_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
+                      <%= link_to 'Список тренировок', all_trainings_trainings_path, class: "dropdown-item my_dropdown_item bg-light" %>
+                    </div>
+                  </li>
+                <% end %>
+                <li class="left_margin"><%= link_to 'Поиск', searching_trainings_path, class: 'btn bg-light' %></li>
+                <% if current_user.admin %>
+                  <li class="left_margin"><%= link_to 'Пользователи', users_path, class: 'btn bg-light' %></li>
+                  <li class="left_margin"><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
+                <% end %>
+                <li class="left_margin"><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
+                <!-- <li class="left_margin"><%#= link_to 'Профиль', current_user, class: 'btn bg-light' %></li> -->
+                <% if current_user.avatar? %>
+                  <li class="left_margin"><%= link_to(image_tag(current_user.avatar.url, class: 'user_avatar_sm'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
+                <% else %>
+                   <li class="left_margin"><%=  link_to(image_pack_tag('user.png', class: 'user_avatar_sm'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
+                <% end %>  
+                <li class="left_margin"><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
+                <li class="left_margin"><%= link_to 'О программе', instruction_trainings_path, class: 'btn bg-light', title: 'Помощь по приложению' %></li>
               <% else %>
-                 <li class="left_margin"><%=  link_to(image_pack_tag('user.png', class: 'user_avatar_sm'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
-              <% end %>  
-              <li class="left_margin"><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
-              <li class="left_margin"><%= link_to 'О программе', instruction_trainings_path, class: 'btn bg-light', title: 'Помощь по приложению' %></li>
-            <% else %>
-              <li class="left_margin"><%= link_to 'Войти', new_user_session_path, class: 'btn bg-light px-3' %></li>
-              <li class="left_margin"><%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'btn bg-light px-3' %></li>
-              <li class="left_margin"><%= link_to 'Восстановить пароль', new_password_path(resource_name), class: 'btn bg-light pl-3' %></li>
-            <% end %>
-          </ul>
+                <li class="left_margin"><%= link_to 'Войти', new_user_session_path, class: 'btn bg-light px-3' %></li>
+                <li class="left_margin"><%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'btn bg-light px-3' %></li>
+                <li class="left_margin"><%= link_to 'Восстановить пароль', new_password_path(resource_name), class: 'btn bg-light pl-3' %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <a id="menu_pic" href="#">
+        <%= image_pack_tag("menu-4x.png", alt: 'menu', class: 'menu_img') %>
+      </a>
+
+      <a href="#">
+        <%= image_pack_tag("close.png", alt: 'menu', class: 'menu_close_img') %>
+      </a>
+
+      <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %> notification_class" role="alert">
+          <%= value %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+
+      <%= yield %>
     </div>
 
-    <a id="menu_pic" href="#">
-      <%= image_pack_tag("menu-4x.png", alt: 'menu', class: 'menu_img') %>
-    </a>
-
-    <a href="#">
-      <%= image_pack_tag("close.png", alt: 'menu', class: 'menu_close_img') %>
-    </a>
-
-    <% flash.each do |key, value| %>
-      <div class="<%= flash_class(key) %> notification_class" role="alert">
-        <%= value %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-
-    <%= yield %>
-
-    <div class="container">
-      <footer>
-        <div class="row">
-          <div class="col-sm-10 col-md-12 dackbottomicons dackbottomicons-range text-center buffer-bottom mt-1 text-secondary">
-            <%= link_to 'Разработка Dack9', 'https://dack9.ru/ru/cv_rus', target: "blanc", rel: 'noreferrer', title: 'dack9', class: 'copyright text-secondary' %>
+    <footer class='bg-light'>
+      <div class="container mt-2">
+        <div class="row pt-3">
+          <div class="col-12 text-center">
+            <%= link_to "Dack9 #{ Time.now.year }", 'https://dack9.ru/ru/cv_rus', target: "blanc", rel: "noreferrer", title: "dack9", class: 'copyright' %>
           </div>
-      </footer>
-    </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
 

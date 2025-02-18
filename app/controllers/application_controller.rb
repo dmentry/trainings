@@ -65,10 +65,10 @@ class ApplicationController < ActionController::Base
       ActionController::Base.helpers.link_to(
                                              title, all_trainings_trainings_path(
                                                                                  sort_by: column, sort_direction: direction, collect_by_name: params[:collect_by_name]
-                                                                                ), class: 'btn-sm btn-primary', id: "#{column}"
+                                                                                ), class: 'btn-sm btn-primary text-decoration-none', id: "#{column}"
                                             )
     else
-      ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(sort_by: column, sort_direction: direction), class: 'btn-sm btn-primary') 
+      ActionController::Base.helpers.link_to(title, all_trainings_trainings_path(sort_by: column, sort_direction: direction), class: 'btn-sm btn-primary text-decoration-none') 
     end
   end
 

@@ -17,10 +17,35 @@
 
   <div class="form-group mt-3">
     <%= form.label 'Дата' %>
-    <%= form.date_select :start_time, default: @new_date, class: 'form-control'  %>
+    <%= form.text_field :start_time, class: 'form-control bg-white btn-width-my', id: 'start_time'  %>
   </div>
 
-  <div class="actions">
-    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-2 btn-width-my' %>
+  <div class="row justify-content-start mb-2">
+    <div class='col-12 col-lg-3 mr-1 mr-lg-0'>
+      <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-2 btn-width-my lg_text px-0' %>
+    </div>
+    <% if !current_user.trainings.where(start_time: Date.today).present? %>
+      <div class='col-12 col-lg-3 mr-1 mr-lg-0'>
+        <%= link_to('Дублировать тренировку', copy_training_trainings_path(current_training_id: @training.id), class: 'btn btn-sm btn-primary mt-2 btn-width-my px-0 lg_text') %>
+      </div>
+    <% end %>
+    <% if !training.new_record? %>
+      <div class='col-12 col-lg-3 mr-1 mr-lg-0'>
+        <%= link_to('Удалить', training_path, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger mt-2 btn-width-my lg_text px-0') %>
+      </div>
+    <% end %>
+    <div class='col-12 col-lg-3'>
+      <%= link_to('Обратно', @training, class: 'btn btn-sm btn-secondary btn-width-my mt-2 lg_text px-0') %>
+    </div>
   </div>
 <% end %>
+
+<script>
+  $(function(){
+    flatpickr("#start_time", {
+      enableTime: false, // Выключаем выбор времени
+      dateFormat: "d.m.Y", // Формат даты и времени
+      defaultDate: '<%= training.start_time&.strftime("%d.%m.%Y") %>' // Дата, показываемая по-умолчанию
+    });
+  });
+</script>

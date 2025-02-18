@@ -1,22 +1,22 @@
-<h3 class='center text_size mt-2 head_color drop_down_button_my'>Тренировки</h3>
+<h3 class='center text_size mt-2 head_color mt-5 mt-lg-2'>Тренировки</h3>
 
 <span id='whole_calendar'>
-  <div class='container my-bg-color without_borders'>
+  <div class='container bg-light borders-rounded'>
     <div class='row top_buffer' id='swipe_area'>
       <div class='col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings'>
         <h2 id="month">
-          <div class="date-my">
+          <div class="date-my mt-2 mb-2">
             <%= link_to "<", controller: 'trainings', date: 'prev_month', remote: true %>
           </div>
-        <div class="date-my" id='home_btn'>
-          <% if @date.month != Date.today.month || @date.year != Date.today.year %>
-            <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), { controller: 'trainings', date: 'current_month' }, class: 'home_btn', remote: true) %>
-          <% end %>
-        </div>
-          <div class="date-my date-width-my">
+          <div class="date-my" id='home_btn' class='mt-2 mb-2'>
+            <% if @date.month != Date.today.month || @date.year != Date.today.year %>
+              <%= link_to(image_pack_tag("home_white.png", alt: 'home', class: 'img-home-white'), { controller: 'trainings', date: 'current_month' }, class: 'home_btn', remote: true) %>
+            <% end %>
+          </div>
+          <div class="date-my date-width-my mt-2 mb-2">
             <%= l(@date, format: "%B, %Y") %>
           </div>
-          <div class="date-my">
+          <div class="date-my mt-2 mb-2">
             <%= link_to ">", controller: 'trainings', date: 'next_month', remote: true %>
           </div>
         </h2>
