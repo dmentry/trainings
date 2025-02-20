@@ -2,19 +2,19 @@
 <h3 class="center text_size mt-2 head_color mt-5 mt-lg-2">Тренировки</h3>
 <div class="container bg-light borders-rounded pt-2">
   <div class="text-center">
-    <p id='train_title' class="my-lg-2"> 
+    <p id='train_title' class="mt-lg-1"> 
       <%= link_to '<', @training.prev, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
       <%= link_to @training.label, edit_training_path(@training), class: "btn btn-primary mt-1 buffer-bottom tr-width-my" %>
       <%= link_to '>', @training.next, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
     </p>
   </div>
-  <div class="row my-1">
+  <div class="row my-1 px-1 ps-lg-3">
     <div class="col-lg-3 order-lg-2 order-sm-1 mt-1 mb-2 center">
       <%#= link_to 'Добавить упражнение', new_training_exercise_path(@training), { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-sm' }  %>
       <%= link_to 'Добавить упражнение', new_training_exercise_path(@training), { class: 'btn btn-primary btn-sm' }  %>
     </div>
 
-    <div class="col-lg-8 order-lg-1 order-sm-2 no-paddings mt-1 mb-lg-3 mb-sm-2 bg-light ex_buffer_both_my bg-white borders-rounded ">
+    <div class="col-lg-8 order-lg-1 order-sm-2 mt-1 mb-3 ms-0  bg-light px-1 bg-white borders-rounded">
       <div class="bold">
         <% formatted_date = l @training.start_time, format: :my_format %>
         Дата: <%= link_to formatted_date, trainings_path(date: @training.start_time, training_highlight: @training), class: "btn btn-primary btn-sm" %>

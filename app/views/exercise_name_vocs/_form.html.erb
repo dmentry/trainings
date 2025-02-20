@@ -11,22 +11,16 @@
     </div>
   <% end %>
 
-  <div class="form-group mt-1">
+  <div class="form-group mt-3 ps-1">
     <%= form.label 'Название' %>
-    <%= form.text_field :label, class: 'form-control field-width-my' %>
+    <%= form.text_field :label, class: 'form-control w-75' %>
   </div>
 
-  <div class="row justify-content-start mb-2">
-    <div class='col-12 col-lg-3 mr-1 mr-lg-0'>
-      <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success btn-width-my mt-2 lg_text px-0' %>
-    </div>
+  <div class="d-flex flex-column flex-sm-row mb-2 me-5 pe-5">
+    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-2 lg_text mx-1' %>
     <% if !exercise_name_voc.new_record? %>
-      <div class='col-12 col-lg-3 mr-1 mr-lg-0'>
-        <%= link_to('Удалить', @exercise_name_voc, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger btn-width-my mt-2 lg_text px-0') %>
-      </div>
+      <%= link_to('Удалить', @exercise_name_voc, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger mt-2 lg_text mx-1') %>
     <% end %>
-    <div class='col-12 col-lg-3 mr-1 mr-lg-0'>
-      <%= link_to('Обратно', exercise_name_vocs_path, class: 'btn btn-sm btn-secondary btn-width-my mt-2 lg_text px-0') %>
-    </div>
+    <%= link_to('Обратно', exercise_name_vocs_path, class: 'btn btn-sm btn-secondary mt-2 lg_text mx-1') %>
   </div>
 <% end %>

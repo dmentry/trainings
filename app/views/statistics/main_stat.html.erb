@@ -12,7 +12,7 @@
         <input type="range" min="1" max='<%= @max_months_quantity %>' step="1" value='<%= params[:months_quantity] %>' id="months_range">
 
         <% @chart_types.each do |key, value| %>
-          <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn-sm btn-primary' %> 
+          <%= link_to key, main_stat_statistics_path(chart_name_id: value, exercise_name_id: params[:exercise_name_id]), class: 'btn btn-sm btn-primary' %> 
         <% end %>
       </div>
 

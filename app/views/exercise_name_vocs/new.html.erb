@@ -1,11 +1,9 @@
 <h3 class="center text_size head_color mt-5 mt-lg-2">Новое упражение</h3>
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 <div class="container bg-light borders-rounded">
-  <div class="row">
-    <div class="col-sm-12 col-md-10  mx-auto">
-      <div>
-        <%= render 'form', exercise_name_voc: @exercise_name_voc %>
-      </div>
+  <div class="row my-3">
+    <div class="col-12 col-md-8 px-0 mx-auto">
+      <%= render 'form', exercise_name_voc: @exercise_name_voc %>
     </div>
   </div>
 </div>

@@ -1,27 +1,17 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 <h3 class="center text_size mt-5 mt-lg-2 head_color">Профиль</h3>
-<div class="container bg-light without_borders">
+<div class="container bg-light">
   <div class="row my-2">
-    <div class="col-12 order-lg-1 mb-3 mx-auto">
-      <div class="profile_align">
-        <%= link_to user_avatar(@user), edit_user_path(@user), class: '' %>
-        <h3 class="text_size mt-1 head_color"><%= @user.name %></h3>
+    <div class="col-11 col-xl-6 mb-3 mx-auto">
+      <%= link_to user_avatar(@user), edit_user_path(@user) %>
+      <h3 class="text_size mt-1 head_color"><%= @user.name %></h3>
+      <div class="d-flex flex-column flex-sm-row mb-2 me-5 pe-5">
+        <% unless current_user.name == 'guest' %>
+          <%= link_to("Редактировать профиль", edit_user_path(@user), class: 'btn btn-sm btn-primary mt-2 lg_text nowrap-btn mx-1') %>
+          <%= link_to('Сменить пароль', edit_user_registration_path, class: 'btn btn-sm btn-danger mt-2 lg_text nowrap-btn mx-1') %>
+        <% end %>
+        <%= link_to('Обратно', root_path, class: 'btn btn-sm btn-secondary mt-2 lg_text mx-1') %>
       </div>
-      <div class="buffer-top">
-        <div class="row justify-content-start mb-2">
-          <% unless current_user.name == 'guest' %>
-            <div class='col-12 col-lg-3 pr-0 pl-3'>
-              <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-sm btn-info mt-2 btn-width-my' %>
-            </div>
-            <div class='col-12 col-lg-3 px-3 px-lg-0'>
-              <%= link_to 'Сменить пароль', edit_user_registration_path, class: 'btn btn-sm btn-warning mt-2 btn-width-my' %>
-            </div>
-          <% end %>
-          <div class='col-12 col-lg-3 pl-3 pl-lg-0'>
-            <%= link_to('Обратно', root_path, class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
-          </div>
-        </div>
-     </div> 
     </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 
 <h3 class="text-center text_size mt-5 mt-lg-2 head_color">Поиск</h3>
-<div class="container bg-white borders-rounded lg_text">
+<div class="container bg-light borders-rounded lg_text">
   <div class='row'>
-    <div class='col-12 col-lg-8 px-0 py-2 mx-auto bg-white'>
-      <%= search_form_for @q, url: searching_trainings_path, class: "mt-3 px-1 pl-lg-3 pr-0 pr-lg-3 pt-3 bg-light borders-rounded", html: { method: :get } do |f| %>
+    <div class='col-12 col-lg-8 px-0 mx-auto bg-white'>
+      <%= search_form_for @q, url: searching_trainings_path, class: "py-3 px-1 pl-lg-3 pr-0 pr-lg-3 bg-light borders-rounded", html: { method: :get } do |f| %>
         Название тренировки, упражнения или текст заметки:
         <div class="input-group mb-1">
           <%= f.text_field :label_or_exercises_note_or_exercises_exercise_name_voc_label_cont, placeholder: "Ведите текст", class: 'form-control' %>
@@ -17,32 +17,39 @@
         <div class="input-group mb-2 btn-width-my">
           <%= f.text_field :start_time_lteq, class: 'form-control bg-white date_chooser', placeholder: "Выберите дату" %>
         </div>
-        <%= link_to "Очистить", searching_trainings_path, class: "btn btn-sm btn-secondary mr-1 mb-2" %>
+        <%= f.hidden_field :search_begin, value: true %>
+
+        <%= link_to "Очистить", searching_trainings_path, class: "btn btn-sm btn-secondary me-3 mb-2" %>
         <%= f.submit 'Искать', class: 'btn btn-sm btn-success mb-2' %>
       <% end %>
     </div>
+    <% if @msg %>
+      <h4 class="text-danger text-center text_size mt-0 mb-3"><%= @msg %></h3>
+    <% end %>
   </div>
+
   <% if @trainings_searched.present? && @trainings_searched.size > 0 %>
-    <div class="row mt-2 bg-white">
-      <div class='col-8 px-0 mx-auto text-center'>
-        <%= sort_link(@q, :start_time, "Дата", class: "btn-sm btn-primary mb-1 text-decoration-none") %>
+    <div class="container bg-light borders-rounded lg_text">
+      <div class="row mt-2 bg-light">
+        <div class='col-12 col-lg-8 py-2 mx-auto text-center bg-white mt-3 borders-rounded '>
+          <%= sort_link(@q, :start_time, "Дата", class: "btn-sm btn-primary mb-1 text-decoration-none") %>
+        </div>
       </div>
-    </div>
-    <div class="row pb-3 mt-3 bg-white">
-      <div class='col-12 col-lg-8 py-2 bg-light borders-rounded max_height_all_tr mx-auto'>
-        <% @trainings_searched.each do |training| %>
-          <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
-          <div>
-            <%= link_to message, training_path(training[:id]) %>
-              <% training.exercises.order(:ordnung).each do |exercise| %>
-                <div class="exercise_margin_left">
-                  <%= exercise.exercise_name_voc.label %>
-                </div> 
-             <% end %>
-          </div> 
-        <% end %>
+      <div class="row pb-3 mt-3 bg-light">
+        <div class='col-12 col-lg-8 py-2 bg-light borders-rounded max_height_all_tr mx-auto bg-white'>
+          <% @trainings_searched.each do |training| %>
+            <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
+            <div>
+              <%= link_to message, training_path(training[:id]) %>
+                <% training.exercises.order(:ordnung).each do |exercise| %>
+                  <div class="exercise_margin_left">
+                    <%= exercise.exercise_name_voc.label %>
+                  </div> 
+               <% end %>
+            </div> 
+          <% end %>
+        </div>
       </div>
-    </div>
     </div>
   <% end %>
 </div>

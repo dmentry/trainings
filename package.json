@@ -2,11 +2,12 @@
   "name": "dack_site",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
     "apexcharts": "^3.28.1",
-    "bootstrap": "4.5",
+    "bootstrap": "5.3.3",
     "jquery": "^3.6.0",
     "jquery-ui-dist": "^1.13.2",
     "popper.js": "^1.16.1"

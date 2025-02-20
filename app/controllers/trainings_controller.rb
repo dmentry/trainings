@@ -206,10 +206,22 @@ class TrainingsController < ApplicationController
   def searching
     @q = current_user.trainings.all.ransack(params[:q])
 
-    if params[:q]
+    if params[:q] && (
+                        params[:q][:label_or_exercises_note_or_exercises_exercise_name_voc_label_cont].present? || 
+                        params[:q][:start_time_gteq].present? || 
+                        params[:q][:start_time_lteq].present?
+                      )
       @q.sorts = 'start_time DESC' if @q.sorts.empty?
 
       @trainings_searched = @q.result.includes(:exercises, :exercise_name_vocs)
+
+      @msg = 'Ничего не найдено' if @trainings_searched.size <= 0
+    elsif params[:q] && !(
+                            params[:q][:label_or_exercises_note_or_exercises_exercise_name_voc_label_cont].present? || 
+                            params[:q][:start_time_gteq].present? || 
+                            params[:q][:start_time_lteq].present?
+                          ) && params[:q][:search_begin]
+      @msg = 'Введите параметры поиска'
     end
   end
 

@@ -1,8 +1,8 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 <h3 class="center text_size mt-5 mt-lg-2 head_color">Редактировать: <%= @exercise_name_voc.label %></h3>
-<div class="container bg-light mt-3 borders-rounded">
-  <div class="row my-2">
-    <div class="col-sm-12 col-md-10 mx-auto">
+<div class="container bg-light borders-rounded">
+  <div class="row my-3">
+    <div class="col-12 col-md-8 px-0 mx-auto">
       <%= render 'form', exercise_name_voc: @exercise_name_voc || @exercise_name_voc = current_user.exercise_name_vocs.build(exercise_name_voc_params) %>
     </div>
   </div>

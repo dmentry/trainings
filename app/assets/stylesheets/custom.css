@@ -1,5 +1,5 @@
-#reset_filtr {
-  display: none;
+.nowrap-btn {
+  white-space: nowrap; /* Запрещает перенос текста */
 }
 
 .center {
@@ -11,12 +11,13 @@
   min-height: calc(100vh - 58px);
 }
 
-.copyright {
+.copyright_my {
   color: black;
   opacity: 0.5;
+  text-decoration: none;
 }
 
-.copyright:hover {
+.copyright_my:hover {
   text-decoration: none;
   color: black;
   opacity: 0.8;
@@ -265,10 +266,9 @@ footer {
   display: block;
 }
 
-/* .profile_align {
-  width: 214px;
-  text-align: center;
-} */
+#reset_filtr {
+  display: none;
+}
 
 .user_avatar {
   height: 70px;

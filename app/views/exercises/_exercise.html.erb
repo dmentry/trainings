@@ -2,7 +2,7 @@
   <thead>
     <tr class="table-buffers-vertical">
       <th class="table-info table-buffers-vertical"><%= exercise.exercise_name_voc.label %>
-        <div class="float-right">
+        <span class="float-end">
           <%#= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
           <%= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise)) %> &nbsp;|&nbsp;
           <%= link_to(image_pack_tag("del.png", alt: 'delete', class: 'img-execise delete_symbol'), training_exercise_path(exercise.training, exercise), method: :delete, data: { confirm: "Вы уверены?" }) %> &nbsp;
@@ -22,7 +22,7 @@
             <% end %>
           <% end %>
 
-        </div>
+        </span>
       </th>
     </tr>
   </thead>
@@ -64,7 +64,6 @@
   };
 
   $(function(){
-
     $('#up_btn<%= exercise.id %>').click(function() {
       $.ajax({
         url: "/trainings/" + '<%= @training.id %>' + "/exercises/" + '<%= exercise.id %>' + "/up", datavalue: 'js'
@@ -79,7 +78,5 @@
 
     has_opacity($(".up_direction"));
     has_opacity($(".down_direction"));
-
-    // switch_arrows();
   });
 </script>

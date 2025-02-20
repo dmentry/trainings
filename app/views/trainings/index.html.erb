@@ -58,9 +58,9 @@
             <% @trainings_by_month.each do |training| %>
               <div class="tr_display">
                 <% if training != @trainings_by_month.last %>
-                  <%= link_to "#{training.label}, ", training %>
+                  <%= link_to "#{ training.label }, ", training, class: 'text-decoration-none' %>
                 <% else %>
-                  <%= link_to training.label, training %>
+                  <%= link_to training.label, training, class: 'text-decoration-none' %>
                 <% end %>
               </div>
 

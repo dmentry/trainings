@@ -1,18 +1,18 @@
 <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
 
 <h3 class="text-center text_size mt-5 mt-lg-2 head_color">Тренировки за все время</h3>
-<div class="container bg-light without_borders full_screen_height borders-rounded">
-  <div class="row mt-3 ml-sm-4">
-    <div class="col-lg-8 order-lg-1 my-2 lg_text">
+<div class="container bg-light borders-rounded">
+  <div class="row mt-3">
+    <div class="col-lg-8 my-2 lg_text">
       Сортировать по:
       <%= sortable("start_time", 'дате')%>
       <%= sortable("label", 'названию') %>
-      <%= link_to("сбросить фильтр", all_trainings_trainings_path(sort_by: nil, collect_by_name: nil), class: 'btn-sm btn-primary', id: 'reset_filtr') %>
+      <%= link_to("сбросить фильтр", all_trainings_trainings_path(sort_by: nil, collect_by_name: nil), class: 'btn btn-sm btn-primary', id: 'reset_filtr') %>
     </div>
   </div>
 
-  <div class="row mt-1 mb-3 ml-sm-4 lg_text">
-    <div class="col-lg-8 order-lg-2 mt-2 mb-3 ml-2 bg-white no-margins max_height_all_tr borders-rounded">
+  <div class="row mt-1 mb-3 lg_text px-2 px-lg-0 justify-content-between">
+    <div class="col-lg-8 mt-2 mb-3 mx-0 mx-lg-2 bg-white max_height_all_tr borders-rounded">
         <% @trainings.each do |training| %>
           <% message = "#{ l training[:start_time], format: :my_format } - #{ training[:label] }"%>
           <div>
@@ -25,15 +25,21 @@
           </div> 
         <% end %>
     </div>
-
-    <div class="col-lg-3 order-lg-3 mt-2 mb-3 bg-white ml-4 no-margins top_buffer_mobile borders-rounded">
+    <div class="col-lg-3 mt-2 mb-3 mx-0 mx-lg-2 bg-white borders-rounded">
       <div class="head_color bold my-lg-2">Выбор тренировок по названиям</div>
       <% Training.where(user_id: current_user.id).pluck(:label).uniq.sort.each do |training_label| %>
-        <div>
+        <div class='exercise_link'>
           <%= link_to(training_label, all_trainings_trainings_path(collect_by_name: training_label)) %>
         </div>
       <% end %>
     </div>
-
   </div>
 </div>
+
+<script>
+  $(function(){
+    <% if params[:collect_by_name].present? %>
+      $('#reset_filtr').css({'display': 'inline-block'});
+    <% end %>
+  });
+</script>
