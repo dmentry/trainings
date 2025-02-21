@@ -1,6 +1,6 @@
-<div class='container bg-light borders-rounded mt-5 mt-lg-2'>
-  <div class='row top_buffer' id='swipe_area'>
-    <div class='col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings'>
+<div class='container bg-light borders-rounded'>
+  <div class='row justify-content-between px-2 px-lg-5' id='swipe_area'>
+    <div class='col-lg-8 mb-3 px-0'>
       <h2 id="month">
         <div class="date-my mt-2 mb-2">
           <%= link_to "<", controller: 'trainings', date: 'prev_month', remote: true %>
@@ -47,7 +47,7 @@
       <% end %>
     </div>
     <% unless @trainings_by_month.empty? %>
-      <div class="border_my col-lg-3 order-lg-2 buffer-both-sm no-margins top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
+      <div class="border_my col-lg-3 tr-list-bg-color" id='trainings_list'>
         <div class="mt-1">
           <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
           
@@ -64,7 +64,7 @@
         </div>
       </div>
     <% else %>
-      <div class="border_my col-lg-3 order-lg-2 buffer-both-sm no-margins top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
+      <div class="border_my col-lg-3 tr-list-bg-color" id='trainings_list'>
         <div class="mt-1">
           <div>В этом месяце у вас еще нет тренировок</div>
         </div>

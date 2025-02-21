@@ -2,8 +2,8 @@
 
 <span id='whole_calendar'>
   <div class='container bg-light borders-rounded'>
-    <div class='row top_buffer' id='swipe_area'>
-      <div class='col-lg-8 order-lg-1 mb-3 bottom_buffer_mobile_tr_index no-paddings'>
+    <div class='row justify-content-between px-2 px-lg-5' id='swipe_area'>
+      <div class='col-lg-8 mb-3 px-0'>
         <h2 id="month">
           <div class="date-my mt-2 mb-2">
             <%= link_to "<", controller: 'trainings', date: 'prev_month', remote: true %>
@@ -49,9 +49,8 @@
           </div>
         <% end %>
       </div>
-
       <% unless @trainings_by_month.empty? %>
-        <div class="border_my col-lg-3 order-lg-2 buffer-both-sm no-margins top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
+        <div class="border_my col-lg-3 tr-list-bg-color" id='trainings_list'>
           <div class="mt-1">
             <div>Тренировки в этом месяце (<%= "#{@trainings_by_month.count}" %>):</div>
             
@@ -68,13 +67,12 @@
           </div>
         </div>
       <% else %>
-        <div class="border_my col-lg-3 order-lg-2 buffer-both-sm no-margins top_buffer_mobile tr-list-bg-color buffer-top2" id='trainings_list'>
+        <div class="border_my col-lg-3 tr-list-bg-color" id='trainings_list'>
           <div class="mt-1">
             <div>В этом месяце у вас еще нет тренировок</div>
           </div>
         </div>
       <% end %>
-    
     </div>
   </div>
 </span>
@@ -145,7 +143,7 @@
     let browser_width = $(window).width();
 
     if (cal_height >= 505 && cal_height < 506 && browser_width > '991') {
-      $('#trainings_list').css({'height' : '505px'});
+      $('#trainings_list').css({'height' : '506px'});
     }
     else if (cal_height >= 425 && cal_height < 426 && browser_width > '991') {
       $('#trainings_list').css({'height' : '425px'});
