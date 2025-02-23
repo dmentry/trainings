@@ -1,6 +1,5 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-2 head_color mt-5 mt-lg-2">Тренировки</h3>
-<div class="container bg-light borders-rounded pt-2">
+<h3 class="center mt-2 head_color">Тренировки</h3>
+<div class="container bg-body-secondary borders-rounded pt-2 lg_text">
   <div class="text-center">
     <p id='train_title' class="mt-lg-1"> 
       <%= link_to '<', @training.prev, class: "btn btn-primary mt-1 buffer-bottom date-my" %>
@@ -15,12 +14,12 @@
     </div>
 
     <div class="col-lg-8 order-lg-1 order-sm-2 mt-1 mb-3 ms-0  bg-light px-1 bg-white borders-rounded">
-      <div class="bold">
+      <div class="fw-bold mt-2">
         <% formatted_date = l @training.start_time, format: :my_format %>
         Дата: <%= link_to formatted_date, trainings_path(date: @training.start_time, training_highlight: @training), class: "btn btn-primary btn-sm" %>
       </div>
 
-      <div class="my-1" id="myexercises">
+      <div class="my-2" id="myexercises">
         <%= render partial: 'exercises/exercise', collection: @training.exercises.order(:ordnung).except(@exercise) %>
         <% if @training.exercises.empty? %>
           Вы еще не внесли ни одного упражнения в эту тренировку

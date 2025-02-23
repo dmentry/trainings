@@ -1,8 +1,6 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-
-<h3 class="text-center text_size mt-5 mt-lg-2 head_color">Тренировки за все время</h3>
-<div class="container bg-light borders-rounded">
-  <div class="row mt-3">
+<h3 class="text-center mt-2 head_color">Тренировки за все время</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
+  <div class="row">
     <div class="col-lg-8 my-2 lg_text">
       Сортировать по:
       <%= sortable("start_time", 'дате')%>
@@ -25,8 +23,8 @@
           </div> 
         <% end %>
     </div>
-    <div class="col-lg-3 mt-2 mb-3 mx-0 mx-lg-2 bg-white borders-rounded">
-      <div class="head_color bold my-lg-2">Выбор тренировок по названиям</div>
+    <div class="col-lg-3 mt-2 mb-3 mx-0 mx-lg-2 bg-white borders-rounded py-1">
+      <div class="head_color fw-bold my-lg-2">Выбор тренировок по названиям</div>
       <% Training.where(user_id: current_user.id).pluck(:label).uniq.sort.each do |training_label| %>
         <div class='exercise_link'>
           <%= link_to(training_label, all_trainings_trainings_path(collect_by_name: training_label)) %>

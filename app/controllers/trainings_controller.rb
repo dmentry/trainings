@@ -1,9 +1,11 @@
 class TrainingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[instruction]
   before_action :set_current_user_training, only: %i[show edit update destroy]
   before_action :user_admin?, only: %i[trainings_upload_post]
  
   def index
+    @nav_menu_active_item = 'main'
+
     @training_highlight = params[:training_highlight].to_i if params[:training_highlight]
 
     if params[:date] && params[:date] == 'next_month'
@@ -63,9 +65,12 @@ class TrainingsController < ApplicationController
   end
 
   def show
+    @nav_menu_active_item = 'main'
   end
 
   def new
+    @nav_menu_active_item = 'main'
+
     day = params[:day].strip
 
     new_date = current_user.options['calendar_date'].to_s[0,8] + day
@@ -76,6 +81,7 @@ class TrainingsController < ApplicationController
   end
 
   def edit
+    @nav_menu_active_item = 'main'
   end
 
   def create
@@ -113,10 +119,13 @@ class TrainingsController < ApplicationController
   end
 
   def instruction
+    @nav_menu_active_item = 'instruction'
   end
 
   def all_trainings
-    redirect_to trainings_url, alert: " У вас еще нет тренировок." if current_user.trainings.count <= 1
+    @nav_menu_active_item = 'statistics'
+
+    redirect_to trainings_url, alert: " У вас еще нет тренировок." if current_user.trainings.count <= 0
 
     sourse = current_user.trainings.all
 
@@ -161,6 +170,7 @@ class TrainingsController < ApplicationController
   end
 
   def trainings_upload_new
+    @nav_menu_active_item = 'trainings_upload_new'
   end
 
   def trainings_upload_post
@@ -204,6 +214,8 @@ class TrainingsController < ApplicationController
   end
 
   def searching
+    @nav_menu_active_item = 'searching'
+
     @q = current_user.trainings.all.ransack(params[:q])
 
     if params[:q] && (

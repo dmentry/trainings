@@ -1,8 +1,7 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-5 mt-lg-2 head_color">Загрузчик тренировок</h3>
-<div class="container bg-light borders-rounded">
+<h3 class="center mt-2 head_color">Загрузчик тренировок</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
   <div class="row">
-    <div class="col-lg-8 mb-3">
+    <div class="col-lg-8">
       <%= form_tag trainings_upload_post_trainings_path, multipart: true do %>
         <div class="form-group mt-3 w-50">
           <%= text_field_tag :user_id, nil, class: 'form-control', placeholder: 'ID пользователя' %>
@@ -11,7 +10,7 @@
           <%= label_tag 'Выберите файл с тренировками для загрузки:' %><br>
           <%= file_field_tag :trainings_file %>
         </div>
-        <div class="actions mt-2">
+        <div class="actions my-2">
           <%= submit_tag 'Начать загрузку' %>
         </div>
       <% end %>

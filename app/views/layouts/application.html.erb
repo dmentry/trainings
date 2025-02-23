@@ -2,95 +2,94 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Тренировки</title>
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
 
     <meta name="robots" content="index, follow">
     <meta name="description" content="Тренировки Дмитрия Dack9 Архипова">
     <meta name="keywords" content="dack9, тренировка, workout">
-    <meta name="author" content="Дмитрий Архипов aka Dack9">
+    <meta name="author" content="Дмитрий Архипов Dack9">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+    <%= favicon_pack_tag 'favicon.ico' %>
   </head>
 
   <body>
 
     <div class="content">
-      <div id="collapseMenu" class="collapse d-lg-block">
-        <div class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
-          <div class="container-fluid">
-            <ul class="navbar-nav">
-              <% if user_signed_in? %>
-                <li class="left_margin"><%= link_to 'Главная', root_path, class: 'btn bg-light left_border', title: 'На главную' %></li>
-                <li class="left_margin"><%= link_to 'Упражнения', exercise_name_vocs_path, class: "btn bg-light", title: 'Список упражнений' %></li>
-                <% unless current_user.exercises.count <= 1 && current_user.trainings.count <= 1 %>
-                  <li class="dropdown left_margin">
-                    <button type="button" class="btn dropdown-toggle drop_down_button_my bg-light" data-toggle="dropdown"><%= 'Статистика' %></button>
-                    <div class="dropdown-menu my_control my_font_size" aria-labelledby="dropdownMenuButton">
-                      <%= link_to 'Статистика общая', secondary_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
-                      <%= link_to 'Статистика упражнений', main_stat_statistics_path, class: "dropdown-item my_dropdown_item bg-light" %>
-                      <%= link_to 'Список тренировок', all_trainings_trainings_path, class: "dropdown-item my_dropdown_item bg-light" %>
-                    </div>
+      <nav class="navbar navbar-expand-md bg-body-secondary">
+        <div class="container-fluid">
+          <a id='main' class="navbar-brand logo_color_light" href='<%= root_path %>'>
+            <%= image_pack_tag("android-chrome-192x192.png", alt: 'logo', class: 'mt-0 logo') %>
+            Главная
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ">
+              <% if current_user %>
+                <li class="nav-item pt-1 pt-lg-0">
+                  <%= link_to 'Упражнения', exercise_name_vocs_path, class: "nav-link", id: 'exercise_name_voc', title: 'Список упражнений' %>
+                </li>
+                <% unless current_user.trainings.count <= 0 %>
+                  <li class="nav-item dropdown pt-1 pt-lg-0">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id='statistics'>
+                      Статистика
+                    </a>
+                    <ul class="dropdown-menu">
+                      <% unless current_user.exercises.count <= 1 && current_user.trainings.count <= 1 %>
+                        <li><%= link_to 'Статистика общая', secondary_stat_statistics_path, class: "dropdown-item" %></li>
+                        <li><%= link_to 'Статистика упражнений', main_stat_statistics_path, class: "dropdown-item" %></li>
+                        <li><hr class="dropdown-divider"></li>
+                      <% end %>
+                      <li><%= link_to 'Список тренировок', all_trainings_trainings_path, class: "dropdown-item" %></li>
+                    </ul>
                   </li>
                 <% end %>
-                <li class="left_margin"><%= link_to 'Поиск', searching_trainings_path, class: 'btn bg-light' %></li>
-                <% if current_user.admin %>
-                  <li class="left_margin"><%= link_to 'Пользователи', users_path, class: 'btn bg-light' %></li>
-                  <li class="left_margin"><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'btn bg-light', title: 'Загрузить список тренировок' %></li>
-                <% end %>
-                <li class="left_margin"><%= link_to 'Скачать', download_textfile_trainings_path, class: 'btn bg-light', title: 'Скачать список тренировок' %></li>
-                <!-- <li class="left_margin"><%#= link_to 'Профиль', current_user, class: 'btn bg-light' %></li> -->
-                <% if current_user.avatar? %>
-                  <li class="left_margin"><%= link_to(image_tag(current_user.avatar.url, class: 'user_avatar_sm'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
-                <% else %>
-                   <li class="left_margin"><%=  link_to(image_pack_tag('user.png', class: 'user_avatar_sm'), current_user, class: 'btn bg-light btn_without_margins', title: 'Профиль') %></li>
-                <% end %>  
-                <li class="left_margin"><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn bg-light' %></li>
-                <li class="left_margin"><%= link_to 'О программе', instruction_trainings_path, class: 'btn bg-light', title: 'Помощь по приложению' %></li>
-              <% else %>
-                <li class="left_margin"><%= link_to 'Войти', new_user_session_path, class: 'btn bg-light px-3' %></li>
-                <li class="left_margin"><%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'btn bg-light px-3' %></li>
-                <li class="left_margin"><%= link_to 'Восстановить пароль', new_password_path(resource_name), class: 'btn bg-light pl-3' %></li>
               <% end %>
+              <% if current_user && current_user.admin %>
+                <li class="nav-item pt-1 pt-lg-0"><%= link_to 'Пользователи', users_path, class: 'nav-link', id: 'user' %></li>
+                <li class="nav-item pt-1 pt-lg-0"><%= link_to 'Загрузить', trainings_upload_new_trainings_path, class: 'nav-link', id: 'trainings_upload_new', title: 'Загрузить список тренировок' %></li>
+              <% end %>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <% if current_user && current_user.avatar? %>
+                  <%= link_to(image_tag(current_user.avatar.url, class: 'user_avatar_sm'), current_user, class: 'nav-link', title: 'Профиль') %>
+                <% elsif current_user %>
+                  <%= link_to(image_pack_tag('user.png', class: 'user_avatar_sm'), current_user, class: 'nav-link', title: 'Профиль') %>
+                <% end %>  
+              </li>
+              <li class="nav-item pt-1 pt-lg-0">
+                <%= link_to 'О программе', instruction_trainings_path, class: 'nav-link', id: 'instruction', title: 'Помощь по приложению' %>
+              </li>
+              <% if current_user %>
+                <li class="nav-item pt-1 pt-lg-0">
+                  <%= link_to 'Поиск', searching_trainings_path, class: 'nav-link', id: 'searching' %>
+                </li>
+              <% end %> 
             </ul>
           </div>
         </div>
-      </div>
-
-      <a id="menu_pic" href="#">
-        <%= image_pack_tag("menu-4x.png", alt: 'menu', class: 'menu_img') %>
-      </a>
-
-      <a href="#">
-        <%= image_pack_tag("close.png", alt: 'menu', class: 'menu_close_img') %>
-      </a>
+      </nav>
 
       <% flash.each do |key, value| %>
-        <div class="<%= flash_class(key) %> notification_class" role="alert">
+        <div class="<%= flash_class(key) %> d-flex justify-content-between mx-0 mb-2" role="alert">
           <%= value %>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
       <% end %>
 
       <%= yield %>
     </div>
 
-    <footer class='bg-light'>
+    <footer class='bg-body-secondary'>
       <div class="container mt-2">
         <div class="row pt-3">
           <div class="col-12 text-center">
@@ -102,35 +101,23 @@
 
   </body>
 </html>
-
 <script>
-  function click_element(elem) {
-    elem.click(function() {
-      if ($("#collapseMenu").height() > 80) {
-        $("#collapseMenu").slideUp(500);
-        $(".menu_close_img").slideUp(300);
-        $('.menu_img').show(500);
-        $('.img-home').show(500);
-      }
-     })
-  };
-
   $(function(){
-    $("#menu_pic").click(function() {
-      if ($("#collapseMenu").height() > 80) {
-        $("#collapseMenu").slideToggle(500);
-        $(".menu_close_img").slideDown(500);
-        $('.menu_img').hide(500);
-        $('.img-home').hide(500);
-      }
-     });
-
-    click_element($(".navbar"));
-
-    click_element($(".menu_close_img"));
-
-    $(".notification_class").click(function() {
-        $(this).hide(500);
-     });
-  });
+    <% case @nav_menu_active_item %>
+    <% when 'main' %>
+        <%= '$("#main").addClass("logo_color_dark");'.html_safe %>
+    <% when 'instruction' %>
+        <%= '$("#instruction").addClass("active");'.html_safe %>
+    <% when 'searching' %>
+        <%= '$("#searching").addClass("active");'.html_safe %>
+    <% when 'trainings_upload_new' %>
+        <%= '$("#trainings_upload_new").addClass("active");'.html_safe %>
+    <% when 'statistics' %>
+        <%= '$("#statistics").addClass("active");'.html_safe %>
+    <% when 'exercise_name_voc' %>
+        <%= '$("#exercise_name_voc").addClass("active");'.html_safe %>
+    <% when 'user' %>
+        <%= '$("#user").addClass("active");'.html_safe %>
+    <% end %>
+  })
 </script>

@@ -1,7 +1,6 @@
-<h3 class="center text_size mt-2 head_color">Новая тренировка</h3>
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<div class="container bg-light borders-rounded">
-  <div class="row m3">
+<h3 class="center mt-2 head_color">Новая тренировка</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
+  <div class="row">
     <div class="col-12 col-md-10 mx-auto">
       <div>
         <%= render 'form', training: @training || @training = Training.new %>

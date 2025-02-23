@@ -1,7 +1,6 @@
-<h3 class="center text_size head_color mt-5 mt-lg-2">Новое упражение</h3>
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<div class="container bg-light borders-rounded">
-  <div class="row my-3">
+<h3 class="center head_color mt-2">Новое упражение</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
+  <div class="row">
     <div class="col-12 col-md-8 px-0 mx-auto">
       <%= render 'form', exercise_name_voc: @exercise_name_voc %>
     </div>
