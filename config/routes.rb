@@ -30,7 +30,6 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :achivements
       get :admin_login_as_user
     end
   end

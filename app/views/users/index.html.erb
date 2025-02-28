@@ -1,53 +1,47 @@
-<h3 class="center text_size mt-2 head_color">Пользователи
-  <%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-</h3>
-<div class="container my-bg-color top_buffer_two_my without_borders full_screen_height">
+<h3 class="center mt-2 head_color">Пользователи</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
 <div class="row">
-  <div class="col-lg-12 order-lg-1 order-sm-2 no-paddings mt-1 mb-lg-3 mb-sm-2 bg-light max_height_all_tr mx-0 px-0">
-    <div class="border my-2 bg-light">
-
-      <table class="table table-sm table-buffers-vertical table-font-my">
-        <thead>
-          <tr class="table-buffers-vertical">
-            <th class="table-info table-buffers-vertical">id</th>
-            <th class="table-info table-buffers-vertical">Имя</th>
-            <th class="table-info table-buffers-vertical">Email</th>
-            <th class="table-info table-buffers-vertical">Создан</th>
-            <th class="table-info table-buffers-vertical">Логинился</th>
-            <th class="table-info table-buffers-vertical">Провайдер</th>
+  <div class="col-lg-12 bg-light mx-0 p-1">
+    <table class="table table-sm table-font-my mb-0">
+      <thead>
+        <tr>
+          <th class="table-info table-buffers-vertical">id</th>
+          <th class="table-info table-buffers-vertical">Имя</th>
+          <th class="table-info table-buffers-vertical">Email</th>
+          <th class="table-info table-buffers-vertical">Создан</th>
+          <th class="table-info table-buffers-vertical">Логинился</th>
+          <th class="table-info table-buffers-vertical">Провайдер</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data.each do |user| %>
+          <tr>
+            <td>            
+              <%= user.first.id %>
+            </td>
+            <td>
+              <%= link_to user.first.name, admin_login_as_user_user_path(user.first) %>
+            </td>
+            <td>            
+              <%= user.first.email %>
+            </td>
+            <td>            
+              <%= user.first.created_at.strftime("%d.%m.%Y") %>
+            </td>
+            <td>
+              <% if user.second == '0001-01-01 01:00:00 +0000' %>
+                  -
+              <% else %>
+                <%= user.first.current_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
+              <% end %>
+            </td>
+            <td>            
+              <%= user.third %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @data.each do |user| %>
-            <tr>
-              <td>            
-                <%= user.first.id %>
-              </td>
-              <td>
-                <%= link_to user.first.name, admin_login_as_user_user_path(user.first) %>
-              </td>
-              <td>            
-                <%= user.first.email %>
-              </td>
-              <td>            
-                <%= user.first.created_at.strftime("%d.%m.%Y") %>
-              </td>
-              <td>
-                <% if user.second == '0001-01-01 01:00:00 +0000' %>
-                    -
-                <% else %>
-                  <%= user.first.current_sign_in_at&.strftime("%d.%m.%Y, %H:%M") %>
-                <% end %>
-              </td>
-              <td>            
-                <%= user.third %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-  </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 </div>

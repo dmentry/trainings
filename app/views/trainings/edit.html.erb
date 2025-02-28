@@ -1,21 +1,8 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-2 head_color">Редактировать тренировку: <%= @training.label %></h3>
-<div class="container my-bg-color without_borders">
-  <div class="row my-3">
-    <div class="col-sm-12 col-md-10">
-      <div>
-        <%= render 'form', training: @training %>
-
-        <% if !current_user.trainings.where(start_time: Date.today).present? %>
-          <%= link_to('Дублировать тренировку', copy_training_trainings_path(current_training_id: @training.id), class: 'btn btn-sm btn-primary mt-2 btn-width-my') %><br>
-        <% end %>
-
-        <%= link_to('Удалить', training_path, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger mt-2 btn-width-my') %><br>
-        <%= link_to('Обратно', @training, class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
-      </div>
-      <div class="my-3">
-        
-      </div>
+<h3 class="center mt-2 head_color">Редактировать тренировку: <%= @training.label %></h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
+  <div class="row">
+    <div class="col-12 col-md-8 px-0 mx-auto">
+      <%= render 'form', training: @training %>
     </div>
   </div>
 </div>

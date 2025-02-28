@@ -1,9 +1,11 @@
 class TrainingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[instruction]
   before_action :set_current_user_training, only: %i[show edit update destroy]
   before_action :user_admin?, only: %i[trainings_upload_post]
  
   def index
+    @nav_menu_active_item = 'main'
+
     @training_highlight = params[:training_highlight].to_i if params[:training_highlight]
 
     if params[:date] && params[:date] == 'next_month'
@@ -63,19 +65,23 @@ class TrainingsController < ApplicationController
   end
 
   def show
+    @nav_menu_active_item = 'main'
   end
 
   def new
-    @training = current_user.trainings.build
+    @nav_menu_active_item = 'main'
 
     day = params[:day].strip
 
     new_date = current_user.options['calendar_date'].to_s[0,8] + day
 
-    @new_date = Date.parse(new_date)
+    new_date = Date.parse(new_date)
+
+    @training = current_user.trainings.build(start_time: new_date)
   end
 
   def edit
+    @nav_menu_active_item = 'main'
   end
 
   def create
@@ -113,10 +119,13 @@ class TrainingsController < ApplicationController
   end
 
   def instruction
+    @nav_menu_active_item = 'instruction'
   end
 
   def all_trainings
-    redirect_to trainings_url, alert: " У вас еще нет тренировок." if current_user.trainings.count <= 1
+    @nav_menu_active_item = 'statistics'
+
+    redirect_to trainings_url, alert: " У вас еще нет тренировок." if current_user.trainings.count <= 0
 
     sourse = current_user.trainings.all
 
@@ -161,6 +170,7 @@ class TrainingsController < ApplicationController
   end
 
   def trainings_upload_new
+    @nav_menu_active_item = 'trainings_upload_new'
   end
 
   def trainings_upload_post
@@ -204,11 +214,26 @@ class TrainingsController < ApplicationController
   end
 
   def searching
+    @nav_menu_active_item = 'searching'
+
     @q = current_user.trainings.all.ransack(params[:q])
 
-    if params[:q]
+    if params[:q] && (
+                        params[:q][:label_or_exercises_note_or_exercises_exercise_name_voc_label_cont].present? || 
+                        params[:q][:start_time_gteq].present? || 
+                        params[:q][:start_time_lteq].present?
+                      )
       @q.sorts = 'start_time DESC' if @q.sorts.empty?
+
       @trainings_searched = @q.result.includes(:exercises, :exercise_name_vocs)
+
+      @msg = 'Ничего не найдено' if @trainings_searched.size <= 0
+    elsif params[:q] && !(
+                            params[:q][:label_or_exercises_note_or_exercises_exercise_name_voc_label_cont].present? || 
+                            params[:q][:start_time_gteq].present? || 
+                            params[:q][:start_time_lteq].present?
+                          ) && params[:q][:search_begin]
+      @msg = 'Введите параметры поиска'
     end
   end
 

@@ -1,12 +1,8 @@
-<h3 class="center text_size mt-2 head_color">Новое упражение</h3>
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<div class="container bg-light without_borders">
+<h3 class="center head_color mt-2">Новое упражение</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
   <div class="row">
-    <div class="col-sm-12 col-md-10">
-      <div>
-        <%= render 'form', exercise_name_voc: @exercise_name_voc %>
-      </div>
-      <%= link_to('Обратно', trainings_path, class: 'btn btn-sm btn-secondary btn-width-my my-2') %>
+    <div class="col-12 col-md-8 px-0 mx-auto">
+      <%= render 'form', exercise_name_voc: @exercise_name_voc %>
     </div>
   </div>
 </div>

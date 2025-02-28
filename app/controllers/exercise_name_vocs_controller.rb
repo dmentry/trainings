@@ -3,17 +3,23 @@ class ExerciseNameVocsController < ApplicationController
   before_action :set_current_user_exercise_name_voc, only: %i[show edit update destroy]
 
   def index
+    @nav_menu_active_item = 'exercise_name_voc'
+
     @exercise_name_vocs = current_user.exercise_name_vocs.order(:label)
   end
 
   def show
+    @nav_menu_active_item = 'exercise_name_voc'
   end
 
   def new
+    @nav_menu_active_item = 'exercise_name_voc'
+
     @exercise_name_voc = current_user.exercise_name_vocs.build
   end
 
   def edit
+    @nav_menu_active_item = 'exercise_name_voc'
   end
 
   def create

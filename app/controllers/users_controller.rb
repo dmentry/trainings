@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   before_action :user_admin?, only: %i[index admin_login_as_user]
 
   def index
-    @users = User.all
+    @nav_menu_active_item = 'user'
+
+    @users = User.all.order(:id)
 
     data = []
 
@@ -26,13 +28,15 @@ class UsersController < ApplicationController
       data << [user, td, user_data]
     end
 
-    @data = data.sort_by{ |h| h.second }.reverse
+    @data = data#.sort_by{ |h| h.second }.reverse
   end
 
   def show
+    @nav_menu_active_item = 'user'
   end
 
   def edit
+    @nav_menu_active_item = 'user'
   end
 
   def update
@@ -51,9 +55,6 @@ class UsersController < ApplicationController
     @user.destroy
 
     redirect_to users_url, notice: "Пользователь был удален."
-  end
-
-  def achivements
   end
 
   def admin_login_as_user

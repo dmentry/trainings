@@ -1,27 +1,16 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-2 head_color">Профиль</h3>
-<div class="container my-bg-color without_borders">
-  <div class="row my-2">
-    <div class="col-lg-8 order-lg-1 mb-3">
-
-<div class="profile_align">
-  <%= link_to user_avatar(@user), edit_user_path(@user), class: '' %>
-  <%#= user_avatar(@user) %>
-
-  <h3 class="text_size mt-1 head_color"><%= @user.name %></h3>
-</div>
-
-      <div class="buffer-top">
+<h3 class="center mt-2 head_color">Профиль</h3>
+<div class="container bg-body-secondary">
+  <div class="row">
+    <div class="col-11 col-xl-6 mb-3 mx-auto">
+      <%= link_to user_avatar(@user), edit_user_path(@user) %>
+      <h3 class="mt-1 head_color"><%= @user.name %></h3>
+      <div class="d-flex flex-column flex-sm-row mb-2 me-5 pe-5">
         <% unless current_user.name == 'guest' %>
-          <div>
-            <%= link_to "Редактировать профиль", edit_user_path(@user), class: 'btn btn-sm btn-info mt-2 btn-width-my' %>
-          </div>
-          <div>
-            <%= link_to 'Сменить пароль', edit_user_registration_path, class: 'btn btn-sm btn-warning mt-2 btn-width-my' %>
-          </div>
-        <% end %>  
-        <%= link_to('Обратно', root_path, class: 'btn btn-sm btn-secondary btn-width-my mt-2') %>
-     </div> 
+          <%= link_to('Скачать свои тренировки', download_textfile_trainings_path, class: 'btn btn-sm btn-info mt-2 lg_text nowrap-btn mx-1', title: 'Скачать список тренировок') %>
+          <%= link_to("Редактировать профиль", edit_user_path(@user), class: 'btn btn-sm btn-primary mt-2 lg_text nowrap-btn mx-1') %>
+          <%= link_to('Выйти', destroy_user_session_path, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-warning mt-2 lg_text nowrap-btn mx-1') %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

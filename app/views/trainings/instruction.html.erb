@@ -1,9 +1,7 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-2 head_color">Календарь тренировок v0.91.121122024</h3>
-<div class="container my-bg-color without_borders full_screen_height">
-  <div class="row my-2">
+<h3 class="center mt-2 head_color">Календарь тренировок v0.91.121122024</h3>
+<div class="container bg-body-secondary lg_text borders-rounded">
+  <div class="row">
     <div class="col-sm-12 col-md-12">
-      
       <div class="image-logo">
         <%= image_pack_tag("android-chrome-192x192.png", alt: 'logo', class: 'img') %>
       </div>
@@ -13,9 +11,9 @@
         </p>
         <p class="mb-0">
           Для подсчета суммы количества сделанных за тренировку повторов в каждом упражнении, имеется парсер количества подходов\повторов в разделе &#8220;<b>Количество подходов и/или повторов</b>&#8221; в &#8220;<b>Добавить упражнение</b>&#8221;. Поэтому подходы обязательно разделять <b>запятой</b> (с пробелом или нет - не важно). Парсер понимает следующие форматы:
-          <br>
         </p>
-        <ul class="my-ul">
+        <br>
+        <ul>
           <li>В названии упражнения допустимы только буквы кириллического и латинского алфавита, цифры, пробел, подчеркивание и одинарные кавычки.</li>
           <li>Запись одиночных подходов: 1, 3,5 или 1-3-5. Сумма будет подсчитана как 9.</li>
           <li>Количество повторов <b>х</b> количество подходов: 4х5. Сумма будет подсчитана как 20.</li>

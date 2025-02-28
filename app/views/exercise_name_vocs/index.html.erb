@@ -1,21 +1,15 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-<h3 class="center text_size mt-2 head_color">Список упражнений</h3>
-<div class="container my-bg-color without_borders full_screen_height">
-  <div class="row my-2 no-margins-row">
-
-    <div class="col-lg-3 order-lg-2 order-sm-1 mt-2 mb-2 center">
+<h3 class="center head_color mt-2">Список упражнений</h3>
+<div class="container bg-body-secondary borders-rounded lg_text">
+  <div class="row my-2 pt-2">
+    <div class="col-lg-3 order-lg-2 order-sm-1 mt-2 mb-2 text-center">
       <%= link_to 'Создать новое упражнение', new_exercise_name_voc_path(@exercise_name_voc), class: 'btn btn-primary btn-sm mt-2' %>
     </div>  
-
-    <div class="col-lg-8 no-paddings no-margins mt-2 mb-3 order-lg-1 order-sm-2 max_height_all_tr full_screen_height">
-      <div class="border p-2 m-2 bg-light without_borders">
-      <div class="my-0">
+    <div class="col-lg-8 mt-2 mb-3 order-lg-1 order-sm-2 max_height_all_tr ">
+      <div class="border p-2 m-2 bg-white borders-rounded">
         <% @exercise_name_vocs.each do |exercise_name_voc| %>
           <div><%= link_to exercise_name_voc.label, edit_exercise_name_voc_path(exercise_name_voc) %></div>
         <% end %>
-        </div>
       </div>
     </div>
-
   </div>
 </div>

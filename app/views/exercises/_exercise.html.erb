@@ -2,27 +2,27 @@
   <thead>
     <tr class="table-buffers-vertical">
       <th class="table-info table-buffers-vertical"><%= exercise.exercise_name_voc.label %>
-        <div class="float-right">
-          <%#= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
-          <%= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise edit_symbol'), edit_training_exercise_path(exercise.training, exercise)) %> &nbsp;|&nbsp;
-          <%= link_to(image_pack_tag("del.png", alt: 'delete', class: 'img-execise delete_symbol'), training_exercise_path(exercise.training, exercise), method: :delete, data: { confirm: "Вы уверены?" }) %> &nbsp;
+        <span class="float-end">
+          <%#= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise me-1'), edit_training_exercise_path(exercise.training, exercise), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
+          <%= link_to(image_pack_tag("edit.png", alt: 'edit', class: 'img-execise me-1'), edit_training_exercise_path(exercise.training, exercise)) %> &nbsp;|&nbsp;
+          <%= link_to(image_pack_tag("del.png", alt: 'delete', class: 'img-execise ms-1'), training_exercise_path(exercise.training, exercise), method: :delete, data: { confirm: "Вы уверены?" }) %> &nbsp;
           
           <% if @training.exercises.count > 1 %>
             |&nbsp;        
             <% if exercise.ordnung != @training.exercises.pluck(:ordnung).min %>
-              <%= image_pack_tag("up.png", alt: 'up', class: 'img-execise edit_symbol up_btn up_direction', id: "up_btn#{exercise.id}") %>
+              <%= image_pack_tag("up.png", alt: 'up', class: 'img-execise me-1 up_btn up_direction', id: "up_btn#{exercise.id}") %>
             <% else %>
-              <%= image_pack_tag("up.png", alt: 'up', class: 'img-execise edit_symbol symbol_opacity up_direction') %>
+              <%= image_pack_tag("up.png", alt: 'up', class: 'img-execise me-1 symbol_opacity up_direction') %>
             <% end %>
 
             <% if exercise.ordnung != @training.exercises.pluck(:ordnung).max %>
-              <%= image_pack_tag("down.png", alt: 'down', class: 'img-execise edit_symbol down_btn down_direction', id: "down_btn#{exercise.id}") %>
+              <%= image_pack_tag("down.png", alt: 'down', class: 'img-execise me-2 down_btn down_direction', id: "down_btn#{exercise.id}") %>
             <% else %>
-              <%= image_pack_tag("down.png", alt: 'down', class: 'img-execise edit_symbol symbol_opacity down_direction') %>
+              <%= image_pack_tag("down.png", alt: 'down', class: 'img-execise me-2 symbol_opacity down_direction') %>
             <% end %>
           <% end %>
 
-        </div>
+        </span>
       </th>
     </tr>
   </thead>
@@ -64,7 +64,6 @@
   };
 
   $(function(){
-
     $('#up_btn<%= exercise.id %>').click(function() {
       $.ajax({
         url: "/trainings/" + '<%= @training.id %>' + "/exercises/" + '<%= exercise.id %>' + "/up", datavalue: 'js'
@@ -79,7 +78,5 @@
 
     has_opacity($(".up_direction"));
     has_opacity($(".down_direction"));
-
-    // switch_arrows();
   });
 </script>

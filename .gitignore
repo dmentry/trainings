@@ -37,4 +37,4 @@
 yarn-debug.log*
 .yarn-integrity
 favicon_package
-#/package-lock.json
+/package-lock.json

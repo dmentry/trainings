@@ -1,53 +1,38 @@
-<%= link_to(image_pack_tag("home.png", alt: 'home', class: 'img-home'), trainings_path, class: 'for-mobile buffer_top_home') %>
-
-<div class="container my-bg-color without_borders">
-  <div class="row additional_buffer_top">
-    <div class="col-lg-12 order-lg-2 mb-2 mt-1 no-paddings_second_stat">
-        <h6 class="center text_size top_buffer_statistics">
-          <b>Тренировок с <%= "#{ @all_tr_by_month_formatted.first[0] }: #{@all_trainings_by_user.count}. Среднее количество тренировок в месяц: #{ @average_in_month }. #{@overall_training_time}" %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 px-0 mb-2 mt-1">
+      <h6 class="text-center lg_text">
+        <b>
+          Тренировок с <%= "#{ @all_tr_by_month_formatted.first[0] }: #{@all_trainings_by_user.count}. Среднее количество тренировок в месяц: #{ @average_in_month }. #{@overall_training_time}" %>
             Тренировки идут уже <%= I18n.t :year, count: @years %> и <%= I18n.t :month, count: @months %>.
-          </b>
+        </b>
+      </h6>
+      <% if @worse_trainings_ration > 0 %>
+        <h6 class="text-center mt-0 lg_text">
+          Текущий месяц по тренировкам лучше, чем <%= @worse_trainings_ration %>% предыдущих месяцев.
         </h6>
-        <% if @worse_trainings_ration > 0 %>
-          <h6 class="center text_size mt-0">
-            Текущий месяц по тренировкам лучше, чем <%= @worse_trainings_ration %>% предыдущих месяцев.
-          </h6>
-        <% end %>
-      <div class="container my-bg-color without_borders">
-        <div class="row">
-          <div class="col-lg-12 order-lg-1 my-2 no-paddings">
-            <% if @all_tr_by_month_formatted.present? %>
-              <div class="center mt-0 bg-light">
-                <b>Количество тренировок по месяцам</b>
-                <%= bar_chart(@all_tr_by_month_formatted, { height: 900, theme: 'palette4' }) %>
-              </div>
-            <% end %>
+      <% end %>
 
-            <% if @tr_by_label_chart.present? %>
-              <div class="bg-light">
-                <div class="center">
-                  <div class="mt-3">
-                    <b>Количество проведенных упражнений</b>
-                    <%= bar_chart(@tr_by_label_chart, { height: 700, theme: 'palette7' }) %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-            
-            <% if @exercises_max_results.present? %>
-              <div class="bg-light">
-                <div class="center">
-                  <div class="mt-3">
-                    <b>Максимальное количество повторов в каждом упражнении</b>
-                    <%= bar_chart(@exercises_max_results, { height: 700, theme: 'palette7' }) %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
+      <% if @all_tr_by_month_formatted.present? %>
+        <div class="lg_text mt-5 text-center">
+          <b>Количество тренировок по месяцам</b>
         </div>
-      </div>
+        <%= bar_chart(@all_tr_by_month_formatted, { height: 900, theme: 'palette4' }) %>
+      <% end %>
 
+      <% if @tr_by_label_chart.present? %>
+          <div class="mt-3 lg_text text-center">
+            <b>Количество проведенных упражнений</b>
+          </div>
+          <%= bar_chart(@tr_by_label_chart, { height: 700, theme: 'palette7' }) %>
+      <% end %>
+      
+      <% if @exercises_max_results.present? %>
+        <div class="mt-3 lg_text text-center">
+          <b>Максимальное количество повторов в каждом упражнении</b>
+        </div>
+        <%= bar_chart(@exercises_max_results, { height: 700, theme: 'palette7' }) %>
+      <% end %>
     </div>
   </div>
 </div>

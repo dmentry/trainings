@@ -5,6 +5,8 @@ class StatisticsController < ApplicationController
   before_action :user_chart_status, only: :main_stat
 
   def main_stat
+    @nav_menu_active_item = 'statistics'
+
     redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики." if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
 
     first_training = current_user.trainings.first.start_time
@@ -32,6 +34,8 @@ class StatisticsController < ApplicationController
 
 ##################################### переменные для второй статистики
   def secondary_stat
+    @nav_menu_active_item = 'statistics'
+
     redirect_to trainings_url, alert: "У вас еще недостаточно данных для статистики." if current_user.exercises.count <= 1 && current_user.trainings.count <= 1
 
     @all_trainings_by_user ||= current_user.trainings.all

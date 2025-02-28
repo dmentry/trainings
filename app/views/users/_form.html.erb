@@ -19,17 +19,20 @@
     <%= form.file_field :avatar %>
   </div>
 
-  <div class="form-group  mt-3">
+  <div class="form-group mt-3">
     <%= form.label 'Имя' %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control w-50 lg_text' %>
   </div>
 
-  <div class="form-group  mt-3">
+  <div class="form-group mt-3">
     <%= form.label :email %>
-    <%= form.text_field :email, class: 'form-control' %>
+    <%= form.text_field :email, class: 'form-control w-50 lg_text' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-warning btn-width-my' %>
+  <div class="d-flex flex-column flex-sm-row mb-2 me-5 pe-5">
+    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-2 lg_text me-0 me-sm-1' %>
+    <%= link_to('Обратно', user_path, class: 'btn btn-sm btn-secondary mt-2 lg_text me-0 me-sm-1') %>
+    <%= link_to('Сменить пароль', edit_user_registration_path, class: 'btn btn-sm btn-warning mt-2 lg_text nowrap-btn') %>
   </div>
+
 <% end %>

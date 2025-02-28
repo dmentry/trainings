@@ -11,45 +11,30 @@
     </div>
   <% end %>
 
-<!--   <div class="mt-1 mr-1">
-    <button type="button" class="close btn btn-success mb-2" data-dismiss="modal">X</button>
-  </div> -->
-
-<!--   <div class="form-group mt-1 mx-1">
-    Выберите из списка или начните вводить название в строке ниже
-    <%#= form.collection_select :exercise_name_voc_id, current_user.exercise_name_vocs.order(label: :asc), :id, :label, prompt: '[Выберите упражнение]' %>
-  </div> -->
-
-<!--   <div class="form-group mt-1 mx-1">
-    <%#= form.text_field :find_exercise, class: 'form-control', id: 'find_exercise', placeholder: 'Начните вводить название упражнения'  %>
-  </div> -->
-
   <%= form.hidden_field :exercise_name_voc_id, value: exercise.exercise_name_voc_id, id: 'exercise_name_voc_id' %>
 
-  <div class="form-group form-buffers-vertical mx-1">
+  <div class="form-group mt-2 ps-1 w-75">
     <%= form.label 'Упражнение' %>
-
     <select id="find_exercise2" class="mt-1 mx-1">
-
       <% if !exercise.new_record? %>
         <option value='<%= exercise.exercise_name_voc_id %>'><%= ExerciseNameVoc.find(exercise.exercise_name_voc_id)&.label %></option>
       <% end %>
-
     </select>
   </div>
 
-  <div class="form-group form-buffers-vertical mx-1">
+  <div class="form-group mt-2 ps-1 w-75">
     <%= form.label 'Количество подходов и/или повторов' %>
     <%= form.text_field :quantity, class: 'form-control' %>
   </div>
 
-  <div class="form-group form-buffers-vertical mx-1">
+  <div class="form-group mt-2 ps-1 w-75">
     <%= form.label 'Заметка' %>
-    <%= form.text_field :note, class: 'form-control' %>
+    <%= form.text_area :note, size: '50x2', class: 'form-control' %>
   </div>
 
-  <div class="actions bt_buffer_top_my">
-    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mb-2 btn-width-my' %>
+  <div class="d-flex flex-column flex-sm-row mb-2 me-5 pe-5">
+    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-2 lg_text mx-1' %>
+    <%= link_to('Обратно', training_path(@training), class: 'btn btn-sm btn-secondary mt-2 lg_text mx-1') %>
   </div>
 <% end %>
 
