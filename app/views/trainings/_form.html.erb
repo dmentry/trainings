@@ -21,14 +21,14 @@
   </div>
 
   <div class="d-flex flex-column flex-sm-row mb-2 me-5 pe-5">
-    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-2 lg_text mx-1' %>
+    <%= form.submit 'Сохранить', class: 'btn btn-sm btn-success mt-3 mt-lg-1 mx-1' %>
     <% if current_user.trainings.where(start_time: @training.start_time).present? %>
-      <%= link_to('Дублировать тренировку', copy_training_trainings_path(current_training_id: @training.id), class: 'btn btn-sm btn-primary mt-2 lg_text nowrap-btn mx-1') %>
+      <%= link_to('Дублировать тренировку', copy_training_trainings_path(current_training_id: @training.id), class: 'btn btn-sm btn-primary mt-3 mt-lg-1 nowrap-btn mx-1') %>
     <% end %>
     <% if !training.new_record? %>
-      <%= link_to('Удалить', training_path, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger mt-2 lg_text mx-1') %>
+      <%= link_to('Удалить', training_path, method: :delete, data: { confirm: "Вы уверены?" }, class: 'btn btn-sm btn-danger mt-3 mt-lg-1 mx-1') %>
     <% end %>
-    <%= link_to('Обратно', @training, class: 'btn btn-sm btn-secondary mt-2 lg_text mx-1') %>
+    <%= link_to('Обратно', @training, class: 'btn btn-sm btn-secondary mt-3 mt-lg-1 mx-1') %>
   </div>
 <% end %>
 
@@ -37,7 +37,7 @@
     flatpickr("#start_time", {
       enableTime: false, // Выключаем выбор времени
       dateFormat: "d.m.Y", // Формат даты и времени
-      defaultDate: '<%= training.start_time&.strftime("%d.%m.%Y") %>' // Дата, показываемая по-умолчанию
+      defaultDate: '<%= training.start_time&.strftime("%d.%m.%Y") %>' // Дата, показываемая по умолчанию
     });
   });
 </script>

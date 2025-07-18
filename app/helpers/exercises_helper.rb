@@ -94,7 +94,7 @@ module ExercisesHelper
       kilo = result&.first&.gsub(",", ".").to_f if result&.size > 0
       krug = result&.last if !result.nil? && result&.size > 1
 
-      kilo = kilo * 1.37 if krug
+      kilo = kilo * 1.33 if krug
 
       kilo.round(1)
     end

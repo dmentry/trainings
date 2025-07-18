@@ -4,7 +4,21 @@
       <h6 class="text-center lg_text">
         <b>
           Тренировок с <%= "#{ @all_tr_by_month_formatted.first[0] }: #{@all_trainings_by_user.count}. Среднее количество тренировок в месяц: #{ @average_in_month }. #{@overall_training_time}" %>
-            Тренировки идут уже <%= I18n.t :year, count: @years %> и <%= I18n.t :month, count: @months %>.
+
+          <!-- Интернализация не понимает 0 -->
+          <% if @years == 0 %>
+            <% years = '' %>
+          <% else %>
+            <% years = "#{ I18n.t :year, count: @years }" %>
+          <% end %>
+
+          <% if @months == 0 %>
+            <% months = '.' %>
+          <% else %>
+            <% months = " и #{ I18n.t :month, count: @months }." %>
+          <% end %>
+
+          <%= "Тренировки идут уже #{ years }#{ months }" %>
         </b>
       </h6>
       <% if @worse_trainings_ration > 0 %>

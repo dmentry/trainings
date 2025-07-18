@@ -11,6 +11,15 @@ import './select2'
 import 'bootstrap/dist/js/bootstrap'
 import './jquery-ui'
 import './flatpickr'
+// Подключаем файл русской локализации flatpickr_ru. Он переписан на js, чтобы webpacker понимаал его
+import ru from "./flatpickr_ru"
+document.addEventListener("DOMContentLoaded", () => {
+  const myElem = document.getElementById("datepicker");
+  flatpickr(myElem, {
+    locale: ru
+  });
+});
+
 import ApexCharts from 'apexcharts'
 window.ApexCharts = ApexCharts
 
